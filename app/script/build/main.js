@@ -8,9 +8,10 @@ import 'react-hot-loader/patch';
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
-  Link
+	Link,
+	BrowserRouter
 } from 'react-router-dom';
 
 import routes from './routes';
@@ -25,9 +26,13 @@ const history = createBrowserHistory();
 const render = () => {ReactDOM.render((
 	<AppContainer>
 		<Provider store={store}>
+		
 			<Router history={history}>
-				{routes}
+				<BrowserRouter basename="/app">
+					{routes}
+				</BrowserRouter>
 			</Router>
+			
 		</Provider>
 	</AppContainer>
 ), document.getElementById('router_container'));

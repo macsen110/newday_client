@@ -76,8 +76,8 @@ var Routes = (
                 <Route path="/user/register" component={register} />
                 <Route path="/user/login" component= {InitLogin}/>
                 <Route path="/user/logout" component={logout} />
-                <Route component = {goodsUpload} path="/goods/upload"  />
-                <Route component = {goodslist} path="/goods/list" />
+                <Route path="/goods/upload" component = {goodsUpload} />
+                <Route path="/goods/list" component = {goodslist}  />
                 <Route path="/goods/detail/:id" component={goodsDetail}/>
                 <Route component={NotFound} />
             </Switch>
