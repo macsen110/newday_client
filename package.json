@@ -1,0 +1,41 @@
+{
+  "name": "liang-newday-client",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bundle-loader": "^0.5.5",
+    "create-react-class": "^15.6.0",
+    "immutable": "^3.7.5",
+    "object-assign": "^3.0.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.0.3",
+    "websocket": "^1.0.21",
+    "whatwg-fetch": "^0.10.1",
+    "yao-m-ui": "^0.2.10"
+  },
+  "devDependencies": {
+    "async": "^1.4.2",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^5.7.0",
+    "events": "^1.0.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "source-map-loader": "^0.1.5",
+    "debug": "~2.2.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.4"
+  }
+}
