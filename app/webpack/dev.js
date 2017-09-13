@@ -3,8 +3,9 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-var htmlTmlPath = path.join(__dirname, '../template/')
+var htmlTplPath = path.join(__dirname, '../template/')
 var entryScriptPath = path.join(__dirname, '../script/build/')
+
 module.exports = {
   resolve: {
     modules: [
@@ -25,7 +26,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: htmlTmlPath + 'index.html',
+      template: htmlTplPath + 'index.html',
       inject: true
     }),
     new FriendlyErrorsPlugin(),
