@@ -5,7 +5,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../template/')
 var entryScriptPath = path.join(__dirname, '../script/build/')
-
 module.exports = {
   resolve: {
     modules: [
@@ -18,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../src/'),
-    publicPath: '/',    
+    publicPath: '/app/',    
     filename: '[name].js'
   },
   devtool: 'eval',

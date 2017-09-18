@@ -103,15 +103,12 @@ class goodsDetail extends Component {
         var self = this;
         var commentData = JSON.stringify({
            goodsid: self.props.match.params.id,
-           comment: commentEle.value.trim(),
-           test: null,
-           oops: 'oops'
+           comment: commentEle.value.trim()
         });
-        commentData = "test="+null
         fetch('/api/comments/',{
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "application/json",
             },
             body: commentData
         }).then(function (res) {

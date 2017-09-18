@@ -19,7 +19,7 @@ class Tab extends Component {
     }
     render() {
         return (
-            <NavLink {...this.props}  activeClassName="active" />
+            <li className="item"><NavLink {...this.props}  activeClassName="active" /></li>
         )
   }
 }
@@ -51,10 +51,10 @@ class App extends Component {
                 <div className="wrap-header-container">                    
                     <header className="header">
                         <ul className="app-nav-list">
-                            <Tab to="/">10</Tab>
-                            <Tab to="/goods/list">list</Tab>
-                            <Tab to="/user/login">login</Tab>
-                            <Tab to="/user/register">register</Tab>
+                            <Tab exact to="/">首页</Tab>
+                            <Tab to="/goods/list">发现</Tab>
+                            <Tab to="/user/login">登录</Tab>
+                            <Tab to="/user/register">注册</Tab>
 
                         </ul>
                     </header>
@@ -68,10 +68,10 @@ class App extends Component {
                 <div className="wrap-header-container">                    
                     <header className="header">
                         <ul className="app-nav-list">
-                            <Tab to="/">ho111me</Tab>
-                            <Tab to="/goods/list">list</Tab>
-                            <Tab to="/goods/upload">upload</Tab>
-                            <Tab to="/user/logout">logout</Tab>
+                            <Tab exact to="/">首页</Tab>
+                            <Tab to="/goods/list">发现</Tab>
+                            <Tab to="/goods/upload">上传</Tab>
+                            <Tab to="/user/logout">注销</Tab>
                         </ul>
                     </header>
                 </div>
