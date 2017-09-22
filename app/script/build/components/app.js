@@ -54,7 +54,7 @@ class App extends Component {
                             <Tab exact to="/">首页</Tab>
                             <Tab to="/goods/list">发现</Tab>
                             <Tab to="/user/login">登录</Tab>
-                            <Tab to="/user/register">注册</Tab>
+                            <Tab to="/communicate">@Me</Tab>
 
                         </ul>
                     </header>
@@ -71,7 +71,7 @@ class App extends Component {
                             <Tab exact to="/">首页</Tab>
                             <Tab to="/goods/list">发现</Tab>
                             <Tab to="/goods/upload">上传</Tab>
-                            <Tab to="/user/logout">注销</Tab>
+                            <Tab to="/communicate">@Me</Tab>
                         </ul>
                     </header>
                 </div>

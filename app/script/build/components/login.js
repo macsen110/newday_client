@@ -86,7 +86,6 @@ class Login extends React.Component {
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.location !== this.props.location) {
-            alert(111)
             // navigated!
         }
     }

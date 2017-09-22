@@ -14,6 +14,7 @@ import goodslist from './components/goodslist';
 import goodsUpload from './components/goodsUpload';
 import NotFound from './components/notfind';
 import goodsDetail from './components/goodsdetail';
+import communicate from './components/communicate';
 import Async from './async-loader';
 
 
@@ -79,6 +80,7 @@ var Routes = (
                 <Route path="/goods/upload" component = {goodsUpload} />
                 <Route path="/goods/list" component = {goodslist}  />
                 <Route path="/goods/detail/:id" component={goodsDetail}/>
+                <Route path="/communicate" component={communicate}/>
                 <Route component={NotFound} />
             </Switch>
         </div>

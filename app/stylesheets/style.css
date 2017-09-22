@@ -448,7 +448,6 @@ widget
 	top: 0;
 	left:0;
 	width: 100%;
-	max-width: 640px;
 	height: 40px;
 	background: #dcdddd;
 	background: rgba(0,0,0,.05);

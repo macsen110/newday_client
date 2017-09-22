@@ -45,7 +45,7 @@ class goodslist extends Component {
             if (listGoods.length) {
                 return (<ul className="app-list-page">{listGoods.map((item, index) => <Blog_item key={item.goodsid} item={item} />)}</ul>)  
             }
-            return <div style={{padding: .8+'rem', backgroundColor: '#fff', color: '#333'}}>no data</div>
+            return <div style={{padding: .8+'rem', color: '#333'}}>暂无数据</div>
         }
 
         return(<div>loading...</div>)
