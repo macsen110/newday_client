@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-
+//export default {};
 
 /**
  * 异步的组件

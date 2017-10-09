@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+  <meta name="viewport" content="initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="./res/main.css">
@@ -12,7 +12,7 @@
 <body>
 
   <div id="container" class="container">
-    <div class="header">
+    <!-- <div class="header">
       <h1>梁玉森的个人网站</h1>
       <p>YuSen Liang Personal Website</p>
     </div>
@@ -24,8 +24,17 @@
     </div>
     <div class="footer">
       <p><a href="mailto:839945193@qq.com">Contact</a> | macsen318.com</p>
-    </div>
+    </div> -->
   </div>
+  <iframe src="http://macsen.111.com.cn:8080/#/orderList" hidden id="iframe"></iframe>
+  <script>    
+    if (navigator.serviceWorker != null) {
+    navigator.serviceWorker.register('sw.js')
+    .then(function(registration) {
+      console.log('Registered events at scope: ', registration.scope);
+    });
+  }
+  </script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-class Tab extends Component {
+class Tab extends React.Component {
     constructor(props, context) {
         super(props, context)
     }
@@ -27,7 +27,7 @@ class Tab extends Component {
 
 
 //home views
-class App extends Component {
+class App extends React.Component {
     constructor(props) {
         super(props)
     }

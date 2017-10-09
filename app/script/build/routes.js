@@ -65,7 +65,7 @@ const InitLogin = (props) => (
         {(InitLogin) => <InitLogin {...props} />}
     </Bundle>
 )
-const InitNewIndex = Async(Index)
+//const InitNewIndex = Async(Index)
 
 
 var Routes = (
@@ -73,7 +73,7 @@ var Routes = (
         <Route component={App} />
         <div className="route-content-box">
             <Switch>
-                <Route path="/" exact component={InitNewIndex} />        
+                <Route path="/" exact component={InitIndex} />        
                 <Route path="/user/register" component={register} />
                 <Route path="/user/login" component= {InitLogin}/>
                 <Route path="/user/logout" component={logout} />
