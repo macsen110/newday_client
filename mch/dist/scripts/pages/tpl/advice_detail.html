@@ -1,0 +1,78 @@
+<script id="advice_detail_template" type="text/html">
+    <div class="mobile-container"><i class="icon"></i>联系方式
+        {{if mobile}}<i class="icon-sign-right"></i>{{/if}}
+        <input type="tel" value="{{mobile ? mobile : ''}}" class="mobile-ipt" placeholder="请输入手机号">
+        
+    </div>
+    <div class="advice-main-input">
+        <textarea class="advice-textarea" data-max="500" placeholder="请留下就诊卡号，所在院区及门诊类型(如:东院普通门诊),问题描述, 我们会在2个工作日内和您联系处理并帮助您处理."></textarea>
+        <div class="advice-num"><span>0</span>/500</div>
+    </div>
+    {{if type == 1}}
+    <ul class="wrap-tags">
+        <li class="item">
+            <span class="tag" data-index="1">已有检查报告没有显示</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="2">检查报告不是本人的报告</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="3">检查项目显示有误</span>
+            <span class="tag" data-index="4">报告显示日期有误</span>
+        </li>
+    </ul>
+    {{/if}}
+    {{if type == 2}}
+    <ul class="wrap-tags">
+        <li class="item">
+            <span class="tag" data-index="1">候诊信息没有显示</span>
+            <span class="tag" data-index="2">检查楼层有误</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="3">候诊信息不能更新</span>
+        </li>
+    </ul>
+    {{/if}}
+    {{if type == 3}}
+    <ul class="wrap-tags">
+        <li class="item">
+            <span class="tag" data-index="1">名字录入错误</span>
+             <span class="tag" data-index="2">手机号码错误</span>
+        </li>
+        <li class="item">
+           <span class="tag" data-index="3">末次月经错误</span>
+           <span class="tag" data-index="4">预产期错误</span>
+        </li>
+    </ul>
+    {{/if}}
+    {{if type == 4}}
+    <ul class="wrap-tags">
+        <li class="item">
+            <span class="tag" data-index="1">门诊线上预约</span>
+            <span class="tag" data-index="2">建卡资料线上填写</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="3">报告生成推送提醒</span>
+            <span class="tag" data-index="4">排队信息推送提醒</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="5">报告详细解读</span>
+            <span class="tag" data-index="6">B超影像资料</span>
+        </li>
+    </ul>
+    {{/if}}
+    {{if type == 5}}
+    <ul class="wrap-tags">
+        <li class="item">
+            <span class="tag" data-index="1">个人信息错误</span>
+            <span class="tag" data-index="2">B超照片无法展示</span>
+        </li>
+        <li class="item">
+            <span class="tag" data-index="3">购买遇到问题</span>
+        </li>
+    </ul>
+    {{/if}}
+    <div class="advice-button">
+        <button type="button" class="comm-btn" disabled>提交</button>
+    </div>
+</script>

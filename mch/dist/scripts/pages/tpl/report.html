@@ -1,0 +1,265 @@
+<script id="report_template" type="text/template">
+    <div class="report-container">
+        {{if repType == '02' && isPayed == 1}}
+        {{if top_info.pregnant_week <= 42 &&　top_info.pregnant_week >= 2}}
+        <div class="payed-b-info">
+            <div class="wrap-weekPregnant">
+                <p>孕<strong class="pregnant-week-words">{{top_info.pregnant_week}}</strong>周{{if top_info.pregnant_days > 0}}+{{top_info.pregnant_days}}天{{/if}}</p>
+                <botton class="more bind-location" data-href="report_list" data-options='{"repType": "{{repType}}","reportName":"{{ reportName }}"}'>历史纪录></botton>
+            </div>
+            <p class="wrap-desc">{{top_info.pregnant_desc}}</p>
+            <div class="wrap-baby-info">
+                <div class="img-box">
+                    <img src="{{host+top_info.pregnant_img}}" alt="">
+                </div>
+                <ul class="info">
+                    <li class="item">
+                        <p>距离预产期</p>
+                        <p><strong>{{top_info.due_date}}</strong>天</p> 
+                    </li>
+                    
+                    {{if top_info.baby_weight && top_info.baby_weight > 0}}
+                    <li class="item">
+                        <p>宝宝体重</p>
+                        <p><strong>{{top_info.baby_weight}}g</strong></p>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+            <div class="wrap-foot-explain">
+                
+                {{if top_info.pregnant_week == 8}}
+                <p><i class="icon icon-voice-label"></i><i class="icon icon-voice-baby"></i></p>
+                <audio src="{{host+center_info.baby_voice}}" class="voice-audio"></audio>
+                {{else if top_info.pregnant_week >= 13 && top_info.pregnant_week <= 17}}
+                    {{if center_info.biparietal_diameter}}<p>顶臀径:{{center_info.biparietal_diameter}}</p>{{/if}}
+                {{else if top_info.pregnant_week >= 18 && top_info.pregnant_week <= 27}}
+                <p>
+                    {{if center_info.biparietal_diameter}}顶臀径:{{center_info.biparietal_diameter}}{{/if}} 
+                    {{if center_info.placenta_position}}胎盘位置: {{center_info.placenta_position}}{{/if}}
+                </p>
+                {{else if top_info.pregnant_week >= 28 && top_info.pregnant_week <= 40}}
+                <p>
+                    {{if center_info.biparietal_diameter}}顶臀径:{{center_info.biparietal_diameter}}, {{/if}}
+                    {{if center_info.femur_length}}股骨长: {{center_info.femur_length}},{{/if}}
+                    {{if center_info.placenta_grade}}胎盘分级: {{center_info.placenta_grade}}{{/if}}
+                </p>
+                {{/if}}
+            </div>
+            {{if center_info.reference_obj}}
+            <ul class="diff-box">
+                <li class="item">
+                    <i class="icon"></i>
+                    <p>宝宝大小</p>
+                </li>
+                <li class="item icon"></li>
+                <li class="item">
+                    <img src="{{host+center_info.reference_obj}}" alt="参考物">
+                    <p>{{center_info.fruitName}}</p>
+                </li>
+            </ul>
+            {{/if}}
+        </div>
+        {{/if}}
+        {{/if}}
+        <header class="header border-bottom">
+            <div class="item">
+                <span class="key">检查项目:</span>
+                {{if repType == '02' && isPayed == 1}}
+                <span class="info">{{buttom_info.inspection_items}}</span>
+                {{else}}
+                <span class="info">{{checkItem}}</span>
+                {{/if}}
+            </div>
+            <div class="item">
+                <span class="key">检查时间:</span>
+                {{if repType == '02' && isPayed == 1}}
+                <span class="info">{{buttom_info.inspection_time}}</span>
+                {{else}}
+                <span class="info">{{checkDate}}</span>
+                {{/if}}
+                
+                {{ if repType == '01' || (repType == '02' && isPayed != 1) || repType == '04' }}
+                <span class="bind-location" data-href="report_list" data-options='{"repType": "{{repType}}","reportName":"{{ reportName }}"}'>查看历史记录 ></span>
+                {{ /if }}
+            </div>
+        </header>
+        <!-- 唐氏 -->
+        {{if repType == '01'}}
+        <div class="report-content type-1 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title">样本信息</div>
+                <table class="comm-table report-table report-table2">
+                    <thead>
+                        <tr>
+                            <td>标记物</td>
+                            <td>结果</td>
+                            <td>单位</td>
+                            <td>矫正值MOM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each sampleInformationList as value}}
+                        <tr>
+                            <td>{{value.tag}}</td>
+                            <td>{{value.result}}</td>
+                            <td>{{value.unit}}</td>
+                            <td>{{value.correctionMOM}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="box border-bottom">
+                <div class="title">风险计算项目</div>
+                <table class="comm-table report-table">
+                    <thead>
+                        <tr>
+                            <td>筛查项目</td>
+                            <td>风险值</td>
+                            <td>风险结果</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each riskComputation as value}}
+                        <tr>
+                            <td>{{value.screening}}</td>
+                            <td>{{value.riskValue}}</td>
+                            <td>{{value.riskResult}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="report-tip">
+            <p>{{illustrate}}</p>
+        </div>
+        <!-- 超声报告 -->
+        {{else if repType == '02'}}
+        
+        {{if isPayed == 1}}
+        <div class="report-content type-2 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title">诊断提示</div>
+                <div class="con">
+                    {{each buttom_info.diagnosis_prompt as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="title">超声结果</div>
+                <div class="con">
+                    {{each buttom_info.ultrasound_result as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            {{if b_mode_phones.length}}
+            <div class="box b-photos-box">
+                <div class="title">B超照片</div>
+                <ul class="list clear">
+                    {{each b_mode_phones}}
+                    <li class="item">
+                        <img src="{{$value}}" alt="" class="img">
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+        </div>
+        {{else}}
+
+        <div class="report-content type-2 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title">诊断提示</div>
+                <div class="con">
+                    {{each diagnosticTips as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="title">超声结果</div>
+                <div class="con">
+                    {{each ultrasonicResult as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        {{/if}}
+        {{else if repType == '04'}}
+        <!--04 病理报告-->
+        <div class="report-content type-4">
+            <div class="box border-bottom">
+                <div class="title details-title">病理诊断</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>标本满意度：{{pathologicDiagnosis.specimenSatisfaction}}</td>
+                            <td>细胞量：{{pathologicDiagnosis.metaplasiaCells}}</td>
+                        </tr>
+                        <tr>
+                            <td>颈管细胞：{{pathologicDiagnosis.cellMass}}</td>
+                            <td>化生细胞：{{pathologicDiagnosis.BacterialTransformation}}</td>
+                        </tr>
+                        <tr>
+                            <td>菌群转变：{{pathologicDiagnosis.neckCanalCell}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div> 
+            </div>
+            <div class="box border-bottom">
+                <div class="title details-title">细胞学</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>滴虫感染提示：{{cytology.herpesInfection}}</td>
+                            <td>念珠感染提示：{{cytology.trichomonasInfection}}</td>
+                        </tr>
+                        <tr>
+                            <td>HPV感染提示：{{cytology.candidaInfection}}</td>
+                            <td>疱疹感染提示：{{cytology.HPVInfection}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="title details-title">TBS诊断</div>
+                <div class="con">
+                    <p>{{TBSDiagnosis}}</p>
+                </div>
+            </div>
+        </div>
+        {{else if repType == '05'}}
+        <!--05 检验报告-->
+        <div class="report-content type-5 border-horizontal">
+            <table class="comm-table report-table">
+                <thead>
+                    <tr>
+                        <td>项目</td>
+                        <td>结果</td>
+                        <td>参考值</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{each items as value}}
+
+                        <tr  class="{{ value.insTip?'xb-table-red':'' }}">
+                            <td>{{value.insItemName}}</td>
+                            <td>{{value.insResult}}{{ value.insTip?value.insTip:'' }}</td>
+                            <td>{{value.insRef}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{ /if }}
+    </div>
+    <div class="larger-img-container"><img class="img" src="" alt=""></div>
+</script>

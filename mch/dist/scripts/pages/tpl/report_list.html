@@ -1,0 +1,142 @@
+<script id="report_list_template" type="text/template">
+    <div class="report-list-container">
+        {{if total >= 1}}
+        <header class="header">
+            <div class="xb-page-nav"> <i class="icon-sign-left"></i></div>
+            <div class="xb-page-main">
+                <div> {{ reportName }}</div>
+                <div>{{ reportDate }}</div>
+                <em class="cur-num">{{page}}</em>/<em class="total-num">{{total}}</em>
+            </div>
+            <div class="xb-page-nav"><i class="icon-sign-right"></i></div>
+
+        </header>
+        {{/if}}
+        {{if repType == '01'}}
+        <div class="box border-bottom">
+            <table class="comm-table report-table report-table2">
+                <thead>
+                    <tr>
+                        <td>标记物</td>
+                        <td>结果</td>
+                        <td>单位</td>
+                        <td>矫正值MOM</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{each sampleInformationList as value}}
+                    <tr>
+                        <td>{{value.tag}}</td>
+                        <td>{{value.result}}</td>
+                        <td>{{value.unit}}</td>
+                        <td>{{value.correctionMOM}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else if repType == '02'}}
+        <div class="report-list page-report">
+            <div class="report-content  type-2 border-horizontal">
+                <div class="box border-bottom">
+                    <div class="title">诊断提示</div>
+                    <div class="con">
+                        {{each diagnosticTips as value}}
+                        <p>{{value}}</p>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="box border-bottom">
+                    <div class="title">超声结果</div>
+                    <div class="con">
+                        {{each ultrasonicResult as value}}
+                        <p>{{value}}</p>
+                        {{/each}}
+                    </div>
+                </div>
+                {{if usPictureList && usPictureList.length}}
+                    <div class="box b-photos-box">
+                        <div class="title">B超照片</div>
+                        <ul class="list clear">
+                            {{each usPictureList}}
+                            <li class="item">
+                                <img src="{{$value}}" alt="" class="img">
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+        {{else if repType == '04'}}
+        <div class="page-report page-report-list">
+        <div class="report-list report-content type-4">
+            <div class="  box  boxNew border-bottom">
+                <div class="title details-title">病理诊断</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>标本满意度：{{pathologicDiagnosis.specimenSatisfaction}}</td>
+                            <td>细胞量：{{pathologicDiagnosis.metaplasiaCells}}</td>
+                        </tr>
+                        <tr>
+                            <td>颈管细胞：{{pathologicDiagnosis.cellMass}}</td>
+                            <td>化生细胞：{{pathologicDiagnosis.BacterialTransformation}}</td>
+                        </tr>
+                        <tr>
+                            <td>菌群转变：{{pathologicDiagnosis.neckCanalCell}}</td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="box boxNew border-bottom">
+                <div class="title details-title">细胞学</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>滴虫感染提示：{{cytology.herpesInfection}}</td>
+                            <td>念珠感染提示：{{cytology.trichomonasInfection}}</td>
+                        </tr>
+                        <tr>
+                            <td>HPV感染提示：{{cytology.candidaInfection}}</td>
+                            <td>疱疹感染提示：{{cytology.HPVInfection}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="box  boxNew border-bottom">
+                <div class="title details-title">TBS诊断</div>
+                <div class="con">
+                    <p>{{TBSDiagnosis}}</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        {{else if repType == '05'}}
+        <div class="box border-bottom">
+            <table class="comm-table report-table">
+                <thead>
+                    <tr>
+                        <td>项目</td>
+                        <td>结果</td>
+                        <td>参考值</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{each items as value}}
+                    <tr  class="{{ value.insTip?'xb-table-red':'' }}">
+                        <td>{{value.insItemName}}</td>
+                        <td>{{value.insResult}}{{ value.insTip !=null ?value.insTip:'' }}</td>
+                        <td>{{value.insRef}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>        
+        {{ /if }}
+    </div>
+    <div class="larger-img-container"><img class="img" src="" alt=""></div>
+</script>

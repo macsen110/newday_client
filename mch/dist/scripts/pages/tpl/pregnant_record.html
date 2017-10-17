@@ -1,0 +1,400 @@
+<script type="text/html" id="pregnant_unborn_record_template">
+    <div class="wrap-fixed">
+        <i class="icon icon-logo"></i>
+        <i class="icon icon-music"></i>
+        <audio src="{{host+backgroundMusic}}" class="voice-audio" preload="auto" autoplay loop></audio>
+    </div>
+    <ul class="page-list page-unborn-record">
+        <li class="page-item remember-start-scene">
+            <p class="title">
+                十个月的怀孕历程<br>
+                终于要接近尾声啦
+            </p>
+            <p class="desc">那些感动和辛苦你还记得吗?</p>
+            <div class="focus">
+                <i class="arm"></i>
+            </div>
+            <p class="text">回顾我的好孕时光</p>
+        </li>
+        <li class="page-item first-antenatal-scene">
+            <div class="title">{{firstCheckDate}}</div>
+            <p class="desc">第一次在一妇婴产检,丝毫不敢大意</p>
+            <div class="focus">
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+            </div>
+        </li>
+        <li class="page-item common-b-scene first-saw-scene">
+            <div class="title">在一妇婴第一次看见你</div>
+            <p class="desc">虽然看不清你的模样<br>但是心中已幻想出你的笑颜</p>
+            <div class="focus clear">
+                <i class="icon sign"></i>
+                <img src="{{firstCheckImg ? firstCheckImg : './images/tmp/b_test.png'}}" class="img-box">
+                <div class="wrap-info">                
+                    <div class="center-box icon {{firstCheckImg ? '' : 'un-exit-img'}}"></div>
+                    <div class="tip-box icon">
+                        <div class="tip-content">
+                            {{if (isShare || total == 1 || !firstCheckImg) }}
+                            <button>宝贝靓照</button>
+                            {{else}}
+                            <button class="change-btn" data-loading="0" data-index="{{index}}">换一张</button>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="bottom-box icon"> </div>
+                </div>
+            </div>
+        </li>
+        <li class="page-item first-heard-scene">
+            <p class="title">在一妇婴第一次听见你</p>
+            <div class="desc">
+                <p>小火车般的心跳好像在说</p>
+                <p>妈妈，狂吃狂吃狂吃...</p>
+            </div>
+            <span class="timer">
+                <strong class="time">10</strong>"<em class="ms">00</em>
+            </span>
+            <audio src="{{host+fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
+            <div class="btn">
+                <i class="icon"></i>
+                <em class="text">点击播放</em>
+            </div>
+            <div class="focus"></div>
+        </li>
+
+        <li class="page-item antenatal-total-scene">
+            <p class="title">{{currentCheckedNum}}次产检</p>
+            <div class="desc">我从未懈怠，请叫我Super妈咪</div>
+            <ul class="focus">
+                {{if goodWeather > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{goodWeather}}>
+                                <p>/次</p>
+                                <p>好天气</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each goodWeatherArr}}
+                                    <li class="icon icon-sun-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-sun"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+                {{if rainWeather > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{rainWeather}}>
+                                <p>/次</p>
+                                <p>下雨天</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each rainWeatherArr}}
+                                    <li class="icon icon-rain-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-rain"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+                {{if earlyWarning > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{earlyWarning}}>
+                                <p>/次</p>
+                                <p>气象预警</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each earlyWarningArr}}
+                                    <li class="icon icon-flash-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-flash"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+            </ul>
+        </li>
+        <li class="page-item antenatal-days-scene">
+            <p class="desc">如今我和宝贝已经一起度过了</p>
+            <p class="title">{{currentPregantDays}}天</p>
+            <div class="focus">
+                <i class="icon"></i>
+            </div>
+
+        </li>
+        <!--<li class="page-item common-b-scene antenatal-b-scene">
+            <p class="title">
+                最幸福的时刻<br>
+                就是看到宝贝健康成长
+            </p>
+            <div class="focus clear">
+                <img src="./images/tmp/b_test.png" class="img-box">
+                <div class="wrap-info">                
+                    <div class="center-box icon"></div>
+                    <div class="tip-box icon">
+                        <div class="tip-content">
+                            <button>B超图像</button>
+                        </div>
+                    </div>
+                    <div class="bottom-box icon"> </div>
+                </div>
+            </div>
+            <p class="tip">注：全部照片可在1产检—Super妈咪服务中查看</p>
+        </li>-->
+        
+        <li class="page-item hospital-scene">
+            <p>我是{{year}}年</p>
+            <p class="title">第 {{rankingMm}} 个</p>
+            <p class="desc">选择一妇婴的准妈妈<br>得到了22位专业医生及护士的保驾护航</p>
+            <div class="hospital">
+                <div class="icon bg"></div>
+                <div class="icon flag-box">
+                    <i class="icon flag-left"></i>
+                    <i class="icon flag-right"></i>
+                    <i class="icon flag"></i>
+                </div>
+            </div>
+        </li>
+        <li class="page-item child-birth-scene">
+            <p class="desc">漫长的妊娠期即将结束<br>爱与责任才刚刚开始</p>
+            <p class="title">{{dateChildbirth}}</p>
+            <p class="desc">期待这天来临</p>
+            <div class="flags icon"></div>
+            <div class="mother-child-box">
+                <div class="icon icon-mother-child"></div>
+                <i class="icon icon-fire"></i>
+                <i class="icon icon-fire"></i>
+            </div>
+            <div>一妇婴&1产检 祝你生一个健康、聪明的宝宝</div>
+            <button class="share-btn icon"></button>
+            <p>*1产检全程提供数据支持</p>
+        </li>
+    </ul>
+    <span class="icon arrow-down"></span>
+</script>
+<script type="text/html" id="pregnant_born_record_template">
+    <div class="wrap-fixed">
+        <i class="icon icon-logo"></i>
+        <i class="icon icon-music"></i>
+        <audio src="{{host+backgroundMusic}}" class="voice-audio" autoplay loop></audio>
+    </div>
+    <ul class="page-list page-born-record">
+        <li class="page-item remember-start-scene">
+            <p class="title">十个月的怀孕历程<br>已经结束</p>
+            <p class="desc">那些感动和辛苦你还记得吗?</p>
+            <div class="focus icon"></div>
+            <p class="text">回顾我的好孕时光</p>
+
+        </li>
+        <li class="page-item first-antenatal-scene">
+            <div class="title">{{firstCheckDate}}</div>
+            <p class="desc">第一次在一妇婴产检,丝毫不敢大意</p>
+            <div class="focus">
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+                <i class="icon"></i>
+            </div>
+        </li>
+        {{if firstCheckImg}}
+        <li class="page-item common-b-scene first-saw-scene">
+            <div class="title">在一妇婴第一次见到你</div>
+            <p class="desc">虽然看不清你的模样<br>但是心中已幻想出你的笑颜</p>
+            <div class="focus clear">
+                <i class="icon sign"></i>
+                <img src="{{firstCheckImg ? firstCheckImg : ''}}" class="img-box">
+                <div class="wrap-info">                
+                    <div class="center-box icon {{firstCheckImg ? '' : 'un-exit-img'}}"></div>
+                    <div class="tip-box icon">
+                        <div class="tip-content">
+                            {{if (isShare || total == 1 || !firstCheckImg) }}
+                            <button>宝贝靓照</button>
+                            {{else}}
+                            <button class="change-btn" data-loading="0" data-index="{{index}}">换一张</button>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="bottom-box icon"> </div>
+                </div>
+            </div>
+        </li>
+        {{/if}}
+        <li class="page-item first-heard-scene">
+            <p class="title">在一妇婴第一次听见你</p>
+            <div class="desc">
+                <p>小火车般的心跳好像在说</p>
+                <p>妈妈，狂吃狂吃狂吃...</p>
+            </div>
+            <span class="timer">
+                <strong class="time">10</strong>"<em class="ms">00</em>
+            </span>
+            <audio src="{{host+fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
+            <div class="btn">
+                <i class="icon"></i>
+                <em class="text">点击播放</em>
+            </div>
+            <div class="focus"></div>
+        </li>
+        <li class="page-item antenatal-total-scene">
+            <p class="title">{{currentCheckedNum}}次产检</p>
+            <div class="desc">我从未懈怠，请叫我Super妈咪</div>
+            <ul class="focus">
+                {{if goodWeather > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{goodWeather}}>
+                                <p>/次</p>
+                                <p>好天气</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each goodWeatherArr}}
+                                    <li class="icon icon-sun-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-sun"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+                {{if rainWeather > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{rainWeather}}>
+                                <p>/次</p>
+                                <p>下雨天</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each rainWeatherArr}}
+                                    <li class="icon icon-rain-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-rain"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+                {{if earlyWarning > 0}}
+                <li class="item">
+                    <span class="sign-box"></span>
+                    <div class="content-box">
+                        <div class="wrap-text">
+                            <div class="text-nums" data-nums={{earlyWarning}}>
+                                <p>/次</p>
+                                <p>气象预警</p>
+                            </div>
+                            <ul class="wrap-icon-sign">
+                                {{each earlyWarningArr}}
+                                    <li class="icon icon-flash-sign"></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap-icon-weather">
+                        <i class="icon icon-flash"></i>
+                        <i class="icon icon-weather-shadow"></i>
+                    </div>
+                </li>
+                {{/if}}
+            </ul>
+        </li>
+        <li class="page-item antenatal-days-scene">
+            <p class="desc">如今我和宝贝已经一起度过了</p>
+            <p class="title">{{currentPregantDays}}天</p>
+            <div class="focus">
+                <i class="icon"></i>
+            </div>
+        </li>
+        <!--<li class="page-item common-b-scene antenatal-b-scene">
+            <p class="title">
+                最幸福的时刻<br>
+                就是看到宝贝健康成长
+            </p>
+            <div class="focus clear">
+                <img src="./images/tmp/b_test.png" class="img-box">
+                <div class="wrap-info">                
+                    <div class="center-box icon"></div>
+                    <div class="tip-box icon">
+                        <div class="tip-content">
+                            <button>B超图像</button>
+                        </div>
+                    </div>
+                    <div class="bottom-box icon"> </div>
+                </div>
+            </div>
+            <p class="tip">注：全部照片可在1产检—Super妈咪服务中查看</p>
+        </li>-->
+        <li class="page-item hospital-scene">
+            <p>我是{{year}}年</p>
+            <p class="title">第 {{rankingMm}} 个</p>
+            <p class="desc">选择一妇婴的准妈妈<br>得到了22位专业医生及护士的保驾护航</p>
+            <div class="hospital">
+                <div class="icon bg"></div>
+                <div class="icon flag-box">
+                    <i class="icon flag-left"></i>
+                    <i class="icon flag-right"></i>
+                    <i class="icon flag"></i>
+                </div>
+            </div>
+        </li>
+        <li class="page-item baby-weight-diff-secene">
+            <p class="desc">宝宝的体重超过了</p>
+            <p class="title">{{weightProportion}}</p>
+            <p>当日出生的宝宝</p>
+            <p>≈ {{watermelonNum}}个南汇8424小西瓜</p>
+            <div class="focus icon">
+                <i class="nums" data-weight={{child.weight}}></i><em class="unit">g</em>
+                <i class="icon sign"></i>
+            </div>
+        </li>
+        <li class="page-item baby-show-scene">
+            <p class="desc">漫长的妊娠期即将结束<br>爱与责任才刚刚开始</p>
+            <p class="title">{{child.dateBorn}}</p>
+            <p class="desc">我家{{child.sex}}诞生啦~生啦~啦~</p>
+            <div class="focus {{child.sex == '小王子' ? 'boy' : 'girl'}}">
+                <img src="{{child.babyPictures}}" />
+                <div class="icon bg"></div>
+                <em class="weight">{{child.weight}}g</em>
+            </div>
+            
+            <button class="share-btn icon"></button>
+            <p>*1产检全程提供数据支持</p>
+        </li>
+        
+    </ul>
+    <span class="icon arrow-down"></span>
+</script>
+<div class="share-container-shadow"></div>

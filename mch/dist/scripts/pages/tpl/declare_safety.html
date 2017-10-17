@@ -1,0 +1,54 @@
+<script id="declare_safety_template" type="text/template">
+    <form action="">
+        <div class="avatar-container">
+            <div class="container {{if babyPictures}}active{{/if}}">
+                <input type="file" class="upload-avatar" accept="image/*">
+                <div class="box">上传宝宝靓照</div>
+                <div class="wrap-pic">
+                    <img src="{{babyPictures}}" alt="" class="pic">
+                    <p>重新上传+</p>
+                </div>
+            </div>
+            <div class="desc">上传一张宝宝的照片,<br>去给叔叔阿姨们报平安</div>
+        </div>
+        <ul class="list">
+            <li class="item">
+                <span class="key">宝宝性别</span>
+                <span class="select-info">
+                    <select name="sex">
+                        <option {{if sex == "小公举"}} selected="selected" {{/if}} value="小公举">小公举</option>
+                        <option {{if sex == "小王子"}} selected="selected" {{/if}} value="小王子">小王子</option>
+                        <option {{if sex == "兄弟连"}} selected="selected" {{/if}} value="兄弟连">兄弟连</option>
+                        <option {{if sex == "姐妹花"}} selected="selected" {{/if}} value="姐妹花">姐妹花</option>
+                        <option {{if sex == "龙凤胎"}} selected="selected" {{/if}} value="龙凤胎">龙凤胎</option>
+                        <option {{if sex == "多胞胎"}} selected="selected" {{/if}} value="多胞胎">多胞胎</option>
+                    </select>
+                </span>
+            </li>
+            <li class="item">
+                <span class="key">宝宝出生日期</span>
+                <label for="select_birth_day" class="select-info child-val-label">{{dateBornText ? dateBornText : '请填写日期'}}</label>
+            </li>
+            <li class="item">
+                <span class="key">宝宝体重</span>
+                <span class="select-info">
+                    <input class="ipt" value="{{weight ? weight : 2500}}" type="number" name="weight" placeholder="请填写体重值">g
+                </span>
+
+            </li>
+        </ul>
+        <button class="gener-btn">立即生成</button>
+        <input id="select_birth_day" class="birth ipt" type="date" name="birth" value="{{dateBorn}}">
+    </form>
+    <div class="logo">
+        <img src="images/logo_white.png" class="img" alt="">
+    </div>
+    <div class="clip-image-container">
+        <img class="clip-img" />
+        <div class="overlay"></div>
+        <div class="tip">
+            <button class="btn ok">确定</button>
+            <button class="btn cancel">取消</button>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,20 @@
+<script id="create_safety_template" type="text/template">
+    <div class="wrap-title">
+        <span class="icon avatar"></span>
+        <p class="title">辣妈  {{name}} 向你扔来一个小宝宝</p>
+    </div>
+    <div class="wrap-time">
+        <p class="time">{{dateBorn}}</p>
+        <p class="desc">wuli{{sex}}在一妇婴平安诞生啦</p>
+    </div>
+    <div class="wrap-baby {{sex== '小王子' ? 'boy' : 'girl'}}">
+        <img class="baby" src="{{pic}}" alt="">
+        <div class="icon bg"></div>
+        <em class="weight">{{weight}}g</em>
+        <div class="words">{{words}}</div>
+        <button class="icon change-words-btn"></button>   
+    </div>
+    <button class="icon btn"></button>
+</script>
+
+

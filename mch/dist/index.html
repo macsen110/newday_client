@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>1产检</title>
+  <meta name="apple-mobile-web-app-title" content="1产检">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name = "format-detection" content = "telephone=no">
+  <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+  <meta content="no-cache" http-equiv="pragma">
+  <meta content="0" http-equiv="expires">
+  <link rel="stylesheet" href="styles/base.css"/>
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css?v=1.2.4">
+  <!-- endbuild -->
+  <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="//static.alipay.com/aliBridge/1.0.0/aliBridge.min.js"></script>
+  <script>
+    //初始化项目,禁用微信跟支付宝的分享功能
+    document.addEventListener('AlipayJSBridgeReady', function () {
+      AlipayJSBridge.call("hideOptionMenu");
+    }, false);
+    wx.config({
+      jsApiList: ['hideOptionMenu']
+    })
+    wx.ready(function () {
+      wx.hideOptionMenu();
+    })
+  </script>
+</head>
+<body data-page="index">
+  <div class="page-container" id="page_container"></div>
+  <div class="widget-bottom-nav " id="bottom_nav">
+      <ul class="container">
+          <li class="item bind-location" data-href="antenatal">
+              <a href="javascript:void(0)">
+                  <span class="iconfont iconfont-1">&#xe600;</span> 我的产检
+              </a>
+          </li>
+          <li class="item bind-location " data-href="waiting_doctor">
+              <a href="javascript:void(0)">
+                <span class="iconfont iconfont-2">&#xe602;</span> 候诊
+              </a>
+          </li>
+          <li class="item bind-location" data-href="profile">
+              <a href="javascript:void(0)">
+                  <span class="iconfont iconfont-3">&#xe607;</span> 我的
+              </a>
+          </li>
+      </ul>
+  </div>
+  <div class="layout_loading" id="layout_loading">
+    <div class="mask"></div>
+    <div class="layout_loading_inner">
+      
+      <div class="loading_box">
+        <div class="block" id="rotate_01"></div>
+        <div class="block" id="rotate_03"></div>
+        <div class="block" id="rotate_05"></div>
+        <div class="block" id="rotate_07"></div>
+      </div>
+      <div class="loading_box">
+        <div class="block" id="rotate_02"></div>
+
+        <div class="block" id="rotate_04"></div>
+
+        <div class="block" id="rotate_06"></div>
+
+        <div class="block" id="rotate_08"></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="logobg">
+    <img src="images/logobg.png" class="img" />
+  </div>
+  <div class="hidden" id="wx_environment_placeholder">
+    <i class="icon"></i>
+    请在微信客户端打开链接
+  </div>
+  <div class="hidden" id="apply_environment_placeholder">
+    <i class="icon"></i>请在服务窗内打开该应用
+  </div>
+  <script src="scripts/build/bundle.js"></script>
+  <script src="scripts/build/app.min.js?v=1.2.7"></script>
+</body>
+</html>
+

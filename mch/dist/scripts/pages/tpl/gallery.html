@@ -1,0 +1,39 @@
+<script type="text/html" id="gallery_template">
+{{if data.length == 0}}
+<div class="bg-head"></div>
+<div class="main">
+    <div class="streach"></div>
+    <div class="streach-cloud"></div>
+    <div class="bg-ani-footer"></div>
+    <div class="tip icon">
+        <p>快带宝贝去做B超吧</p>
+        <p>相册会在B超报告生成后显示</p>
+        <p>请耐心等待</p>
+        <p>(目前仅显示20周前的B超照片)</p>
+    </div>
+</div>
+{{else}}
+<div class="bg-head"></div>
+<div class="bg-head-words"></div>
+<div class="main">
+    <div class="streach"></div>
+    <div class="streach-cloud"></div>
+    <ul class="list">
+        {{each data}}
+        <li class="item">
+            <img data-time="{{$value.time}}" src="{{$value.imageUrlInit}}" alt="" class="img">
+            <span class="sign">{{$value.time}}</span>
+        </li>
+        {{/each}}
+    </ul>
+    <div class="bg-ani-footer"></div>
+</div>
+<div class="mask">
+    <div class="mask-content">
+        <img src="" class="img" alt="">
+        <p class="date"></p>
+    </div>
+    <i class="icon-close">X</i>
+</div>
+{{/if}}
+</script>
