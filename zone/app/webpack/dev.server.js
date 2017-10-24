@@ -6,7 +6,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   historyApiFallback: true
-}).listen(4000, 'www.newday.com', function (err, result) {
+}).listen(4000, 'dev.macsen318.com', function (err, result) {
   console.log(result)
   if (err) {
     return console.log(err);

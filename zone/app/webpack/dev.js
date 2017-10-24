@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-var htmlTplPath = path.join(__dirname, '../template/')
+var htmlTplPath = path.join(__dirname, '../template/dev/')
 var entryScriptPath = path.join(__dirname, '../script/build/')
 module.exports = {
   resolve: {
@@ -17,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../src/'),
-    publicPath: '/app/',    
+    publicPath: '/zone/',    
     filename: '[name].js'
   },
   devtool: 'eval',

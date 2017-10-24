@@ -62,10 +62,10 @@ class Blog_item extends React.Component {
         var content = item.content ? <div>{item.content}</div> : '';
         switch(category) {
             case 'image':
-                itemEle = <div className="wrap-uri"><img src={item.path} width={item.width/2} /></div>;
+                itemEle = <div className="wrap-uri"><img src={'//res.macsen318.com'+item.path} width={item.width/2} /></div>;
                 break;
             case 'video':
-                itemEle = <div className="wrap-uri"><video src={item.path} controls="controls" autoPlay></video></div>;
+                itemEle = <div className="wrap-uri"><video src={'//res.macsen318.com'+item.path} controls="controls" autoPlay></video></div>;
                 break;
             case 'note':             
                 itemEle = <p className="content">{item.content}</p>; 

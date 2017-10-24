@@ -72,7 +72,7 @@
 		self.uid = self._getOpenId();
 		self.openType = self._getOpenType();
 		self.host = {
-			api: '//macsen318.com.cn/mch'
+			api: '//www.macsen318.com/api'
 		};
 		self.ui = ui;
 		self._todo();
@@ -107,17 +107,10 @@
 			self.getCustomerInfo(data);
 		}
 		else {
-			var data = {
-				request_context: {
-					uid: self.uid,
-					appType: self.openType
-				}
-			}
 			$.ajax({
 				url : self.host.api + '/infanthospital/v1/getToken',
-				type : 'post',
+				type : 'get',
 				contentType : 'application/json',
-				data: JSON.stringify(data),
 				success : function(response) {
 					localStorage.setItem('token', response.data.token);
 					self._todo()

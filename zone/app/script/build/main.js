@@ -26,9 +26,8 @@ const history = createBrowserHistory();
 const render = () => {ReactDOM.render((
 	<AppContainer>
 		<Provider store={store}>
-		
 			<Router history={history}>
-				<BrowserRouter basename="/app">
+				<BrowserRouter basename="/zone">
 					{routes}
 				</BrowserRouter>
 			</Router>

@@ -131,14 +131,14 @@ class Blog_item extends React.Component {
         var itemEle;
         switch(category) {
             case 'image':
-                itemEle = <img src={item.path} width={item.width} />;
+                itemEle = <img src={'//res.macsen318.com'+item.path} width={item.width} />;
                 break;
             case 'video':
-                itemEle = <video src={item.path} controls="controls" autoPlay></video>;
+                itemEle = <video src={'//res.macsen318.com'+item.path} controls="controls" autoPlay></video>;
                 break;
             case 'note':
                 if(item.url) {
-                    itemEle = <div><p>{item.content}</p><p><img src={item.path} width={item.width/2} /></p></div>;
+                    itemEle = <div><p>{item.content}</p><p><img src={'//res.macsen318.com'+item.path} width={item.width/2} /></p></div>;
                 }
                 else {
                     itemEle = <p>{item.content}</p>; 

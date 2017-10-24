@@ -220,7 +220,6 @@
 					setTimeout(function(){
 						window.location.href = hrefvalue;
 					},800)
-					APP.recordsObj.record({page_id: 700002});
 					return;
 				}
 			})
@@ -315,7 +314,6 @@
 			if (profileInfo.emStatus == 2) self.bindCard(stateObj);
 		},
 		bindCard: function (stateObj) {
-			APP.recordsObj.record({page_id: 700000});
 			var self = this;
 			self.isBindCard = true;
 			//获取总的产检周期
@@ -537,7 +535,6 @@
 			}
 		},
 		unbindCard: function (stateObj) {
-			APP.recordsObj.record({page_id: 700001});
 			var self = this;
 			self.isBindCard = false;
 			var unbindCardUrl = APP.openType  == 1 ? 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe9b29693633b2e6f&redirect_uri=https%3A%2F%2Fh5.shqmxx.com%2FResource.aspx%3FCustomerId%3D77%26Pri%3D2F6242724A346747504136312B2F53773568446C4A4A504F754B3467667775574351314D4262352B564236576444514158486E4150664155726172343274686A665537303654587444435274424B4832347530415032654B58655A7A61376B3551534958757666477474314F4B42704E704F64624C3333756B5358783476722B54756A64366B3657346B576C63636A2F6455784C56673D3D%26UiServiceId%3Dgh_f6090761f9dc%26UItype%3Dwx%26IsMenu%3D1%26Version%3D1.1%26ForwardUIUserId%3DoTqovuCyWUNksPVsdOzvIGaUhnOk&response_type=code&scope=snsapi_base&state=d3hlOWIyOTY5MzYzM2IyZTZmJTJjYTAxMjk3YjExYmZmZTI2YzE4ZTcxZjQyNGQ3YWUwNmMlMmMw#wechat_redirect' : 'http://alipay.51mch.com/HTML/myCardList.html?userID='+encodeURIComponent(APP.uid);

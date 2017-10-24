@@ -21,7 +21,6 @@
 			}
 		},
 		show: function (html) {
-			APP.recordsObj.record({page_id: 900000});
 			APP.tools.pageCount();
 			this.$rootDom.addClass('visibile');
 			this.$rootDom.append(html);
@@ -32,7 +31,6 @@
 			var self = this;
 			var startIcon =  $('.page-index .icon');
 			startIcon.on('click', function () {
-				APP.recordsObj.record({page_id: 900001});
 				self.ui.dialog = APP.ui.Dialog({
 					isMask: true,
 					title: '提示',

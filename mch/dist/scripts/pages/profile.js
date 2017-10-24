@@ -19,7 +19,6 @@
 			}
 		},
 		show: function (tplScript, data) {
-			APP.recordsObj.record({page_id: 600000});
 			var self = this;
 			APP.tools.pageCount();
 			self.$rootDom.html(tplScript);

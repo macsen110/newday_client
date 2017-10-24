@@ -2,7 +2,7 @@
     <div class="wrap-fixed">
         <i class="icon icon-logo"></i>
         <i class="icon icon-music"></i>
-        <audio src="{{host+backgroundMusic}}" class="voice-audio" preload="auto" autoplay loop></audio>
+        <audio src="{{backgroundMusic}}" class="voice-audio" preload="auto" autoplay loop></audio>
     </div>
     <ul class="page-list page-unborn-record">
         <li class="page-item remember-start-scene">
@@ -37,11 +37,8 @@
                     <div class="center-box icon {{firstCheckImg ? '' : 'un-exit-img'}}"></div>
                     <div class="tip-box icon">
                         <div class="tip-content">
-                            {{if (isShare || total == 1 || !firstCheckImg) }}
                             <button>宝贝靓照</button>
-                            {{else}}
-                            <button class="change-btn" data-loading="0" data-index="{{index}}">换一张</button>
-                            {{/if}}
+                           
                         </div>
                     </div>
                     <div class="bottom-box icon"> </div>
@@ -57,7 +54,7 @@
             <span class="timer">
                 <strong class="time">10</strong>"<em class="ms">00</em>
             </span>
-            <audio src="{{host+fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
+            <audio src="{{fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
             <div class="btn">
                 <i class="icon"></i>
                 <em class="text">点击播放</em>
@@ -199,7 +196,7 @@
     <div class="wrap-fixed">
         <i class="icon icon-logo"></i>
         <i class="icon icon-music"></i>
-        <audio src="{{host+backgroundMusic}}" class="voice-audio" autoplay loop></audio>
+        <audio src="{{backgroundMusic}}" class="voice-audio" autoplay loop></audio>
     </div>
     <ul class="page-list page-born-record">
         <li class="page-item remember-start-scene">
@@ -231,11 +228,7 @@
                     <div class="center-box icon {{firstCheckImg ? '' : 'un-exit-img'}}"></div>
                     <div class="tip-box icon">
                         <div class="tip-content">
-                            {{if (isShare || total == 1 || !firstCheckImg) }}
                             <button>宝贝靓照</button>
-                            {{else}}
-                            <button class="change-btn" data-loading="0" data-index="{{index}}">换一张</button>
-                            {{/if}}
                         </div>
                     </div>
                     <div class="bottom-box icon"> </div>
@@ -252,7 +245,7 @@
             <span class="timer">
                 <strong class="time">10</strong>"<em class="ms">00</em>
             </span>
-            <audio src="{{host+fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
+            <audio src="{{fetalHeartMusic}}" class="taixin-voice-audio" loop></audio>
             <div class="btn">
                 <i class="icon"></i>
                 <em class="text">点击播放</em>

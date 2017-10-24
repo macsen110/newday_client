@@ -37,7 +37,6 @@
 				setTimeout(function(){
 					window.location.href = hrefvalue;
 				},800)
-				APP.recordsObj.record({page_id: 800002});
 			})
 			if (self.isBindCard && !sessionStorage.getItem('queueIsToday')) self._startTimeCount();
 		},
@@ -49,7 +48,6 @@
 		},
 		bindCard: function (stateObj) {
 			//this need to request bindCard ajax
-			APP.recordsObj.record({page_id: 800000});
 			var self = this;
 			self.isBindCard = true;
 			var profileInfo = APP.profileInfo;
@@ -94,7 +92,6 @@
 			
 		},
 		unbindCard: function (stateObj) {
-			APP.recordsObj.record({page_id: 800001});
 			var self = this;
 			var unbindCardUrl = APP.openType  == 1 ? 'https://wxapi.shqmxx.com/WXOAuth/AuthReceivePage.aspx?customerId=77&applicationId=2b0ff89f27584e3ab81d44d060a4271e&goUrl=https://h5.shqmxx.com/Template/Resource.aspx?Pri=QM.CSFP.77.DIS.UserManage-Binding' : 'http://alipay.51mch.com/HTML/myCardList.html?userID='+encodeURIComponent(APP.uid);
 			self.ready(stateObj, {uid: APP.uid,unbindCardUrl:unbindCardUrl});            
