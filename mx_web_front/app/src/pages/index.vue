@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container page-index">
   <nav>home</nav>
   <div @click="goList">go list</div>
 </div>
