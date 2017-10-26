@@ -6,18 +6,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
 module.exports = {
-  entry: {
-    app: resolve('src/main')
-  },
-  output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
-  },
+  
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     modules: [
@@ -28,11 +18,22 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
     }
   },
+  entry: {
+    vendor: ['vue', 'vue-router'],
+    app: resolve('src/main')
+  },
+  output: {
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  },
   module: {
     rules: [ 
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },     
       {
@@ -54,20 +55,35 @@ module.exports = {
       //解析.css文件
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", 'css')
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        }),
       },
       //解析.vue文件
       {
           test: /\.vue$/,
-          loader: 'vue'
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
       }, 
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style", 'css!sass') //这里用了样式分离出来的插件，如果不想分离出来，可以直接这样写 loader:'style!css!sass'
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          //resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader']
+        })
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin("style.css")
+    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor.js"}),
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
+      disable: process.env.NODE_ENV !== 'production'
+    })
   ]
 }

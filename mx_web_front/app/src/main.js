@@ -1,3 +1,11 @@
-import Vue from 'vue';
-//require('./sass/a.sass')
-export default {}
+import Vue from 'vue'
+import App from './App'
+import router from './routes'
+new Vue({
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: {
+    App
+  }
+})

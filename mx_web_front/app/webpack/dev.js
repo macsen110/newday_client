@@ -1,11 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
+var base = require('./base');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../')
 var entryScriptPath = path.join(__dirname, '../src/')
-module.exports = {
+var NODE_ENV = process.env.NODE_ENV;
+module.exports = merge(base, {
   resolve: {
     modules: [
       '../../',
@@ -13,14 +15,14 @@ module.exports = {
     ]
   },
   entry: {
-    app: [entryScriptPath+'main'] // Your appʼs entry point
+    app: [entryScriptPath+'main'], // Your appʼs entry point
   },
   output: {
     path: path.join(__dirname, '../src/'),
     publicPath: '',    
     filename: '[name].js'
   },
-  devtool: 'eval',
+  devtool: NODE_ENV == 'development' ? 'inline-source-map' : 'eval',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
@@ -29,10 +31,9 @@ module.exports = {
       inject: true
     }),
     new FriendlyErrorsPlugin(),
+    
   ],
   module: {
-    rules: [
-      {test: /\.(js|jsx)$/, use: ['react-hot-loader/webpack','babel-loader']}
-    ]
+    
   }
-};
+});
