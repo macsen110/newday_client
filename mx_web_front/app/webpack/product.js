@@ -8,7 +8,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 //var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../')
 var env = 'production';
-console.log(htmlTplPath);
 //return false;
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -21,12 +20,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: '[id].js',
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   },
-    //   sourceMap: true
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      sourceMap: true
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: htmlTplPath + 'index.html',
