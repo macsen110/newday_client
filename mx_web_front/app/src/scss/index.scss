@@ -1,4 +1,27 @@
-@import './base.scss';
-.page-index {
-    width: 400px
+.page-index{
+    background-color: #132e44;
+    .bg-header {
+        height: px2rem(105);
+        @include bis('../scss/imgs/bg_index_header.png')
+    }
+    .section-box {
+        width: px2rem(938);
+        height: px2rem(484);
+        margin: 0 auto;
+        font-family: FZLTTHK--GBK1-0;
+        font-size: 104px;
+        color: #FF5F28;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        width: px2rem(1028);
+        height: px2rem(236);
+        color: #fff;
+        text-align: center;
+        line-height: px2rem(236);
+        background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
+    }
 }

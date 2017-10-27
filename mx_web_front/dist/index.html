@@ -4,9 +4,9 @@
 					recalc = function () {
 						var clientWidth = docEl.clientWidth;
 						if (!clientWidth) return;
-						clientWidth = clientWidth > 640 ? 640 : clientWidth;
+						clientWidth = clientWidth > 1080 ? 1080 : clientWidth;
 						clientWidth = clientWidth < 320 ? 320 : clientWidth;
-						docEl.style.fontSize = clientWidth/32 + 'px'; //以后的宽高值除以20，为了兼容谷歌的模拟器,根目录最小单位不能为12px
+						docEl.style.fontSize = clientWidth/10 + 'px'; //以后的宽高值除以20，为了兼容谷歌的模拟器,根目录最小单位不能为12px
 						docEl.style.display = "none";
 						// docEl.clientWidth; // Force relayout - important to new Androids
 						docEl.style.display = "";
@@ -14,16 +14,11 @@
 
 			// Abort if browser does not support addEventListener
 			if (!doc.addEventListener) return;
-
 			// Test rem support
 			var div = doc.createElement('div');
 			div.setAttribute('style', 'font-size: 1rem');
-
 			// Abort if browser does not recognize rem
 			if (div.style.fontSize != "1rem") return;
-
-			win.addEventListener('resize', recalc, false);
-			//recalc()
-
 			doc.addEventListener('DOMContentLoaded', recalc, false);
+			win.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', recalc, false);
 		})(document, window);</script><link href=/style.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/vendor.js></script><script type=text/javascript src=/app.js></script></body></html>

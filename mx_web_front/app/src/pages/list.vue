@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="page-list container">
     <h1 @click="goPay">list</h1> 
     
   </div>
@@ -13,6 +13,9 @@ export default {
   }
 }
 </script>
-<style src="../scss/list.scss"></style>
+<style lang="scss">
+@import '~styles/tools.scss';
+@import '~styles/list.scss';
+</style>
 
 

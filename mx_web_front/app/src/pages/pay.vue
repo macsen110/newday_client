@@ -13,7 +13,7 @@ export default {
   }
 }
 </script>
-<style src="../scss/pay.scss">
+<style src="../scss/pay.scss" lang="scss">
 </style>
 
 

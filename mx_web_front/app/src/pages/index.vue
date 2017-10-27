@@ -1,7 +1,8 @@
 <template>
 <div class="container page-index">
-  <nav>home</nav>
-  <div @click="goList">go list</div>
+  <h3 class="bg-header"></h3>
+  <div class="section-box"></div>
+  <div class="footer">点击屏幕开始点餐</div>
 </div>
 </template>
 <script>
@@ -13,4 +14,7 @@ export default {
   }
 }
 </script>
-<style src="../scss/index.scss"></style>
+<style lang="sass" type="text/scss" rel="stylesheet/scss">
+@import '~styles/tools.scss';
+@import '~styles/index.scss';
+</style>

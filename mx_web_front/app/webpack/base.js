@@ -9,13 +9,14 @@ function resolve (dir) {
 module.exports = {
   
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     modules: [
       '../../',
       "node_modules"
     ],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
+      'styles': resolve('src/scss')
     }
   },
   entry: {
@@ -65,7 +66,19 @@ module.exports = {
           test: /\.vue$/,
           loader: 'vue-loader',
           options: {
-            extractCSS: true
+            extractCSS: true,
+            loaders: {
+              //sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1&data=@import "./src/scss/tools"',
+              //scss: 'vue-style-loader!css-loader!sass-loader?data=@import "./src/scss/tools";',
+              scss: ExtractTextPlugin.extract({
+                use: 'css-loader!sass-loader',
+                fallback: 'vue-style-loader'
+              }),
+              sass: ExtractTextPlugin.extract({
+                use: 'css-loader!sass-loader?indentedSyntax',
+                fallback: 'vue-style-loader'
+              })
+            }
           }
       }, 
       {
@@ -73,7 +86,18 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           //resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'sass-loader']
+          use: [
+            'style-loader',
+            'css-loader', 
+            'sass-loader',
+            // {
+            //   loader: 'sass-resources-loader',generateLoaders(['css', 'sass?data=@import "~assets/styles/app";'])
+            //   options: {
+            //     // Provide path to the file with resources
+            //     resources: resolve('src/scss/base.scss'),
+            //   },
+            // },
+          ]
         })
       }
     ]
