@@ -1,0 +1,283 @@
+/* reset */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+  display: block;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption,
+th {
+  text-align: left;
+  font-weight: normal;
+}
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+i,
+cite,
+em,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+[hidefocus],
+summary {
+  outline: 0;
+}
+li {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  font-size: 100%;
+}
+sup,
+sub {
+  font-size: 83%;
+}
+pre,
+code,
+kbd,
+samp {
+  font-family: inherit;
+}
+q:before,
+q:after {
+  content: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+label,
+summary {
+  cursor: default;
+}
+a,
+button {
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b {
+  font-weight: bold;
+}
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+  text-decoration: none;
+}
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+  font: 12px/1.14 arial, \5b8b\4f53;
+  color: #333;
+  outline: 0;
+}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 0px;  
+    height: 0px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);  
+    border-radius: 10px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
+    background-color: #555;  
+}  
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.page-index {
+  background-color: #132e44;
+}
+.page-index .bg-header {
+    height: 0.97222rem;
+    background-image: url(/static/img/bg_index_header.4739305.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.page-index .section-box {
+    width: 8.68519rem;
+    height: 4.48148rem;
+    margin: 0 auto;
+    font-family: FZLTTHK--GBK1-0;
+    font-size: 104px;
+    color: #FF5F28;
+}
+.page-index .footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    width: 10rem;
+    height: 2.18519rem;
+    color: #fff;
+    text-align: center;
+    line-height: 2.18519rem;
+    background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
+}
+
+.page-list {
+  position: relative;
+  height: 100vh;
+  padding: 1.48148rem 0 2.22222rem;
+  overflow: hidden;
+  background: #fafafa;
+}
+.page-list .header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    width: 10rem;
+    height: 1.16667rem;
+    background: #FFFFFF;
+    box-shadow: 0 0.05556rem 0.11111rem 0 rgba(228, 228, 228, 0.5);
+}
+.page-list .header .btn-go-back {
+      float: right;
+      width: 1.7037rem;
+      height: 100%;
+      line-height: 1.16667rem;
+      text-align: center;
+      background: #f7f7f7;
+      color: #515151;
+}
+.page-list .body {
+    overflow: auto;
+    padding-left: 2.22222rem;
+}
+.page-list .nav {
+    position: absolute;
+    left: 0;
+    width: 1.74074rem;
+}
+.page-list .nav .item {
+      position: relative;
+      display: block;
+      text-align: center;
+      height: 1.25926rem;
+      line-height: 1.25926rem;
+}
+.page-list .nav .item:before {
+        content: '';
+        position: absolute;
+        width: 0.22222rem;
+        left: 0;
+        top: 0;
+        bottom: 0;
+}
+.page-list .nav .item.cur {
+        background: #fff;
+}
+.page-list .nav .item.cur:before {
+          background: #00AFEC;
+          box-shadow: 0 0 0.11111rem 0 #BBDFEC;
+}
+.page-list .list-container .tit {
+    font-family: PingFangSC-Regular;
+    font-size: 33px;
+    color: #B4B4B4;
+    margin-bottom: 0.2037rem;
+}
+.page-list .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2.22222rem;
+    background: #132E44;
+    box-shadow: 0 -0.05556rem 0.24074rem 0 rgba(137, 137, 137, 0.5);
+}
+

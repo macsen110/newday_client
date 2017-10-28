@@ -1,8 +1,9 @@
-@import url('../scss/base.css');
+@import url('~styles/base.css');
 $blue: #3190e8;  
 $bc: #e4e4e4;
 $fc:#fff;
 $ue-width: 1080;
+$body-font-size: 28;
 // 背景图片地址和大小
 @mixin bis($url) { 
 	background-image: url($url);
@@ -76,3 +77,6 @@ $ue-width: 1080;
 @function px2rem($px) {
   @return #{$px/$ue-width*10}rem;
 }
+@function px2em($px) {
+	@return #{$px/$body-font-size}em;
+  }

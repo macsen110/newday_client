@@ -5,29 +5,22 @@
     </h3>
     <div class="body">
       <ul class="nav">
-        <li class="item cur" @click="filterList('sd')">item1</li>
-        <li class="item" @click="filterList('ds')">item2</li>
-        <li class="item" @click="filterList('ds')">item3</li>
+        <li class="item cur" @click="filterList('sd')">套餐</li>
+        <li class="item" @click="filterList('ds')">食品</li>
+        <li class="item" @click="filterList('ds')">饮品</li>
 
       </ul>
       <div class="list-container">
         <h4 class="tit">套餐</h4>
-        <ul class="list">
+        <ul class="list clear">
           <li class="item" v-for="(item, index) in goods" :key="index">
-            <div class="wrap-pic">
+            <div class="wrap-img">
               <img :src="item.url" alt="">
             </div>
+            <h5 class="price">10.00</h5>
+            <p class="name">{{item.name}}</p>
           </li>
-          <li class="item" v-for="(item, index) in goods" :key="index">
-            <div class="wrap-pic">
-              <img :src="item.url" alt="">
-            </div>
-          </li>
-          <li class="item" v-for="(item, index) in goods" :key="index">
-            <div class="wrap-pic">
-              <img :src="item.url" alt="">
-            </div>
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -39,6 +32,16 @@ export default {
   data: function () {
     return {
       goods: [
+        {
+          url: '/tmp/tmp_item_0.png',
+          name: '100ml豆浆加1个水煮鸡蛋',
+
+        },
+        {
+          url: '/tmp/tmp_item_0.png',
+          name: '100ml豆浆加1个水煮鸡蛋',
+
+        },
         {
           url: '/tmp/tmp_item_0.png',
           name: '100ml豆浆加1个水煮鸡蛋',

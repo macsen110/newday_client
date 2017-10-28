@@ -13,7 +13,9 @@ export default {
   }
 }
 </script>
-<style src="../scss/pay.scss" lang="scss">
+<style lang="scss">
+@import '~styles/tools.scss';
+@import '~styles/pay.scss';
 </style>
 
 

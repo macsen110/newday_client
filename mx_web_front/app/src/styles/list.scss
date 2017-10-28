@@ -14,6 +14,7 @@
     height: px2rem(126);
     background: #FFFFFF;
     box-shadow: 0 px2rem(6) px2rem(12) 0 rgba(228,228,228,0.50);
+    font-weight: normal;
     .btn-go-back {
       float: right;
       width: px2rem(184);
@@ -25,6 +26,7 @@
     } 
   }
   .body {
+    height: 100%;
     overflow: auto;
     padding-left: px2rem(240);
   }
@@ -38,7 +40,7 @@
       text-align: center;
       height: px2rem(136);
       line-height: px2rem(136);
-      
+      background: #fff;
       &:before {
         content: '';
         position: absolute;
@@ -48,7 +50,7 @@
         bottom: 0;
       }
       &.cur {
-        background: #fff;
+        background: transparent;
         &:before {
           background: #00AFEC;
           box-shadow: 0 0 px2rem(12) 0 #BBDFEC;
@@ -63,6 +65,47 @@
       font-size: 33px;
       color: #B4B4B4;
       margin-bottom: px2rem(22)
+    }
+    .list {
+      > .item {
+        float: left;
+        width: px2rem(368);
+        height: px2rem(498);
+        background: #FFFFFF;
+        margin: 0 px2rem(40) px2rem(40) 0;
+        border-radius: px2rem(9);
+      }
+      .wrap-img {
+        height: px2rem(278);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        > img {
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+      .price {
+        width: px2rem(212);
+        height: px2rem(60);
+        line-height: px2rem(60);
+        border-radius: 0 px2rem(60) px2rem(60) 0;
+        background: #FF5F28;
+        color: #fff;
+        font-size: px2em(40);
+        &:before {
+          font-size: .7em;
+          content: '¥';
+        }
+      }
+      .name,
+      
+      .name {
+        font-family: PingFangSC-Regular;
+        font-size: px2em(36);
+        color: #051B28;
+      }
     }
   }
   .footer {

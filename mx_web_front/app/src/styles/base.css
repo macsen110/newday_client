@@ -124,7 +124,7 @@ h6,
 em,
 strong,
 b {
-  font-weight: bold;
+  font-weight: normal;
 }
 del,
 ins,
@@ -175,4 +175,25 @@ legend {
   max-width: 1080px;
   margin: 0 auto;
   min-height: 100vh;
+}
+
+
+/**media**/
+@media screen and (min-width: 320px) {
+	body {font-size: 18px}
+}
+@media screen and (min-width: 481px) and (max-width:640px) {
+	body {font-size: 20px}
+}
+@media screen and (min-width: 641px) and (max-width:800px) {
+	body {font-size: 22px}
+}
+@media screen and (min-width: 801px) and (max-width:960px) {
+	body {font-size: 24px}
+}
+@media screen and (min-width: 961px) and (max-width:1020px) {
+	body {font-size: 26px}
+}
+@media screen and (min-width: 1021px) {
+	body {font-size: 28px}
 }

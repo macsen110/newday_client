@@ -1,5 +1,5 @@
 <template>
-<div class="container page-index">
+<div class="container page-index" @click="goList">
   <h3 class="bg-header"></h3>
   <div class="section-box"></div>
   <div class="footer">点击屏幕开始点餐</div>

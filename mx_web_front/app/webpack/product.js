@@ -16,8 +16,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   //devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
-    chunkFilename: '[id].js',
+    filename: utils.assetsPath('js/[name].js'),
+    chunkFilename: utils.assetsPath('js/[id].js'),
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

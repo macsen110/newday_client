@@ -16,7 +16,8 @@ module.exports = {
     ],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'styles': resolve('src/scss')
+      'styles': resolve('src/styles'),
+      'assets': resolve('src/assets')
     }
   },
   entry: {
@@ -103,9 +104,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor.js"}),
+    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: utils.assetsPath("js/vendor.js")}),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: process.env.NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
       allChunks: true,
       disable: process.env.NODE_ENV !== 'production'
     })

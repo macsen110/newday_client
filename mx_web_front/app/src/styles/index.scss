@@ -2,7 +2,7 @@
     background-color: #132e44;
     .bg-header {
         height: px2rem(105);
-        @include bis('../scss/imgs/bg_index_header.png')
+        @include bis('~assets/bg_index_header.png')
     }
     .section-box {
         width: px2rem(938);
@@ -23,5 +23,6 @@
         text-align: center;
         line-height: px2rem(236);
         background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
+        font-size: px2em(52)
     }
 }
