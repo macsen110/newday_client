@@ -1,4 +1,77 @@
 
 .page-list{
-  
+  position: relative;
+  height: 100vh;
+  padding: px2rem(160) 0 px2rem(240);
+  overflow: hidden;
+  background: #fafafa;
+  .header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    @include transform(translate3d(-50%, 0, 0));
+    width: px2rem(1080);
+    height: px2rem(126);
+    background: #FFFFFF;
+    box-shadow: 0 px2rem(6) px2rem(12) 0 rgba(228,228,228,0.50);
+    .btn-go-back {
+      float: right;
+      width: px2rem(184);
+      height: 100%;
+      line-height: px2rem(126);
+      text-align: center;
+      background: #f7f7f7;
+      color: #515151;
+    } 
+  }
+  .body {
+    overflow: auto;
+    padding-left: px2rem(240);
+  }
+  .nav {
+    position: absolute;
+    left: 0;
+    width: px2rem(188);
+    .item {
+      position: relative;
+      display: block;
+      text-align: center;
+      height: px2rem(136);
+      line-height: px2rem(136);
+      
+      &:before {
+        content: '';
+        position: absolute;
+        width: px2rem(24);
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+      &.cur {
+        background: #fff;
+        &:before {
+          background: #00AFEC;
+          box-shadow: 0 0 px2rem(12) 0 #BBDFEC;
+        }
+      }
+      
+    }
+  }
+  .list-container {
+    .tit {
+      font-family: PingFangSC-Regular;
+      font-size: 33px;
+      color: #B4B4B4;
+      margin-bottom: px2rem(22)
+    }
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: px2rem(240);
+    background: #132E44;
+    box-shadow: 0 px2rem(-6) px2rem(26) 0 rgba(137,137,137,0.50);
+  }
 }

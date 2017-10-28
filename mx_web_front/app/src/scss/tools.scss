@@ -31,7 +31,11 @@ $ue-width: 1080;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+@mixin transform($trans) {
+	-webkit-transform: $trans;
+	transform: $trans;
 
+}
 //定位上下居中
 @mixin ct {  
 	position: absolute;
