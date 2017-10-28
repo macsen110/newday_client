@@ -124,7 +124,7 @@ h6,
 em,
 strong,
 b {
-  font-weight: bold;
+  font-weight: normal;
 }
 del,
 ins,
@@ -177,6 +177,27 @@ legend {
   min-height: 100vh;
 }
 
+
+/**media**/
+@media screen and (min-width: 320px) {
+	body {font-size: 18px}
+}
+@media screen and (min-width: 481px) and (max-width:640px) {
+	body {font-size: 20px}
+}
+@media screen and (min-width: 641px) and (max-width:800px) {
+	body {font-size: 22px}
+}
+@media screen and (min-width: 801px) and (max-width:960px) {
+	body {font-size: 24px}
+}
+@media screen and (min-width: 961px) and (max-width:1020px) {
+	body {font-size: 26px}
+}
+@media screen and (min-width: 1021px) {
+	body {font-size: 28px}
+}
+
 .page-index {
   background-color: #132e44;
 }
@@ -205,8 +226,10 @@ legend {
     text-align: center;
     line-height: 2.18519rem;
     background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
+    font-size: 1.85714em;
 }
 
+@charset "UTF-8";
 .page-list {
   position: relative;
   height: 100vh;
@@ -224,6 +247,7 @@ legend {
     height: 1.16667rem;
     background: #FFFFFF;
     box-shadow: 0 0.05556rem 0.11111rem 0 rgba(228, 228, 228, 0.5);
+    font-weight: normal;
 }
 .page-list .header .btn-go-back {
       float: right;
@@ -235,6 +259,7 @@ legend {
       color: #515151;
 }
 .page-list .body {
+    height: 100%;
     overflow: auto;
     padding-left: 2.22222rem;
 }
@@ -249,6 +274,7 @@ legend {
       text-align: center;
       height: 1.25926rem;
       line-height: 1.25926rem;
+      background: #fff;
 }
 .page-list .nav .item:before {
         content: '';
@@ -259,7 +285,7 @@ legend {
         bottom: 0;
 }
 .page-list .nav .item.cur {
-        background: #fff;
+        background: transparent;
 }
 .page-list .nav .item.cur:before {
           background: #00AFEC;
@@ -270,6 +296,44 @@ legend {
     font-size: 33px;
     color: #B4B4B4;
     margin-bottom: 0.2037rem;
+}
+.page-list .list-container .list > .item {
+    float: left;
+    width: 3.40741rem;
+    height: 4.61111rem;
+    background: #FFFFFF;
+    margin: 0 0.37037rem 0.37037rem 0;
+    border-radius: 0.08333rem;
+}
+.page-list .list-container .list .wrap-img {
+    height: 2.57407rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.page-list .list-container .list .wrap-img > img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+}
+.page-list .list-container .list .price {
+    width: 1.96296rem;
+    height: 0.55556rem;
+    line-height: 0.55556rem;
+    border-radius: 0 0.55556rem 0.55556rem 0;
+    background: #FF5F28;
+    color: #fff;
+    font-size: 1.42857em;
+}
+.page-list .list-container .list .price:before {
+      font-size: .7em;
+      content: '\A5';
+}
+.page-list .list-container .list .name,
+  .page-list .list-container .list .name {
+    font-family: PingFangSC-Regular;
+    font-size: 1.28571em;
+    color: #051B28;
 }
 .page-list .footer {
     position: absolute;
