@@ -62,7 +62,8 @@ body,
 fieldset,
 img,
 iframe,
-abbr {
+abbr,
+button {
   border: 0;
 }
 i,
@@ -115,6 +116,7 @@ a,
 button {
   cursor: pointer;
 }
+
 h1,
 h2,
 h3,
@@ -141,9 +143,12 @@ button,
 select,
 keygen,
 legend {
-  font: 12px/1.14 arial, \5b8b\4f53;
+  font: .3rem/1.14 arial, \5b8b\4f53;
   color: #333;
   outline: 0;
+}
+button {
+  font-size: inherit
 }
 .clearfix{*zoom:1;}
 .clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
@@ -177,9 +182,130 @@ legend {
   min-height: 100vh;
 }
 
+/**widget**/
+.widget-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(36,40,47,0.80);
+}
+
+.widget-dialog {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.widget-dialog .dialog-mask-bg {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.widget-dialog .main {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 75.8%;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  font-size: .38rem;
+}
+.widget-dialog .title {
+  padding: 12px 0;
+}
+.widget-dialog .content {
+  padding: 0 16px 10px;
+}
+.widget-dialog .foot {
+  
+  display: -webkit-box;
+  display: flex;
+  overflow: hidden;
+}
+.widget-dialog .foot button {
+  display: block;
+  height: 100%;
+  
+  -webkit-box-flex: 1;
+  flex: 1;
+  width: 100%;
+  color: #01a0e4;
+  border: 0 none;
+  background: none;
+  
+}
+
+.widget-prompt {
+  position: fixed;
+  z-index: 101;
+  top: 50%;
+  left: 50%;
+  width: 75.8%;;
+  padding: 0.462rem;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  background: #FFFFFF;
+  box-shadow: 0 0 0.1rem 0 rgba(181,181,181,0.50);
+  border-radius: 0.1rem;
+  color: #333;
+  font-size: 0.372rem;
+  text-align: center;
+  
+}
+
+/****/
+/***业务逻辑处理调用****/
+
+.widget-dialog .content {
+  padding: 1.08rem 0 .45rem;
+}
+.widget-dialog .foot {
+  padding: 0 0.46rem 0.83rem;
+  justify-content: space-between;
+}
+.widget-dialog .foot button {
+  text-align: center;
+  line-height: 1.4rem;
+  width: 47%;
+  
+}
+.widget-dialog .foot button {
+  -webkit-box-flex: none;
+  flex: none;
+  
+  border-radius: 0.09rem;
+}
+.widget-dialog .foot .btn-dialog-cancel {
+  background-image: linear-gradient(-179deg, #F5F5F5 13%, #DADADA 91%);
+  border: 1px solid #979797;
+  border-radius: 0.09rem;
+  color: #616161;
+}
+.widget-dialog .foot .btn-dialog-ok {
+  color: #fff;
+  background-image: linear-gradient(-179deg, #13C1FF 19%, #009AFF 91%);
+}
+/*****/
+
+
 
 /**media**/
-@media screen and (min-width: 320px) {
+/* @media screen and (min-width: 320px) {
 	body {font-size: 18px}
 }
 @media screen and (min-width: 481px) and (max-width:640px) {
@@ -196,4 +322,4 @@ legend {
 }
 @media screen and (min-width: 1021px) {
 	body {font-size: 28px}
-}
+} */

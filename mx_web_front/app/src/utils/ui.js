@@ -1,14 +1,14 @@
-(function (win, factory) {
-	if (typeof exports === 'object') {
-			module.exports = factory();
-	} 
-	else if (typeof define === 'function' && define.amd) {
-			define(factory);
-	} 
-	else {
-			win.eventUtil = factory();
-	}
-})(this, function () {
+// (function (win, factory) {
+// 	if (typeof exports === 'object') {
+// 			module.exports = factory();
+// 	} 
+// 	else if (typeof define === 'function' && define.amd) {
+// 			define(factory);
+// 	} 
+// 	else {
+// 			win.yaoMUI = factory();
+// 	}
+// })(this, function () {
 	//module ...
 	/****************
 	tab 切换插件
@@ -291,7 +291,7 @@
 			//纵向
 			if (self.orientation == 2 && Math.abs(self.deltaY) > Math.abs(self.deltaX)) {
 				e.preventDefault();
-                if (!self.hasMoved) self.touchMoveCb &&  self.touchMoveCb(self.index)   
+				if (!self.hasMoved) self.touchMoveCb &&  self.touchMoveCb(self.index)   
 				self.element.style.MozTransform = self.element.style.webkitTransform = 'translate3d(0,' + (self.deltaY - (self.index-self.focusIndex) * self.childHeight) + 'px,0)';
 			}
 			self.hasMoved = true;
@@ -403,10 +403,11 @@
 			this.promptTimer = setTimeout(function(){
 					this.destory();
 					if (this.cb) this.cb()
-			}.bind(this),3000);
+			}.bind(this), this.duration || 3000);
 		},
 		destory: function () {
-			this._container.parentNode.removeChild(this._container)
+			if (!this._container) return false;
+			this._container.parentNode && this._container.parentNode.removeChild(this._container)
 			this._container = null;
 		}
 	}
@@ -438,11 +439,11 @@
 			this._container && (this._container.style.display = 'none');
 		}
 	}
-	return {
+	export default {
 			TabWidget: function (args) {return new TabWidget(args)},
 			Dialog: function (args) {return new Dialog(args)},
 			easyMove: function (dom, args) { return new easyMove(dom, args)},
 			showPrompt: function (args) {return new showPrompt(args)},
 			Loading: function (args) { return new Loading(args) },
 	}
-})
+//})

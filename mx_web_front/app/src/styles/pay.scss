@@ -1,4 +1,68 @@
-@import '~styles/tools.scss';
-.page-pay{
-  
+.page-pay {
+  position: relative;
+  height: 100vh;
+  padding: px2rem(160) 0 0;
+  overflow: hidden;
+  background: #132e44;
+  .header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    @include transform(translate3d(-50%, 0, 0));
+    width: px2rem(1080);
+    height: px2rem(146);
+    font-weight: normal;
+    @include bis('~assets/bg_list_header.png');
+  }
+  .body {
+    color: #fff;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    padding-bottom: px2rem(40);
+    .pay-box-header {
+      height: px2rem(584);
+      padding-top: px2rem(258);
+
+      background: url('~assets/bg_payBody_split.png') no-repeat left bottom;
+      background-size: 100% auto;
+      
+      .unpay {
+        text-align: left;
+        padding-left: 12.1%;
+        padding-right: 12.1%;
+        display: -webkit-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .num {
+          margin-left: px2rem(20);
+        }
+      }
+    }
+    .pay-result {
+      padding-top: px2rem(118); 
+      .remian,
+      .desc {
+        color: $blue;
+        
+      }
+      .remian {
+        margin-bottom: px2rem(60);
+      }
+      .desc {
+        line-height: 1.8;
+      }
+      .tip {
+        margin-bottom: px2rem(40)
+      }
+      .qrcode {
+        
+        width: px2rem(636);
+        height: px2rem(636);
+        
+      }
+    }
+  }
 }

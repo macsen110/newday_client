@@ -11,18 +11,19 @@
     left: 50%;
     @include transform(translate3d(-50%, 0, 0));
     width: px2rem(1080);
-    height: px2rem(126);
-    background: #FFFFFF;
-    box-shadow: 0 px2rem(6) px2rem(12) 0 rgba(228,228,228,0.50);
+    height: px2rem(146);
+    padding-bottom: px2rem(18);
     font-weight: normal;
+    @include bis('~assets/bg_list_header.png');
     .btn-go-back {
       float: right;
       width: px2rem(184);
       height: 100%;
-      line-height: px2rem(126);
+      line-height: px2rem(128);
       text-align: center;
       background: #f7f7f7;
       color: #515151;
+      font-size: px2rem(34);
     } 
   }
   .body {
@@ -41,6 +42,7 @@
       height: px2rem(136);
       line-height: px2rem(136);
       background: #fff;
+      font-size: px2rem(34);
       &:before {
         content: '';
         position: absolute;
@@ -62,13 +64,14 @@
   .list-container {
     .tit {
       font-family: PingFangSC-Regular;
-      font-size: 33px;
+      font-size: px2rem(32);
       color: #B4B4B4;
       margin-bottom: px2rem(22)
     }
     .list {
       > .item {
         float: left;
+        position: relative;
         width: px2rem(368);
         height: px2rem(498);
         background: #FFFFFF;
@@ -82,39 +85,218 @@
         justify-content: space-around;
         > img {
           display: block;
-          max-width: 100%;
-          max-height: 100%;
+          width: px2rem(190);
+          height: px2rem(226)
+          // max-width: 100%;
+          // max-height: 100%;
         }
       }
       .price {
-        width: px2rem(212);
+        position: absolute;
+        top: px2rem(248);
+        left: 0;
+        width: px2rem(214);
         height: px2rem(60);
+        padding-left: px2rem(24);
         line-height: px2rem(60);
         border-radius: 0 px2rem(60) px2rem(60) 0;
         background: #FF5F28;
         color: #fff;
-        font-size: px2em(40);
+        font-size: px2rem(40);
         &:before {
-          font-size: .7em;
+          font-size: px2rem(28);
           content: '¥';
         }
       }
-      .name,
+      .wrap-item-info {
+        height: px2rem(220);
+        padding: px2rem(30) px2rem(24) 0; 
+      }
+      .wrap-sku {
+        height: px2rem(90);
+        display: -webkit-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        > *{
+          display: block;
+          
+        }
+        .sign {
+          font-size: px2rem(24);
+          &::before {
+            content: '';
+            display: inline-block;
+            width: px2rem(23);
+            height: px2rem(28);
+          }
+          &.hot {
+            color: #F1561B;
+            &::before{
+              margin-right: px2rem(8);
+              @include bis('~assets/icon_warm.png')
+            }
+          }
+        }
+
+
+      }
       
       .name {
         font-family: PingFangSC-Regular;
-        font-size: px2em(36);
+        font-size: px2rem(34);
         color: #051B28;
+        height: px2rem(100);
+        line-height: px2rem(50);
       }
     }
   }
   .footer {
+    z-index: 12;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: px2rem(240);
+    padding: px2rem(28) px2rem(56) px2rem(28) px2rem(140);
     background: #132E44;
     box-shadow: 0 px2rem(-6) px2rem(26) 0 rgba(137,137,137,0.50);
+    .wrap-cart-info {
+      position: relative;
+      height: 100%;
+      display: -webkit-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+    }
+    .wrap-cart-info > * {
+      display: block;
+      color: #fff;
+    }
+    .btn {
+      width: px2rem(370);
+      height: px2rem(184);
+      line-height: px2rem(184);
+      text-align: center;
+      background-image: linear-gradient(-180deg, #13C1FF 0%, #009AFF 100%);
+      border-radius: px2rem(14);
+      font-size: px2rem(50);
+      &:disabled {
+        background-image: linear-gradient(-180deg, #545D64 5%, #434E57 96%);
+        color: #133149;
+      }
+    }
+    .cart-info {
+      .icon-cart {
+        position: relative;
+        display: block;
+        width: px2rem(92);
+        height: px2rem(92);
+        @include bis('~assets/icon_cart.png');
+        .cart-number {
+          position: absolute;
+          top: px2rem(-30);
+          right: px2rem(-30);
+          width: px2rem(66);
+          height: px2rem(66);
+          line-height: px2rem(66);
+          border-radius: 50%;
+          text-align: center;
+          font-size: px2rem(40);
+          background: #FF7B28;
+        }
+      }
+      .total-price {
+        font-size: px2rem(64);
+        &:before {
+          font-size: px2rem(32);
+          content: '¥';
+          margin:0 px2rem(10) 0 px2rem(20)
+        }
+      }
+    }
+    
+    .cart-items-box {
+      &.show {
+        display: block;
+      }
+      
+      position: absolute;
+      left: 0;
+      bottom: px2rem(240);
+      width: 100%;
+      padding-left: px2rem(90);
+      background: #FFFFFF;
+      box-shadow: 0 px2rem(-6) px2rem(26) 0 rgba(0,0,0,0.13);
+      border-radius: px2rem(20) px2rem(20) 0 0;
+      .head {
+        padding: px2rem(28);
+        padding-left: 0;
+        padding-bottom: 0;
+        text-align: right;
+        .close {
+          display: inline-block;
+          width: px2rem(20);
+          height: px2rem(20);
+          margin-right: px2rem(8);
+          @include bis('~assets/icon_cross.png')
+
+        }
+      }
+      .item-list{
+        > .item {
+          padding: px2rem(28) px2rem(80) px2rem(28) px2rem(16);
+          border-bottom: 1px solid #EDEDED;
+          display: -webkit-box;
+          display: flex;
+          justify-content: space-between;
+          align-items: center; 
+          color: #051B28;  
+          &:last-child {
+            border-bottom: 0 none;
+          }   
+        }
+        .name,
+        .price,
+        .wrap-actions {
+          display: block
+        }
+        .name {
+          width: px2rem(440);
+        }
+      }
+    } 
+  }
+  .wrap-actions {
+    height: px2rem(48);
+    .icon-reduce,
+    .icon-plus {
+      display: inline-block;
+      height: px2rem(48);
+      width: px2rem(48);
+      vertical-align: middle;
+
+    }
+    .icon-reduce {
+      @include bis('~assets/icon_less.png')
+    }
+    .icon-plus {
+      @include bis('~assets/icon_more.png')
+    }
+    .numbers {
+      display: inline-block;
+      min-width: px2rem(80);
+      vertical-align: middle;
+      text-align: center;
+      &:before {
+        content: '';
+        display: inline-block;
+        width: px2rem(20);
+        height: px2rem(20);
+        margin-right: px2rem(8);
+        @include bis('~assets/icon_cross.png')
+      }
+    }
   }
 }

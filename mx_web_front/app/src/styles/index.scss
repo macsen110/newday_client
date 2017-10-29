@@ -1,15 +1,17 @@
 .page-index{
     background-color: #132e44;
+    padding-bottom: px2rem(240);
+    overflow: auto;
     .bg-header {
         height: px2rem(105);
         @include bis('~assets/bg_index_header.png')
     }
     .section-box {
-        width: px2rem(938);
-        height: px2rem(484);
-        margin: 0 auto;
+        //width: px2rem(938);
+        height: px2rem(1303);
+        margin: px2rem(70) auto 0;
         font-family: FZLTTHK--GBK1-0;
-        font-size: 104px;
+        @include bis('~assets/bg_index_breakfirst.png');
         color: #FF5F28;
     }
     .footer {
@@ -23,6 +25,6 @@
         text-align: center;
         line-height: px2rem(236);
         background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
-        font-size: px2em(52)
+        font-size: px2rem(52)
     }
 }
