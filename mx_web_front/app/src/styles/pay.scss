@@ -4,6 +4,7 @@
   padding: px2rem(160) 0 0;
   overflow: hidden;
   background: #132e44;
+  font-size: px2rem(40);
   .header {
     position: absolute;
     top: 0;
@@ -32,18 +33,35 @@
     text-align: center;
     padding-bottom: px2rem(40);
     .pay-box-header {
-      height: px2rem(584);
-      padding-top: px2rem(258);
-
+      height: px2rem(300);
+      padding-bottom: px2rem(30);
       background: url('~assets/bg_payBody_split.png') no-repeat left bottom;
       background-size: 100% auto;
-      
-      .unpay {
+      text-align: center;
+      .price {
+        font-size: px2rem(98);
+        margin-left: px2rem(20);
+      }
+      .tit {
+        font-size: px2rem(50);
+        line-height: 1.8;
+      }
+      .unpay-header,
+      .payed-header {
+        height: 100%;
+        display: -webkit-box;
+        display: flex;
+      }
+      .payed-header {
+        flex-direction: column;
+        justify-content: flex-end
+      }
+      .unpay-header {
+        height: 100%;
         text-align: left;
         padding-left: 12.1%;
         padding-right: 12.1%;
-        display: -webkit-box;
-        display: flex;
+        
         justify-content: space-between;
         align-items: center;
         
@@ -51,19 +69,18 @@
           margin-left: px2rem(20);
         }
       }
+      
     }
     .pay-result {
-      padding-top: px2rem(118); 
+      padding-top: px2rem(220); 
       .remian,
-      .desc {
+      .result-text {
+        line-height: 1.8;
         color: $blue;
-        
+        font-size: px2rem(50)
       }
       .remian {
         margin-bottom: px2rem(60);
-      }
-      .desc {
-        line-height: 1.8;
       }
       .tip {
         margin-bottom: px2rem(40)
@@ -73,6 +90,21 @@
         width: px2rem(636);
         height: px2rem(636);
         
+      }
+      .bg-result-payed,
+      .bg-result-finished {
+        margin-top: px2rem(150);
+      }
+      .bg-result-payed {
+        width: 100%;
+        height: px2rem(728);
+        @include bis('~assets/bg_pay_result_payed.png');
+      }
+      .bg-result-finished {
+        width: px2rem(212);
+        height: px2rem(368);
+        // margin:  0 auto;
+        // @include bis('~assets/bg_pay_result_finished.png');
       }
     }
   }

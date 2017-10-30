@@ -2,18 +2,90 @@
     background-color: #132e44;
     padding-bottom: px2rem(240);
     overflow: auto;
+    overflow-x: hidden;
     .bg-header {
         // height: px2rem(105);
         // @include bis('~assets/bg_index_header.png')
+        height: px2rem(1008);
+        //margin: px2rem(70) auto 0;
+        //font-family: FZLTTHK--GBK1-0;
+        @include bis('~assets/bg_index_breakfirst.gif');
+        color: #FF5F28;
     }
     .section-box {
         //width: px2rem(938);
-        height: px2rem(1008);
-        margin: px2rem(70) auto 0;
-        font-family: FZLTTHK--GBK1-0;
+        //height: px2rem(1008);
+        //margin: px2rem(70) auto 0;
+        //font-family: FZLTTHK--GBK1-0;
         //@include bis('~assets/bg_index_breakfirst.gif');
-        color: #FF5F28;
+        height: px2rem(318);
+        margin-top: px2rem(300);
+        border-top: 1px solid transparent;
+        //padding: px2rem(100);
+        color: #fff;
+        background-image: linear-gradient(-180deg, #FF730D 0%, #FF7350 100%);
+        &:after {
+            content: '';
+            display: block;
+            height: px2rem(40);
+            background-color: red;
+        }
+        .list {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 110%;
+            transform: translate3d(0, -30%, 0);
+            overflow-x: auto;
+        }
+        .item {
+            flex-shrink: 0;
+            width: px2rem(348);
+            margin-left: px2rem(48);
+            img {
+                display: block;
+                width: 100%;
+                height: px2rem(260);
+                margin-bottom: px2rem(20)
+            }
+            .item-info-box {
+                display: flex;
+                justify-content: space-between;
+                font-size: px2rem(28);
+
+            }
+            .price {
+                font-size: px2rem(40);
+                &:before {
+                    font-size: px2rem(28);
+                    content: '¥';
+                }
+            }
+            .tag {
+                width: px2rem(100);
+                height: px2rem(46);
+                line-height: px2rem(46);
+                text-align: center;
+                background: #FFFFFF;
+                border-radius: px2rem(54);
+                font-size: px2rem(24);
+                &::before {
+                  content: '';
+                  display: inline-block;
+                  width: px2rem(23);
+                  height: px2rem(28);
+                  vertical-align: middle
+                }
+                &.hot {
+                  color: #F1561B;
+                  &::before{
+                    margin-right: px2rem(8);
+                    @include bis('~assets/icon_warm.png')
+                  }
+                }
+              }
+        }
     }
+    
     .footer {
         position: fixed;
         bottom: 0;

@@ -21,7 +21,7 @@
             <div class="wrap-item-info">
               <p class="name">{{item.name}}</p>
               <div class="wrap-sku">
-                <i class="sign hot">暖</i>
+                <i class="tag hot">暖</i>
                 <div class="wrap-actions">
                   <i class="icon icon-reduce"></i>
                   <em class="numbers">2</em>
@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import  ui from '../utils/ui.js';
+import  * as ui from 'yao-m-ui';
 export default {
   data: function () {
     return {
@@ -95,17 +95,11 @@ export default {
   methods: {
     goPay() {
       this.pageUxState.buyBtnDisabled = true;
-      var pay4Dialog = ui.Dialog({
-        content:'是否要去支付',
-        foot: '<button class="btn-dialog-cancel">取消</button><button class="btn-dialog-ok">确定</button>',
-        afterOk: () =>  {
-          pay4Dialog.destory()
-          this.$router.push('pay')
-        },
-        afterClose: () => this.pageUxState.buyBtnDisabled = false
-      })
-      
-      
+      this.destroyStagnation()
+      ui.showPrompt({
+        msg: '正在创建订单...',
+        cb: () => this.$router.push('pay')
+      });
     },
     goBack() {
       history.back()      

@@ -10,7 +10,8 @@
     "immutable": "^3.7.5",
     "prop-types": "^15.5.10",
     "socket.io": "^2.0.3",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "yao-m-ui": "^0.3.4"
   },
   "devDependencies": {
     "async": "^1.4.2",
