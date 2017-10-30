@@ -11,7 +11,7 @@ const pay = resolve => require(['../pages/pay.vue'], resolve)
 const routes = [
   {
     path: '/',
-    name: 'index',
+    name: 'home',
     component: index
   },
   {

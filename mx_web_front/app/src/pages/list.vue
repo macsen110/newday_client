@@ -1,5 +1,5 @@
 <template>
-  <div class="page-list container">
+  <div class="page-list container" @click="reflushStagnation">
     <h3 class="header">
       <span @click="goBack" class="btn-go-back">取消</span>
     </h3>
@@ -58,7 +58,7 @@
         </ul>
       </div>
     </div>
-    <div class="widget-mask" v-show="pageUxState.showCartBox"></div>
+    <div @click="toggleCartBox(false)" class="widget-mask" v-show="pageUxState.showCartBox"></div>
   </div>
 </template>
 <script>
@@ -66,6 +66,8 @@ import  ui from '../utils/ui.js';
 export default {
   data: function () {
     return {
+      stagnationTime: 10,
+      stagnationEndCb: null,
       goods: [
         {
           url: '/tmp/tmp_item_0.png',
@@ -106,20 +108,29 @@ export default {
       
     },
     goBack() {
-      ui.showPrompt({
-        msg: '呀，超出库存量了',       
-        cb: function () {
-          history.back()
-        }
-      })
-      
+      history.back()      
     },
     filterList(type) {
       console.log(type)
     },
     toggleCartBox(flag) {
       this.pageUxState.showCartBox = flag
-    }
+    },
+    reflushStagnation() {
+      this.destroyStagnation()
+      this.stagnationEndCb = setTimeout(() => this.$router.push({ path: '/' }), this.stagnationTime * 1000)
+    },
+    destroyStagnation() {
+      this.stagnationEndCb && clearTimeout(this.stagnationEndCb);
+    },
+    
+    
+  },
+  created() {
+    this.reflushStagnation()
+  },
+  beforeDestroy() {
+    this.destroyStagnation()
   }
 }
 </script>

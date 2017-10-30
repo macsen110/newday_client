@@ -1,6 +1,8 @@
 <template>
   <div class="page-pay">
-    <h2 class="header"></h2>
+    <h3 class="header">
+      <span @click="goBack" class="btn-go-back">取消</span>
+    </h3>
     <div class="body" @click="openDialog">
       <div class="pay-box-header">
         <div class="unpay">
@@ -28,10 +30,34 @@
 // import  ui from '../utils/ui.js';
 
 export default {
+  data: function () {
+    return {
+      stagnationTime: 10,
+      stagnationEndCb: null
+    }
+  },
   methods: {
     openDialog() {
       
-    }
+    },
+    reflushStagnation() {
+      this.destroyStagnation()
+      this.stagnationEndCb = setInterval(this.loopStagnation, 1000)
+    },
+    loopStagnation() {
+      if (this.stagnationTime > 0) --this.stagnationTime
+      else {}
+    },
+    destroyStagnation() {
+      this.stagnationEndCb && clearTimeout(this.stagnationEndCb);
+    },
+    
+  },
+  created() {
+    this.reflushStagnation()
+  },
+  beforeDestroy() {
+    //this.destroyStagnation()
   }
 }
 </script>

@@ -40,11 +40,25 @@ module.exports = {
       },     
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: utils.assetsPath('img/[name].[hash:7].[ext]')
+            }  
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+            },
+          },
+        ],
+        // loader: 'url-loader',
+        // query: {
+        //   limit: 1000,
+        //   name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        // }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,

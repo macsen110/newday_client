@@ -8,11 +8,11 @@
   .header {
     position: absolute;
     top: 0;
-    left: 50%;
-    @include transform(translate3d(-50%, 0, 0));
-    width: px2rem(1080);
+    left: 0;
+    //@include transform(translate3d(-50%, 0, 0));
+    width: 100%;
     height: px2rem(146);
-    padding-bottom: px2rem(18);
+    padding-bottom: px2rem(19);
     font-weight: normal;
     @include bis('~assets/bg_list_header.png');
     .btn-go-back {

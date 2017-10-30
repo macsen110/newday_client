@@ -3,15 +3,15 @@
     padding-bottom: px2rem(240);
     overflow: auto;
     .bg-header {
-        height: px2rem(105);
-        @include bis('~assets/bg_index_header.png')
+        // height: px2rem(105);
+        // @include bis('~assets/bg_index_header.png')
     }
     .section-box {
         //width: px2rem(938);
-        height: px2rem(1303);
+        height: px2rem(1008);
         margin: px2rem(70) auto 0;
         font-family: FZLTTHK--GBK1-0;
-        @include bis('~assets/bg_index_breakfirst.png');
+        //@include bis('~assets/bg_index_breakfirst.gif');
         color: #FF5F28;
     }
     .footer {
