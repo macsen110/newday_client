@@ -93,18 +93,17 @@
       }
       .bg-result-payed,
       .bg-result-finished {
+        width: 100%;
+        height: px2rem(728);
+
         margin-top: px2rem(150);
       }
       .bg-result-payed {
-        width: 100%;
-        height: px2rem(728);
         @include bis('~assets/bg_pay_result_payed.png');
       }
       .bg-result-finished {
-        width: px2rem(212);
-        height: px2rem(368);
         // margin:  0 auto;
-        // @include bis('~assets/bg_pay_result_finished.png');
+        @include bis('~assets/bg_pay_result_finished.png');
       }
     }
   }

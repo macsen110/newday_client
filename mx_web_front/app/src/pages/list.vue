@@ -66,7 +66,7 @@ import  * as ui from 'yao-m-ui';
 export default {
   data: function () {
     return {
-      stagnationTime: 10,
+      stagnationTime: 30,
       stagnationEndCb: null,
       goods: [
         {

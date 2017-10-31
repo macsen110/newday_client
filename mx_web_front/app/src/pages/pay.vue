@@ -173,4 +173,3 @@ export default {
 @import '~styles/pay.scss';
 </style>
 
-
