@@ -14,15 +14,17 @@ var webpackConfig = require('./product')
 var spinner = ora('building for production...')
 spinner.start()
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+
 shell.config.silent = true
 shell.rm('-rf', assetsPath)
 shell.mkdir('-p', assetsPath)
-
 shell.cp('-R', 'static/*', assetsPath)
 shell.cp('-R', 'tmp', config.build.assetsRoot)
 shell.config.silent = false
 
 webpack(webpackConfig, function (err, stats) {
+  console.log(assetsPath+'/css/style.css');
+  shell.sed('-i', 'static/', '../', assetsPath+'/css/style.css');
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({

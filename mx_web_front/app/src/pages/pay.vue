@@ -23,7 +23,7 @@
           <p class="remian">{{loopPayTime}}s</p>
           <p class="result-text">等待支付</p>
           <p class="tip">请打开盒马App的付款码，对准下方扫码口</p>
-          <img @click="toPay" class="qrcode" alt="" src="/tmp/qrcode.png">
+          <span @click="toPay" class="qrcode" :style="{backgroundImage:'url(./tmp/qrcode.png)'}"></span>
         </div>
         <div v-if="orderInfo.status == 2 || orderInfo.status == 3" class="payed-result">
           <h3 class="result-text">

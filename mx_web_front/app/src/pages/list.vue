@@ -68,19 +68,20 @@ export default {
     return {
       stagnationTime: 30,
       stagnationEndCb: null,
+      cartListData: [],
       goods: [
         {
-          url: '/tmp/tmp_item_0.png',
+          url: './tmp/tmp_item_0.png',
           name: '100ml豆浆加1个水煮鸡蛋',
 
         },
         {
-          url: '/tmp/tmp_item_0.png',
+          url: './tmp/tmp_item_0.png',
           name: '100ml豆浆加1个水煮鸡蛋',
 
         },
         {
-          url: '/tmp/tmp_item_0.png',
+          url: './tmp/tmp_item_0.png',
           name: '100ml豆浆加1个水煮鸡蛋',
 
         }
@@ -117,7 +118,12 @@ export default {
     destroyStagnation() {
       this.stagnationEndCb && clearTimeout(this.stagnationEndCb);
     },
-    
+    addCart() {
+
+    },
+    reduceCartArr() {
+
+    }
     
   },
   created() {

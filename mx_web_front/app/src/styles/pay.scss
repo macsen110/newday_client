@@ -86,10 +86,12 @@
         margin-bottom: px2rem(40)
       }
       .qrcode {
-        
+        display: block;
+        margin: 0 auto;
         width: px2rem(636);
         height: px2rem(636);
-        
+        background-size: contain;
+        background-position: center;
       }
       .bg-result-payed,
       .bg-result-finished {

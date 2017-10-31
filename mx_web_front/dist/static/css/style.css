@@ -33,6 +33,7 @@ menu {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none
 }
 header,
 footer,
@@ -65,6 +66,10 @@ iframe,
 abbr,
 button {
   border: 0;
+}
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 i,
 cite,
@@ -333,7 +338,7 @@ button {
 }
 .page-index .bg-header {
     height: 9.33333rem;
-    background-image: url(/static/img/bg_index_breakfirst.a2cfa0f.gif);
+    background-image: url(../img/bg_index_breakfirst.a2cfa0f.gif);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     color: #FF5F28;
@@ -393,7 +398,7 @@ button {
 }
 .page-index .section-box .item .tag.hot::before {
             margin-right: 0.07407rem;
-            background-image: url(/static/img/icon_warm.62587db.png);
+            background-image: url(../img/icon_warm.62587db.png);
             background-repeat: no-repeat;
             background-size: 100% 100%;
 }
@@ -427,7 +432,7 @@ button {
     height: 1.35185rem;
     padding-bottom: 0.17593rem;
     font-weight: normal;
-    background-image: url(/static/img/bg_list_header.ef722aa.png);
+    background-image: url(../img/bg_list_header.ef722aa.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -546,7 +551,7 @@ button {
 }
 .page-list .list-container .list .wrap-sku .tag.hot::before {
           margin-right: 0.07407rem;
-          background-image: url(/static/img/icon_warm.62587db.png);
+          background-image: url(../img/icon_warm.62587db.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
 }
@@ -598,7 +603,7 @@ button {
       display: block;
       width: 0.85185rem;
       height: 0.85185rem;
-      background-image: url(/static/img/icon_cart.2dd5c2f.png);
+      background-image: url(../img/icon_cart.2dd5c2f.png);
       background-repeat: no-repeat;
       background-size: 100% 100%;
 }
@@ -646,7 +651,7 @@ button {
           width: 0.18519rem;
           height: 0.18519rem;
           margin-right: 0.07407rem;
-          background-image: url(/static/img/icon_cross.26689aa.png);
+          background-image: url(../img/icon_cross.26689aa.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
 }
@@ -681,12 +686,12 @@ button {
       vertical-align: middle;
 }
 .page-list .wrap-actions .icon-reduce {
-      background-image: url(/static/img/icon_less.37cc5af.png);
+      background-image: url(../img/icon_less.37cc5af.png);
       background-repeat: no-repeat;
       background-size: 100% 100%;
 }
 .page-list .wrap-actions .icon-plus {
-      background-image: url(/static/img/icon_more.b29c991.png);
+      background-image: url(../img/icon_more.b29c991.png);
       background-repeat: no-repeat;
       background-size: 100% 100%;
 }
@@ -702,7 +707,7 @@ button {
         width: 0.18519rem;
         height: 0.18519rem;
         margin-right: 0.07407rem;
-        background-image: url(/static/img/icon_cross.26689aa.png);
+        background-image: url(../img/icon_cross.26689aa.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
 }
@@ -723,7 +728,7 @@ button {
     height: 1.35185rem;
     padding-bottom: 0.17593rem;
     font-weight: normal;
-    background-image: url(/static/img/bg_list_header.ef722aa.png);
+    background-image: url(../img/bg_list_header.ef722aa.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -747,7 +752,7 @@ button {
 .page-pay .body .pay-box-header {
       height: 2.77778rem;
       padding-bottom: 0.27778rem;
-      background: url(/static/img/bg_payBody_split.805838d.png) no-repeat left bottom;
+      background: url(../img/bg_payBody_split.805838d.png) no-repeat left bottom;
       background-size: 100% auto;
       text-align: center;
 }
@@ -796,8 +801,12 @@ button {
         margin-bottom: 0.37037rem;
 }
 .page-pay .body .pay-result .qrcode {
+        display: block;
+        margin: 0 auto;
         width: 5.88889rem;
         height: 5.88889rem;
+        background-size: contain;
+        background-position: center;
 }
 .page-pay .body .pay-result .bg-result-payed,
       .page-pay .body .pay-result .bg-result-finished {
@@ -806,12 +815,12 @@ button {
         margin-top: 1.38889rem;
 }
 .page-pay .body .pay-result .bg-result-payed {
-        background-image: url(/static/img/bg_pay_result_payed.2cae23d.png);
+        background-image: url(../img/bg_pay_result_payed.2cae23d.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
 }
 .page-pay .body .pay-result .bg-result-finished {
-        background-image: url(/static/img/bg_pay_result_finished.a0d5c81.png);
+        background-image: url(../img/bg_pay_result_finished.a0d5c81.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
 }
