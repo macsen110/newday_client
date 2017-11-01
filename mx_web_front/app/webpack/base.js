@@ -3,6 +3,7 @@ var config = require('./config/index')
 var webpack = require("webpack")
 var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -21,7 +22,7 @@ module.exports = {
     }
   },
   entry: {
-    vendor: ['vue', 'vue-router'],
+    vendor: ['vue', 'vue-router', 'yao-m-ui'],
     app: resolve('src/main')
   },
   output: {
@@ -68,14 +69,7 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      //解析.css文件
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        }),
-      },
+      
       //解析.vue文件
       {
           test: /\.vue$/,
@@ -103,7 +97,12 @@ module.exports = {
           //resolve-url-loader may be chained before sass-loader if necessary
           use: [
             'style-loader',
-            'css-loader', 
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true
+              }
+            }, 
             'sass-loader',
             // {
             //   loader: 'sass-resources-loader',generateLoaders(['css', 'sass?data=@import "~assets/styles/app";'])
@@ -114,7 +113,20 @@ module.exports = {
             // },
           ]
         })
-      }
+      },
+      //解析.css文件
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }]
+        }),
+      },
     ]
   },
   plugins: [
@@ -123,6 +135,12 @@ module.exports = {
       filename: process.env.NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
       allChunks: true,
       disable: process.env.NODE_ENV !== 'production'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: {removeAll: true } },
+      canPrint: true
     })
   ]
 }

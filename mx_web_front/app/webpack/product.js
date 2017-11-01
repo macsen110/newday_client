@@ -5,7 +5,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./base')
 var utils = require('./utils')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-//var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var htmlTplPath = path.join(__dirname, '../')
 var env = 'production';
 function resolve (dir) {
@@ -43,14 +43,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    new webpack.ContextReplacementPlugin(/^\.scss$/, (context) => {  
-      console.log(context)  
-      Object.assign(context, {
-        regExp: /^static/,
-        request: './imgs' // 
-      });
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    
     
   ]
 })
