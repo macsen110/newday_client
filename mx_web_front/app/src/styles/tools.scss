@@ -52,9 +52,17 @@ $body-font-size: 28;
 }
 
 //宽高
-@mixin wh($width, $height){
-	width: $width;
-	height: $height;
+@mixin wh($width, $height: $width){
+	width: px2rem($width);
+	height: px2rem($height);
+}
+
+@mixin w($width) {
+	width: px2rem($width)
+}
+
+@mixin h($height) {
+	height: px2rem($height)
 }
 
 //字体大小、行高、字体
@@ -68,15 +76,17 @@ $body-font-size: 28;
 	color: $color;
 }
 
+
 //flex 布局和 子元素 对其方式
 @mixin fj($type: space-between){
 	display: flex;
 	justify-content: $type;
 
 }
+
 @function px2rem($px) {
-  @return #{$px/$ue-width*10}rem;
+  @return #{$px/$ue-width*10}rem
 }
-@function px2em($px) {
-	@return #{$px/$body-font-size}em;
-  }
+
+
+

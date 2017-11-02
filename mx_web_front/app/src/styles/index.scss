@@ -4,40 +4,22 @@
     overflow: auto;
     overflow-x: hidden;
     .bg-header {
-        // height: px2rem(105);
-        // @include bis('~assets/bg_index_header.png')
-        height: px2rem(1008);
-        //margin: px2rem(70) auto 0;
-        //font-family: FZLTTHK--GBK1-0;
+        @include h(1008);
         @include bis('~assets/bg_index_breakfirst.gif');
         color: #FF5F28;
     }
     .section-box {
-        //width: px2rem(938);
-        //height: px2rem(1008);
-        //margin: px2rem(70) auto 0;
-        //font-family: FZLTTHK--GBK1-0;
-        //@include bis('~assets/bg_index_breakfirst.gif');
-        height: px2rem(420);
+        @include h(420);
+        
         margin-top: px2rem(100);
-        //border-top: 1px solid transparent;
-        //padding: px2rem(100);
         color: #fff;
         background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.2, rgba(0,0,0,0)), color-stop(.2, #FF730D),color-stop(.96, #FF730D), color-stop(.96, #C84625));
-       // background-image: linear-gradient(-180deg, #FF730D 0%, #FF7350 100%);
-        &:after {
-            // content: '';
-            // display: block;
-            // height: px2rem(40);
-            // background-color: red;
-        }
         .list {
             display: flex;
             flex-wrap: nowrap;
-            //height: 110%;
-            //transform: translate3d(0, -30%, 0);
             overflow-x: auto;
         }
+        
         .item {
             flex-shrink: 0;
             width: px2rem(348);
