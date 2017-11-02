@@ -23,8 +23,8 @@ shell.cp('-R', 'tmp', config.build.assetsRoot)
 shell.config.silent = false
 
 webpack(webpackConfig, function (err, stats) {
-  console.log(assetsPath+'/css/style.css');
-  shell.sed('-i', 'static/', '../', assetsPath+'/css/style.css');
+  
+  
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({
@@ -40,4 +40,6 @@ webpack(webpackConfig, function (err, stats) {
     '  Tip: built files are meant to be served over an HTTP server.\n' +
     '  Opening index.html over file:// won\'t work.\n'
   ))
+  console.log(assetsPath+'/css/style.css');
+  shell.sed('-i', 'rem', '../', assetsPath+'/css/style.css');
 })

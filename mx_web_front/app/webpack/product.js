@@ -5,7 +5,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./base')
 var utils = require('./utils')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+//var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var htmlTplPath = path.join(__dirname, '../')
 var env = 'production';
 function resolve (dir) {

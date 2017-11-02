@@ -3,7 +3,6 @@ var config = require('./config/index')
 var webpack = require("webpack")
 var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -76,57 +75,60 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             extractCSS: true,
+            postcss: [
+              require('autoprefixer')(),
+            ],
             loaders: {
               //sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1&data=@import "./src/scss/tools"',
               //scss: 'vue-style-loader!css-loader!sass-loader?data=@import "./src/scss/tools";',
-              scss: ExtractTextPlugin.extract({
-                use: 'css-loader!sass-loader',
-                fallback: 'vue-style-loader'
-              }),
-              sass: ExtractTextPlugin.extract({
-                use: 'css-loader!sass-loader?indentedSyntax',
-                fallback: 'vue-style-loader'
-              })
+              // scss: ExtractTextPlugin.extract({
+              //   use: 'css-loader!sass-loader',
+              //   fallback: 'vue-style-loader'
+              // }),
+              // sass: ExtractTextPlugin.extract({
+              //   use: 'css-loader!sass-loader?indentedSyntax',
+              //   fallback: 'vue-style-loader'
+              // })
             }
           }
       }, 
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          //resolve-url-loader may be chained before sass-loader if necessary
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            }, 
-            'sass-loader',
-            // {
-            //   loader: 'sass-resources-loader',generateLoaders(['css', 'sass?data=@import "~assets/styles/app";'])
-            //   options: {
-            //     // Provide path to the file with resources
-            //     resources: resolve('src/scss/base.scss'),
-            //   },
-            // },
-          ]
-        })
-      },
-      //解析.css文件
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          }]
-        }),
-      },
+      // {
+      //   test: /\.scss$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     //resolve-url-loader may be chained before sass-loader if necessary
+      //     use: [
+      //       'style-loader',
+      //       {
+      //         loader: 'css-loader',
+      //         options: {
+      //           minimize: true
+      //         }
+      //       }, 
+      //       'sass-loader',
+      //       // {
+      //       //   loader: 'sass-resources-loader',generateLoaders(['css', 'sass?data=@import "~assets/styles/app";'])
+      //       //   options: {
+      //       //     // Provide path to the file with resources
+      //       //     resources: resolve('src/scss/base.scss'),
+      //       //   },
+      //       // },
+      //     ]
+      //   })
+      // },
+      // //解析.css文件
+      // {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [{
+      //       loader: 'css-loader',
+      //       options: {
+      //         minimize: true
+      //       }
+      //     }]
+      //   }),
+      // },
     ]
   },
   plugins: [
@@ -136,11 +138,5 @@ module.exports = {
       allChunks: true,
       disable: process.env.NODE_ENV !== 'production'
     }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorOptions: { discardComments: {removeAll: true } },
-      canPrint: true
-    })
   ]
 }
