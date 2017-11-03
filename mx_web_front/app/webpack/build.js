@@ -11,6 +11,7 @@ var webpack = require('webpack')
 var config = require('./config/')
 var webpackConfig = require('./product')
 
+
 var spinner = ora('building for production...')
 spinner.start()
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)

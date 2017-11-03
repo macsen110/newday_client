@@ -1,31 +1,11 @@
+@import './tools';
 .page-pay {
   position: relative;
   height: 100vh;
-  padding: px2rem(160) 0 0;
+  @include padding(160, 0, 0);
   overflow: hidden;
   background: #132e44;
-  font-size: px2rem(40);
-  .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    //@include transform(translate3d(-50%, 0, 0));
-    width: px2rem(1080);
-    height: px2rem(146);
-    padding-bottom: px2rem(19);
-    font-weight: normal;
-    @include bis('~assets/bg_list_header.png');
-    .btn-go-back {
-      float: right;
-      width: px2rem(184);
-      height: 100%;
-      line-height: px2rem(128);
-      text-align: center;
-      background: #f7f7f7;
-      color: #515151;
-      font-size: px2rem(34);
-    } 
-  }
+  @include sc(40);
   .body {
     color: #fff;
     height: 100%;
@@ -49,7 +29,6 @@
       .unpay-header,
       .payed-header {
         height: 100%;
-        display: -webkit-box;
         display: flex;
       }
       .payed-header {
@@ -61,10 +40,8 @@
         text-align: left;
         padding-left: 12.1%;
         padding-right: 12.1%;
-        
         justify-content: space-between;
-        align-items: center;
-        
+        align-items: center;        
         .num {
           margin-left: px2rem(20);
         }
@@ -76,8 +53,7 @@
       .remian,
       .result-text {
         line-height: 1.8;
-        color: $blue;
-        font-size: px2rem(50)
+        @include sc(50, $blue);
       }
       .remian {
         margin-bottom: px2rem(60);
@@ -87,9 +63,8 @@
       }
       .qrcode {
         display: block;
+        @include wh(636);
         margin: 0 auto;
-        width: px2rem(636);
-        height: px2rem(636);
         background-size: contain;
         background-position: center;
       }
@@ -97,7 +72,6 @@
       .bg-result-finished {
         width: 100%;
         height: px2rem(728);
-
         margin-top: px2rem(150);
       }
       .bg-result-payed {

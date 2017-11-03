@@ -1,6 +1,6 @@
 <template>
   <div class="container page-pay">
-    <h3 class="header">
+    <h3 class="common-header header">
       <span @click="goBack" class="btn-go-back">取消</span>
     </h3>
     <div class="body">
@@ -169,7 +169,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~styles/tools.scss';
+
 @import '~styles/pay.scss';
 </style>
 

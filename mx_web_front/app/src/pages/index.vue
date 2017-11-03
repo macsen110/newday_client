@@ -58,6 +58,6 @@ export default {
 }
 </script>
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-@import '~styles/tools.scss';
+@import '~styles/_tools.scss';
 @import '~styles/index.scss';
 </style>

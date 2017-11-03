@@ -48,7 +48,7 @@ $body-font-size: 28;
 @mixin cl {  
 	position: absolute;
 	left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
 }
 
 //宽高
@@ -65,15 +65,27 @@ $body-font-size: 28;
 	height: px2rem($height)
 }
 
+@mixin lh($lh) {
+	line-height: px2rem($lh)
+}
+
+@mixin margin($t:0, $r:0, $b:0, $l:0) {
+	margin: px2rem($t) px2rem($r) px2rem($b) px2rem($l);
+}
+
+@mixin padding($t:0, $r:0, $b:0, $l:0) {
+	padding: px2rem($t) px2rem($r) px2rem($b) px2rem($l);
+}
+
 //字体大小、行高、字体
 @mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
 	font: #{$size}/#{$line-height} $family;
 }
 
 //字体大小，颜色
-@mixin sc($size, $color){
-	font-size: $size;
-	color: $color;
+@mixin sc($size, $color: null){
+	font-size: px2rem($size);
+	@if $color {color: $color};
 }
 
 
@@ -88,5 +100,25 @@ $body-font-size: 28;
   @return #{$px/$ue-width*10}rem
 }
 
+.common-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	@include h(146);
+	padding-bottom: px2rem(19);
+	font-weight: normal;
+	@include bis('~assets/bg_list_header.png');
+	.btn-go-back {
+		float: right;
+		width: px2rem(184);
+		height: 100%;
+		line-height: px2rem(128);
+		@include sc(34, #515151);
+		text-align: center;
+		background: #f7f7f7;
+		
+	} 
+}
 
 

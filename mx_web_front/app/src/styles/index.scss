@@ -1,6 +1,6 @@
-.page-index{
+.page-index {
     background-color: #132e44;
-    padding-bottom: px2rem(240);
+    @include padding(0, 0, 240);
     overflow: auto;
     overflow-x: hidden;
     .bg-header {
@@ -10,76 +10,68 @@
     }
     .section-box {
         @include h(420);
-        
-        margin-top: px2rem(100);
+        @include margin(100);
         color: #fff;
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.2, rgba(0,0,0,0)), color-stop(.2, #FF730D),color-stop(.96, #FF730D), color-stop(.96, #C84625));
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.2, rgba(0, 0, 0, 0)), color-stop(.2, #FF730D), color-stop(.96, #FF730D), color-stop(.96, #C84625));
         .list {
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
         }
-        
         .item {
             flex-shrink: 0;
-            width: px2rem(348);
+            @include w(348);
             margin-left: px2rem(48);
             img {
                 display: block;
                 width: 100%;
-                height: px2rem(260);
-                margin-bottom: px2rem(20)
+                @include h(260);
+                @include margin(0, 0, 20)
             }
             .item-info-box {
                 display: flex;
                 justify-content: space-between;
-                font-size: px2rem(28);
-
+                @include sc(28)
             }
             .price {
-                font-size: px2rem(40);
+                @include sc(40);
                 &:before {
-                    font-size: px2rem(28);
+                    @include sc(28);
                     content: '¥';
                 }
             }
             .tag {
-                width: px2rem(100);
-                height: px2rem(46);
-                line-height: px2rem(46);
+                @include wh(100, 46);
+                @include lh(46);
                 text-align: center;
                 background: #FFFFFF;
                 border-radius: px2rem(54);
-                font-size: px2rem(24);
+                @include sc(24);
                 &::before {
-                  content: '';
-                  display: inline-block;
-                  width: px2rem(23);
-                  height: px2rem(28);
-                  vertical-align: middle
+                    content: '';
+                    display: inline-block;
+                    @include wh(23, 28);
+                    vertical-align: middle
                 }
                 &.hot {
-                  color: #F1561B;
-                  &::before{
-                    margin-right: px2rem(8);
-                    @include bis('~assets/icon_warm.png')
-                  }
+                    color: #F1561B;
+                    &::before {
+                        @include margin(0, 8, 0, 0);
+                        @include bis('~assets/icon_warm.png')
+                    }
                 }
-              }
+            }
         }
     }
-    
     .footer {
         position: fixed;
         bottom: 0;
         left: 50%;
         transform: translate3d(-50%, 0, 0);
-        width: px2rem(1080);
-        height: px2rem(236);
-        color: #fff;
+        @include wh(1080, 236);
+        @include lh(236);
+        @include sc(52, #fff);
         text-align: center;
-        line-height: px2rem(236);
         background-image: linear-gradient(-227deg, #13C1FF 0%, #009AFF 100%);
-        font-size: px2rem(52)
     }
 }

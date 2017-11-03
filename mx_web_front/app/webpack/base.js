@@ -3,6 +3,7 @@ var config = require('./config/index')
 var webpack = require("webpack")
 var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -77,8 +78,17 @@ module.exports = {
             extractCSS: true,
             postcss: [
               require('autoprefixer')(),
+              require('cssnano')({
+                reduceIdents: false,
+                discardDuplicates: true,
+                autoprefixer: true
+              })
             ],
             loaders: {
+              // scss: ExtractTextPlugin.extract({
+              //     use: 'css-loader!sass-loader-once!sass-loader?data=@import "./src/styles/_tools";',
+              //     fallback: 'vue-style-loader'
+              // }),
               //sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1&data=@import "./src/scss/tools"',
               //scss: 'vue-style-loader!css-loader!sass-loader?data=@import "./src/scss/tools";',
               // scss: ExtractTextPlugin.extract({
@@ -138,5 +148,10 @@ module.exports = {
       allChunks: true,
       disable: process.env.NODE_ENV !== 'production'
     }),
+    
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/
+    })
+
   ]
 }

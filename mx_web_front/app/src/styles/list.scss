@@ -1,31 +1,10 @@
-
+@import './tools';
 .page-list{
   position: relative;
   height: 100vh;
-  padding: px2rem(160) 0 px2rem(240);
+  @include padding(160, 0, 240);
   overflow: hidden;
   background: #fafafa;
-  .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    //@include transform(translate3d(-50%, 0, 0));
-    width: 100%;
-    height: px2rem(146);
-    padding-bottom: px2rem(19);
-    font-weight: normal;
-    @include bis('~assets/bg_list_header.png');
-    .btn-go-back {
-      float: right;
-      width: px2rem(184);
-      height: 100%;
-      line-height: px2rem(128);
-      text-align: center;
-      background: #f7f7f7;
-      color: #515151;
-      font-size: px2rem(34);
-    } 
-  }
   .body {
     height: 100%;
     overflow: auto;
@@ -39,17 +18,17 @@
       position: relative;
       display: block;
       text-align: center;
-      height: px2rem(136);
-      line-height: px2rem(136);
-      background: #fff;
-      font-size: px2rem(34);
+      @include h(136);
+      @include lh(136);
+      @include sc(34);
+      background: #fff;      
       &:before {
         content: '';
         position: absolute;
-        width: px2rem(24);
         left: 0;
         top: 0;
         bottom: 0;
+        @include w(24);
       }
       &.cur {
         background: transparent;
@@ -64,18 +43,16 @@
   .list-container {
     .tit {
       font-family: PingFangSC-Regular;
-      font-size: px2rem(32);
-      color: #B4B4B4;
-      margin-bottom: px2rem(22)
+      @include sc(32, #B4B4B4);
+      @include margin(0, 0, 22, 0);
     }
     .list {
       > .item {
         float: left;
         position: relative;
-        width: px2rem(368);
-        height: px2rem(498);
+        @include wh(368, 498);
+        @include margin(0, 40, 40);
         background: #FFFFFF;
-        margin: 0 px2rem(40) px2rem(40) 0;
         border-radius: px2rem(9);
       }
       .wrap-img {
@@ -85,50 +62,43 @@
         justify-content: space-around;
         > img {
           display: block;
-          width: px2rem(190);
-          height: px2rem(226)
-          // max-width: 100%;
-          // max-height: 100%;
+          @include wh(190, 226);
         }
       }
       .price {
         position: absolute;
         top: px2rem(248);
         left: 0;
-        width: px2rem(214);
-        height: px2rem(60);
-        padding-left: px2rem(24);
-        line-height: px2rem(60);
+        @include wh(214, 60);
+        @include padding(0, 0, 0, 24);
+        @include lh(60);
+        @include sc(40, #fff);
         border-radius: 0 px2rem(60) px2rem(60) 0;
         background: #FF5F28;
-        color: #fff;
-        font-size: px2rem(40);
+        
         &:before {
-          font-size: px2rem(28);
+          @include sc(28);
           content: '¥';
         }
       }
       .wrap-item-info {
-        height: px2rem(220);
-        padding: px2rem(30) px2rem(24) 0; 
+        @include h(220);
+        @include padding(30, 24, 0);
       }
       .wrap-sku {
-        height: px2rem(90);
-        display: -webkit-box;
+        @include h(90);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        > *{
+        > * {
           display: block;
-          
         }
         .tag {
-          font-size: px2rem(24);
+          @include sc(24);
           &::before {
             content: '';
             display: inline-block;
-            width: px2rem(23);
-            height: px2rem(28);
+            @include wh(23, 28)
           }
           &.hot {
             color: #F1561B;
@@ -143,11 +113,12 @@
       }
       
       .name {
-        font-family: PingFangSC-Regular;
-        font-size: px2rem(34);
-        color: #051B28;
         height: px2rem(100);
         line-height: px2rem(50);
+        overflow: hidden;
+        font-family: PingFangSC-Regular;
+        @include sc(34, #051B28)
+        
       }
     }
   }
@@ -157,8 +128,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: px2rem(240);
-    padding: px2rem(28) px2rem(56) px2rem(28) px2rem(140);
+    @include h(240);
+    //height: px2rem(240);
+    @include padding(28, 56, 28, 140);
     background: #132E44;
     box-shadow: 0 px2rem(-6) px2rem(26) 0 rgba(137,137,137,0.50);
     .wrap-cart-info {
@@ -175,13 +147,16 @@
       color: #fff;
     }
     .btn {
-      width: px2rem(370);
-      height: px2rem(184);
-      line-height: px2rem(184);
+      @include wh(370, 184);
+      // width: px2rem(370);
+      // height: px2rem(184);
+      @include lh(184);
+      //line-height: px2rem(184);
       text-align: center;
       background-image: linear-gradient(-180deg, #13C1FF 0%, #009AFF 100%);
       border-radius: px2rem(14);
-      font-size: px2rem(50);
+      @include sc(50);
+      //font-size: px2rem(50);
       &:disabled {
         background-image: linear-gradient(-180deg, #545D64 5%, #434E57 96%);
         color: #133149;
@@ -198,9 +173,8 @@
           position: absolute;
           top: px2rem(-30);
           right: px2rem(-30);
-          width: px2rem(66);
-          height: px2rem(66);
-          line-height: px2rem(66);
+          @include wh(66);
+          @include lh(66);
           border-radius: 50%;
           text-align: center;
           font-size: px2rem(40);
@@ -237,8 +211,7 @@
         text-align: right;
         .close {
           display: inline-block;
-          width: px2rem(20);
-          height: px2rem(20);
+          @include wh(20);
           margin-right: px2rem(8);
           @include bis('~assets/icon_cross.png')
 
@@ -248,7 +221,6 @@
         > .item {
           padding: px2rem(28) px2rem(80) px2rem(28) px2rem(16);
           border-bottom: 1px solid #EDEDED;
-          display: -webkit-box;
           display: flex;
           justify-content: space-between;
           align-items: center; 
@@ -273,10 +245,8 @@
     .icon-reduce,
     .icon-plus {
       display: inline-block;
-      height: px2rem(48);
-      width: px2rem(48);
+      @include wh(48);
       vertical-align: middle;
-
     }
     .icon-reduce {
       @include bis('~assets/icon_less.png')
@@ -292,8 +262,7 @@
       &:before {
         content: '';
         display: inline-block;
-        width: px2rem(20);
-        height: px2rem(20);
+        @include wh(20);
         margin-right: px2rem(8);
         @include bis('~assets/icon_cross.png')
       }

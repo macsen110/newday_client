@@ -5,12 +5,28 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./base')
 var utils = require('./utils')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 //var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var htmlTplPath = path.join(__dirname, '../')
 var env = 'production';
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
+
+// var sass = require('node-sass'),
+// importOnce = require('node-sass-import-once');
+// console.log(111)
+// console.log(path.join(__dirname, '../src/styles/_tools.scss'))
+// sass.render({
+// file: path.join(__dirname, '../src/styles/_tools.scss'),
+// importer: importOnce,
+// importOnce: {
+// index: false,
+// css: false,
+// bower: false
+// }
+// });
 //return false;
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -43,10 +59,23 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    
+
     new webpack.optimize.OccurrenceOrderPlugin(),
-    
-    
+    /**尽管vue-loader extractCSS: true可以压缩css,
+     * 此配置为了剔除相同的css,
+     * 加上浏览器前缀
+     */
+    //new OptimizeCssAssetsPlugin({
+      //assetNameRegExp: /\.optimize\.css$/g,
+      // cssProcessor: require('cssnano'),
+      // cssProcessorOptions: {
+      //   autoprefixer: true,
+      //   discardComments: { removeAll: true }
+      // }
+      // ,
+      // canPrint: true
+    //})
+
   ]
 })
 
