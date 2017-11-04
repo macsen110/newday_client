@@ -59,6 +59,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/
+    }),
 
     new webpack.optimize.OccurrenceOrderPlugin(),
     /**尽管vue-loader extractCSS: true可以压缩css,

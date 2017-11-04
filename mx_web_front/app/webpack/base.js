@@ -4,6 +4,7 @@ var webpack = require("webpack")
 var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+var cssnano = require('cssnano');
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -77,11 +78,10 @@ module.exports = {
           options: {
             extractCSS: true,
             postcss: [
-              require('autoprefixer')(),
-              require('cssnano')({
-                reduceIdents: false,
-                discardDuplicates: true,
-                autoprefixer: true
+              cssnano({
+                reduceIdents: process.env.NODE_ENV === 'production' ? false : true,
+                discardDuplicates: process.env.NODE_ENV === 'production' ? true : false,
+                autoprefixer: process.env.NODE_ENV === 'production' ? true : false
               })
             ],
             loaders: {
@@ -148,10 +148,6 @@ module.exports = {
       allChunks: true,
       disable: process.env.NODE_ENV !== 'production'
     }),
-    
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/
-    })
-
+  
   ]
 }

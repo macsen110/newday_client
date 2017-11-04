@@ -129,14 +129,12 @@
     left: 0;
     right: 0;
     @include h(240);
-    //height: px2rem(240);
     @include padding(28, 56, 28, 140);
     background: #132E44;
     box-shadow: 0 px2rem(-6) px2rem(26) 0 rgba(137,137,137,0.50);
     .wrap-cart-info {
       position: relative;
       height: 100%;
-      display: -webkit-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
