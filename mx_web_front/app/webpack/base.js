@@ -5,9 +5,11 @@ var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var cssnano = require('cssnano');
+var NODE_ENV = process.env.NODE_ENV;
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
+
 module.exports = {
   
   resolve: {
@@ -29,7 +31,7 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
@@ -79,9 +81,9 @@ module.exports = {
             extractCSS: true,
             postcss: [
               cssnano({
-                reduceIdents: process.env.NODE_ENV === 'production' ? false : true,
-                discardDuplicates: process.env.NODE_ENV === 'production' ? true : false,
-                autoprefixer: process.env.NODE_ENV === 'production' ? true : false
+                reduceIdents: NODE_ENV === 'production' ? false : true,
+                discardDuplicates: NODE_ENV === 'production' ? true : false,
+                autoprefixer: NODE_ENV === 'production' ? true : false
               })
             ],
             loaders: {
@@ -142,12 +144,16 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.EnvironmentPlugin([
+      "NODE_ENV"
+    ]),
     new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: utils.assetsPath("js/vendor.js")}),
     new ExtractTextPlugin({
-      filename: process.env.NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
+      filename: NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
       allChunks: true,
-      disable: process.env.NODE_ENV !== 'production'
+      disable: NODE_ENV !== 'production'
     }),
+    
   
   ]
 }

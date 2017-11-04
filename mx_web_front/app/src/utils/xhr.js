@@ -15,7 +15,7 @@ class xhr {
 	send() {
 	    var _xhr = new XMLHttpRequest();
 		_xhr.timeout = 60000;
-	    _xhr.open(this.method, this.url, this.aysc);
+	    _xhr.open(this.method ? this.method.toLocaleUpperCase() : 'GET', this.url, this.aysc);
 		this.withCredentials && (_xhr.withCredentials = true);
 	    if (this.setHeader) {
 	    	_xhr.setRequestHeader("Content-Type", this.setHeader);	    

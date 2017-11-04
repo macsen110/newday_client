@@ -63,6 +63,7 @@
 </template>
 <script>
 import  * as ui from 'yao-m-ui';
+import _xhr from '../utils/xhr';
 export default {
   data: function () {
     return {
@@ -123,10 +124,23 @@ export default {
     },
     reduceCartArr() {
 
+    },
+    async getData() {
+      
+      var data = await this.getDataSync();
+      console.log(data);
+      
+    },
+    async getDataSync() {
+      return APP.utils.http({
+        url: '?cmd=GetPlistByCategoryId&param={"categoryId":"cat_1","sess":"aaa"}'
+      })
+      
     }
     
   },
   created() {
+    this.getData()
     this.reflushStagnation()
   },
   beforeDestroy() {
