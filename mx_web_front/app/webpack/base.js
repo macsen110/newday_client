@@ -9,7 +9,27 @@ var NODE_ENV = process.env.NODE_ENV;
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+function getVueOptions() {
+  var obj = {};
+  if (NODE_ENV === 'production') {
+    obj = {
+      extractCSS: true,
+      postcss: [
+        cssnano({
+          reduceIdents: false,
+          discardDuplicates:true,
+          autoprefixer:true
+        })
+      ],
+    }
+  }
+  else {
+    obj = {
+      extractCSS: true
+    } 
+  }
+  return obj;
+}
 module.exports = {
   
   resolve: {
@@ -77,32 +97,7 @@ module.exports = {
       {
           test: /\.vue$/,
           loader: 'vue-loader',
-          options: {
-            extractCSS: true,
-            postcss: [
-              cssnano({
-                reduceIdents: NODE_ENV === 'production' ? false : true,
-                discardDuplicates: NODE_ENV === 'production' ? true : false,
-                autoprefixer: NODE_ENV === 'production' ? true : false
-              })
-            ],
-            loaders: {
-              // scss: ExtractTextPlugin.extract({
-              //     use: 'css-loader!sass-loader-once!sass-loader?data=@import "./src/styles/_tools";',
-              //     fallback: 'vue-style-loader'
-              // }),
-              //sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1&data=@import "./src/scss/tools"',
-              //scss: 'vue-style-loader!css-loader!sass-loader?data=@import "./src/scss/tools";',
-              // scss: ExtractTextPlugin.extract({
-              //   use: 'css-loader!sass-loader',
-              //   fallback: 'vue-style-loader'
-              // }),
-              // sass: ExtractTextPlugin.extract({
-              //   use: 'css-loader!sass-loader?indentedSyntax',
-              //   fallback: 'vue-style-loader'
-              // })
-            }
-          }
+          options: getVueOptions()
       }, 
       // {
       //   test: /\.scss$/,

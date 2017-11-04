@@ -1,5 +1,5 @@
 var port = '80';
-var server = 'fkcapi.fusionrobotics.cn';
+var server = 'fkcapilocal.fusionrobotics.cn';
 var config = {
   env: 'development',
   http: {

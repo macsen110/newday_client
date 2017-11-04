@@ -36,7 +36,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].js'),
-    chunkFilename: utils.assetsPath('js/[id].js'),
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -59,25 +59,17 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/
-    }),
+
 
     new webpack.optimize.OccurrenceOrderPlugin(),
     /**尽管vue-loader extractCSS: true可以压缩css,
      * 此配置为了剔除相同的css,
      * 加上浏览器前缀
      */
-    //new OptimizeCssAssetsPlugin({
-      //assetNameRegExp: /\.optimize\.css$/g,
-      // cssProcessor: require('cssnano'),
-      // cssProcessorOptions: {
-      //   autoprefixer: true,
-      //   discardComments: { removeAll: true }
-      // }
-      // ,
-      // canPrint: true
-    //})
+
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/
+    })
 
   ]
 })
