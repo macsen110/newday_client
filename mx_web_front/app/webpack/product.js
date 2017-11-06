@@ -14,20 +14,6 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-// var sass = require('node-sass'),
-// importOnce = require('node-sass-import-once');
-// console.log(111)
-// console.log(path.join(__dirname, '../src/styles/_tools.scss'))
-// sass.render({
-// file: path.join(__dirname, '../src/styles/_tools.scss'),
-// importer: importOnce,
-// importOnce: {
-// index: false,
-// css: false,
-// bower: false
-// }
-// });
-//return false;
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     
@@ -35,7 +21,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   //devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].js'),
+    filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
   },
   plugins: [

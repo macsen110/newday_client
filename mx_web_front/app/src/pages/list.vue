@@ -5,19 +5,16 @@
     </h3>
     <div class="body">
       <ul class="nav">
-        <li class="item cur" @click="filterList('sd')">套餐</li>
-        <li class="item" @click="filterList('ds')">食品</li>
-        <li class="item" @click="filterList('ds')">饮品</li>
-
+        <li @click="filterListByCatId(item.id, index)" v-for="(item, index) in cateGoryList" :class="index == curFilterIndex ? 'item cur' : 'item'"  :key="index">{{item.val}}</li>
       </ul>
       <div class="list-container">
         <h4 class="tit">套餐</h4>
         <ul class="list clear">
           <li class="item" v-for="(item, index) in goods" :key="index">
             <div class="wrap-img">
-              <img :src="item.url" alt="">
+              <img :src="item.pic" alt="">
             </div>
-            <h5 class="price">10.00</h5>
+            <h5 class="price">{{item.price}}</h5>
             <div class="wrap-item-info">
               <p class="name">{{item.name}}</p>
               <div class="wrap-sku">
@@ -67,25 +64,13 @@ import _xhr from '../utils/xhr';
 export default {
   data: function () {
     return {
-      stagnationTime: 30,
+      stagnationTime: 30 * 100,
       stagnationEndCb: null,
       cartListData: [],
+      cateGoryList:[],
+      curFilterIndex: 0,
       goods: [
-        {
-          url: './tmp/tmp_item_0.png',
-          name: '100ml豆浆加1个水煮鸡蛋',
-
-        },
-        {
-          url: './tmp/tmp_item_0.png',
-          name: '100ml豆浆加1个水煮鸡蛋',
-
-        },
-        {
-          url: './tmp/tmp_item_0.png',
-          name: '100ml豆浆加1个水煮鸡蛋',
-
-        }
+        
       ],
       
       pageUxState: {
@@ -106,9 +91,7 @@ export default {
     goBack() {
       history.back()      
     },
-    filterList(type) {
-      console.log(type)
-    },
+    
     toggleCartBox(flag) {
       this.pageUxState.showCartBox = flag
     },
@@ -125,22 +108,40 @@ export default {
     reduceCartArr() {
 
     },
-    async getData() {
-      
-      var data = await this.getDataSync();
-      console.log(data);
-      
-    },
-    async getDataSync() {
-      return APP.utils.http({
-        url: '?cmd=GetPlistByCategoryId&param={"categoryId":"cat_1","sess":"aaa"}'
+    async filterListByCatId(catId, index) {
+      var ajaxData = await APP.utils.http({
+        url: '?cmd=GetPlistByCategoryId&param={"categoryId":"'+catId+'","sess":"aaa"}'
       })
-      
+      ajaxData = this.filterAjaxData(ajaxData);
+      if (ajaxData) {
+        this.goods = ajaxData.goods;
+        this.curFilterIndex = index;
+      }
+    },
+    async initCateGoryList() {
+      var ajaxData = await this.getCateGoryList()
+      ajaxData = this.filterAjaxData(ajaxData);
+      if (ajaxData) {
+        this.cateGoryList = ajaxData.categories;
+        this.filterListByCatId(this.cateGoryList[0].id, 0)
+      } 
+    },
+    getCateGoryList() {
+      return APP.utils.http({
+        url: '?cmd=GetCategoryList&param={"sess":"aaa"}'
+      })
+    },
+    filterAjaxData(data) {
+      if (data.status == 'ok') return data.result;
+      else {
+        ui.showPrompt(data.msg)
+        return false
+      }
     }
-    
   },
+  
   created() {
-    this.getData()
+    this.initCateGoryList()
     this.reflushStagnation()
   },
   beforeDestroy() {

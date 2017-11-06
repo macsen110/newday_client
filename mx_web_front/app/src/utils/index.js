@@ -7,7 +7,7 @@ function http(options) {
       method: options.method,
       sendData: options.sendData || null,
       done(callData) {
-        res(callData.result)
+        res(callData)
       },
       faild() {
         var error = new Error('something wrong')
