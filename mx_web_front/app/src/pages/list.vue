@@ -5,10 +5,10 @@
     </h3>
     <div class="body">
       <ul class="nav">
-        <li @click="filterListByCatId(item.id, index)" v-for="(item, index) in cateGoryList" :class="index == curFilterIndex ? 'item cur' : 'item'"  :key="index">{{item.val}}</li>
+        <li @click="filterListByCatId(item.id, index, item.val)" v-for="(item, index) in cateGoryList" :class="index == curFilterCatIndex ? 'item cur' : 'item'"  :key="index">{{item.val}}</li>
       </ul>
       <div class="list-container">
-        <h4 class="tit">套餐</h4>
+        <h4 class="tit">{{curFilterCatTitle}}</h4>
         <ul class="list clear">
           <li class="item" v-for="(item, index) in goods" :key="index">
             <div class="wrap-img">
@@ -52,6 +52,51 @@
               <i class="icon icon-plus"></i>
             </div>
           </li>
+          <li class="item">
+            <span class="name">100ml豆浆加1个水煮蛋</span>
+            <strong class="price">¥10.00</strong>
+            <div class="wrap-actions">
+              <i class="icon icon-reduce"></i>
+              <em class="numbers">2</em>
+              <i class="icon icon-plus"></i>
+            </div>
+          </li>
+          <li class="item">
+            <span class="name">100ml豆浆加1个水煮蛋</span>
+            <strong class="price">¥10.00</strong>
+            <div class="wrap-actions">
+              <i class="icon icon-reduce"></i>
+              <em class="numbers">2</em>
+              <i class="icon icon-plus"></i>
+            </div>
+          </li>
+          <li class="item">
+            <span class="name">100ml豆浆加1个水煮蛋</span>
+            <strong class="price">¥10.00</strong>
+            <div class="wrap-actions">
+              <i class="icon icon-reduce"></i>
+              <em class="numbers">2</em>
+              <i class="icon icon-plus"></i>
+            </div>
+          </li>
+          <li class="item">
+            <span class="name">100ml豆浆加1个水煮蛋</span>
+            <strong class="price">¥10.00</strong>
+            <div class="wrap-actions">
+              <i class="icon icon-reduce"></i>
+              <em class="numbers">2</em>
+              <i class="icon icon-plus"></i>
+            </div>
+          </li>
+          <li class="item">
+            <span class="name">100ml豆浆加1个水煮蛋</span>
+            <strong class="price">¥10.00</strong>
+            <div class="wrap-actions">
+              <i class="icon icon-reduce"></i>
+              <em class="numbers">2</em>
+              <i class="icon icon-plus"></i>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -68,7 +113,8 @@ export default {
       stagnationEndCb: null,
       cartListData: [],
       cateGoryList:[],
-      curFilterIndex: 0,
+      curFilterCatIndex: 0,
+      curFilterCatTitle: '',
       goods: [
         
       ],
@@ -108,14 +154,15 @@ export default {
     reduceCartArr() {
 
     },
-    async filterListByCatId(catId, index) {
+    async filterListByCatId(catId, index, catName) {
       var ajaxData = await APP.utils.http({
         url: '?cmd=GetPlistByCategoryId&param={"categoryId":"'+catId+'","sess":"aaa"}'
       })
       ajaxData = this.filterAjaxData(ajaxData);
       if (ajaxData) {
         this.goods = ajaxData.goods;
-        this.curFilterIndex = index;
+        this.curFilterCatIndex = index;
+        this.curFilterCatTitle = catName
       }
     },
     async initCateGoryList() {

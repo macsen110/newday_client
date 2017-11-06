@@ -146,15 +146,11 @@
     }
     .btn {
       @include wh(370, 184);
-      // width: px2rem(370);
-      // height: px2rem(184);
       @include lh(184);
-      //line-height: px2rem(184);
       text-align: center;
       background-image: linear-gradient(-180deg, #13C1FF 0%, #009AFF 100%);
       border-radius: px2rem(14);
       @include sc(50);
-      //font-size: px2rem(50);
       &:disabled {
         background-image: linear-gradient(-180deg, #545D64 5%, #434E57 96%);
         color: #133149;
@@ -216,7 +212,10 @@
         }
       }
       .item-list{
+        max-height: px2rem(520);
+        overflow: auto;
         > .item {
+          @include h(56+48);
           padding: px2rem(28) px2rem(80) px2rem(28) px2rem(16);
           border-bottom: 1px solid #EDEDED;
           display: flex;
