@@ -7,7 +7,7 @@ var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../')
 var entryScriptPath = path.join(__dirname, '../src/')
 var NODE_ENV = process.env.NODE_ENV;
-
+const DashboardPlugin = require('webpack-dashboard/plugin');
 module.exports = merge(base, {
   resolve: {
     modules: [
@@ -32,6 +32,7 @@ module.exports = merge(base, {
       inject: true
     }),
     new FriendlyErrorsPlugin(),
+    new DashboardPlugin(),
     
   ],
   module: {
