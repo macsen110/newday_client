@@ -1,0 +1,2 @@
+<view>{{id}}</view>
+ <web-view src="https://www.macsen318.com/nb_news_detail"></web-view> 

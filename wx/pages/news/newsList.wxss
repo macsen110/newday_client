@@ -1,0 +1,49 @@
+.list{
+  height: 100vh;
+  width: 100%;
+}
+.content {
+  display: flex;  
+  flex-direction: row; 
+  padding: 5pt; 
+}
+.content-text {
+   width: 65%; 
+}
+.img {
+  /* padding:4pt;  */
+  height: 150rpx;
+  width: 200rpx;
+  vertical-align: middle;
+}
+.listView {
+  width: 100%;
+  /* height: 75pt; */
+}
+.line {
+  height: 1px;
+  background-color: #ccc;
+  margin-left: 5pt;
+  margin-right: 5pt;
+}
+.content-name {
+  padding-top: 10pt;
+  font-size: 12pt;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.content-detail {
+  padding-top: 4pt;
+  font-size: 8pt;
+  color: #999;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.content-buttom {
+  display: flex;
+  flex-direction: row;
+  font-size: 8pt;
+  padding-top: 15pt;
+}
