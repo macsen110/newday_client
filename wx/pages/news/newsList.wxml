@@ -6,8 +6,8 @@
           <view class='content-name'>{{item.name}}</view>
           <view class='content-detail'>{{item.detial}}</view>
           <view class='content-buttom'>
-            <view style='font-size:10'>{{item.source}}</view>
-            <image style='width:10pt;height:7pt;' src='/img/浏览.png'></image>
+            <view class='source-name'>{{item.source}}</view>
+            <image class='icon-view' src='/img/浏览.png'></image>
             <view>{{item.count}}</view>
           </view>
         </view>

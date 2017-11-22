@@ -1,9 +1,7 @@
-import tools from '../../utils/util.js';
-console.log(tools)
 //index.js
 //获取应用实例
 const app = getApp()
-
+import tools from '../../utils/util.js';
 Page({
   data: {
     motto: 'Hello World',
@@ -20,15 +18,21 @@ Page({
       url: '../logs/logs'
     })
   },
+  getData() {
+    tools.http({
+      url: '/api/home'
+    })
+    .then(data => console.log(data))
+    .catch(data => console.log(data))
+  },
   showDetail(event) {
-    console.log(event);
     let id = event.currentTarget.dataset.id;
-    console.log(id)
     wx.navigateTo({
       url: '../newDetail/newDetail?id='+id,
     })
   },
   onLoad: function () {
+    //this.getData()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

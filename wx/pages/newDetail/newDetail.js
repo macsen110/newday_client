@@ -1,4 +1,3 @@
-
 Page({
 
   /**
@@ -7,11 +6,15 @@ Page({
   data: {
     
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //this.getData()
+    wx.showLoading({
+      title: '加载中',
+    })
     this.setData({
       id: options.id
     })
@@ -28,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    wx.hideLoading()
   },
 
   /**

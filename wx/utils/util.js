@@ -8,39 +8,28 @@ const formatTime = date => {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
-
+const prefixUrl = 'https://www.macsen318.com';
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-class xhr {
-  constructor(opt) {
 
-    this.method = 'GET';
-    this.aysc = true;
-    this.sendData = null;
-    this.cache = true;
-    if (typeof opt === 'object') {
-      Object.assign(this, opt);
-    }
+function http(options) {
 
-    this.send();
-
-  }
-  send() {
-    
-
-    
-  }
-  done(data) {
-
-  }
-  faild() {
-
-  }
+  return new Promise((res, rej) => {
+    let obj = {};
+    Object.assign(obj, options, {
+      url: prefixUrl + options.url,
+      success: (data) => res(data),
+      falid: (data) => rej(data)
+    })
+    console.log(obj)
+    wx.request(
+      obj
+    )
+  })
 }
-module.exports = {
+export default {
   formatTime: formatTime,
-  xhr: new xhr
-
+  http: http
 }
