@@ -21,7 +21,7 @@
 .icon-view {
   width: 30rpx;
   height: 22.5rpx;
-  
+  margin-right: 8rpx;
 }
 .listView {
   width: 100%;
