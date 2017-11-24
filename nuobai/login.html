@@ -228,7 +228,7 @@
 
       </ul>
       <div class="footer">
-        <button type="submit" class="btn-submit" name="btn">获取验证码</button>
+        <button type="submit" class="btn-submit" name="btn">进入诺白服务</button>
         <p class="tip">注册即表示您已阅读并同意
           <a href="javascript:void(0)">《药箱服务协议》</a>
         </p>
@@ -347,17 +347,19 @@
           this.$sendSmsBtn.addEventListener('click', function () {
             var _that = this;
             checkForm(function () {
-              if ($(_that).text() == '重新发送' || $(_that).text() == '获取验证码') {
-                $sendVerifyCode.addClass('counting-box');
-                $(_that).html('<span class="counting">59</span><span>后重新发送</span>');
+              if (_that.innerHTML == '重新发送' || _that.innerHTML == '获取验证码') {
+                cancelAnimationFrame(that.SmsBtnStatus)
+                _that.setAttribute('disabled', true);
+                _that.innerHTML = '<span class="counting">59</span><span>后重新发送</span>';
                 timeOutFlag = setInterval(function () {
-                  counting = $sendVerifyCode.find('.counting').text();
+                  counting = _that.querySelector('.counting').innerHTML;
                   if (counting == 0) {
                     clearInterval(timeOutFlag);
-                    $sendVerifyCode.classList.removeClass('counting-box');
-                    $sendVerifyCode.html('重新发送');
+                    _that.removeAttribute('disable');
+                    that.SmsBtnStatus = requestAnimationFrame(exports.checkSmsBtnStatus.bind(that))
+                    _that.innerHTML = '重新发送';
                   } else {
-                    $sendVerifyCode.find('.counting').text(--counting)
+                    _that.querySelector('.counting').innerHTML = --counting
                   }
                 }, 1000)
               }
@@ -373,22 +375,28 @@
               ui.showPrompt('手机号码错误');
               return false;
             }
+            callback && callback()
             new xhr({
               url:'//www.macsen318.com/api/home',
               done: function (data) {
-                callback && callback()
+                alert(data)
               }
             })
             return true;
           }
           exports.checkBtnStatus()
-
+          exports.checkSmsBtnStatus()
         };
+        exports.checkSmsBtnStatus = function () {
+          var isValidTel = /^1\d{10}$/.test(this.$form.tel.value);
+          if (isValidTel) this.$sendSmsBtn.removeAttribute('disabled')
+          else this.$sendSmsBtn.setAttribute('disabled', true)
+          this.SmsBtnStatus = requestAnimationFrame(exports.checkSmsBtnStatus.bind(this))
+        }
         exports.checkBtnStatus = function () {
           var isValidTel = /^1\d{10}$/.test(this.$form.tel.value);
           var isVaildMsgCode = this.$form.sms_code.value.trim().length > 0 ? true : false;
-          if (isValidTel) this.$sendSmsBtn.removeAttribute('disabled')
-          else this.$sendSmsBtn.setAttribute('disabled', true)
+          
           if (isValidTel && isVaildMsgCode) this.$form.btn.removeAttribute('disabled')
           else this.$form.btn.setAttribute('disabled', true)
           this.btnStatus = requestAnimationFrame(exports.checkBtnStatus.bind(this))
