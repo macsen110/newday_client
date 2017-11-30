@@ -30,6 +30,7 @@ function getVueOptions() {
   }
   return obj;
 }
+console.log(__dirname+'/dist/vendor-mainfest.json')
 module.exports = {
   
   resolve: {
@@ -45,7 +46,7 @@ module.exports = {
     }
   },
   entry: {
-    vendor: ['vue', 'vue-router', 'yao-m-ui'],
+    //vendor: ['vue', 'vue-router', 'yao-m-ui'],
     app: resolve('src/main')
   },
   output: {
@@ -142,13 +143,12 @@ module.exports = {
     new webpack.EnvironmentPlugin([
       "NODE_ENV"
     ]),
-    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: utils.assetsPath("js/vendor.js")}),
+   // new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: utils.assetsPath("js/vendor.js")}),
     new ExtractTextPlugin({
       filename: NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
       allChunks: true,
       disable: NODE_ENV !== 'production'
-    }),
-    
-  
+    })
   ]
 }
+
