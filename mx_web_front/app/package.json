@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dashboard -- node webpack/dev.server.js",
-    "build": "webpack-dashboard node webpack/build.js"
+    "build": "node webpack/build.js"
   },
   "dependencies": {
     "vue": "^2.5.2",
@@ -47,6 +47,7 @@
     "vue-loader": "^13.3.0",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dashboard": "^1.0.1",
     "webpack-dev-server": "^2.4.4",
     "webpack-merge": "^4.1.0"

@@ -55,8 +55,13 @@ var webpackConfig = merge(baseWebpackConfig, {
 
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require("./dist/manifest.json"),
+      
     })
-
+    
   ]
 })
 
