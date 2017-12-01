@@ -1,0 +1,27 @@
+// progress
+
+.el-progress-bar__inner {
+	background-color: lighten($blue, 5%);
+}
+
+.el-progress.is-success {
+	.el-progress-bar__inner {
+		background-color: lighten($green, 5%);
+	}
+	.el-progress__text {
+		color: $green;
+	}
+} 
+
+.el-progress.is-exception {
+	.el-progress-bar__inner {
+		background-color: lighten($red, 5%);
+	}
+	.el-progress__text {
+		color: $red;
+	}
+} 
+
+.el-progress-bar__outer {
+	background-color: $lightGray;
+}

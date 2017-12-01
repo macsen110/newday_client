@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div class="zipUrl">zipUrl</div>
+</head>
+<body>
+<script type="text/javascript" src="zip/jszip.min.js"></script>
+<script type="text/javascript" src="zip/jszip-utils.min.js"></script>
+<!--
+Mandatory in IE 6, 7, 8 and 9.
+-->
+<!--[if IE]>
+<script type="text/javascript" src="zip/jszip-utils-ie.js"></script>
+<![endif]-->
+<script>
+  var indexDB = window.indexedDB;
+  indexDB.deleteDatabase('zipIndexedDB');
+  const static = window.location.origin+'/static/';
+  const staticCssPath = '/static/css/';
+  const staticJsPath = '/static/js/';
+  const fileContent = {};
+  let content = null;
+  let count = 0;
+//  const zip = new JSZip();
+  new JSZip.external.Promise((resolve, reject) => {
+    JSZipUtils.getBinaryContent('http://dev-static.oss-cn-hangzhou.aliyuncs.com/551/out/out.zip', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  }).then( data => {
+    JSZip.loadAsync(data).then(zipdata =>{
+      console.log(zipdata);
+      let zipfile_index = {};
+      const len = Object.keys(zipdata.files).length;
+      zipdata.forEach((relativePath, zipEntry) => {
+        let fileName = zipEntry.name;
+        zipdata.file(zipEntry.name).async('base64').then(text => {
+          const indexDB = window.indexedDB;
+          let curDB = null;
+          const req = indexDB.open('zipIndexedDB');
+          req.onupgradeneeded = function () {
+            const db = req.result;
+            db.createObjectStore('file_view', {
+              autoIncrement: 'file_id'
+            });
+          };
+          req.onsuccess = function () {
+            curDB = req.result;
+            const tran = curDB.transaction('file_view', 'readwrite');
+            const objectStroe = tran.objectStore('file_view');
+            const zipFile = {
+              file_name : fileName,
+              file_content: text
+            };
+            const addFile = objectStroe.add(zipFile);
+            addFile.onsuccess = function () {
+              count++;
+              zipfile_index[fileName] = addFile.result;
+              // getopenfile
+              const getopenfile = objectStroe.get(zipfile_index[fileName]);
+              if (fileName.indexOf('.html')>0){
+                getopenfile.onsuccess = function () {
+                  content = window.atob(getopenfile.result.file_content);
+                }
+              }else{
+                getopenfile.onsuccess = function () {
+                  fileContent[fileName] = getopenfile.result.file_content;
+                  if (count == len){
+                    content = content.replace(staticJsPath+'manifest.js', 'data:text/javascript;base64,' + fileContent['manifest.js']);
+                    content = content.replace(staticJsPath+'vendor.js', 'data:text/javascript;base64,' + fileContent['vendor.js']);
+                    content = content.replace(staticJsPath+'app.js', 'data:text/javascript;base64,' + fileContent['app.js']);
+                    content = content.replace(staticCssPath+'app.css', 'data:text/css;base64,' + fileContent['app.css']);
+                    document.write(content);
+                  }
+                }
+              }
+            };
+          };
+
+        });
+      });
+    });
+  });
+
+</script>
+</body>
+</html>

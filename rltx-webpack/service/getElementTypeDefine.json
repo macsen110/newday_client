@@ -1,0 +1,68 @@
+{
+  "text": {
+    "control_type": "text",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "select": {
+    "control_type": "select",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "checkbox": {
+    "control_type": "checkbox",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "radio": {
+    "control_type": "radio",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "pop": {
+    "control_type": "pop",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "multilevelpop": {
+    "control_type": "multilevelpop",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "image": {
+    "control_type": "image",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "autocomplete": {
+    "control_type": "autocomplete",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "date": {
+    "control_type": "date",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "hide": {
+    "control_type": "hide",
+    "datasource": "",
+    "event": "",
+    "model_id": ""
+  },
+  "select_area": {
+    "control_type": "select_area",
+    "datasource": "area",
+    "event": "",
+    "model_id": ""
+  }
+}

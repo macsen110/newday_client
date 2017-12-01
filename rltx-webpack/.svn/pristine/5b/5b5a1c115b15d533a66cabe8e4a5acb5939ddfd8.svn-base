@@ -1,0 +1,65 @@
+// nav-menu
+
+.el-menu {
+	background-color: $bgLight;
+}
+
+.el-menu--dark {
+	background-color: $uiColor;
+}
+
+.el-menu-item.is-active {
+	color: $uiColor;
+}
+
+.el-menu--horizontal.el-menu--dark .is-active {
+	color: $white;
+}
+
+.el-menu-vertical-demo {
+	.is-active {
+		color: $white;
+		background-color: $uiColor;
+	}
+}
+
+.el-menu--horizontal>.el-menu-item:hover, 
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title, 
+.el-menu--horizontal>.el-submenu:hover .el-submenu__title {
+	background-color: $lightOrg;
+}
+
+.el-menu--horizontal.el-menu--dark .el-menu-item:hover, 
+.el-menu--horizontal.el-menu--dark .el-submenu__title:hover {
+	background-color: $lightCoffee;
+}
+
+.el-menu--horizontal>.el-menu-item:hover, 
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title, 
+.el-menu--horizontal>.el-submenu:hover .el-submenu__title {
+	border-bottom-color: $uiColor;
+}
+
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover, 
+.el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover, 
+.el-menu-item:hover {
+	background-color: $lightCoffee;
+}
+
+.el-submenu .el-menu-item, .el-submenu__title {
+	&:hover {
+		background-color: $lightCoffee;
+	}
+}
+
+.el-menu--dark .el-menu-item, .el-menu--dark .el-submenu__title {
+	color: $white;
+	&:hover {
+		background-color: $lightCoffee;
+		color: $uiColor;
+	}
+}
+
+.el-menu--horizontal.el-menu--dark .el-submenu .el-submenu__icon-arrow {
+	color: $white;
+}

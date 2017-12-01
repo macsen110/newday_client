@@ -1,0 +1,225 @@
+body, div, p, h1, h2, h3, h4, h5, h6, hr, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {margin:0; padding:0; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box;}
+body, button, input, select, textarea {font:normal 12px/1  microsoft yahei, "\5b8b\4f53", Tahoma, Helvetica, Arial, sans-serif; line-height:22px }
+textarea {resize:none; overflow:hidden; word-break:break-all; word-wrap:break-word }
+table {border-collapse:collapse; border-spacing:0;}
+address, caption, cite, code, dfn, em, strong, th, var {font-style:normal; font-weight:normal;}
+h1 {font-size:18px }
+h2 {font-size:16px }
+h3 {font-size:14px }
+h4, h5, h6 {font-size:100% }
+a {text-decoration:none; outline: none; color:#666;}
+a:hover {text-decoration:underline }
+input, button, textarea {outline:none }
+fieldset, img {border:0 }
+ul, ol {list-style:none }
+.fl {float:left; display:inline;}
+.fr {float:right; display:inline;}
+.cl {clear:both }
+.pr {position: relative; z-index: 10 }
+.pa {position: absolute; z-index: 20 }
+.pf {position: fixed; _position:absolute; z-index: 9999}
+/*.br3 {-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;}*/
+.br6 {-webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px;}
+.br10 {-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+.hide {display:none !important;}
+.block {display:block !important;}
+.pfi {position: fixed !important;}
+.tc {text-align:center;}
+.tl ,#dep_users_list .tl{text-align:left;}
+.invisible {visibility: hidden;}
+.visible {visibility: visible;}
+.text-split {display: inline-block; zoom:1; *display:inline; white-space: nowrap; word-wrap: normal; overflow: hidden; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; text-overflow: ellipsis;}
+.curhand { cursor: pointer;}
+.curnone {cursor:default;}
+.clearfix:after {visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0 }
+.clearfix {*zoom:1}
+.tdu {text-decoration:underline;}
+.transparent { opacity: 0; filter:Alpha(opacity=50); }
+/*--global--*/
+body { color:#666; min-width: 1024px; }
+.innerwp { padding:0 12px; min-width: 1000px; margin:0 auto; clear:both;}
+.container { overflow:hidden; }
+.bgnone { background: none; overflow:visible; }
+.bgnone .wdauto { width: auto }
+
+.uchd { margin-bottom: 13px; }
+.mwhd { overflow: hidden; }
+.no-border { border-bottom: none; margin-bottom: 0; padding-bottom: 0 }
+.mwbd-title { padding:0 22px; line-height:38px; color:#777; background: #f6f6f6; }
+.mwform .mwbd-title { margin-bottom: 20px; }
+.mwbd .fmfrom, .mwbd .fmto { width:160px; }
+h2.mwtit, h2.sdtit { color:#f48400; font-weight: normal; float: left; display: inline }
+em.titid { float:left; display:inline; color:#8d8e90; margin-top:2px; margin-left:10px }
+h2.sdtit { font-weight: bold; }
+.mwhd .fr192 { width: 192px;float: right;display: inline; }
+.mwhd a { color:#8d8e90; height: 22px; line-height: 22px; display: block; }
+.mwhd .daily-order a { display: inline; color: #f60; font-weight: bold; margin:0 3px; }
+
+.fmcont div.pr,.showdialog div.pr,.manage-table div.pr { display: inline-block; }
+.txtbox { width: 140px; height: 22px; padding: 0 5px; line-height: 22px; color: #464646; border:solid 1px #dadada; -webkit-transition:all .2s ease-in-out; transition:all .2s ease-in-out; }
+
+.fmtit { font-size: 14px; width: 100px; float: left; padding-right:10px; min-height: 24px; }
+.fmcont { float: left; }
+
+
+/*--company cert--*/
+.company-cert { margin: 12px 0 }
+.company-cert .uc-tablist { border: solid 1px #e8e8e8; padding: 35px 50px }
+.company-cert .uc-main { border: 0 }
+.company-cert .compverify { border: 0 }
+.company-cert .verify { width: auto }
+.company-cert .verify .fmnoti .btn-a-blue a { color: #fff }
+.company-cert .verify .formlist .fmtit { width: 100px }
+.company-cert .verify .formlist li { height: 28px }
+.company-cert .chosen-container .chosen-results li.active-result { height: 16px }
+
+.v-status { font-size: 14px; margin-left:  10px; color: #f48400; }
+
+/*company head*/
+.companymanage .uc-tablist { background: #f8f7f7; }
+/*--company unverify--*/
+.company-person-div .uc-main { padding: 35px 50px; border:solid 1px #e8e8e8 }
+.compverify { padding-bottom: 35px; }
+.compbasicinfo { padding-top: 35px; border-top: solid 1px #e8e8e8 }
+.comptit { font-size: 15px; }
+.verify { margin: 26px auto 0; }
+.unverify { background: #fff;}
+.verify .formlist { padding: 0 15px 0 146px }
+.verify .formlist li { height:24px; margin-bottom: 10px }
+.verify .formlist .fmtit { font-size: 12px; color: #8c8f93; width: 75px; padding-right: 0; margin-right: 40px; text-align: right; }
+.verify .fmving .fmcont { max-width: 550px; white-space: nowrap; /*overflow: hidden;*/ text-overflow:ellipsis; }
+.uploadcerti .fmcont { font-size: 14px; }
+.verify .fmnoti { height: 25px; padding:10px 15px; background:#fcfcfc; margin:0 }
+.verify .fmnoti .btn-a-blue { width:auto; height:26px; }
+.verify .fmnoti .btn-a-blue a { padding:0 12px; height:26px; line-height:26px }
+.verfirst { margin-right:10px; line-height:28px }
+.verify .txtbox { width: 176px }
+.verify input[readonly="readonly"],.verify input[disabled="disabled"] { background-color: #f6f6f6  }
+h4.verbgtit { color: #434343; line-height: 32px; font-size:14px; font-weight:normal }
+.inradio { vertical-align: text-top; }
+.radlb { margin-right: 25px; margin-left: 5px }
+.uncerti, .certing, .certed { color:#828488; display: inline-block; font-size:12px; width: 68px; height: 14px; padding: 4px 5px; margin: 0 20px; line-height: 14px; border: solid 1px #dbdbdb; background: #f6f6f6; text-shadow:1px 1px 0 #fff; border-radius: 14px; box-shadow: 0 1px 0 #fff inset,0 -1px 0 #fff inset }
+.certed { color: #f48400; background: #fff4da; border-color: #f48400; }
+.editinfo .formlist, .compinfo .formlist { padding:15px 15px 15px 8px; border:0 }
+.editinfo .formlist .i-sign { margin-right:0 }
+.verify .uploadcerti .formlist li, .verify .compcerti .formlist li {clear:both;overflow:hidden; height:30px; line-height:30px; padding:10px 0; margin-bottom: 0; border-bottom:dotted 1px #d3d6db }
+.verify .formlist li:last-child { border:0 }
+.unverify .uploadcerti .formlist { background: #fff }
+.fmright { float: right; margin-right: 30px; text-align: right; }
+.upfile { cursor:pointer; opacity:0; filter:alpha(opacity=0); right:0; top:0; font-size:0; font-size:12px\9; }
+.companymanage .fmright { height:30px; }
+.uploadcerti .stabar, .uploadcerti .upsucess, .uploadcerti .unupload, .uploadcerti .unpassed { text-align: left; }
+.uploadcerti .noti, .uploadcerti .noti { width: 215px; background: none }
+.uploadcerti .unupload .ftorange { display: inline-block; zoom:1; *display:inline; }
+.uploadcerti .unupload .ftorange i { margin-right: 5px; margin-top:-2px }
+.progressbar, .probar-blue { width: 170px; height: 12px; margin-top: 9px; display: inline-block; background-color: #e6e6e6 }
+.probar-blue { max-width: 100%; background-color: #f48400; vertical-align: top; margin-top:0; }
+.percent { width:80px; text-align: center; margin-left: -40px; left: 50%; height: 12px; line-height: 12px; color: #fff !important }
+.stabar .fr, .upsucess .fr, .unupload .fr, .unpassed .fr { display: inline-block; zoom:1; *display:inline; width: 18px; margin-top: 6px; margin-left:20px }
+.upsucess .fr, .unupload .fr { margin-top: 6px }
+.unpassed .fr a { display: block; height: 18px; line-height: 18px }
+.stabar .fr a, .upsucess .fr a, .unupload .fr a, .unpassed .fr a { width: 18px; height: 18px; display:block; overflow: hidden; background:#e6e6e6 url(../img/ico-sprite.png) -211px -22px; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px }
+.stabar .fr a:hover, .upsucess .fr a:hover, .unupload .fr a:hover, .unpassed .fr a:hover { background-color: #adadad; background-position:-211px -1px }
+.noti .fr { width: auto; margin-top: 0; border: 0 }
+.sucess { display: inline-block; zoom:1; *display:inline; height: 30px; }
+.sucimg { width: 48px; height: 28px; border: solid 1px #e6e6e6; display: inline-block; zoom:1; *display:inline; margin-left:20px }
+.sucimg img { width:48px; height:28px; }
+.fmright .sucimg .ico-ok { right: -8px; bottom: -2px; top: auto; margin-top: auto; margin-right: 5px }
+.uploading { background:url(../img/uploading.gif) no-repeat 0 0; width:56px; padding-top:10px; color:#777; height:20px; line-height:20px; margin-top:2px; display:inline-block; letter-spacing:-1px }
+/*--company verify--*/
+.compcerti .fmright { margin-right: 0 }
+.compcerti .unpassed .sucess { width: 235px; }
+.fmright a { text-decoration:underline }
+/*--company basic info--*/
+.basicinfo { margin-top:22px; }
+.basicinfo .formlist { border-bottom: 0; padding: 0 22px }
+.basicinfo .formlist li { margin-bottom: 10px; height:24px }
+.basicinfo .formlist li .cityselect { top: -168px !important }
+.basicinfo .fmtit { display:inline; font-size: 12px; color: #8c8f93; text-align:right; width:85px; margin-right:40px; padding:0 }
+.bi-industry, .bi-province { width: 226px }
+.bi-industry .droplist, .bi-district, .bi-province .droplist { width: 236px }
+.basicinfo .txtbox { width: 226px }
+.basicinfo .fmfrom, .basicinfo .fmto { width: 172px }
+.basicinfo .fmfrom .txtbox, .basicinfo .fmto .txtbox { width: 160px }
+.basicinfo .multibox { width:350px; display: block; margin-top: 10px }
+.copmp-hd .btn-a-blue { width: 75px }
+.copmp-hd .ftgrey { margin-right: 10px; }
+.basicinfo .fmcont .txtbox[readonly],.basicinfo .fmcont .txtbox[readonly]:focus { background-color: #fff }
+/*--uploadify--*/
+.uploadify { display:inline-block; zoom:1; *display:inline; position:relative;vertical-align: middle; }
+.upsucess i {margin-right:5px;}
+.uploadcerti .upsucess .ftorange {margin-right:20px;}
+.uploadcerti .upsucess.noti span {text-align:right;margin-right:0;}
+.uploadcerti .upsucess.noti {text-align:right;}
+.uploadify .swfupload { left:0 }
+.uploadify-button { border:0; width:100%; text-decoration:underline; text-align:center }
+.fmright .uploadify-button { float:right; text-align:right; cursor:pointer }
+.uploadify:hover .uploadify-button { }
+.uploadify-button.disabled { background-color:#D0D0D0; color:#808080 }
+.uploadify-queue { float:left; display:inline-block }
+.uploadify-queue-item { margin-top:5px; max-width:350px }
+.uploadify-error { background-color:#FDE5DD !important }
+.uploadify-queue-item .cancel a { float:right; width:16px; background:url('../img/uploadify-cancel.png') 0 0 no-repeat; text-indent:-9999px; height:16px }
+.uploadify-queue-item.completed { background-color:#E5E5E5 }
+.uploadify-progress { margin-top:10px; width:100%; background-color:#E5E5E5 }
+.uploadify-progress-bar { width:1px; background-color:#0099FF; height:3px }
+.filehand { background:#c00; position:absolute; width:80px; height:22px; overflow:hidden; left:0; top:0; opacity:0; filter:alpha(opacity=0); cursor:pointer }
+.files { opacity:0; filter:alpha(opacity=0); }
+.logo-info { padding-top: 35px; border-top:solid 1px #ddd; margin-top: 35px; }
+.logo-info p { margin-bottom: 12px; }
+.logo-info img { width: 180px; height:40px; padding:10px; background-color: #f6f6f6; border: solid 1px #eee; }
+.logo-info .comptit { margin-bottom: 22px; }
+.logo-info .uploading { top: 0; left: 0; width: 336px; height: 95px; line-height: 92px; text-align: center; background-position: center 68px; color: #666; margin-top: 0; background-color:#f8f8f8; border: solid 1px #eee; opacity: .8 }
+.logo-fm span { vertical-align: top; }
+.logo-fm .btn-a-white a { color: #f48400; }
+.logo-fm .btn-a-blue a,.logo-fm .btn-a-white a:hover { color: #fff; }
+
+
+.avatar-uploader {
+    margin:40px 10px 10px;
+  }
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+  }
+  .avatar {
+    width: 90px;
+    height: 90px;
+    display: block;
+  }
+  .el-button {
+    width: 100%;
+    display: inline-block;
+    line-height: 10px;
+  }
+  .text-list {
+    margin: 30px 0;
+  }
+  .company-cert .unverify .formlist li {
+    height: auto;
+  }
+  .company-cert .unverify .editinfo .formlist li {
+    height: 28px;
+  }
+  .avatar-uploader-box .avatar{
+    border-radius: 0px;
+  }
+
+  .submit-btn{
+    background-color: #f48400;
+    display: inline-block;
+  }

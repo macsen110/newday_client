@@ -1,0 +1,24 @@
+// step
+
+.el-step__head {
+	&.is-finish {
+		color: $uiColor;
+		border-color: $uiColor;
+	}
+	&.is-text.is-finish {
+		background-color: $uiColor;
+		border-color: $uiColor;
+	}
+}
+
+.el-step__title {
+	&.is-finish {
+		color: $uiColor;
+	}
+}
+
+.el-step__description {
+	&.is-finish {
+		color: lighten($uiColor, 10%);
+	}
+}

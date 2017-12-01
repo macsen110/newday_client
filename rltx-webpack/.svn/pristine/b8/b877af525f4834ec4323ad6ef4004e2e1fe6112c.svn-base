@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-cmn-Hans-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit">
+  <title>融链天下平台</title>
+  <meta name="keywords" content="融链天下" />
+  <meta name="description" content="融链天下" />
+  <meta name="copyright" content="rltx.com" />
+  <link rel="shortcut icon" href="/img/favicon.ico" />
+  <!-- <link rel="stylesheet" href="/css/register.min.css" /> -->
+  <!--[if lt IE 9]><script src="lib/html5shiv.min.js"></script><![endif]-->
+  <!--[if lte IE 6]><script language="javascript" src="lib/DD_belatedPNG.js"></script><![endif]-->
+</head>
+
+<body class="bg-logreg">
+<div id="page"></div>
+
+<!-- scripts -->
+<!-- <script src='/js/register/org.js'></script> -->
+</body>
+</html>

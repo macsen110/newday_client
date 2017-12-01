@@ -1,0 +1,285 @@
+
+a {
+	color: #666;
+}
+
+.inner {
+	width: 1000px;
+	margin: 0 auto
+}
+
+.bg-logreg {
+	background: url(img/sepline.jpg) repeat-x center center
+}
+
+.topbar {
+	height: 30px;
+	background: #fff;
+	border-bottom: solid 1px #e6e6e6;
+	line-height: 30px
+}
+
+.topbar a:hover {
+	color: #f48400
+}
+
+.ico-phone,.ico-qr,.ico-tel {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin: 8px 6px 8px 0;
+	vertical-align: middle;
+	background: url(img/logreg.png) no-repeat -1px -1px
+}
+
+.ico-tel {
+	background-position: -1px -17px
+}
+
+.ico-phone {
+	background-position: -17px -1px
+}
+
+.tel {
+	color: #f48400;
+	font-size: 18px
+}
+
+.wlqr {
+	margin-right: 12px;
+	position: relative
+}
+
+.qrbox {
+	width: 154px;
+	height: 154px;
+	background: #fff url(img/qrcode.jpg) no-repeat center center;
+	padding: 8px;
+	position: absolute;
+	z-index: 100;
+	right: -94px;
+	top: 25px;
+	display: none;
+	box-shadow: 0 0 10px #666
+}
+
+.qrbox:before {
+	content: "";
+	width: 0;
+	height: 0;
+	position: absolute;
+	overflow: hidden;
+	top: -8px;
+	right: 112px;
+	border-bottom: solid 8px #fff;
+	border-top: 0;
+	border-right: solid 8px transparent;
+	border-left-color: transparent
+}
+
+.wlqr:hover .qrbox {
+	display: block;
+	box-shadow: 0 0 10px #ccc
+}
+
+.header {
+	padding: 35px 0
+}
+
+.logo {
+	width: 194px;
+	height: 44px;
+	background: url(img/logo-medium.png) no-repeat 0 0;
+	overflow: hidden;
+	margin-right: 40px
+}
+
+.logo a {
+	display: block;
+	height: 44px;
+	text-indent: -200px
+}
+
+.btn-highlight,.btn-normal,.btn-normal:hover {
+	display: inline-block;
+	height: 32px;
+	width: 298px;
+	line-height: 32px;
+	font-size: 18px;
+	font-family: microsoft yahei;
+	color: #fff;
+	text-align: center;
+	background: #f48400;
+	border: solid 1px #f48400;
+	border-radius: 4px
+}
+
+.btn-highlight:hover,.btn-normal {
+	background: #fff;
+	color: #f48400
+}
+
+.txtbox {
+	height: 22px;
+	line-height: 22px;
+	padding: 0 5px;
+	border: solid 1px #dadada;
+	border-radius: 3px;
+	transition: all .2s ease-in-out
+}
+
+.txtbox:hover {
+	border-color: #ccc
+}
+
+.focus .txtbox,.txtbox:focus {
+	border-color: #f48400;
+	background: #fffbf6;
+	color: #f48400
+}
+
+.msginfo {
+	padding: 6px 10px;
+	background: #fffbf6;
+	color: #f48400;
+	font-weight: 700;
+	border: dashed 1px #f48400
+}
+
+.footer {
+	width: 100%;
+	line-height: 22px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px
+}
+
+.copyright {
+	line-height: 24px;
+	color: #999
+}
+
+em {
+	font-style: normal
+}
+
+.org {
+	color: #f48400
+}
+
+.red {
+	color: red
+}
+
+.green {
+	color: #282
+}
+
+.blue {
+	color: #2778cb
+}
+
+.bg-org {
+	background-color: #fffaf0
+}
+
+.bg-red {
+	background-color: #fff0f0
+}
+
+.bg-green {
+	background-color: #f0fff0
+}
+
+.tc {
+	text-align: center
+}
+
+.logreg {
+	background: url(img/map.png) no-repeat center 0;
+}
+
+.logregfm .inner {
+	background: #fff;
+	border: solid 1px #e6e6e6;
+	height: 482px;
+}
+
+.logregfm .login-bg {
+	background: #fff url(img/login-bg.jpg) no-repeat right center;
+}
+
+.logtxt {
+	width: 222px;
+	line-height: 24px;
+	padding: 6px 38px;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+.logform {
+	width: 500px;
+	height: 482px;
+	border-right: solid 1px #e6e6e6;
+	fieldset { 
+		padding: 20px 100px;
+	}
+}
+
+.logtit {
+	font-size: 24px;
+	font-weight: 400;
+	color: #f48400;
+	padding: 50px 100px 20px;
+}
+
+.logtit em {
+	font-size: 14px;
+	color: #999;
+	margin-left: 12px;
+}
+
+.loglist {
+	min-height: 200px;
+	margin-top: 20px;
+	.el-button {
+		margin-top: 106px;
+	}
+}
+
+.regrec { 
+	width: 300px;
+	margin-right: 100px;
+	margin-top: 282px;
+	h2 {
+		font-size: 24px;
+		font-weight: normal;
+		margin-bottom: 20px;
+	}
+	p {
+		margin-bottom: 20px;
+		font-size: 14px;
+	}
+	.el-button { 
+		margin-top: 20px;
+	}
+}
+
+#loginAccount, #password {
+	&:before {
+		content: '';
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		width: 16px;
+		height: 16px;
+		overflow: hidden;
+		background: url(img/logreg.png) no-repeat -32px 0;
+	}
+}
+
+#password {
+	&:before {
+		background-position: -48px 0;
+	}
+}

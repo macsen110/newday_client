@@ -1,0 +1,10 @@
+// loading
+
+.el-loading-spinner {
+	.path {
+		stroke: $uiColor;
+	}
+	.el-loading-text {
+		color: $uiColor;
+	}
+} 

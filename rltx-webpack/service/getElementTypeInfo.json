@@ -1,0 +1,69 @@
+{
+  "text": {
+    "element_info_codes": [
+      "text"
+    ],
+    "event": ""
+  },
+  "select": {
+    "element_info_codes": [
+      "select"
+    ],
+    "event": ""
+  },
+  "checkbox": {
+    "element_info_codes": [
+      "checkbox"
+    ],
+    "event": ""
+  },
+  "radio": {
+    "element_info_codes": [
+      "radio"
+    ],
+    "event": ""
+  },
+  "pop": {
+    "element_info_codes": [
+      "pop"
+    ],
+    "event": ""
+  },
+  "multilevelpop": {
+    "element_info_codes": [
+      "multilevelpop"
+    ],
+    "event": ""
+  },
+  "image": {
+    "element_info_codes": [
+      "image"
+    ],
+    "event": ""
+  },
+  "autocomplete": {
+    "element_info_codes": [
+      "autocomplete"
+    ],
+    "event": ""
+  },
+  "date": {
+    "element_info_codes": [
+      "date"
+    ],
+    "event": ""
+  },
+  "hide": {
+    "element_info_codes": [
+      "hide"
+    ],
+    "event": ""
+  },
+  "select_area": {
+    "element_info_codes": [
+      "select_area",
+      "hide"
+    ],
+    "event": ""
+  }
+}

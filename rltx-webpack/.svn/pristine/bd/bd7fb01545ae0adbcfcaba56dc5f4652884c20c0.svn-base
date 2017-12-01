@@ -1,0 +1,69 @@
+// pagination
+
+@import "color";
+
+.pagination {
+	font-size: 14px;
+	padding: 10px;
+	line-height: 22px;
+	.page-preview, .page-next {
+		display: inline-block;
+		vertical-align: middle;
+		padding: 0 6px;
+		line-height: 22px;
+		background-color: $white;
+		color: $uiColor;
+		border: solid 1px #e0e1e4;
+		&:hover {
+			border-color: $uiColor;
+			background-color: $uiColor;
+			color: $white;
+		}
+		&[disabled], &[disabled]:hover {
+			border-color: #e0e1e4;
+			background-color: #e0e1e4;
+			color: #999;
+			cursor: not-allowed;
+		}
+
+	}
+	.page-select {
+		font-size: 14px;
+		height: 24px;
+		line-height: 24px;
+		border: solid 1px #e0e1e4;
+	}
+}
+
+.page-list {
+	display: inline-block;
+	vertical-align: middle;
+	li {
+		display: inline-block;
+		vertical-align: middle;
+		min-width: 10px;
+		text-align: center;
+		border: solid 1px #e0e1e4;
+		padding: 0 6px;
+		margin: 0 3px;
+		background-color: $bgLight;
+		color: $uiColor;
+		cursor: pointer;
+		&:hover {
+			border-color: $uiColor;
+			background-color: $lightOrg;
+		}
+		&.active {
+			border-color: $uiColor;
+			background-color: $uiColor;
+			color: $white;
+			font-weight: 700;
+		}
+	}
+}
+
+.page-total, .page-size {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}

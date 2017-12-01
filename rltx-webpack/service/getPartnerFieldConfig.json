@@ -1,0 +1,72 @@
+[
+  {
+    "field_config_code": "org_name",
+    "type": 1,
+    "show_name": "伙伴简称",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:’org_name'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "login_name",
+    "type": 1,
+    "show_name": "公司全称",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'login_name'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "partner_type",
+    "type": 1,
+    "show_name": "伙伴类型",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'partner_type'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "partner_area",
+    "type": 1,
+    "show_name": "所在地区",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'org_name'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "linkman_user_name",
+    "type": 1,
+    "show_name": "联系人",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'linkman_user_name'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "linkman_mobilephone",
+    "type": 1,
+    "show_name": "手机号",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'linkman_mobilephone'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  },
+  {
+    "field_config_code": "description",
+    "type": 1,
+    "show_name": "备注",
+    "format": "",
+    "element_code": "text",
+    "extra_params": "{field1:'description'}",
+    "search_element_code": "",
+    "search_extra_params": ""
+  }
+]

@@ -1,0 +1,56 @@
+// alert
+
+.el-alert {
+	border-style: dashed !important;
+	.el-alert__description {
+		line-height: 1.5;
+	}
+}
+
+.el-alert--success {
+	color: $green;
+	background-color: lighten($green, 67%);
+	border: solid 1px desaturate($green, 10%);
+	.el-alert__icon, .el-alert__closebtn {
+		color: $green;
+	}
+	.el-alert__description {
+		color: desaturate($green, 58%);
+	}
+}
+
+.el-alert--info {
+	color: $blue;
+	background-color: lighten($blue, 60%);
+	border: solid 1px desaturate($blue, 20%);
+	.el-alert__icon, .el-alert__closebtn {
+		color: $blue;
+	}
+	.el-alert__description {
+		color: desaturate($blue, 58%);
+	}
+}
+
+.el-alert--warning {
+	color: $uiColor;
+	background-color: lighten($uiColor, 50%);
+	border: solid 1px desaturate($uiColor, 20%);
+	.el-alert__icon, .el-alert__closebtn {
+		color: $uiColor;
+	}
+	.el-alert__description {
+		color: desaturate($uiColor, 58%);
+	}
+}
+
+.el-alert--error {
+	color: $red;
+	background-color: lighten($red, 42%);
+	border: solid 1px desaturate($red, 10%);
+	.el-alert__icon, .el-alert__closebtn {
+		color: $red;
+	}
+	.el-alert__description {
+		color: desaturate($red, 58%);
+	}
+}

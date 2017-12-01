@@ -1,0 +1,7 @@
+// breadcrumb
+
+.el-breadcrumb__item__inner {
+	&:hover, a:hover {
+		color: $uiColor;
+	}
+}

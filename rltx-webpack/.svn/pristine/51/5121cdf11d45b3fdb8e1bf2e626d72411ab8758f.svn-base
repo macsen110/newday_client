@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>融链 | 会员中心-车辆定位</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Expires" content="0">
+<script src="http://api.map.baidu.com/api?v=2.0&ak=0splGL787be69VgsOZX2t3vMvw016i0F&s=1"></script>
+<link rel="shortcut icon" href="../img/favicon.ico">
+<style>
+  .hide{
+  	display: none!important;
+  }
+</style>
+<style>
+    *{
+    	padding:0;
+    	margin:0;
+    }
+    body, button, input, select, textarea {
+	    font: normal 12px/1 microsoft yahei, "\5b8b\4f53", Tahoma, Helvetica, Arial, sans-serif;
+	    line-height: 22px;
+	}
+	.header{
+		background: #f6f6f6;
+	}
+	.header .wdauto {
+	    padding: 0 12px;
+	    height: 40px;
+	    border-bottom: solid 2px #f48400;
+	}
+	.biz-logo {
+	    font: bold 18px/40px microsoft yahei;
+	    color: #454545;
+	}
+	.fl {
+	    float: left;
+	    display: inline;
+	}
+	.biz-right {
+	    line-height: 40px;
+	    color: #666;
+	}
+	.fr {
+	    float: right;
+	    display: inline;
+	}
+	.biz-right a, .role {
+	    margin-left: 5px;
+	    margin-right: 5px;
+	}
+	.ftorange {
+	    color: #f60;
+	}
+
+	.mc-list {
+	    width: 306px;
+	    padding: 0px;
+	    background-color: #fff;
+	    border-left: solid 1px #ccc;
+	}
+	.ml-filter {
+	    padding-left: 14px;
+	}
+
+	#groupId{
+		width:190px;
+	    height: 26px;
+	    font-size: 14px;
+	    border-radius: 3px;
+	}
+
+	ul, ol {
+	    list-style: none;
+	}
+
+	.ml-hd {
+	    background-color: #f6f6f6;
+	    border: none 0;
+	    margin-bottom: 0;
+	    padding:10px;
+	}
+
+	.ml-filter .txtbox {
+	    width: 178px;
+	    height: 26px;
+	    font-size: 14px;
+	    border-radius: 3px;
+	}
+
+	.ml-filter li {
+	    margin-bottom: 6px;
+	}
+
+	.txtbox, .dropdata {
+	    width: 140px;
+	    height: 22px;
+	    padding: 0 5px;
+	    line-height: 22px;
+	    color: #464646;
+	    border: solid 1px #dadada;
+	    -webkit-transition: all .2s ease-in-out;
+	    transition: all .2s ease-in-out;
+	}
+
+	input, textarea, select, button {
+	    text-rendering: auto;
+	    color: initial;
+	    letter-spacing: normal;
+	    word-spacing: normal;
+	    text-transform: none;
+	    text-indent: 0px;
+	    text-shadow: none;
+	    display: inline-block;
+	    text-align: start;
+	    margin: 0em;
+	    font: 13.3333px Arial;
+	}
+
+	option {
+	    font-weight: normal;
+	    display: block;
+	    white-space: pre;
+	    min-height: 1.2em;
+	    padding: 0px 2px 1px;
+	}
+
+	.s-btn {
+	    background: #f48400;
+	    width: 60px;
+	    height: 26px;
+	    line-height: 26px;
+	    border: 1px solid #f48400;
+	    border-radius: 3px;
+	    text-align: center;
+	    font-size: 14px;
+	    color: #fff;
+	    margin-left: 6px;
+	    cursor: pointer;
+	    margin-left: 200px;
+	}
+
+	.ml-bd {
+	    overflow-y: auto;
+	    height: 422px;
+	}
+
+	.map-truck-list{
+		height: 422px;
+	    position: relative;
+	    zoom: 1;
+	}
+
+	.map-truck-list li {
+	    position: relative;
+	    padding: 5px 10px 0 30px;
+	    border-bottom: solid 1px #ebebeb;
+	    cursor: pointer;
+	}
+
+	.sequence {
+	    float: left;
+	    display: block;
+	    width: 30px;
+	    margin-left: -30px;
+	    text-align: center;
+	}
+
+	.ftbold {
+	    font-weight: bold;
+	}
+
+	.ftgreen {
+	    color: #64b05c;
+	}
+
+	.truck-info {
+	    height: 25px;    
+	    line-height: 25px;
+	}
+
+	.map-truck-list li.ckd a {
+	    color: #434343;
+	}
+	.ml-bd .ckd a {
+	    color: #fff;
+	}
+	.truck-id a {
+	    font-size: 14px;
+	    font-weight: bold;
+	    margin-right: 8px;
+	}
+	a {
+	    text-decoration: none;
+	    outline: none;
+	    color: #666;
+	}
+	a {
+	    text-decoration: none;
+	    outline: none;
+	    color: #666;
+	}
+
+	.ts-grey {
+	    border-color: #999;
+	    color: #999;
+	}
+	.master-fold {
+	    position: relative;
+	    width: 9px;
+	    overflow: hidden;
+	    border-left: solid 1px #d6d6d6;
+	}
+	.master-fold a {
+	    position: absolute;
+	    width: 9px;
+	    height: 80px;
+	    overflow: hidden;
+	    line-height: 200px;
+	    top: 50%;
+	    margin-top: -40px;
+	    background: #fff url(../img/fold.png) no-repeat 0 center;
+	    border-top: solid 1px #ccc;
+	    border-bottom: solid 1px #ccc;
+	}
+    .ml-ft {
+	    background-color: #f2f2f2;
+	    padding: 6px;
+	    margin-top: 0px;
+	}
+
+	.uc-pages {
+	    margin:0;
+	    text-align: right;
+	}
+
+	.curpage {
+	    border: 1px solid #d3d6db;
+	    box-shadow: 1px 1px 2px #ededed inset;
+	    text-align: center;
+	    margin: 0 5px;
+	    width: 25px;
+	    height: 22px;
+	    vertical-align: top;
+	}
+
+	.uc-pages a, .uc-pages span {
+	    color: #f48400;
+	    display: inline-block;
+	    vertical-align: top;
+	    padding: 0 5px;
+	    height: 22px;
+	    margin: 0 5px;
+	    line-height: 22px;
+	    text-align: center;
+	    cursor: pointer;
+	    border: solid 1px #e0e1e4;
+	    background: #fff;
+	}
+
+	.uc-pages a.ucp-pre, .uc-pages a.ucp-next, .uc-pages span.ucp-pre, .uc-pages span.ucp-next {
+	    border: solid 1px #e0e1e4;
+	    width: auto;
+	    font-weight: normal;
+	    line-height: 22px;
+	}
+
+	.uc-pages a, .uc-pages span {
+	    color: #f48400;
+	    display: inline-block;
+	    vertical-align: top;
+	    padding: 0 5px;
+	    height: 22px;
+	    margin: 0 5px;
+	    line-height: 22px;
+	    text-align: center;
+	    cursor: pointer;
+	    border: solid 1px #e0e1e4;
+	    background: #fff;
+	}
+
+	.map-tool{
+		text-align: right;padding:0 20px;
+	}
+
+	.rl-hd .truck-tag, .rl-hd .truck-status {
+	    font-weight: normal;
+	    font-size: 12px;
+	    vertical-align: middle;
+	    margin-top: -3px;
+	}
+
+	.map-content {
+        padding: 8px 0 10px;
+	}
+
+	.truck_detail {
+		color: #2778cb;
+		font-size: 16px;
+		margin-right: 10px;
+	}
+
+	.carDetail {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+	}
+
+	.map-footer {
+		text-align: center;
+	}
+
+	.btn-grey {
+	    background-color: #f6f6f6;
+	    border-color: #e8e8e8;
+	    color: #2778cb;
+	}
+
+	.btn-grey, .btn-light, .btn-org {
+	    display: inline-block;
+	    padding: 0 12px;
+	    height: 22px;
+	    line-height: 22px;
+	    border: solid 1px #e8e8e8;
+	    border-radius: 3px;
+	    margin: 0 5px;
+	}
+
+	.truck-tag, .truck-role, .truck-status, .fee-type, .user-status, .od-status {
+	    display: inline-block;
+	    font-size: 12px;
+	    height: 14px;
+	    line-height: 14px;
+	    padding: 0 1px;
+	    background-color: #fff;
+	    color: #f48400;
+	    border: solid 1px #f48400;
+	    border-radius: 3px;
+	    margin-right: 8px;
+	}
+
+	.truck-role {
+	    background-color: #ff9110;
+	    color: #fff;
+	}
+
+	em {
+		font-style: normal;
+	}
+
+	.copilot .truck-role {
+	    background-color: #2c84de;
+	    border-color: #2c84de;
+	}
+</style>
+</head>
+<body>
+<div class="header">
+	<div class="innerwp wdauto clearfix">
+	    <h1 class="biz-logo fl">车辆定位</h1>
+	    <!--<p class="biz-right fr">-->
+		    <!--<a href="/member/homepage" class="ftorange">通达物流公司</a>-->
+		    <!--<em class="role"><span class="logitype">[ 物流公司 ]</span></em>-->
+		    <!--<a href="/member/userInfo/view">张智</a>-->
+		    <!--[<a href="/logout">退出</a>] | <a href="http://192.168.1.51/www" target="_blank">融链官网</a>-->
+	    <!--</p>-->
+	</div>
+</div>
+<div class="content">
+	<div style="height:100%;">
+		<div class="mc-list fl">
+		    <div class="ml-hd clearfix">
+                <ul class="ml-filter">
+                    <li>
+                        <select class="txtbox" name="groupId" id="truckType">
+                            <option value="">全部</option>
+                        </select>
+                    </li>
+                    <li>
+                        <input type="text" name="truckLicenseNo" autocomplete="off" id="truckLicenseNo" class="txtbox fl" placeholder="请输入车牌号">
+                        <div class="s-btn search" id="search">搜索</div>
+                    </li>
+                </ul>
+        	</div>
+        	<div class="ml-bd" >
+            	<ul class="map-truck-list" id='map-truck-list'>
+            		<!-- <li>
+            			<span class="sequence">0</span>
+						<p class="truck-id" data-truck-license="京AQ1219">
+						    <span class="running-status fr">
+						    	<strong class="ftgreen ftbold">行驶中</strong>
+						    </span>
+						    <a href="/member/truck/Window/33996/detail" class="truck_detail" target="_blank">京AQ1219</a><em class="truck-tag">自有</em>
+						    <em class="truck-tag ts-grey" title="GPS定位">GPS</em>
+						</p>
+						<p class="truck-info">普通挂车，12米，3吨</p>
+					</li> -->
+            	</ul>
+            </div>
+            <div class="ml-ft">
+                <div class="uc-pages map-truck-list-foot">
+                    第<input class="curpage" id='pageNumber' value="1">页，共
+                      <input class="curpage" id="totlePage" readonly></input>页
+                    <a href="javascript:void(0)" class="ucp-pre" id="ucp-pre" title="上一页">
+                    <i class="icon i6-12 ico-prearrow"></i>上一页</a>
+                    <a href="javascript:void(0);" class="ucp-next" id="ucp-next" title="下一页">下一页
+                    <i class="icon i6-12 ico-nextarrow"></i></a>
+                </div>
+            </div>
+		</div>
+		<!-- <div class="master-fold fl" style="height: 40px;">
+			<a href="javascript:;" title="收起左侧" class="">《</a>
+		</div> -->
+		<div class="mc-cont" style="margin-left: 307px;">
+	        <!-- view mode -->
+	        <div class="view-mode clearfix">
+	            <!-- map tool -->
+	            <div class="map-tool pr">
+	                <a href="javascript:;" class="full-screen">
+	                    <i class="icon i12 ico-fullscreen"></i>
+	                全屏</a>
+	            </div>
+	        </div>
+	        <!-- vm-wrapper -->
+	        <div class="vm-wrapper" id="mapContent"></div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>

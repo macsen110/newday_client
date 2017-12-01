@@ -1,0 +1,8 @@
+// switch
+
+.el-switch.is-checked {
+	.el-switch__core {
+		border-color: $uiColor;
+		background-color: $uiColor;
+	}
+}

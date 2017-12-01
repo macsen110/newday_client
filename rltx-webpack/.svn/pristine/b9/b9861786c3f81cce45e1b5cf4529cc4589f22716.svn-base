@@ -1,0 +1,23 @@
+// time-picker
+
+.time-select-item {
+	&:hover {
+		background-color: $lightCoffee;
+	}
+}
+
+.el-time-panel__content {
+	&::before, &::after {
+		background-color: $uiColor;
+	}
+}
+
+.el-time-panel__btn {
+	&.confirm {
+		color: $uiColor;
+	}
+}
+
+.el-time-spinner__item:hover:not(.disabled):not(.active) {
+	background-color: $lightCoffee;
+}

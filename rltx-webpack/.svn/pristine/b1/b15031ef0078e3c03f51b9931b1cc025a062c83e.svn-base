@@ -1,0 +1,58 @@
+// message-box
+
+.el-message {
+	max-width: 800px;
+	overflow: visible;
+	.el-message__group {
+		height: auto;
+		align-items: baseline;
+		p {
+			white-space: normal;
+		}
+	}
+}
+
+.el-message-box {
+	box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+.el-message-box__header {
+	margin: 0 20px;
+	padding: 20px 0 10px;
+	border-bottom: solid 1px $borderColor;
+}
+
+.el-message-box__headerbtn {
+	right: 0;
+	&:focus .el-message-box__close, &:hover .el-message-box__close {
+		color: $uiColor;
+	}
+}
+
+.el-message-box__content {
+	padding: 20px;
+}
+
+.el-message-box__status {
+	&.el-icon-warning {
+		color: $uiColor;
+	}
+	&.el-icon-circle-check {
+		color: $green;
+	}
+	&.el-icon-information {
+		color: $blue;
+	}
+	&.el-icon-circle-cross {
+		color: $red;
+	}
+}
+
+.el-message-box__btns {
+	margin: 0 20px;
+	padding: 10px 0;
+	border-top: solid 1px $borderColor;
+	button:nth-child(2) {
+		margin-left: 5px;
+	}
+}

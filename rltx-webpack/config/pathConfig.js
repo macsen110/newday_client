@@ -1,0 +1,164 @@
+/**
+ * pathConfig.js
+ * Created by zyc on 17/8/14.
+ */
+
+/**
+ * chunks 编译打包的chunks
+ * templatePath 文件模板目录
+ * filePath dev文件目录
+ * outputPath build打包输出目录
+ * urlPath dev环境游览器访问路径
+ * 默认会根据chunks来生成配置，如chunks为'config/add'，生成配置如下
+ * {
+    chunks: 'config/add',
+    templatePath: 'template/config/add.html',
+    filePath: './src/config/add.js',
+    outputPath: '/config/add.html',
+    urlPath: 'config/add.html'
+  }
+ * 如果需要自己单独配置，在config里面修改对应的配置, 但是chunks必填
+ * 如下
+ * {
+    'chunks':'employee/add',
+    'filePath': './src/employee/add/add.js'
+   },
+ * 如果不需要修改，只需要写个chunks
+ * [
+     {
+       'chunks':'employee/list',
+       'filePath': './src/employee/list/list.js'
+     },
+     'driver/add'
+   ]
+ * 运行dev环境 npm run dev item group , group是我们定义的对应的组, 例如帐号就是account, 如果想运行多组织，就用npm run dev item account/person 这种方式, 不填默认运行所有
+ * 运行build环境, npm run build test/dev group , group是我们定义的对应的组, 例如帐号就是account, 如果想运行多组织，就用npm run dev item account/person 这种方式, 不填默认build所有
+ */
+const configList = {
+  // 登录，menu，注册
+  account: ['login/login', 'menu/index', 'menu/menu', 'register/user', 'register/org', 'register/success', 'register/wait', 'register/personal', 'register/activation'],
+  // 人员，司机， 个人信息
+  person: [
+    'person/info', 'driver/add', 'driver/list', 'driver/account-add', 'driver/account-list',
+    { 'chunks': 'employee/add', 'filePath': './src/employee/add/add.js' },
+    { 'chunks': 'employee/list', 'filePath': './src/employee/list/list.js' }
+  ],
+  // // 伙伴，公司信息, 安全设置, 会员认证
+  // org: ['org/self', 'partner/add', 'partner/list', 'safe/cert', 'safe/verify', 'safe/safe', 'bankAccount/add', 'bankAccount/list'],
+  // // 挂车，车辆，车辆定位
+  // // truck: ['trailer/add', 'trailer/list', 'truck/add', 'truck/list', 'truck/detail', 'car/car', 'attachment/add', 'attachment/list',
+  // //   // { 'chunks': 'truck/truck-map', 'filePath': './src/truck/truck-map' }
+  // //   'truck/truck-map',
+  // //   'truck/truck-gps',
+  // //   'truck/truck-pos'
+  // // ],
+  // // 运单，货单，付款单
+  // waybill: ['waybill/action', 'waybill/settle', 'waybill/list', 'waybill/add', 'waybill/settleList', 'waybill/report', 'waybillNew/add', 'outsourcingWaybill/list', 'outsourcingWaybill/add',
+  //   // 'sebillreceivable/list',
+  //   // 'sebillreceivable/presebillreceivable',
+  //   // 'sebillreceivable/create',
+  //   // 'sebillreceivable/receivablelist',
+  //   // 'sebillreceivable/receivableedit',
+  //   // 'sebillreceivable/optionresult',
+  //   // 'sebillreceivable/receivabledetail',
+  //   // { 'chunks': 'settleBillReceivable/create', 'filePath': './src/settleBillReceivable/create', 'outputPath': '/settle_bill_beceivable/create.html', 'urlPath': 'settle_bill_beceivable/create.html' },
+  //   { 'chunks': 'ticket/list', 'filePath': './src/ticket/list/list' },
+  //   { 'chunks': 'ticket/add', 'filePath': './src/ticket/add/add' },
+  //   { 'chunks': 'waybill/print/add', 'filePath': './src/waybill/print/add' },
+  //   { 'chunks': 'waybill/print/list', 'filePath': './src/waybill/print/list' }
+  // ],
+  // // 订单
+  // logistics: ['logistics/list', 'logistics/action', 'logistics/add', 'outsourcingLogistics/list', 'outsourcingLogistics/add', 'contract/list', 'contract/add'],
+  // // 运力
+  // transport: ['transport/add', 'transport/list'],
+  // // 设备
+  // lbs: ['device/add', 'device/list', 'deviceBind/add', 'deviceBind/list'],
+  // // 路线，税率
+  // resource: [
+  //   { 'chunks': 'route/add', 'filePath': './src/route/add/add.js' },
+  //   { 'chunks': 'route/list', 'filePath': './src/route/list/list.js' },
+  //   { 'chunks': 'rates/add', 'filePath': './src/rates/add/add.js' },
+  //   { 'chunks': 'rates/list', 'filePath': './src/rates/list/list.js' }],
+  // // 车维, 待办提醒, 违章, 事故, 轮胎, 轮胎巡检
+  // maintenance: ['maintenance/add', 'maintenance/list', 'remind/list',
+  //   'peccancy/add', 'peccancy/list', 'accident/add', 'accident/list',
+  //   'insurance/add', 'insurance/list', 'care/add', 'care/list',
+  //   { 'chunks': 'tyreInspection/add', 'outputPath': '/tyre_inspection/add.html', 'urlPath': 'tyre_inspection/add.html' },
+  //   { 'chunks': 'tyreInspection/list', 'outputPath': '/tyre_inspection/list.html', 'urlPath': 'tyre_inspection/list.html' },
+  //   'tyre/add', 'tyre/list'],
+  // // 货源
+  // freight: ['freight/add', 'freight/list',
+  //   { 'chunks': 'freightAcceptRecord/add', 'outputPath': '/freightAcceptRecord/add.html', 'urlPath': 'freightAcceptRecord/add.html' },
+  //   { 'chunks': 'freightAcceptRecord/list', 'outputPath': '/freightAcceptRecord/list.html', 'urlPath': 'freightAcceptRecord/list.html' }],
+  // // 其他
+  // other: ['logs/list', 'role/list', 'fence/list'],
+  // // 报表
+  // //report: ['report/single_car_summary', 'report/customer_summary', 'report/line_summary', 'report/driver_summary', 'report/screen'],
+  // // 平台
+  // platform: [
+  //   { 'chunks': 'platform/certOrg/list', 'outputPath': '/platform/cert_org/list.html', 'urlPath': 'platform/cert_org/list.html' },
+  //   { 'chunks': 'platform/certOrg/approval', 'outputPath': '/platform/cert_org/approval.html', 'urlPath': 'platform/cert_org/approval.html' },
+  //   { 'chunks': 'platform/certPerson/list', 'outputPath': '/platform/cert_person/list.html', 'urlPath': 'platform/cert_person/list.html' },
+  //   { 'chunks': 'platform/certPerson/approval', 'outputPath': '/platform/cert_person/approval.html', 'urlPath': 'platform/cert_person/approval.html' },
+  //   { 'chunks': 'platform/certTruck/list', 'outputPath': '/platform/cert_truck/list.html', 'urlPath': 'platform/cert_truck/list.html' },
+  //   { 'chunks': 'platform/certTruck/approval', 'outputPath': '/platform/cert_truck/approval.html', 'urlPath': 'platform/cert_truck/approval.html' },
+  //   'orgManagement/list', 'orgManagement/add', 'driverManagement/list', 'truckManagement/list', 'truckManagement/detail', 'chargeItem/list', 'chargeItem/add', 'expression/list', 'expression/add'
+  // ],
+  // // 企业结算
+  // settle: ['settleBillReceivable/select_client', 'settleBillReceivable/select_waybill', 'settleBillReceivable/list', 'settleBillReceivable/receive_log_list',
+  //   'settleBillPayable/select_carrier', 'settleBillPayable/select_waybill', 'settleBillPayable/list',
+  //   'settleBillReceivable/receive_log_list', 'settleBillReceivable/receive_log_add',
+  //   'settleBillPayable/payment_log_list', 'settleBillPayable/payment_log_add', 'settleBillReceivable/create', 'settleBillPayable/create'
+  // ],
+  // // demo
+  // demo: [
+  //   { 'chunks': 'add/add', 'templatePath': 'template/add.html', 'filePath': './src/add/add' }
+  // ]
+  // test: [
+  //   { 'chunks': 'test/print', 'templatePath': 'template/test/print.html', 'filePath': './src/test/print' }
+  // ]
+};
+
+
+// 获取到输入的第二个字段
+// 范例 npm run dev item account
+const arg = process.argv[3];
+const getArray = arg ? arg.split('/') : [],
+  exportsArray = [];
+// 没有填第二个参数就全部编译
+if (getArray.length === 0) {
+  Object.keys(configList).forEach((element) => {
+    getArray.push(element);
+  });
+}
+getArray.forEach((element) => {
+  // 获取到对应的属性
+  const pushPropList = configList[element];
+  if (pushPropList && pushPropList.length > 0) {
+    pushPropList.forEach((ele) => {
+      // 字符串
+      if ((typeof ele === 'string') && ele.constructor === String) {
+        const pushObj = {
+          chunks: ele,
+          templatePath: `template/${ele}.html`,
+          filePath: `./src/${ele}.js`,
+          outputPath: `/${ele}.html`,
+          urlPath: `${ele}.html`
+        }
+        exportsArray.push(pushObj);
+      } else {
+        const name = ele.chunks;
+        const pushObj = Object.assign({
+          chunks: name,
+          templatePath: `template/${name}.html`,
+          filePath: `./src/${name}.js`,
+          outputPath: `/${name}.html`,
+          urlPath: `${name}.html`
+        }, ele);
+        exportsArray.push(pushObj);
+      }
+    });
+  }
+});
+
+module.exports = exportsArray;

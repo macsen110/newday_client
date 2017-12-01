@@ -1,0 +1,23 @@
+// radio
+
+.el-radio__inner {
+	width: 16px;
+	height: 16px;
+	&:hover {
+		border-color: $uiColor;
+	}
+	&::after {
+		width: 5px;
+		height: 5px;
+	}
+}
+
+.el-radio__input {
+	&.is-checked .el-radio__inner {
+		background-color: $white;
+		border-color: $uiColor;
+		&::after {
+			background-color: $uiColor;
+		}
+	}
+}

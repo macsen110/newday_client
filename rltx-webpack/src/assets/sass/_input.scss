@@ -1,0 +1,58 @@
+// input
+
+.el-input__inner {
+	height: 24px;
+	border-color: $formColor;
+	border-radius: 0;
+	&:hover {
+		border-color: $uiColor;
+	}
+	&:focus {
+		background-color: $lightOrg;
+		color: $uiColor;
+		border-color: $uiColor;
+		box-shadow: 0 0 3px lighten($uiColor, 30%);
+	}
+	&::placeholder {
+		color: $placeholder;
+		font-size: 12px;
+	}
+}
+
+.el-textarea__inner {
+	min-width: 358px;
+	height: 24px;
+	padding-top: 0;
+	padding-bottom: 0;
+	border-color: $formColor;
+	border-radius: 0;
+	resize: none;
+	&:hover {
+		border-color: $uiColor;
+	}
+	&:focus {
+		background-color: $lightOrg;
+		border-color: $uiColor;
+		box-shadow: 0 0 3px lighten($uiColor, 30%);
+	}
+	&::placeholder {
+		color: $placeholder;
+		font-size: 12px;
+		line-height: 22px;
+	}
+}
+
+.el-autocomplete-suggestion {
+	width: auto !important;
+	min-width: 174px;
+	max-width: 384px;
+	li {
+		&:hover {
+			background-color: $lightCoffee;
+		}
+	}
+}
+
+.el-input__icon {
+	color: $placeholder;
+}

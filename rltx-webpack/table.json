@@ -1,0 +1,77 @@
+[
+  {
+    "show_name": "地址",
+    "format": "",
+    "prop": "address"
+  },
+  {
+    "show_name": "伙伴名",
+    "format": "",
+    "prop": "partnerName"
+  },
+  {
+    "show_name": "市",
+    "format": "",
+    "prop": "city"
+  },
+  {
+    "show_name": "县",
+    "format": "",
+    "prop": "county"
+  },
+  {
+    "show_name": "创建人用户名",
+    "format": "",
+    "prop": "creatorUsername"
+  },
+  {
+    "show_name": "备注",
+    "format": "",
+    "prop": "description"
+  },
+  {
+    "show_name": "业务联系人姓名",
+    "format": "",
+    "prop": "linkmanFullName"
+  },
+  {
+    "show_name": "电话号码",
+    "format": "",
+    "prop": "linkmanPhone"
+  },
+  {
+    "show_name": "公司全称",
+    "format": "",
+    "prop": "orgFullName"
+  },
+  {
+    "show_name": "标签列表",
+    "format": "",
+    "prop": "orgTagList"
+  },
+  {
+    "show_name": "伙伴编码",
+    "format": "",
+    "prop": "partnerOrgCode"
+  },
+  {
+    "show_name": "省Code",
+    "format": "",
+    "prop": "province"
+  },
+  {
+    "show_name": "更新时间",
+    "format": "",
+    "prop": "updateTime"
+  },
+  {
+    "show_name": "更新人用户名",
+    "format": "",
+    "prop": "updateUsername"
+  },
+  {
+    "show_name": "创建时间",
+    "format": "",
+    "prop": "createTime"
+  }
+]

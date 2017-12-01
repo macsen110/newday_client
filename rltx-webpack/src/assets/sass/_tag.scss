@@ -1,0 +1,55 @@
+// tag
+
+.el-tag {
+	margin-left: 5px;
+	vertical-align: top;
+}
+
+.el-tag--primary {
+	color: $uiColor;
+	background-color: lighten($uiColor, 50%);
+	border-color: lighten($uiColor, 20%);
+	.el-tag__close:hover {
+		background-color: $uiColor;
+	}
+}
+
+.el-tag--success {
+	color: $green;
+	background-color: lighten($green, 67%);
+	border-color: lighten($green, 10%);
+	.el-tag__close:hover {
+		background-color: $green;
+	}
+}
+
+.el-tag--warning {
+	color: $uiColor;
+	background-color: lighten($uiColor, 50%);
+	border-color: lighten($uiColor, 20%);
+	.el-tag__close:hover {
+		background-color: $uiColor;
+	}
+}
+
+.el-tag--danger {
+	color: $red;
+	background-color: lighten($red, 42%);
+	border-color: lighten($red, 10%);
+	.el-tag__close:hover {
+		background-color: $red;
+	}
+}
+.el-tag--grey {
+	color: #999;
+	background-color: $white;
+	border-color: #999;
+}
+
+.input-new-tag {
+	width: 66px;
+	.el-input__inner {
+		height: 24px;
+		border-radius: 4px;
+	}
+}

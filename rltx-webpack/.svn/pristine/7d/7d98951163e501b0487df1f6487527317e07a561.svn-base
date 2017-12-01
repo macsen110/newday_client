@@ -1,0 +1,54 @@
+// select
+
+.el-select {
+	&:hover {
+		.el-input__inner {
+			border-color: $uiColor;
+		}
+	}
+	// .el-input__inner {
+	// 	&:hover {
+	// 		border-color: $uiColor;
+	// 	}
+	// 	&:focus {
+	// 		border-color: $uiColor;
+	// 	}
+	// }
+	.el-input .el-input__icon {
+		height: 24px;
+		overflow: hidden;
+	}
+}
+
+.el-select-dropdown__item {
+	a {
+		color: $baseColor;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	&.hover, &:hover {
+		background-color: $lightCoffee;
+	}
+	&.selected {
+		background-color: $uiColor;
+		color: $white !important;
+		a, span {
+			color: $white !important;
+		}
+		&.hover {
+			background-color: $uiColor;
+			a {
+				color: $white;
+			}
+		}
+	}
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+	background-color: #ccc;
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected.hover {
+	background-color: $lightCoffee;
+}

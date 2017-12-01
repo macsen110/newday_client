@@ -1,0 +1,7 @@
+@import "normalize.scss";
+@import "reset.scss";
+@import "rltx.scss";
+
+body {
+	min-width: 1130px;
+}
