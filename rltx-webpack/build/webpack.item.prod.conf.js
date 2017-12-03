@@ -92,6 +92,13 @@ const proPluginArray = [
      */
     manifest: require('./dist/vendor-manifest.json')
   }),
+  new webpack.DllReferencePlugin({
+    context: __dirname,
+    /**
+     * 在这里引入 manifest 文件
+     */
+    manifest: require('./dist/vue-manifest.json')
+  }),
 ];
 
 // 把需要遍历的页面push到plugin中
@@ -146,9 +153,9 @@ if (config.build.productionGzip) {
   )
 }
 
-if (config.build.bundleAnalyzerReport) {
+//if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
+//}
 
 module.exports = webpackConfig;

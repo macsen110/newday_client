@@ -16,39 +16,42 @@ var buildToOSS = require('./buildToOSS');
 // var zipFile = require('../zip');
 var spinner = ora('building for production...');
 var copy = require('./copy');
-
+var os = require('os');
 spinner.start();
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err;
   console.log(chalk.cyan('Start Build.\n'));
   global.startTime = Date()
   console.log('start: ' + global.startTime)
-  webpack(webpackConfig, function (err, stats) {
-    spinner.stop();
-    if (err) throw err;
-    console.log(chalk.cyan('Webpack Build.\n'));
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n');
+  //for (var i =0; i < os.cpus().length; i++) {
+    webpack(webpackConfig, function (err, stats) {
+      spinner.stop();
+      if (err) throw err;
+      console.log(chalk.cyan('Webpack Build.\n'));
+      process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+      }) + '\n\n');
+  
+      console.log(chalk.cyan('Build complete.\n'));
+      //copy.copyDir(path.resolve(__dirname, '../src/ex'), path.resolve(__dirname, `../dist/${process.argv[2]}/ex`));
+      //copy.copyFile(path.resolve(__dirname, '../template/car/track.html'),  path.resolve(__dirname, `../dist/${process.argv[2]}/car/track.html`));
+  
+      buildToOSS.uploadToOSS();
+      // console.log(chalk.cyan('  zip start.\n'));
+      // zipFile.zip(orgId);
+      // console.log(chalk.cyan('  zip complete.\n'));
+      console.log('startTime: ',  global.startTime)
+      console.log('end build: ' + Date())
+      console.log(chalk.yellow(
+        '  Tip: built files are meant to be served over an HTTP server.\n' +
+        '  Opening index.html over file:// won\'t work.\n'
+      ))
+    })
+  //}
 
-    console.log(chalk.cyan('Build complete.\n'));
-    copy.copyDir(path.resolve(__dirname, '../src/ex'), path.resolve(__dirname, `../dist/${process.argv[2]}/ex`));
-    copy.copyFile(path.resolve(__dirname, '../template/car/track.html'),  path.resolve(__dirname, `../dist/${process.argv[2]}/car/track.html`));
-
-    buildToOSS.uploadToOSS();
-    // console.log(chalk.cyan('  zip start.\n'));
-    // zipFile.zip(orgId);
-    // console.log(chalk.cyan('  zip complete.\n'));
-    console.log('startTime: ',  global.startTime)
-    console.log('end build: ' + Date())
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ))
-  })
 });
 

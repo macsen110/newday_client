@@ -38,11 +38,11 @@ const configList = {
   // 登录，menu，注册
   account: ['login/login', 'menu/index', 'menu/menu', 'register/user', 'register/org', 'register/success', 'register/wait', 'register/personal', 'register/activation'],
   // 人员，司机， 个人信息
-  person: [
-    'person/info', 'driver/add', 'driver/list', 'driver/account-add', 'driver/account-list',
-    { 'chunks': 'employee/add', 'filePath': './src/employee/add/add.js' },
-    { 'chunks': 'employee/list', 'filePath': './src/employee/list/list.js' }
-  ],
+  // person: [
+  //   'person/info', 'driver/add', 'driver/list', 'driver/account-add', 'driver/account-list',
+  //   { 'chunks': 'employee/add', 'filePath': './src/employee/add/add.js' },
+  //   { 'chunks': 'employee/list', 'filePath': './src/employee/list/list.js' }
+  // ],
   // // 伙伴，公司信息, 安全设置, 会员认证
   // org: ['org/self', 'partner/add', 'partner/list', 'safe/cert', 'safe/verify', 'safe/safe', 'bankAccount/add', 'bankAccount/list'],
   // // 挂车，车辆，车辆定位

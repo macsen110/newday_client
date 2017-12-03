@@ -8,9 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    items: [{ "id": 1, "name":"文章标题", "detial": "文章详情，我是来测试文章以供有几行的，每一行是多少，展示多少合适，是否换行。哈哈哈哈果然自动换行但是能最多两行吗","source":"1药网","count":100 },
-      { "id": 2, "name": "文章标题,测试文章长度是否OK，展示是否有问题，", "detial": "文章详情，我是来测试文章以供有几行的，每一行是多少，展示多少合适，是否换行。哈哈哈哈果然自动换行但是能最多两行吗", "source": "1药网", "count": 100 },
-    ]
+    items: null
   },
   //事件处理函数
   bindViewTap: function () {
@@ -19,11 +17,19 @@ Page({
     })
   },
   getData() {
+    
     tools.http({
-      url: '/api/home'
+      method: 'post',
+      url: 'wx/articleList',
+      data: {
+        cid: 5
+      }
     })
-    .then(data => console.log(data))
+    .then(data => this.renderUI(data))
     .catch(data => console.log(data))
+  },
+  renderUI(data) {
+    if (data.code === '0') this.setData({ items: data.data.data })    
   },
   showDetail(event) {
     let id = event.currentTarget.dataset.id;
@@ -32,7 +38,7 @@ Page({
     })
   },
   onLoad: function () {
-    //this.getData()
+    this.getData()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

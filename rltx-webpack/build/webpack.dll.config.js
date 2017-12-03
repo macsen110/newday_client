@@ -5,7 +5,8 @@ const getApiPath = function (fileName) {
 }
 module.exports = {
   entry: {
-    vendor: ['vue/dist/vue.esm.js', 'element-ui', getApiPath('area.json'), getApiPath('Utils.js'), getApiPath('DataSourceService.js')]
+    vue: ['vue/dist/vue.esm.js'],
+    vendor: ['element-ui','element-ui/lib/date-picker.js', getApiPath('area.json'), getApiPath('Utils.js'), getApiPath('DataSourceService.js')]
   },
   output: {
     path: path.join(__dirname, 'dist'),
