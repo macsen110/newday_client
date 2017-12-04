@@ -1,11 +1,39 @@
 const path = require('path');
 const webpack = require('webpack');
-const getApiPath = function (fileName) {
-  return path.join(__dirname, '../api', fileName)
-}
+const getApiPath = (fileName) => path.join(__dirname, '../api', fileName)
+
+
+const getEleMentItemArr = (arr) => arr.map(item => 'element-ui/lib/'+item);
+const eleMentArr = [
+  'element-ui.common',
+  'date-picker',
+  'message',
+  'upload',
+  'message-box',
+  'autocomplete',
+  'loading',
+  'form-item',
+  'dialog',
+  'alert',
+  'radio',
+  'form',
+  'col',
+  'radio-group',
+  'row'
+]
 module.exports = {
   entry: {
-    vendor: ['vue/dist/vue.esm.js', 'element-ui', getApiPath('area.json'), getApiPath('Utils.js'), getApiPath('DataSourceService.js')]
+    vendor: [
+      'vue/dist/vue.esm.js',
+      ...getEleMentItemArr(eleMentArr),
+      getApiPath('area.json'), 
+      getApiPath('Utils.js'), 
+      getApiPath('httpUtil.js'), 
+      getApiPath('DataSourceService.js'),
+      "vue-baidu-map",
+      "v-charts",
+      "echarts",
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),

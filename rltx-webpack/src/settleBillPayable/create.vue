@@ -356,7 +356,7 @@
               loadingweight: '按发货货量',
               unloadingweight: '按收货货量',
               smaller: '发货与收货两者取小',
-              bigger: '发货与收货两者取大',
+              bigger: '发货与收货两者取大'
               // trucknumber: '按车次'
             };
             return formats[value[field.fieldConfigCode]];

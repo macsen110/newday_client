@@ -1,8 +1,10 @@
-require('./check-versions')();
 
+require('./check-versions')();
 process.env.NODE_ENV = 'production';
+global.progressIndex = 0;
 var fs = require('fs'),
   stat = fs.stat;
+const util = require('util');
 var async = require("async");
 var ora = require('ora');
 var rm = require('rimraf');
@@ -10,45 +12,45 @@ var path = require('path');
 var chalk = require('chalk');
 var webpack = require('webpack');
 var config = require('../config');
-var webpackConfig = require('./webpack.item.prod.conf');
+//var webpackConfig = require('./webpack.item.prod.conf');
 var buildToOSS = require('./buildToOSS');
 // var orgId = config.build.orgId;
 // var zipFile = require('../zip');
-var spinner = ora('building for production...');
+//var spinner = ora('building for production...');
 var copy = require('./copy');
+const webpackPromise = util.promisify(webpack);
+var webpackConfig = require('./webpack.item.prod.conf');
+const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
+const pathConfig = require("../config/pathConfig")
+const proStartTime = Date();
+const projectsDone = () => {
+  console.log(chalk.cyan('project build startTime', proStartTime+'\n\n'))
+  console.log(chalk.cyan('project build endTime', Date()))
+}
+const projectsRun = () => {
+  if (process.argv[2]) execSync('npm run item ' + process.argv[2])
+  else {
+    Object.keys(pathConfig.configProjectObj).forEach((proItem, index) => {
+      console.log(chalk.cyan('Start Build. ' + proItem ));
+      let startItemTime = Date();
+      execSync('npm run item ' + proItem)
+      let endTime = Date();
+      console.log(chalk.green('\n'+'bulid ' + proItem + '; entry items length: '+ proItem.length));
+      console.log(chalk.cyan('Start time. ' + startItemTime));
+      console.log(chalk.cyan('End   time. ' + endTime +'\n'));
+    })
+  }
+}
 
-spinner.start();
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
-  if (err) throw err;
-  console.log(chalk.cyan('Start Build.\n'));
-  global.startTime = Date()
-  console.log('start: ' + global.startTime)
-  webpack(webpackConfig, function (err, stats) {
-    spinner.stop();
-    if (err) throw err;
-    console.log(chalk.cyan('Webpack Build.\n'));
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n');
 
-    console.log(chalk.cyan('Build complete.\n'));
-    copy.copyDir(path.resolve(__dirname, '../src/ex'), path.resolve(__dirname, `../dist/${process.argv[2]}/ex`));
-    copy.copyFile(path.resolve(__dirname, '../template/car/track.html'),  path.resolve(__dirname, `../dist/${process.argv[2]}/car/track.html`));
 
-    buildToOSS.uploadToOSS();
-    // console.log(chalk.cyan('  zip start.\n'));
-    // zipFile.zip(orgId);
-    // console.log(chalk.cyan('  zip complete.\n'));
-    console.log('startTime: ',  global.startTime)
-    console.log('end build: ' + Date())
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ))
-  })
-});
+// rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
+//   if (err) throw err;
+//   console.log(chalk.cyan('Start Build.\n'));
+//   console.log('startTime: ',  global.startTime)
+// });
 
+
+projectsRun()
+projectsDone()
