@@ -1,17 +1,17 @@
 <view class='container'>
-  <scroll-view class='list' scroll-y="true">
+  <scroll-view v-if="items" class='list' scroll-y="true">
     <view wx:key="{{item.id}}" wx:for="{{items}}" class="listView" bindtap="showDetail" data-id="{{item.id}}">
       <view class='content'>
         <view class='content-text'>
-          <view class='content-name'>{{item.name}}</view>
-          <view class='content-detail'>{{item.detial}}</view>
+          <view class='content-name'>{{item.title}}</view>
+          <view class='content-detail'>{{item.brief}}</view>
           <view class='content-buttom'>
             <view class='source-name'>{{item.source}}</view>
-            <image class='icon-view' src='/img/浏览.png'></image>
-            <view>{{item.count}}</view>
+            <image v-if="item.view_count > 0" class='icon-view' src='/img/浏览.png'></image>
+            <view v-if="item.view_count > 0">{{item.view_count}}</view>
           </view>
         </view>
-        <image class='img' mode='scaleToFill' src='/img/素材.png'></image>
+        <image class='img' mode='scaleToFill' src="{{item.thumb_url}}"></image>
       </view>
       <view class='line'></view>
     </view>

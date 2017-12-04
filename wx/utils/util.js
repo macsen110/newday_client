@@ -8,7 +8,7 @@ const formatTime = date => {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
-const prefixUrl = 'https://www.macsen318.com';
+const prefixUrl = 'https://syj.noobai.cn/';
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -20,10 +20,9 @@ function http(options) {
     let obj = {};
     Object.assign(obj, options, {
       url: prefixUrl + options.url,
-      success: (data) => res(data),
-      falid: (data) => rej(data)
+      success: (data) => res(data.data),
+      fail: (data) => rej(data)
     })
-    console.log(obj)
     wx.request(
       obj
     )
