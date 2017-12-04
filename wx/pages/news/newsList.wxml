@@ -1,19 +1,24 @@
 <view class='container'>
-  <scroll-view v-if="items" class='list' scroll-y="true">
-    <view wx:key="{{item.id}}" wx:for="{{items}}" class="listView" bindtap="showDetail" data-id="{{item.id}}">
-      <view class='content'>
+  <scroll-view wx:if="items" class='list' scroll-y="true">
+    <view wx:key="{{item.id}}" wx:for="{{items}}" class="listView content" bindtap="showDetail" data-id="{{item.id}}">
         <view class='content-text'>
           <view class='content-name'>{{item.title}}</view>
+          <view class='author-box' wx:if="{{item.auth_img && item.auth_info}}">
+            <image class='avatar' src="{{item.auth_img}}"></image>
+            <view class='wrap-author-info'>
+              <view class='author-name'>{{item.auth_name}}</view>
+              <view class='auth-info'>{{item.auth_info}}</view>
+            </view>
+          </view>
           <view class='content-detail'>{{item.brief}}</view>
           <view class='content-buttom'>
+            <text wx:if="{{item.is_top == 1}}" class='show-top-box'>置顶</text>
             <view class='source-name'>{{item.source}}</view>
-            <image v-if="item.view_count > 0" class='icon-view' src='/img/浏览.png'></image>
-            <view v-if="item.view_count > 0">{{item.view_count}}</view>
+            <image wx:if="{{item.view_count > 0}}" class='icon-view' src='/img/浏览.png'></image>
+            <view wx:if="{{item.view_count > 0}}">{{item.view_count}}</view>
           </view>
         </view>
         <image class='img' mode='scaleToFill' src="{{item.thumb_url}}"></image>
-      </view>
-      <view class='line'></view>
     </view>
   </scroll-view>
 </view>
