@@ -1,0 +1,42 @@
+// form
+
+.el-form-item {
+	margin-bottom: 7px;
+	&.is-error {
+		.el-input__inner, .el-textarea__inner {
+			background-color: lighten($red, 42%);
+		}
+	}
+}
+
+.el-form-item__label {
+	padding: 5px 10px;
+}
+
+.el-form-item__content {
+	line-height: 24px;
+	.el-form-item__error {
+		z-index: 10;
+		top: -100%;
+		right: 0;
+		left: auto;
+		padding: 5px 10px;
+		background-color: rgba(0, 0, 0, .6);
+		border-radius: 3px;
+		color: $white;
+		white-space: nowrap;
+		&:after {
+			content: ""; 
+			position: absolute; 
+			top: 22px; 
+			right: 8px; 
+			width: 0; 
+			height: 0; 
+			border-top: solid 3px rgba(0, 0, 0, .6); 
+			border-left:solid 3px transparent; 
+			border-right:solid 3px transparent;
+		}
+	}
+}
+
+

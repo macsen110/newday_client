@@ -1,0 +1,16 @@
+// cascader
+
+.el-cascader-menu__item {
+	&:hover {
+		background-color: $lightCoffee;
+	}
+	&.is-active {
+		background-color: $uiColor;
+		&:hover {
+			background-color: lighten($uiColor, 10%);
+		}
+		&::after {
+			color: $white;
+		}
+	}
+}

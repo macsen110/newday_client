@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <title>融链 | 会员中心-车辆轨迹</title>
+    <meta name="keywords" content="查询轨迹"/>
+    <meta name="description" content="查询轨迹"/>
+    <link rel="stylesheet" href="/ex/base.css"/>
+    <link rel="stylesheet" href="/ex/main.css"/>
+    <link rel="stylesheet" href="http://msdk.rltx.com/test/templet2/css/rl-chat-widget.css">
+    <!--[if lte IE 6]>
+    <script language="javascript" src="lib/DD_belatedPNG.js"></script><![endif]-->
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+        }
+
+        #dateMap{
+            background-color: #fff !important;
+            height:200px;width: 98%;
+        }
+
+        /*--tj-warning--*/
+        .tj-warning { position: absolute; z-index: 9999; width: 100px; line-height: 36px; font-size: 14px; text-align: center; right: 10px; bottom: 30px; background-color: #f48400; border-radius: 2px; color: #fff; cursor: pointer; }
+        .tj-warning:hover { background-color: #f48a00; }
+        .tj-warning-box { position: absolute; z-index: 9999; width: 600px; height: 360px; background-color: #fff; right: 0; bottom: 0; border: solid 1px #ddd; box-shadow: 0 3px 5px 3px #ddd;  }
+        .tj-hd { background-color: #f48400; color: #fff; padding: 6px 12px; border-top-left-radius: 3px; border-top-right-radius: 3px; }
+        .tj-hd span { cursor: pointer; opacity: .8; }
+        .tj-hd span:hover { opacity: 1; }
+        .tj-tit { margin-top: 3px; }
+        .tj-close { display: block; width: 20px; height: 20px; line-height: 20px; text-align: center; color: #fff; font-size: 25px; font-family: arial, sans, sans-serif; }
+        .tj-info { white-space: normal; text-align: left; padding: 6px; line-height: 1.4; }
+        .tj-bd .fix-table-wrap { max-height: 326px; }
+        .blackmask { z-index: 10000; }
+        .dialog-set-time { width: 400px; z-index: 10010; top:50%; margin-top: -142px; margin-left: -230px; }
+        .dialog-set-time .close { opacity: 1; width: 24px; height:24px; }
+        .dialog-set-time .sd-bd { padding: 20px; border-bottom: solid 1px #fff; }
+        .dialog-set-time .sd-bd .tit { margin-bottom: 20px; }
+        .dialog-set-time .sd-ft { padding-top: 24px; border-top: solid 1px #ddd; }
+        .set-by { margin-bottom: 12px; }
+        .set-by .radio-item { margin-right: 50px; }
+        .mi-tit{width: 90px}
+        .btn{padding: 0 5px;}
+        .fmtit{padding-right: 0;}
+        .btn-play, .btn-pause, .btn-stop{padding: 0 8px;}
+        .header { float:left; width:100%; height:42px; }
+        #trajectory { height: 200px;max-height: 200px;overflow: auto;width: 100%;padding-bottom: 5px; }
+        #trackSearchId{margin:9px 10px;}
+        #run,#stop{margin:0;}
+        .carSpeed{margin-left:2px!important;font-size:10px;}
+    </style>
+</head>
+<body>
+<!--头部版块 -->
+<!-- header -->
+<div class="header henrie">
+    <div class="innerwp wdauto clearfix">
+        <!-- search -->
+        <div class="vt-form fl">
+            <ul class="formlist fl">
+                <li class="">
+                    <label class="fmtit" style="width: 56px;font-weight: normal">车牌号：</label>
+
+                    <div class="fmcont truckNo">
+                        ${truckNo}
+                    </div>
+                </li>
+                <li>
+                    <label class="fmtit" style="width: 95px;font-weight: normal">回放时间：从 </label>
+
+                    <div class="fmcont">
+
+                    </div>
+                    <div class="fmcont datetimepicker_moudle">
+                         <span class="fmdate pr z100"><input type="text" class="txtbox br3 datetimepicker" name=" " value="" id="vehicleTrackSTime" data-datetimepicker="start">
+                            <i class="icon i12 ico-calendar pa"></i>
+                          </span><span class="link-line">-</span><span class="fmdate pr z100"><input type="text" class="txtbox br3 datetimepicker" value=""  name=""  id="vehicleTrackETime" data-datetimepicker="end">
+                            <i class="icon i12 ico-calendar pa"></i>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+            <button type="button" class="btn-search fl" id="trackSearchId"><i class="icon i15 ico-search mr5"  style="background-position: -108px -23px;"></i><span>搜索</span>
+            </button>
+            <div class="veh-btn fl">
+                <button type="button" class="btn-play" id="run" disabled>开始回放</button>
+                <button type="button" class="btn-pause hidden" id="pause">暂停回放</button>
+                <button type="button" class="btn-stop" id="stop" disabled>回到起点</button>
+            </div>
+        </div>
+        <div class="hd-opr fr mt10">
+            <a href="javascript:;" class="btn btn-org" id="trajectoryDetail" data-hide="true">轨迹明细</a>
+            <a href="javascript:;" class="btn btn-org" id="dateMapDetail" data-hide="true">速度明细</a>
+        </div>
+        <div class="hd-opr fr mt10" style="margin-right: 5px">
+            回放速度：
+            <a href="javascript:;" class="btn btn-line carSpeed" data-speed="0.5">0.5倍</a>
+            <a href="javascript:;" class="btn btn-org carSpeed" data-speed="1">1倍</a>
+            <a href="javascript:;" class="btn btn-line carSpeed" data-speed="1.5">1.5倍</a>
+            <a href="javascript:;" class="btn btn-line carSpeed" data-speed="2">2倍</a>
+            <a href="javascript:;" class="btn btn-line carSpeed" data-speed="50">50倍</a>
+            <a href="javascript:;" class="btn btn-line carSpeed" data-speed="100">100倍</a>
+        </div>
+    </div>
+</div>
+<!-- header -->
+<div class="hide" id="trajectory">
+    <table class="rl-fix-table table-bordered">
+        <thead>
+        <tr>
+            <th class="fix-hd">序号</th>
+            <th class="fix-hd">时间</th>
+            <th class="fix-hd">经度</th>
+            <th class="fix-hd">纬度</th>
+            <th class="fix-hd">速度（公里/时）</th>
+            <th class="fix-hd">方向</th>
+            <th class="fix-hd">位置</th>
+        </tr>
+        </thead>
+        <tbody class="mapTpl"></tbody>
+    </table>
+</div>
+<div id="dateMap" class="" ></div>
+<div id="map"></div>
+<!-- tj-warning -->
+<span class="tj-warning btn-danger" title="点击查看报警信息">报警 <b class="badge hide"></b></span>
+<div class="tj-warning-box hide">
+    <!--hd-->
+    <div class="tj-hd clearfix">
+        <h3 class="tj-tit fl">报警信息</h3>
+        <span class="set-time fl ml20">[设置停留报警时间]</span>
+        <span class="tj-close fr ml20" title="关闭">×</span>
+        <span class="clear-read fr">全部已读清空</span>
+    </div>
+    <!--bd-->
+    <div class="tj-bd">
+        <div class="fix-table-wrap">
+            <table class="rl-fix-table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="fix-hd">报警类型</th>
+                        <th class="fix-hd">车牌号</th>
+                        <th class="fix-hd">报警信息</th>
+                    </tr>
+                </thead>
+                <tbody class="tj-tpl">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="blackmask hide"></div>
+<div class="showdialog lushuDialog dialog-set-time hide">
+    <div class="sd-hd">
+        <h2 class="sdtit">轨迹回放</h2>
+        <a href="javascript:;" class="close" title="点击关闭窗口">关闭</a>
+    </div>
+    <div class="sd-bd">
+        <ul class="mi-list clearfix">
+            <li>
+                <span class="mi-tit">回放开始时间：</span><div class="mi-cont" id="v-p-start-time"></div>
+            </li>
+            <li>
+                <span class="mi-tit">回放结束时间：</span><div class="mi-cont" id="v-p-end-time"></div>
+            </li>
+            <li>
+                <span class="mi-tit">行驶里程：</span><div class="mi-cont" id="v-p-running-mil"></div>
+            </li>
+            <li>
+                <span class="mi-tit">行驶时间：</span><div class="mi-cont" id="v-p-running-time"></div>
+            </li>
+            <li>
+                <span class="mi-tit">平均速度：</span><div class="mi-cont" id="v-p-avg-speed"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="sd-ft clearfix">
+        <p class="fr">
+            <span class="confirm btn-a-white" id="playback">
+                <a href="javascript:;" title="取消">重新回放</a>
+            </span>
+            <span class="cancel btn-a-blue">
+                <a href="javascript:;" title="确认">确认</a>
+            </span>
+        </p>
+    </div>
+</div>
+<div class="showdialog dialog-set-time setTime hide">
+    <div class="sd-hd">
+        <h2 class="sdtit">设置停留报警时间</h2>
+        <a href="javascript:;" class="close" title="点击关闭窗口">关闭</a>
+    </div>
+    <div class="sd-bd">
+        <h3 class="tit">系统会根据您设置的停留时间来进行报警提醒</h3>
+        <div class="set-by">
+                <span class="radio-item active">
+                    <input type="radio" name="setType" class="setType" id="st1" checked data-type="minute">
+                    <label for="st1">按分钟</label>
+                </span>
+                <span class="radio-item">
+                    <input type="radio" name="setType" class="setType" id="st2" data-type="hour">
+                    <label for="st2">按小时</label>
+                </span>
+                <span class="radio-item">
+                    <input type="radio" name="setType" class="setType" id="st3" data-type="day">
+                    <label for="st3">按天</label>
+                </span>
+        </div>
+        <div class="set-content">
+                <span class="set-item">
+                    <select class="txtbox mr10 minute">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="55">55</option>
+                        <option value="60">60</option>
+                    </select>
+                    分钟
+                </span>
+                <span class="set-item hide">
+                    <select class="txtbox mr10 hour">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                    小时
+                </span>
+                <span class="set-item hide">
+                    <select class="txtbox mr10 day">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
+                    天
+                </span>
+        </div>
+    </div>
+    <div class="sd-ft clearfix">
+        <p class="fr">
+            <span class="cancel btn-a-white"><a href="javascript:;" title="取消">取消</a></span>
+            <span class="confirm btn-a-blue"><a href="javascript:;" title="确认">确认</a></span>
+        </p>
+    </div>
+</div>
+<script src="/ex/js/jquery-1.9.1.min.js"></script>
+<script src="/ex/js/js.cookie.js"></script>
+<script>
+    window.lbsDomain = "/member/lbs/";
+    window.lbsImgDomain = "/member/static/gps/img/";
+    window.lbsLibDomain = "/member/static/gps/lib/";
+    window.cookieDomain = "192.168.1.51";
+    window.msgDomain = "http://192.168.1.54:3000/";
+    window.openapiServerUrl = "http://dev.wl.com/openapi/";
+    window.lbsTileUrl = "http://dev.wl.com/RealTimeTracking/test.jsp?x=[x]&y=[y]&z=[z]";
+    window.jssessionId = "b3f2f4c3-743a-4740-9718-d5dcc2953ae9";
+    window.ctx = "/member";
+    window.host = "192.168.1.51";
+    window.port = "80";
+    window.userId = 11022;
+    window.orgId = 551;
+    
+    window.environment = "test";
+    window.startVersion = "1498472044618";
+    var require = {
+        urlArgs: 'v=1498472044618'
+    };
+    window.ctrs = "/member/static";
+    window.initLongitude = 121.534235;
+    window.initLatitude = 31.23488; 
+    var ajaxCode = {
+        SUCCESS: 100,       // 业务处理成功
+        FAILURE: 101,       // 业务处理失败
+        ERROR: 500          // 程序错误
+    }
+</script>
+<script src="/ex/util.js"></script>
+<script src="/ex/datetimepicker.js"></script>
+<script type="text/javascript" src="http://ms-sdk.oss-cn-hangzhou.aliyuncs.com/test/templet2/javascripts/chat-pendant.js?t_=1498551544307"></script>
+<script src="/ex/echarts-all.js"></script>
+<script src="/ex/labMap.js"></script>
+<script>
+    $(function(){
+        //get height
+        var getHeight = function(){
+            var winH = $(window).height(),
+                headH = $(".header").outerHeight();
+            $("#map").css({"height":winH-headH});
+        };
+        getHeight();
+        $(window).resize(function(){
+            getHeight();
+        });
+        //warning info
+        $(".tj-warning,.tj-close").on("click",function(){
+            $(".tj-warning-box").toggleClass("hide");
+            $('.tj-warning').find('.badge').addClass('hide').text('');
+        });
+        //set time
+        $(".set-time").on("click",function(){
+            $(".blackmask,.setTime").removeClass("hide");
+            $.ajax({
+                url: ctx + '/gps/alarm/config/arrest/time',
+                cache: false,
+                method: 'GET',
+                data: {}
+            }).done(function(data){
+                if(data.code===200){
+                    if(data.content.configValueType!==''&&data.content.configValue!==''){
+                        $('input[name=setType]').eq(data.content.configValueType - 1).attr("checked","checked");
+                        $(".set-content .set-item").eq(data.content.configValueType - 1).removeClass("hide").siblings().addClass("hide").find('select').val(data.content.configValue);
+                    }
+                }
+            });
+        });
+        //set type
+        $(".set-by .radio-item").on("click",function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".set-content .set-item").eq($(this).index()).removeClass("hide").siblings().addClass("hide");
+        });
+        //hide dialog
+        $(".blackmask,.sd-hd .close,.sd-ft .cancel").on("click",function(){
+            $(".blackmask,.showdialog").addClass("hide");
+        });
+        //scroll table
+        $("#trajectory").scroll(function(e){
+            e.preventDefault();
+            var top = $(this).scrollTop(),
+                left = $(this).scrollLeft();
+            $(this).find(".fix-hd").css({"top":top});
+            $(this).find(".fix-col").css({"left":left});
+        });
+    });
+</script>
+<script src="/ex/track.js"></script>
+<script>
+    $(function () {
+        window.clientMap = {};
+        window.truckBindType = '${truckBindType}';
+        window.objid = '${driverId}', window.truckType = 'driver';
+        if (truckBindType) {
+            window.objid = '${truckLicenseNo}';
+            window.truckType = "truck";
+        }
+        //get height
+        var getHeight = function () {
+            var pm = $(window).height(),
+                    hd = $(".header").outerHeight();
+            $(".record-list,.master-fold,.map-mode-wrapper,#amap").css("height", pm - hd);
+            $(".fix-table-wrap").css("height", pm - hd - 34);
+        }
+        getHeight();
+        $(window).resize(function () {
+            getHeight();
+        })
+        //scroll table
+        $(".fix-table-wrap").scroll(function (e) {
+            e.preventDefault();
+            var top = $(this).scrollTop();
+            $(this).find(".fix-hd").css({"top": top, "box-shadow": "0 1px 0 #ddd"});
+        })
+        //fold
+    });
+    //fold
+    $(".ele-trajectory").on("click",function(){
+        $(this).addClass("hide");
+        $(".record-list").removeClass("fold-record-list");
+        $(".master-fold").removeClass("fold-master-fold");
+        $(".vt-cont").removeClass("fold-vt-cont");
+    });
+    $(".master-fold a").on("click",function(){
+        $(".record-list").addClass("fold-record-list");
+        $(".master-fold").addClass("fold-master-fold");
+        $(".vt-cont").addClass("fold-vt-cont");
+        $(".ele-trajectory").removeClass("hide");
+    });
+
+    //trajectory
+    $("#trajectoryDetail").on("click",function(){
+        $(".trajectory-detail").toggleClass("hide");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+* {padding:0;margin:0;}
+body {color:#666;min-width:1024px;}
+body, button, input, select, textarea {
+    font: normal 12px/1 microsoft yahei, "\5b8b\4f53", Tahoma, Helvetica, Arial, sans-serif;
+    line-height: 22px;
+}
+.innerwp {
+    padding: 0 12px;
+    min-width: 1000px;
+    margin: 0 auto;
+    clear: both;
+}
+.hide{display: none;}
+.new-frame .mwhd {border-bottom: none;margin-bottom: 0;}
+.mwhd {overflow: hidden;}
+.tipinfo {margin-bottom: 10px;}
+.fr {float: right;display: inline;}
+
+h2.mwtit, h2.sdtit {color: #f48400;font-weight: normal;float: left;display: inline;}
+h2 {font-size: 16px;}
+.ftred {color: #f03;}
+
+.ftgrey {color: #8d8e90;}
+
+.last-login {border: solid 1px #e8e8e8;padding: 20px;margin-bottom: 20px;font-size: 14px;}
+
+.ftbold {font-weight: bold;}
+.ftgreen {color: #64b05c;}
+.security-setting {border: solid 1px #e0e1e4;margin-bottom: 20px;}
+
+.setlist dt i, .vertype dt i {float: left;display: inline;margin-right: 20px;}
+.st1 {background-position: 0 0;}
+
+.ico-st {background: url(../img/secstatus.png) no-repeat 0 0;width: 32px;
+	height: 32px;overflow: hidden;display: inline-block;}
+
+.setlist a {color: #2778cb;}
+
+.security-notice {background: #f6f6f6;padding: 20px;margin-bottom: 40px;}
+
+.mwhd {
+    overflow: hidden;
+}
+
+.mwhd, .sd-hd {
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #e8e8e8;
+}
+.sd-hd .close, .sd-hd .custom-close {
+    width: 18px;
+    height: 18px;
+    background: #f48400 url(../img/ico-sprite.png) -211px -1px;
+    text-indent: -9999px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1010;
+    right: -35px;
+    top: -30px;
+    border: solid 3px #fff;
+    -webkit-box-shadow: 1px 1px 3px #999;
+    -moz-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+}
+
+.setlist, .vertype {
+    padding: 20px 20px 20px 160px;
+    border-bottom: dashed 1px #e8e8e8;
+    overflow: hidden;
+    line-height: 32px;
+}
+
+.security-level {
+    padding: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.security-notice h3 {
+    margin-bottom: 6px;
+}
+
+h3 {
+    font-size: 14px;
+}
+
+.setlist dd, .vertype dd {
+    float: left;
+    width: 480px;
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.setlist dt, .vertype dt {
+    float: left;
+    display: inline;
+    width: 120px;
+    margin-left: -140px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.setlist .operate, .vertype .operate {
+    width: 110px;
+    margin-right: 0;
+    text-align: center;
+}
+
+.verify-section {
+    border: solid 1px #e8e8e8;
+    padding: 35px 50px;
+}
+
+.real-verify, .quali-verify {
+    margin-bottom: 60px;
+}
+
+.company-verifying, .company-verifyed, .personal-verifying, .personal-verifyed {
+    border: solid 1px #e8e8e8;
+    padding: 20px 44px;
+    margin-bottom: 20px;
+}
+
+.pr {
+    position: relative;
+    z-index: 10;
+}
+
+.cvcerted, .pvcerted {
+    width: 100px;
+    height: 100px;
+    display: block;
+    overflow: hidden;
+    right: 80px;
+    top: 62px;
+    background: url(../img/cert.png) no-repeat 0 0;
+}
+
+.pa {
+    position: absolute;
+    z-index: 20;
+}

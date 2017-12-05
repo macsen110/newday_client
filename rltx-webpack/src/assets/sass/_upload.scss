@@ -1,0 +1,45 @@
+// upload
+
+.el-upload-list__item, .avatar-uploader .el-upload {
+	&:hover {
+		background-color: $lightOrg;
+		border-color: $uiColor !important;
+		.avatar-uploader-icon {
+			color: $uiColor;
+		}
+	}
+}
+
+.el-upload-list__item.is-success {
+	.el-upload-list__item-name {
+		&:hover {
+			color: $uiColor;
+		}
+	}
+} 
+
+.el-upload--picture-card {
+	&:hover {
+		background-color: $lightOrg;
+		border-color: $uiColor;
+	}
+}
+
+.el-upload-dragger {
+	&:hover {
+		background-color: $lightOrg;
+		border-color: $uiColor;
+	}
+	.el-upload__text em {
+		color: $uiColor;
+	}
+}
+
+.el-upload-list--picture {
+	.el-upload-list__item {
+		border-color: $lightGray;
+		&:hover {
+			border-color: $uiColor;
+		}
+	}
+}

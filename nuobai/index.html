@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-title" content="文章详情">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name = "format-detection" content = "telephone=no">
+  <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+  <meta content="no-cache" http-equiv="pragma">
+  <meta content="0" http-equiv="expires">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章详情</title>
+  <style>
+  *{
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+      -webkit-text-size-adjust:none;
+      font-family: Arial,'Microsoft YaHei';
+      box-sizing: border-box
+  }
+  img{
+      vertical-align: top;
+      border:none;
+  }
+  input,textarea{
+      user-select: text
+      /*//-webkit-appearance:none;*/
+  }
+  input:focus,select:focus,textarea:focus,button:focus{
+      outline: none;
+  }
+  input[type="text"],input[type="password"],input[type="search"],input[type="tel"],input[type="number"],input[type="email"],input[type="url"],textarea{
+      -webkit-appearance:none;
+      border: 1px solid;
+  }
+  input[type="number"]::-webkit-inner-spin-button{
+      -webkit-appearance:none;
+  }
+  a{
+      text-decoration: none;
+      
+      -webkit-touch-callout:none;
+  }
+  em,i{
+      font-style: normal;
+  }
+  li{
+      list-style: none;
+  }
+  html{
+      font-size: 10px;
+  }
+  .container {
+    padding: 16px 16px 32px;
+    font-size: 12px;
+  }
+  header {
+    padding-bottom: 16px;
+  }
+  .title {
+    font-weight: normal;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .author-box  > * {
+    display: inline-block;
+    vertical-align: middle
+  }
+  .author-box .author-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .author-info {
+    font-size: inherit;
+    font-weight: normal
+  }
+  .author-box .hispital,
+  .subinfo-box {
+    color: #999;
+  }
+  .subinfo-box {
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .subinfo-box  > span {
+    float: right;
+  }
+  .subinfo-box .view-nums {
+    margin-left: 30px;
+  }
+  .subinfo-box .view-nums:before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 10px;
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAYAAACTQC2+AAACcUlEQVRIiZXVTYxecxTH8c88lESIjXcpMokuxkIQ4i1pExYSXaAJFcKizU9jUW0i4i0ooaQLJULnoJtZtERF2KlGxFviZVkRZSEoMSipBabJWNz7SM3c+zyczc09/98533P/9/zPf2J+ft44q6pjcDUuwqU4El/iQ7ydZO+4HBOjQFW1Ao+2yYf2FX7HJI5rfT9ia5LN/wtUVadiB5bjCzyLmSS/LNBN4ArcjmtxCDcleXksqKpW4g0cxKoku/uqXBB3PLbjOmxPsqYXVFVr8AJeSrL6vwA6gMNCP0hy2SJQVd2AnXgsyX0jEq3GiXg9ydc9minsxTtJVvwDqqpJzU+eSXJLT/BaPN++zmMCe5Jc2aO/EB/h6SR3DFr/e5gdAbm5hTyEJUkGmiZYXlWfdsUk+Rh3YX1VnTcxPT19G7ZhWZJ9HZAjNN30YpK1C9ZOwCxuTLKzp8hvcNSghezogrR2cfvc2FH1T/gEt/bEwiqcNNy6gyOER2MOf/Ssz2kmRZ/9BgPcg1TVyT3C97EE9y9cqKoBLsGuEaBd+GuQ5PG22ne7VEn+xN14oG2KIeQUfIv9SbZ1xbb6c7ByuHWX4+yq2tIDewKbMFNVB6pqP77Hr5jqgUxiBq8k2X34gd2AJ7EhyVM9wWdhHY7FW0le69Gdhu+wL8kyFo+gBzVnZXOSe7uSjLOqukDTiT9gaZJDi0CtcB2ew2e4ZkTbd0Ee0TTNv+ZcJ6gNmMKbOF3TJJuS7OlJvhTrcWfr2phk60LduIvvemzBGa3rZ80kmNNcemdqZh48g4eTzHblGgk6DHg+rsK5LXSAA/hc88WvJhmZ6G+3jxFuPvIsXQAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    vertical-align: middle;
+  }
+  .subinfo-box .view-nums em {
+    margin-left: 6px;
+    vertical-align: middle
+  }
+  .section {
+    font-size: 16px;
+  }
+  .section img,
+  .section video {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .section .content-end-box {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .section .content-end-box > * {
+    display: block;
+  }
+  .section .content-end-box:before,
+  .section .content-end-box:after {
+    content: '';
+    height: 1px;
+    width: 38.55%;
+    background-color: #ccc;
+
+  }
+  .section .content-end-box .sign{
+    width: 58px;
+    height: 8px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHUAAAAQCAYAAAAoPTBVAAAB7ElEQVRYhe2Z3XGCQBCAPzO+xw5CCVhBsILECoIdJBUIFeirT2oFmgqkg2AHpANLyMMehkGERQ/IZPhmHBnv9ud2b+52cbBarXzgjXp8ALF5PgBbYKOQWwDH3Nw69mNju00ONeZm4+Ii6/0Elko7WXkoj02CxHJvns8MzQ9RgZBfMnbKPHtX5hTh5mQBnoyOQCH/rbRjEw9ZX6SYm13byMh6SKKq5D0jk6UsNiMk4Qtk05w3+7DEYc/8HlY4Y4u27NxCxO3+xcAaGHO5obWU2faAHeAAU4CHG4306AmRZC4a0h8BEyS5PvRJbYMTMEMC/tqQjRipU+bQJ7UtYuReXHN5b9piixzBTp/U9giRwnPdkP60anaGlhT6yJlehcv1KlDTOkx07ljHp3p9mrZuCnwB7+janFtwbSU1QVfyOyVjGvmuSKj2L1HqCZG776K/tMSjraRG6Ep+r2Tsv7Y0eZbAM9KGjC3pzHLs79RumCGn1tyiTtd8J31SuyFtcwJ+k3EvL8hxHvdJ7Y49UljtuL/NcZDiawN9n9o16fvae45hF9kYCebet1Uo2cBTzosa9OEaDjr/EupVtOkxXNXOFdl2kILLR2IyTQf+UlK1f3ENGvWiGN98qgioXyVHRi4omVMUmwR54TAht9F/APUla2+HlCHAAAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+  }
+  .footer {
+    padding-top: 24px;
+  }
+  .footer .ad{
+    display: block
+  }
+  .footer .ad img {
+    width: 100%;
+    height: auto
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="title">秋季多发感冒时节，儿童感冒时家长应该多注意什么？</h1>
+      <div class="author-box">
+        <img class="author-avatar" src="//img.dongqiudi.com/uploads/avatar/2015/07/25/QM387nh7As_thumb_1437790672318.jpg" />
+        <h3 class="author-info">
+          <p class="name">张小玉-儿科主任</p>
+          <p class="hispital">西安交大附属第二医院</p>
+        </h3>
+      </div>
+      <div class="subinfo-box">
+        <span class="view-nums"><em>322</em></span>
+        <span>医药网</span>
+        
+        <em class="strong date">2017-10-21</em>
+      </div>
+      
+    </header>
+    <div class="section">
+      <p>在我国庞大的人口基数之下，儿童感冒患者已多达
+          0.3亿人 ，也就是说在儿童出现流季节转换， 秋季
+          早晚温差较大。</p>
+        
+        <div class="content-end-box">
+          <i class="sign"></i>
+        </div>
+    </div>
+    <footer class="footer">
+      <a href="" class="ad">
+        <img src="//www.macsen318.com/res/bg_body.jpg" alt="ad" />
+      </a>
+    </footer>
+  </div>
+  <script>
+    
+  </script>
+</body>
+</html>

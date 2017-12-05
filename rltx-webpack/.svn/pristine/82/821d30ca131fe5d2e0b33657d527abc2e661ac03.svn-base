@@ -1,0 +1,14 @@
+// transfer
+
+.el-transfer-panel__item {
+	&:hover {
+		background-color: $lightCoffee;
+	}
+}
+
+.el-transfer__buttons {
+	.el-button {
+		margin: 0 5px;
+	}
+}
+

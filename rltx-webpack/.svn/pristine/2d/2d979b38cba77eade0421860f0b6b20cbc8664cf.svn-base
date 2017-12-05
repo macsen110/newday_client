@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>添加人员</title>
+</head>
+<body>
+<div id="employeeAdd"></div>
+<!-- built files will be auto injected -->
+</body>
+</html>
+

@@ -5,34 +5,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Macsen 开发学习之道</title>
   <link rel="stylesheet" href="./res/main.css">
+  <link rel="shortcut icon" href="//www.macsen318.com/favicon.ico" type="image/x-icon"/>
 </head>
 
 <body>
 
   <div id="container" class="container">
-    <!-- <div class="header">
+    <div class="header">
       <h1>梁玉森的个人网站</h1>
       <p>YuSen Liang Personal Website</p>
     </div>
     <div class="content">
       <div class="page-alpha">
-        <p>»<a href="/app">mini Lofter</a></p>
-        <p>»<a href="https://github.com/macsen110/Blog">个人博客(Blog)</a></p>
+        <p>»<a href="//github.com/macsen110/Blog">个人博客(Blog)</a></p>
+        <p>»<a href="/zone">Lofter Zone</a></p>
+        <p>»<a href="/ui/">ui 插件(yao-m-ui)</a></p>
+        <p>»<a href="/pages">路由轮子 (yao-pages)</a></p>
+        <p>»<a href="/canvas">Mini 美图秀秀</a></p>
       </div>
+      
     </div>
     <div class="footer">
       <p><a href="mailto:839945193@qq.com">Contact</a> | macsen318.com</p>
-    </div> -->
+    </div>
   </div>
   <script>    
     if (navigator.serviceWorker != null) {
-    navigator.serviceWorker.register('sw.js')
+
+    navigator.serviceWorker.register('./cache/sw.js')
     .then(function(registration) {
       console.log('Registered events at scope: ', registration.scope);
     });
   }
+
   </script>
 </body>
 

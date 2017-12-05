@@ -1,0 +1,6 @@
+build/*.js
+config/*.js
+src/car/labMap.js
+src/safe/safe.vue
+src/safe/main.css
+src/car/track.js

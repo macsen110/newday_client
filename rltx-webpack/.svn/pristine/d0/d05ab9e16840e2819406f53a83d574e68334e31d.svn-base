@@ -1,0 +1,5 @@
+// datetime-picker
+
+.el-picker-panel__link-btn {
+	color: $uiColor;
+}

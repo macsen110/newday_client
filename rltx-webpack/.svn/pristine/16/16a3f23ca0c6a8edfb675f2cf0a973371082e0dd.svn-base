@@ -1,0 +1,73 @@
+// date-picker
+
+.el-picker-panel__icon-btn {
+	&:hover {
+		color: $uiColor;
+	}
+}
+
+.el-date-picker__header-label {
+	&:hover, &.active {
+		color: $uiColor;
+	}
+}
+
+.el-date-table td {
+	&.today {
+		color: $uiColor;
+		&::before {
+			border-top-color: $uiColor;
+		}
+	}
+	&.available:hover {
+		background-color: $lightCoffee;
+	}
+	&.current:not(.disabled), &.end-date, &.start-date {
+		background-color: $uiColor !important;
+	}
+}
+
+.el-year-table td {
+	.cell {
+		&:hover {
+			background-color: $lightCoffee;
+			text-decoration: none;
+		}
+	}
+	&.current:not(.disabled) {
+		.cell {
+			background-color: $uiColor !important;
+		}
+	}
+}
+
+.el-month-table td {
+	.cell {
+		&:hover {
+			background-color: $lightCoffee;
+			text-decoration: none;
+		}
+	}
+	&.current:not(.disabled) {
+		.cell {
+			background-color: $uiColor !important;
+		}
+	}
+}
+
+.el-picker-panel__shortcut {
+	&:hover {
+		background-color: $lightCoffee;
+	}
+}
+
+.el-date-table.is-week-mode {
+	.el-date-table__row {
+		&:hover {
+			background-color: $lightCoffee;
+		}
+		&.current {
+			background-color: $lightOrg;
+		}
+	}
+} 

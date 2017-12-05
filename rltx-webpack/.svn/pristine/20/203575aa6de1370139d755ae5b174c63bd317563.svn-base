@@ -1,0 +1,47 @@
+/*--common--*/
+body { font-size: 14px; }
+.bold { font-weight: 700; }
+.blackmask { position: fixed; z-index: 1000; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, .5); }
+.showdialog { padding:25px 30px; background: #fff; position: absolute; z-index: 1010; width: 600px; left: 50%; top: 35px; margin-left:-330px; -webkit-box-shadow: 0 0 10px #434343; -moz-box-shadow: 0 0 10px #434343; box-shadow: 0 0 10px #434343; }
+.sd-hd { position: relative; height: 22px; padding-bottom: 6px; margin-bottom:10px; border-bottom: solid 1px #e8e8e8 }
+.sdtit { float: left; font-size: 16px; color: #f48400; }
+.sd-hd .close { width: 18px; height: 18px; background: #f48400 url(../img/ico-sprite.png) -211px -1px; text-indent: -9999px; overflow: hidden; position: absolute; z-index:1010; right: -35px; top: -30px; border: solid 3px #fff; -webkit-box-shadow: 1px 1px 3px #999; -moz-box-shadow: 1px 1px 3px #999; box-shadow: 1px 1px 3px #999; }
+.sd-hd .close:hover { background-color: #d3d6db; }
+.sd-bd p.fmbtm { padding-top: 12px; margin-top: 10px; border-top: solid 1px #e6e6e6; text-align:right; }
+/*--security setting--*/
+.last-login { border:solid 1px #e0e1e4; padding:20px; margin: 10px; font-size: 14px; }
+.security-setting { border:solid 1px #e0e1e4; margin: 10px }
+.sec-suggestion { margin-left: 20px }
+.setlist,.vertype { padding: 20px 20px 20px 160px; border-bottom: dashed 1px #e8e8e8; overflow: hidden; line-height: 32px }
+.setlist:last-child { border-bottom: 0 }
+.setlist:hover { background: #f6f6f6; }
+.setlist a { color:#2778cb }
+.setlist dt,.vertype dt { float: left; display: inline; width: 120px; margin-left: -140px; font-weight: bold; font-size: 16px }
+.setlist dd,.vertype dd { float: left; width: 480px; margin-right: 20px }
+.setlist .operate,.vertype .operate { width: 110px; margin-right: 0; text-align: center; }
+.setlist dt i,.vertype dt i { float: left; display: inline; margin-right:20px; }
+.ico-st { background: url(../img/secstatus.png) no-repeat 0 0; width: 32px; height: 32px; overflow: hidden; display: inline-block; }
+.st1 { background-position: 0 0 }
+.st2 { background-position: -32px 0 }
+.setlist .btn-a-white a { border-color:#e8e8e8; background: #f8f8f8; border-radius: 3px }
+.setlist .btn-a-white a:hover { border-color: #f48400; background: #f48400 }
+.security-notice { background: #f6f6f6; padding:20px; margin: 10px }
+.security-notice h3 { margin-bottom: 6px; }
+.security-notice ol { list-style: decimal inside; line-height: 1.4; }
+/*--mobile phone verify--*/
+.uc-uinfoverify, .uc-delcar { width: 380px; margin-left: -220px; }
+.uc-updatepwd, .uc-login { width: 320px; margin-left: -190px; top:50%; margin-top:-140px; }
+.tabverify, .add-org{ padding-left: 20px; color: #8C8F93 }
+.tabverify .btn-a-white a { height: 22px !important; line-height: 22px !important; }
+.uc-uinfoverify .sd-bd p.fmnoti { color: #f60; padding:10px 0 20px }
+.uc-updatepwd .sd-bd p.fmbtm input { vertical-align: middle; }
+.uc-uinfoverify .sd-bd p.pt0 { padding-top: 0 }
+.ufvcont { margin-top: 10px }
+.ufvcont .text-rec { margin-left: 0; margin-right: 12px }
+.tabverify .dialog-table { width: 100% }
+.tabverify .dialog-table td { width: auto; vertical-align: top; height: auto; }
+.dialog-table td .el-input__inner { margin-top: 5px; margin-bottom: 5px; }
+.dialog-table i { color:#ff4e17; font-style:normal; }
+.col6,.col4 { float: left; }
+.col6 { width: 60%; }
+.col4 { width: 40%; }

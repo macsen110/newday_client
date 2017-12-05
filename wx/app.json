@@ -1,0 +1,35 @@
+{
+  "pages":[
+    "pages/news/newsList",
+    "pages/map/map",
+    
+    "pages/me/me",
+    "pages/newDetail/newDetail"
+
+  ],
+  "tabBar": {
+    "color":"#999",
+    "selectedColor":"#16d6d6",
+    "backgroundColor":"#fff",
+    "list": [
+      {
+        "pagePath": "pages/map/map",
+        "text": "找药箱",
+        "iconPath":"img/药丸.png",
+        "selectedIconPath":"img/药丸选中.png"
+      },
+      {
+        "pagePath": "pages/news/newsList",
+        "text": "懂健康",
+        "iconPath": "img/健康.png",
+        "selectedIconPath": "img/健康选中.png"
+      }
+    ]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "诺白药箱",
+    "navigationBarTextStyle":"#fff"
+  }
+}

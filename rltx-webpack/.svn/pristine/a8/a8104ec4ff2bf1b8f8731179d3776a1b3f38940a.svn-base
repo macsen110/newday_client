@@ -1,0 +1,301 @@
+// 车辆定位
+@import '../assets/sass/rltx.scss';
+@import '../assets/sass/rl-pagination.scss';
+.truck-map-page {
+  color: #666;
+  font-size: 12px;
+  line-height: 22px;
+  a {
+    color: #666;
+  }
+  .red {
+    color: $red;
+  }
+  .green {
+    color: $green;
+  }
+  .blue {
+    color: $blue;
+  }
+}
+
+
+/*--header--*/
+
+.header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  border-bottom: solid 2px $uiColor;
+  background-color: $bgLight;
+  .page-title {
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: $baseColor;
+  }
+  .login-info {
+    font-size: 12px;
+    a {
+      margin: 0 5px;
+      color: $baseColor;
+    }
+  }
+}
+
+
+/*--content--*/
+
+.content {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .el-tag {
+    height: 18px;
+    line-height: 18px;
+    vertical-align: middle;
+    margin-top: -4px;
+  }
+}
+
+
+/*--mc-list--*/
+
+.mc-list {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 306px;
+  background-color: #f6f6f6;
+  border-right: solid 1px $borderColor;
+}
+
+.ml-hd {
+  padding: 6px 12px;
+  .el-form-item {
+    margin-bottom: 6px;
+  }
+  .txtbox {
+    width: 217px;
+  }
+}
+
+.ml-bd {
+  background-color: $white;
+  overflow-y: scroll;
+  width: 100%;
+  top: 60px;
+  bottom: 30px;
+  position: absolute;
+}
+
+.ml-ft {
+  position: absolute;
+  bottom: 0;
+}
+
+
+/*--map-truck-list--*/
+
+.map-truck-list {
+  bottom: 24px;
+  width: 100%;
+  li {
+    position: relative;
+    padding: 5px 10px 0 30px;
+    border-bottom: solid 1px #ebebeb;
+    cursor: pointer;
+    .sequence {
+      float: left;
+      display: block;
+      width: 30px;
+      margin-left: -30px;
+      text-align: center;
+    }
+    &:hover {
+      background-color: #fffcf9;
+    }
+    &.ckd {
+      background-color: #fcecdb;
+      border-color: #ebebeb;
+    }
+    // .el-tag {
+    //   height: 14px;
+    //   line-height: 12px;
+    //   padding: 0 1px;
+    //   vertical-align: middle;
+    // }
+    // .el-tag--primary {
+    //   background-color: $white;
+    // }
+  }
+  .truck-id {
+    a {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+
+/*--fold--*/
+
+.fold {
+  position: absolute;
+  width: 9px;
+  top: 0;
+  bottom: 0;
+  left: 307px;
+  background-color: $white;
+  border-right: solid 1px $borderColor;
+  cursor: pointer;
+  &:hover {
+    background-color: #f6f6f6;
+    &:before {
+      border-right-color: #ccc;
+    }
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    margin-top: -6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    border-color: transparent #ddd transparent transparent;
+  }
+  &.closed:before {
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent #ddd;
+  }
+}
+
+
+/*--mc-cont--*/
+
+.mc-cont {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 317px;
+  .view-mode {
+    padding: 5px 15px;
+  }
+  .map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.pagination {
+  padding: 2px;
+}
+
+
+.collapse{
+  visibility: collapse;
+}
+
+
+.rl-map-info {
+  position: relative;
+  top: 0;
+  width: 320px;
+  white-space: nowrap;
+}
+
+.map-header {
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: solid 1px #e8e8e8;
+  .truck-tag {
+    display: inline-block;
+    margin-right: 8px;
+    height: 14px;
+    line-height: 14px;
+    padding: 0 1px;
+    font-size: 12px;
+    color: #999;
+    border: solid 1px #999;
+    border-radius: 3px;
+  }
+  .truck_detail {
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 3px;
+  }
+  .status {
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.map-content {
+  .truck-role {
+    display: inline-block;
+    margin-right: 8px;
+    height: 14px;
+    line-height: 14px;
+    padding: 0 1px;
+    font-size: 12px;
+    font-style: normal;
+    background-color: #f48400;
+    color: #fff;
+    border: solid 1px #f48400;
+    border-radius: 3px;
+  }
+  .copilot {
+    .truck-role {
+      background-color: #2c84de;
+      border-color: #2c84de;
+    }
+  }
+  .to-list {
+    padding: 6px 12px;
+    border-bottom: solid 1px #f6f6f6;
+    .tit {
+      display: inline-block;
+      width: 80px;
+      color: #999;
+    }
+  }
+  .gold {
+    color: #993;
+  }
+}
+
+.map-footer {
+  padding: 12px;
+  text-align: center;
+  .btn-grey {
+    display: inline-block;
+    padding: 0 12px;
+    margin: 0 5px;
+    height: 22px;
+    line-height: 22px;
+    text-decoration: none;
+    background-color: #f6f6f6;
+    border: solid 1px #e8e8e8;
+    border-radius: 3px;
+    &:hover {
+      background-color: #f48400;
+      color: #fff;
+      border-color: #f48400;
+    }
+  }
+}

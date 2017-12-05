@@ -1,0 +1,5 @@
+// badge
+
+.el-badge__content {
+	background-color: $red;
+}

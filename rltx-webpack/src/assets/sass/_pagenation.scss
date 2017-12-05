@@ -1,0 +1,52 @@
+// pagenation
+
+.el-pagination {
+	button {
+		&:hover {
+			color: $uiColor;
+		}
+		&.disabled:hover {
+			color: #e4e4e4;
+		}
+	}
+}
+
+.el-pagination__sizes {
+	.el-input {
+		.el-input__inner {
+			&:hover {
+				border-color: $uiColor;
+			}
+			&:focus {
+				border-color: $uiColor;
+			}
+		}
+	}
+}
+
+.el-pagination__editor {
+	&:hover {
+		border-color: $uiColor;
+	}
+	&:focus {
+		background-color: $lightOrg;
+		border-color: $uiColor;
+		box-shadow: 0 0 3px lighten($uiColor, 30%);
+	}
+}
+
+.el-pager {
+	li {
+		&:hover {
+			color: $uiColor;
+			background-color: $lightOrg;
+		}
+		&.active {
+			background-color: $uiColor;
+			border-color: $uiColor;
+			&:hover {
+				color: $white;
+			}
+		}
+	}
+}

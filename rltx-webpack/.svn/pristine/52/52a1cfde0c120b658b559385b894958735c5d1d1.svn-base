@@ -1,0 +1,123 @@
+// button
+
+.el-button {
+	line-height: 1.45 !important;
+	color: $baseColor !important;
+	padding: 1px 10px !important;
+	// margin-left: 5px !important;
+	// margin-right: 5px !important;
+	&:hover {
+		text-decoration: none !important;
+	}
+	+ .el-button {
+		margin-left: 0 !important;
+	}
+}
+
+.el-button--small {
+	padding: 3px 8px !important;
+}
+
+.el-button--large {
+	line-height: 1 !important;
+	padding: 11px 19px !important;
+}
+
+.el-button--default {
+	background-color: $bgLight !important;
+	border-color: #e8e8e8 !important;
+	&:hover,&:focus {
+		background-color: $white !important;
+		border-color: $uiColor !important;
+		color: $uiColor !important;
+	}
+}
+
+.el-button--primary {
+	background-color: $uiColor !important;
+	border-color: $uiColor !important;
+	color: $white !important;
+	&:hover,&:focus {
+		background-color: lighten($uiColor, 10%) !important;
+		border-color: lighten($uiColor, 10%) !important;
+		color: $white !important;
+	}
+}
+
+.el-button--text {
+	color: $blue !important;
+	&:hover,&:focus {
+		color: lighten($blue, 10%) !important;
+	}
+}
+
+.el-button--line {
+	background-color: $white !important;
+	border-color: $uiColor !important;
+	color: $uiColor !important;
+	&:hover,&:focus {
+		background-color: $uiColor !important;
+		border-color: $uiColor !important;
+		color: $white !important;
+	}
+}
+
+.el-button--success {
+	background-color: $green !important;
+	border-color: $green !important;
+	color: $white !important;
+	&:hover,&:focus {
+		background-color: lighten($green, 10%) !important;
+		border-color: lighten($green, 10%) !important;
+		color: $white !important;
+	}
+	&.is-plain:hover,.is-plain:focus {
+		color: $green !important;
+		border-color: $green !important;
+	}
+}
+
+.el-button--warning {
+	background-color: $uiColor !important;
+	border-color: $uiColor !important;
+	color: $white !important;
+	&:hover,&:focus {
+		background-color: lighten($uiColor, 10%) !important;
+		border-color: lighten($uiColor, 10%) !important;
+		color: $white !important;
+	}
+	&.is-plain:hover,.is-plain:focus {
+		color: $uiColor !important;
+		border-color: $uiColor !important;
+	}
+}
+
+.el-button--danger {
+	background-color: $red !important;
+	border-color: $red !important;
+	color: $white !important;
+	&:hover,&:focus {
+		background-color: lighten($red, 10%) !important;
+		border-color: lighten($red, 10%) !important;
+		color: $white !important;
+	}
+	&.is-plain:hover,.is-plain:focus {
+		color: $red !important;
+		border-color: $red !important;
+	}
+}
+
+.el-button--info {
+	background-color: $blue !important;
+	border-color: $blue !important;
+	color: $white !important;
+	&:hover,&:focus {
+		background-color: lighten($blue, 10%) !important;
+		border-color: lighten($blue, 10%) !important;
+		color: $white !important;
+	}
+	&.is-plain:hover,.is-plain:focus {
+		color: $blue !important;
+		border-color: $blue !important;
+	}
+}

@@ -1,0 +1,97 @@
+
+.el-tree {
+  padding: 10px;
+  border: none;
+  background: transparent;
+}
+.role-permission-config {
+  border-bottom: solid 1px #e6e6e6;
+  .hd-opr {
+    padding: 10px;
+    margin-right: 0;
+    border-bottom: solid 1px #e6e6e6;
+  }
+}
+.role-aside {
+  width: 236px;
+  background-color: #f6f6f6;
+  border-right: solid 1px #e6e6e6;
+}
+
+.permission-content {
+  .hd-opr {
+    height: 25px;
+    .tit {
+      font-size: 16px;
+      line-height: 25px;
+    }
+  }
+  margin-left: 236px;
+}
+
+.role-tree, .permission-tree {
+  overflow: auto;
+}
+
+.el-dialog__body {
+  min-height: auto;
+}
+
+.dialog-form {
+  .dialog-form-item {
+    padding-left: 100px;
+    margin-bottom: 10px;
+    span {
+      float: left;
+      width: 90px;
+      text-align: right;
+      margin-left: -100px;
+      line-height: 24px;
+
+    }
+    .el-textarea__inner {
+      min-width: auto;
+      height: 100px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .required {
+    span {
+      &:before {
+        content: '*';
+        display: inline-block;
+        margin-right: 3px;
+        color: #f48400;
+      }
+    }
+  }
+}
+
+.permission-list {
+  padding: 20px 10px 0;
+  .permission-tit {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
+
+.permission-check {
+  padding: 20px 10px 0;
+}
+
+.el-radio-group {
+  padding: 20px 10px;
+  display: block;
+  .el-radio {
+    display: block;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.el-checkbox-group {
+  padding: 10px;
+  background-color: #f6f6f6;
+}

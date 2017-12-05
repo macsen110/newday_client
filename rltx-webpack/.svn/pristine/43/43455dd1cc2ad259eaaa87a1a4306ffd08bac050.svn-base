@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>编辑税率</title>
+</head>
+<body>
+<div id="rateEdit"></div>
+<!-- built files will be auto injected -->
+</body>
+</html>
+

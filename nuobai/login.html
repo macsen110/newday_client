@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-title" content="验证手机">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+  <meta content="no-cache" http-equiv="pragma">
+  <meta content="0" http-equiv="expires">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>验证手机</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-text-size-adjust: none;
+      font-family: Arial, 'Microsoft YaHei';
+      box-sizing: border-box
+    }
+
+    img {
+      vertical-align: top;
+      border: none;
+    }
+
+    input,
+    textarea {
+      user-select: text
+      /*//-webkit-appearance:none;*/
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+      outline: none;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    textarea {
+      -webkit-appearance: none;
+
+    }
+
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    input::-webkit-input-placeholder,
+    input::placeholder {
+      color: #999;
+    }
+
+    input,
+    button {
+      border: 0 none;
+    }
+
+    a {
+      text-decoration: none;
+      -webkit-touch-callout: none;
+    }
+
+    em,
+    i {
+      font-style: normal;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    html {
+      font-size: 10px;
+    }
+
+    .container {
+      padding: 72% 9.6% 0;
+      background: url(./assets/bg_login_head.png) no-repeat;
+      background-size: 100% auto;
+      background-color: #fff;
+      font-size: 12px;
+    }
+
+    .container button:disabled {
+      background-color: #ccc;
+    }
+
+    .list>.item {
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    .list>.item.tel-box {
+      height: 50px;
+
+    }
+
+    .list>.item.sms-box {
+      height: 40px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .list>.item.sms-box .item-tel-box {
+      float: left;
+      width: 66%;
+    }
+
+    .list>.item.sms-box .btn-sms {
+      float: right;
+      height: 100%;
+      width: 32%;
+      background-color: #16d6d6;
+      border-radius: 4px;
+      color: #ffffff;
+    }
+
+    .list>.item.sms-box .btn-sms:disabled {
+      background-color: #ccc;
+    }
+
+    .item-tel-box {
+      height: 100%;
+      border: 1px solid #16d6d6;
+      padding: 0 16px;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .item-tel-box>* {
+      display: block;
+    }
+
+    .item-tel-box>.ipt {
+      line-height: 24px;
+    }
+
+    .icon {
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .icon-tel {
+      width: 16px;
+      height: 24px;
+      background-image: url(./assets/icon_tel.png);
+      margin-right: 16px;
+    }
+
+    .icon-sms {
+      width: 22px;
+      height: 24px;
+      background-image: url(./assets/icon_sms.png);
+      margin-right: 10px;
+    }
+
+    .tip-msg-box {
+      height: 24px;
+      line-height: 24px;
+      visibility: hidden
+    }
+
+    .tip-msg-box.show {
+      visibility: visible
+    }
+
+    .footer {
+      padding-top: 20px;
+    }
+
+    .footer .tip {
+      font-size: 14px;
+      color: #999
+    }
+
+    .footer .tip a {
+      color: #16d6d6;
+    }
+
+    .btn-submit {
+
+      height: 40px;
+      width: 100%;
+      display: block;
+      font-size: 18px;
+      color: #fff;
+      background-color: #ffbb19
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <form action="" class="form">
+      <ul class="list">
+        <li class="item tel-box">
+          <div class="item-tel-box">
+            <i class="icon icon-tel"></i>
+            <input placeholder="请输入手机号" name="tel" class="ipt" type="tel" />
+          </div>
+        </li>
+        <li class="item sms-box">
+          <div class="item-tel-box">
+            <i class="icon icon-sms"></i>
+            <input placeholder="请输入短信验证码" class="ipt" type="tel" name="sms_code" />
+          </div>
+          <button id="send_sms_btn" type="button" class="btn-sms">获取验证码</button>
+        </li>
+        <li class="item">
+          <h3 id="tip_msg_box" class="tip-msg-box"></h3>
+        </li>
+
+      </ul>
+      <div class="footer">
+        <button type="submit" class="btn-submit" name="btn">进入诺白服务</button>
+        <p class="tip">注册即表示您已阅读并同意
+          <a href="javascript:void(0)">《药箱服务协议》</a>
+        </p>
+      </div>
+
+
+    </form>
+
+  </div>
+  <script>
+    function xhr(opt) {
+      this.method = 'GET';
+      this.aysc = true;
+      this.sendData = null;
+      this.cache = true;
+      if (typeof opt === 'object') {
+        for (var i in opt) this[i] = opt[i];
+      }
+      this.send();
+    }
+    xhr.prototype = {
+      constructor: xhr,
+      send: function () {
+        var _xhr = new XMLHttpRequest();
+        _xhr.timeout = 60000;
+        _xhr.open(this.method, this.url, this.aysc);
+        this.withCredentials && (_xhr.withCredentials = true);
+        if (this.setHeader) {
+          _xhr.setRequestHeader("Content-Type", this.setHeader);
+        }
+        if (!this.cache) {
+          _xhr.setRequestHeader("Pragma", "no-cache");
+          _xhr.setRequestHeader("Cache-Control", "no-cache");
+        }
+
+        _xhr.onload = function () {
+          if (_xhr.readyState === 4) {
+            if (_xhr.status === 200) {
+              var sucData;
+              if (_xhr.response) {
+                sucData = JSON.parse(_xhr.response);
+              }
+              this.done(sucData);
+            }
+            else {
+              var error = new Error("something went wrong");
+              this.faild(error);
+            }
+          }
+        }.bind(this);
+        _xhr.onerror = function (error) {
+          this.faild(error);
+        }.bind(this)
+        _xhr.send(this.sendData)
+      },
+      done: function (data) {
+
+      },
+      faild: function () {
+
+      }
+    }
+
+
+      ; (function () {
+        var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) { var id = window.setTimeout(callback, 1000 / 60); return id; };
+        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || function (id) { clearTimeout(id); };
+
+        window.onpageshow = function (event) {
+          if (event.persisted) window.location.reload()
+        };
+        var ui = {
+          showPrompt: function (msg, flag) {
+            var $tipMsgBox = document.getElementById('tip_msg_box');
+            if (flag) $tipMsgBox.classList.remove('show');
+            else {
+              $tipMsgBox.classList.add('show');
+              $tipMsgBox.innerHTML = msg
+            }
+
+          }
+        };
+        var exports = {
+          identity: '', //图形验证码
+          openId: '',
+          unionId: '',
+          access_token: '',
+          $form: document.querySelector('form'),
+          $sendSmsBtn: document.getElementById('send_sms_btn')
+        };
+        var config = {};
+        var reqData = {
+        };
+        var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) { var id = window.setTimeout(callback, 1000 / 60); return id; };
+        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || function (id) { clearTimeout(id); };
+        exports.renderUI = function () {
+          this.bindUI();
+          this.fetchImgCode();
+        };
+        exports.fetchImgCode = function () {
+
+        };
+        exports.bindUI = function () {
+          this.$form.addEventListener('submit', function (e) {
+            e.preventDefault()
+            this.submit()
+          }.bind(this))
+          var counting = 0,
+            timeOutFlag,
+            flag,
+            that = this;
+
+          var imgCodeFlag;
+          this.$sendSmsBtn.addEventListener('click', function () {
+            var _that = this;
+            checkForm(function () {
+              if (_that.innerHTML == '重新发送' || _that.innerHTML == '获取验证码') {
+                cancelAnimationFrame(that.SmsBtnStatus)
+                _that.setAttribute('disabled', true);
+                _that.innerHTML = '<span class="counting">59</span><span>后重新发送</span>';
+                timeOutFlag = setInterval(function () {
+                  counting = _that.querySelector('.counting').innerHTML;
+                  if (counting == 0) {
+                    clearInterval(timeOutFlag);
+                    _that.removeAttribute('disable');
+                    that.SmsBtnStatus = requestAnimationFrame(exports.checkSmsBtnStatus.bind(that))
+                    _that.innerHTML = '重新发送';
+                  } else {
+                    _that.querySelector('.counting').innerHTML = --counting
+                  }
+                }, 1000)
+              }
+            })
+          });
+          var checkForm = function (callback) {
+            var $phone = exports.$form.tel.value;
+            if (!$phone) {
+              ui.showPrompt('请输入手机号');
+              return false;
+            }
+            if (!/^1\d{10}$/.test($phone)) {
+              ui.showPrompt('手机号码错误');
+              return false;
+            }
+            callback && callback()
+            new xhr({
+              url:'//www.macsen318.com/api/home',
+              done: function (data) {
+                alert(data)
+              }
+            })
+            return true;
+          }
+          exports.checkBtnStatus()
+          exports.checkSmsBtnStatus()
+        };
+        exports.checkSmsBtnStatus = function () {
+          var isValidTel = /^1\d{10}$/.test(this.$form.tel.value);
+          if (isValidTel) this.$sendSmsBtn.removeAttribute('disabled')
+          else this.$sendSmsBtn.setAttribute('disabled', true)
+          this.SmsBtnStatus = requestAnimationFrame(exports.checkSmsBtnStatus.bind(this))
+        }
+        exports.checkBtnStatus = function () {
+          var isValidTel = /^1\d{10}$/.test(this.$form.tel.value);
+          var isVaildMsgCode = this.$form.sms_code.value.trim().length > 0 ? true : false;
+          
+          if (isValidTel && isVaildMsgCode) this.$form.btn.removeAttribute('disabled')
+          else this.$form.btn.setAttribute('disabled', true)
+          this.btnStatus = requestAnimationFrame(exports.checkBtnStatus.bind(this))
+        }
+
+        exports._init = function () {
+
+        }
+
+        exports.submit = function () {
+          var that = this;
+
+        }
+        exports.gourl = function (store, url, needReplace) {
+          url = url || 'http://m.111.com.cn';
+          store && store.UserInfo && common.cookie('UserInfo', store.UserInfo, 7);
+          store && store.newtoken && common.cookie('gltoken', store.newtoken, 7);
+          if (store.UserInfo) {
+            var uid = common.getQueryName('UserId', common.cookie('UserInfo'));
+            uid && common.cookie('JUD', uid, 7);
+          }
+          if (store && store.newtoken && common.cookie('cartkey')) return exports.asyncCart(store.newtoken, common.cookie('cartkey'), url, needReplace)
+          exports.jumpUrl(decodeURIComponent(url), needReplace);
+        }
+
+        exports.jumpUrl = function (url, needReplace) {
+          if (needReplace) { return location.href = url }
+          sessionStorage.setItem('hasOpen', 1)
+          location.href = url
+        }
+        exports.renderUI()
+      }())
+  </script>
+</body>
+
+</html>

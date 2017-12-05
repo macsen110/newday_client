@@ -1,0 +1,100 @@
+// table
+
+@import "color";
+
+.fix-table-wrap {
+	position: relative;
+	font-size: 14px;
+	width: 100%;
+	line-height: 22px;
+	overflow:auto;
+}
+
+.rl-fix-table {
+	min-width: 100%;
+	white-space: nowrap;
+	margin-top: -1px;
+	margin-left: -1px;
+	thead {
+		background-color: #e6e6e6;
+		th {
+			background-color: #e6e6e6;
+		}
+	}
+	th, td {
+		padding: 2px 8px;
+		max-width: 300px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.fix-hd {
+		position: relative;
+		z-index: 10;
+		top: 0;
+		&.fix-col {
+			background-color: #e6e6e6;
+			z-index: 30;
+		}
+	}
+	.fix-col {
+		position: relative;
+		z-index: 10;
+		left: 0;
+		background-color: $white;
+	}
+	tbody {
+		tr {
+			&:nth-child(even), &:nth-child(even) .fix-col {
+				background-color: #f6f6f6;
+			}
+			&:hover {
+				background-color: $trHover;
+				.fix-col {
+					background-color: $trHover;
+				}
+			}
+			&.active, &.active:hover {
+				background-color: $trActive;
+				.fix-col {
+					background-color: $trActive;
+				}
+			}
+		}
+	}
+	input[type='checkbox'] {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.table-bordered {
+	th, td {
+		border: solid 1px #ddd;
+	}
+	thead, tbody {
+		.fix-col {
+			box-shadow: 1px 0 0 #ddd;
+		}
+	}
+}
+
+/*--firefox border fix--*/
+@-moz-document url-prefix(){
+    .table-bordered {
+    	thead {
+	    	.fix-hd {
+	    		transform: translateY(-1px);
+	    	}
+	    	.fix-col {
+	    		 transform:translateY(0);
+	    		 box-shadow: none; 
+	    	}
+    	}
+    	tbody {
+	    	.fix-col {
+	    		 transform:translateY(-1px);
+	    		 box-shadow: -1px 0 0 #ddd inset, 0 1px 0 #ddd inset;
+	    	}
+    	}
+    }
+}
