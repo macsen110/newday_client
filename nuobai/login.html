@@ -376,17 +376,23 @@
               return false;
             }
             callback && callback()
-            new xhr({
-              url:'//www.macsen318.com/api/home',
-              done: function (data) {
-                alert(data)
-              }
-            })
+            exports.ajax4sms($phone);
             return true;
           }
           exports.checkBtnStatus()
           exports.checkSmsBtnStatus()
         };
+        exports.ajax4sms = function (phone) {
+          new xhr({
+              url:'http://www.macsen318.com/sms/',
+              done: function (data) {
+                if (data.code != 0) ui.showPrompt(data.msg)
+              },
+              method: 'POST',
+              setHeader: 'application/x-www-from-urlencoded',
+              sendData: 'mobile='+phone
+            })
+        },
         exports.checkSmsBtnStatus = function () {
           var isValidTel = /^1\d{10}$/.test(this.$form.tel.value);
           if (isValidTel) this.$sendSmsBtn.removeAttribute('disabled')
@@ -407,9 +413,18 @@
         }
 
         exports.submit = function () {
-          var that = this;
+          //var that = this;
+          new xhr({
+              url:'http://www.macsen318.com/sms/',
+              done: function (data) {
+                if (data.code != 0) ui.showPrompt(data.msg)
+              },
+              method: 'POST',
+              setHeader: 'application/x-www-from-urlencoded',
+              sendData: 'mobile='+phone
+            })
+        },
 
-        }
         exports.gourl = function (store, url, needReplace) {
           url = url || 'http://m.111.com.cn';
           store && store.UserInfo && common.cookie('UserInfo', store.UserInfo, 7);
