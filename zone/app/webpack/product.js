@@ -7,8 +7,8 @@ var utils = require('./utils')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 //var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../template/pro/')
-var env = 'production';
-
+var env = process.env.NODE_ENV;
+console.log(env)
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     
@@ -20,6 +20,9 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env || 'development')
+  }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -31,6 +34,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       template: htmlTplPath + 'index.html',
       inject: true,
     }),
+    
   ]
 })
 
