@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as UI from 'yao-m-ui';
-//home views
-// var loading = UI.Loading();
-// loading.start()
+import {
+    Link
+  } from 'react-router-dom';
 export default class Communicate extends Component {
 	constructor(props, context) {  
         super(props, context);
@@ -42,6 +42,7 @@ export default class Communicate extends Component {
     }
     render() {
         var state = this.state; 
+        var isLogin = sessionStorage.getItem('isLogin') ? sessionStorage.getItem('isLogin') : null;
         return (
             <div className="app-home-page">
                 <div className="chat-container">
@@ -59,6 +60,7 @@ export default class Communicate extends Component {
                     <div className="chat-box" ref="chat_box"></div>
                     <input type="text" ref="chat_content" className="ipt"/>
                     <botton className="btn" onClick={() => this.sendChat()} ref="send_chat_btn">submit</botton>
+                    {JSON.parse(isLogin) ? <Link to="/user/logout">注销账号</Link> : ''}
                 </div>
             </div>
         )

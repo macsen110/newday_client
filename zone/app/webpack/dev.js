@@ -5,19 +5,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../template/dev/')
 var entryScriptPath = path.join(__dirname, '../script/build/')
-module.exports = {
-  resolve: {
-    modules: [
-      '../../',
-      "node_modules"
-    ]
-  },
+var base = require('./base');
+module.exports = merge(base, {
+  
   entry: {
     app: [entryScriptPath+'main'] // Your appʼs entry point
   },
   output: {
     path: path.join(__dirname, '../src/'),
-    publicPath: '/zone/',    
     filename: '[name].js'
   },
   devtool: 'eval',
@@ -35,4 +30,4 @@ module.exports = {
       {test: /\.(js|jsx)$/, use: ['react-hot-loader/webpack','babel-loader']}
     ]
   }
-};
+});

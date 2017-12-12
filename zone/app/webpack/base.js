@@ -34,7 +34,7 @@ module.exports = {
     rules: [      
       {
         test: /\.js$/,
-         use: ['react-hot-loader/webpack','babel-loader']
+         use: ['babel-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

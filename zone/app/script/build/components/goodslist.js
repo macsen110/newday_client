@@ -48,12 +48,11 @@ class goodslist extends Component {
             return <div style={{padding: .8+'rem', color: '#333'}}>暂无数据</div>
         }
 
-        return(<div>loading...</div>)
+        return(<div className="app-list-page">loading22222...</div>)
     }
 }
 class Blog_item extends React.Component {
     componentDidMount() {
-       
     }
     render() {
         var item = this.props.item;
@@ -77,6 +76,7 @@ class Blog_item extends React.Component {
         return (
             <li className="item">
                 <Link to={'/goods/detail/' + item.goodsid}>
+                    <h2>{item.user}</h2>
                     <h3>{item.title}</h3>
                     {itemEle}
                     <p className="more">查看详情</p>
