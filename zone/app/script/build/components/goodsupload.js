@@ -29,7 +29,7 @@ export default class goodsUpload extends Component {
             showPrompt('内容不能为空');
             return false
         }
-        var url = form.action;
+        var url = '/api/goods/upload';
         var formdata = new FormData(form);
         var promise = new Promise(function(resolve, reject ){
             new xhr({

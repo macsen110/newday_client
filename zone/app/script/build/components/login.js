@@ -32,7 +32,7 @@ class Login extends React.Component {
             showPrompt('请填写密码');
             return false;
         }
-        var senddatas = JSON.stringify({
+        var senddata = JSON.stringify({
             username:form['username'].value,
             password: form['password'].value,
             test: null
@@ -42,9 +42,9 @@ class Login extends React.Component {
         var promise = new Promise(function(resolve, reject ){
             new xhr({
                 setHeader:  'application/json',
-                sendData: senddatas,
+                sendData: senddata,
                 method: 'POST',
-                url: url,
+                url: '/api/users/validuser',
                 done: function(callData) {
                     resolve(callData)
                 },

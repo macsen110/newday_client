@@ -8,13 +8,14 @@ class xhr {
 		if (typeof opt === 'object') {
 			Object.assign(this, opt);
 		}
-
+		this.url = perfixerURL + this.url
 		this.send();
 
 	}
 	send() {
 	    var _xhr = new XMLHttpRequest();
 		_xhr.timeout = 60000;
+		console.log(this.url)
 	    _xhr.open(this.method, this.url, this.aysc);
 		this.withCredentials && (_xhr.withCredentials = true);
 	    if (this.setHeader) {

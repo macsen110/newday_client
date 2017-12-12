@@ -32,7 +32,7 @@ class App extends React.Component {
         super(props)
     }
     componentDidMount() {
-        fetch("/api/home", {
+        fetch(perfixerURL+"/api/home", {
             credentials: 'include'
         })
         .then(function(res){

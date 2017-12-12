@@ -21,8 +21,9 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env || 'development')
-  }),
+      'process.env.NODE_ENV': JSON.stringify(env || 'development'),
+      'perfixerURL': JSON.stringify('https://www.macsen318.com')
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

@@ -17,6 +17,10 @@ module.exports = merge(base, {
   },
   devtool: 'eval',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      'perfixerURL': JSON.stringify('http://localhost:3000')
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',

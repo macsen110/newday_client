@@ -27,7 +27,7 @@ class register extends Component {
             showPrompt('请填写密码');
             return false;
         }
-        var url = form.action;
+        var url = '/api/users/saveuser';
         var formdata = 'username=' + form.username.value + '&password=' + form.password.value+"&test="+null;
         var promise = new Promise(function(resolve, reject ){
             new xhr({

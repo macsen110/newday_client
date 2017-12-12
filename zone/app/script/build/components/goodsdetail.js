@@ -24,7 +24,7 @@ class goodsDetail extends Component {
     }
     componentDidMount() {
         var self = this;
-        console.log(this)
+        
         var promise = new Promise(function(resolve, reject ){
             new xhr({
                 url: '/api/goods/detail/' + self.props.match.params.id,
@@ -85,7 +85,7 @@ class goodsDetail extends Component {
     }
     deleteGoods() {
         var self = this;
-        fetch('/api/goods/delete/'+ self.props.match.params.id, {
+        fetch(perfixerURL+'/api/goods/delete/'+ self.props.match.params.id, {
             method: 'DELETE'
         }).then(function (res) {
             if(res.ok) {
@@ -105,7 +105,7 @@ class goodsDetail extends Component {
            goodsid: self.props.match.params.id,
            comment: commentEle.value.trim()
         });
-        fetch('/api/comments/',{
+        fetch(perfixerURL+'/api/comments/',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

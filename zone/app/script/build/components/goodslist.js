@@ -28,7 +28,7 @@ class goodslist extends Component {
     }
     componentDidMount() {
         var self = this;
-        fetch("/api/goods/list")
+        fetch(perfixerURL+"/api/goods/list")
             .then(function(res){
                 if (res.ok) {
                     return res.json()

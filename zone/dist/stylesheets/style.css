@@ -509,7 +509,8 @@ widget
 .app-login-page,
 .app-upload-page,
 .app-home-page,
-.app-detail-page {
+.app-detail-page,
+.app-list-page {
 	background-color: #f0f0f0;
 	padding: 1rem;
 
