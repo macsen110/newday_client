@@ -13,7 +13,7 @@ import {
 	Link,
 	BrowserRouter
 } from 'react-router-dom';
-
+import cookie from './utils/cookie';
 import routes from './routes';
 import ReactDOM from 'react-dom';
 import { createRedux } from 'redux';
@@ -22,7 +22,10 @@ import configureStores from './stores/configureStores';
 const store = configureStores();
 import createBrowserHistory from 'history/createBrowserHistory';
 const history = createBrowserHistory();
-
+cookie.cookie('test', 'ssss', {
+	path:'/',
+	domain: 'macsen318.com'
+})
 const render = () => {ReactDOM.render((
 	<AppContainer>
 		<Provider store={store}>

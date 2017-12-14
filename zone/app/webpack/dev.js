@@ -19,7 +19,7 @@ module.exports = merge(base, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      'perfixerURL': JSON.stringify('http://localhost:3000')
+      'perfixerURL': JSON.stringify('http://api.macsen318.com:3000')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
