@@ -7,7 +7,6 @@ var htmlTplPath = path.join(__dirname, '../template/dev/')
 var entryScriptPath = path.join(__dirname, '../script/build/')
 var base = require('./base');
 module.exports = merge(base, {
-  
   entry: {
     app: [entryScriptPath+'main'] // Your appʼs entry point
   },
@@ -19,7 +18,7 @@ module.exports = merge(base, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      'perfixerURL': JSON.stringify('http://api.macsen318.com:3000')
+      'perfixerURL': JSON.stringify('http://dev.macsen318.com')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
