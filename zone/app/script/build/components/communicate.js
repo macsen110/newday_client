@@ -12,7 +12,7 @@ export default class Communicate extends Component {
         }
     }
 	componentDidMount() {
-        alert(110)
+        //alert(110)
         //loading.end()
         var _self = this;
         try {
@@ -43,7 +43,7 @@ export default class Communicate extends Component {
     }
     render() {
         var state = this.state; 
-        var isLogin = (sessionStorage.getItem('isLogin') && sessionStorage.getItem('isLogin')!='undefined')? sessionStorage.getItem('isLogin') : null;
+        var isLogin = null;
         return (
             <div className="app-home-page">
                 <div className="chat-container">

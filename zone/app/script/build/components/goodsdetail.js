@@ -86,7 +86,8 @@ class goodsDetail extends Component {
     deleteGoods() {
         var self = this;
         fetch(perfixerURL+'/api/goods/delete/'+ self.props.match.params.id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: "include"
         }).then(function (res) {
             if(res.ok) {
                 return res.json()
@@ -107,6 +108,7 @@ class goodsDetail extends Component {
         });
         fetch(perfixerURL+'/api/comments/',{
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -116,6 +118,7 @@ class goodsDetail extends Component {
                 return res.json()
             }
         }).then((obj) => {
+            if (obj.code !==0) return;
             commentEle.value = '';
             this.props.postCommetAction({C_content:obj.commet, _id: obj._id}
         )})
