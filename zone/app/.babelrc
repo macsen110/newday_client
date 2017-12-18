@@ -1,6 +1,24 @@
 {
   "presets": [
   	["env", { "targets": { "browsers": ["ios > 7", "android  >= 4"] }, "modules":false } ],
-    ["react"]
+    ["es2015", {"modules": false}],
+    "react",
+    "stage-0",
+    "stage-1",
+    "stage-2",
+    "stage-3"
+  ],
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }],
+    "react-hot-loader/babel",
+    "transform-decorators-legacy",
+    "transform-async-to-generator",
+    "transform-do-expressions",
+    "syntax-do-expressions"
   ]
 }

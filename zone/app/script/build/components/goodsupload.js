@@ -5,7 +5,8 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { showPrompt } from '../utils/ui';
+import { showPrompt } from 'yao-m-ui';
+const unLoginCode = '00002';
 export default class goodsUpload extends Component {
     constructor(props) {
         super(props)
@@ -49,10 +50,8 @@ export default class goodsUpload extends Component {
         })        
         promise.then(
             obj => {
-                if (obj.code == 0)  {
-                    showPrompt(obj.msg);
-                    this.props.history.push('/goods/list') 
-                }            
+                if (obj.code == 0)  showPrompt({msg: obj.msg, cb: () =>this.props.history.push('/goods/list')});
+                else if (obj.code === unLoginCode) showPrompt({msg: obj.msg, cb: () => this.props.history.push('/user/login')});
             }, 
             error => console.log(error)
         )

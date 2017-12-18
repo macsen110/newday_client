@@ -49,11 +49,19 @@ class register extends Component {
         })        
         promise.then(
             obj => {
-                showPrompt(obj.msg)
-                if(obj.code == 0) {
-                    this.props.initAction({isLogin: obj.isLogin})
-                    this.props.history.push({pathname: '/'});
+                if (obj.code === 0) {
+                    showPrompt({
+                        msg: obj.msg,
+                        cb:  ()=> {
+                            this.props.initAction({
+                                isLogin: obj.isLogin,
+                                user: obj.user
+                            })
+                            this.props.history.push({pathname: '/goods/upload'})
+                        }
+                    });
                 }
+                else showPrompt(obj.msg)                
             }, 
             error => console.log(error)
         )

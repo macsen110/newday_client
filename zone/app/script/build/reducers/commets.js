@@ -5,9 +5,9 @@ export default function commets(state=[],action) {
 			state.push(action.value);
 			return [...state];
 		case LISTCOMMETS:
-			return state.concat(action.value)
+			return action.value
 		case DELETECOMMET:
-			var index;
+			let index;
 			for (let i =0; i <state.length; i++) {
 				if (state[i]._id === action.value) {
 					index = i;
@@ -18,6 +18,6 @@ export default function commets(state=[],action) {
 			}
 			return [...state]
 		default:
-			return state;
+			return [...state];
 	}
 }

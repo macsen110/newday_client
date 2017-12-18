@@ -12,7 +12,8 @@ module.exports = merge(base, {
   },
   output: {
     path: path.join(__dirname, '../src/'),
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   devtool: 'eval',
   plugins: [

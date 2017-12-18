@@ -62,7 +62,10 @@ class Login extends React.Component {
                     showPrompt({
                         msg: obj.msg,
                         cb:  ()=> {
-                            this.props.initAction({isLogin: obj.isLogin})
+                            this.props.initAction({
+                                isLogin: obj.isLogin,
+                                user: obj.user
+                            })
                             this.props.history.push({pathname: '/goods/upload'})
                         }
                     });

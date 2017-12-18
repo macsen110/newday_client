@@ -49,7 +49,7 @@ class App extends React.Component {
     componentWillUnmount() {
     }
     render() {
-       var initData = this.props.initData;
+        var initData = this.props.initData;
         if (!initData.isLogin) {
             return (
                 <div className="wrap-header-container">                    

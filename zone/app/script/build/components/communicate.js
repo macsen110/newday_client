@@ -12,11 +12,8 @@ export default class Communicate extends Component {
         }
     }
 	componentDidMount() {
-        //alert(110)
-        //loading.end()
         var _self = this;
         try {
-        //var socket = io();
             var Manager = require('socket.io-client');
             var socket = new Manager("http://dev.macsen318.com");           
             socket.on('connect', () => _self.setState({socket: socket}))

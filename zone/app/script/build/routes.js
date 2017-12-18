@@ -5,19 +5,12 @@ import {
   Link,
   Switch
 } from 'react-router-dom';
-import App from './components/app';
+
 import Index from 'bundle-loader?lazy!./components/index';
-import register from './components/register';
 import login from 'bundle-loader?lazy!./components/login';
-import logout from './components/logout';
-import goodslist from './components/goodslist';
-import goodsUpload from './components/goodsUpload';
-import NotFound from './components/notfind';
-import goodsDetail from './components/goodsdetail';
-import communicate from './components/communicate';
-import Async from './async-loader';
 
-
+// import communicate from './components/communicate';
+import AsyncComponent from './async-loader';
 
 class Bundle extends React.Component {
     constructor(props, context) {
@@ -65,7 +58,17 @@ const InitLogin = (props) => (
         {(InitLogin) => <InitLogin {...props} />}
     </Bundle>
 )
-//const InitNewIndex = Async(Index)
+async function fetchAsyncCommpoent(name) {
+    return await import('./components/'+name)
+}
+const App = AsyncComponent(() => fetchAsyncCommpoent('app'))
+const goodsList = AsyncComponent(() => fetchAsyncCommpoent('goodslist'))
+const goodsUpload = AsyncComponent(() => fetchAsyncCommpoent('goodsupload'))
+const goodsDetail = AsyncComponent(() => fetchAsyncCommpoent('goodsdetail'))
+const communicate = AsyncComponent(() => fetchAsyncCommpoent('communicate'))
+const register = AsyncComponent(() => fetchAsyncCommpoent('register'))
+const logout = AsyncComponent(() => fetchAsyncCommpoent('logout'))
+const notFound = AsyncComponent(() => fetchAsyncCommpoent('notfind'))
 
 
 var Routes = (
@@ -73,15 +76,15 @@ var Routes = (
         <Route component={App} />
         <div className="route-content-box">
             <Switch>
-                <Route path="/" exact component={InitIndex} />        
+                <Route path="/" exact component={InitIndex} />  
+                <Route path="/user/login" component= {InitLogin}/>      
                 <Route path="/user/register" component={register} />
-                <Route path="/user/login" component= {InitLogin}/>
-                <Route path="/user/logout" component={logout} />
                 <Route path="/goods/upload" component = {goodsUpload} />
-                <Route path="/goods/list" component = {goodslist}  />
+                <Route path="/goods/list" component = {goodsList}  />
                 <Route path="/goods/detail/:id" component={goodsDetail}/>
                 <Route path="/communicate" component={communicate}/>
-                <Route component={NotFound} />
+                <Route path="/user/logout" component={logout} />
+                <Route component={notFound} />
             </Switch>
         </div>
     </div>

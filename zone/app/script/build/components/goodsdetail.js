@@ -8,11 +8,13 @@ import {
 } from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {showGoodAction, postCommetAction, deleteCommetAction, listCommetsAction} from '../actions/actions';
-
+import { showPrompt } from 'yao-m-ui';
+const unLoginCode = '00002';
 function mapStateToProps(state, ownProps) {
     return {
         showGood: state.showGood,
-        commets: state.commets
+        commets: state.commets,
+        initData: state.initData
     };
 }
 class goodsDetail extends Component {
@@ -69,7 +71,7 @@ class goodsDetail extends Component {
                     {commets.length ? 
                         <div className="comments-container">
                             <p className="comments-title">评论</p>
-                            <ul className="list">{commets.map((item, index) => <CommetItem deleteCommetAction = {this.props.deleteCommetAction} key={index} item={item} />)}</ul>
+                            <ul className="list">{commets.map((item, index) => <CommetItem history={this.props.history} user={this.props.initData.user} author={goodsObj.user} C_user ={item.C_user} deleteCommetAction = {this.props.deleteCommetAction}  key={index} item={item} />)}</ul>
                         </div> 
                         : ''
                     }                 
@@ -77,7 +79,7 @@ class goodsDetail extends Component {
                         <textarea className="ipt" />
                         <p><button onClick={this.submitComment} className="btn">提交评论</button></p>
                     </div>
-                    <button onClick={this.deleteGoods} className="icon-delete-page">x</button>
+                    {this.props.initData.user === goodsObj.user && <button onClick={this.deleteGoods} className="icon-delete-page">x</button>}
                 </div>
             )
         }
@@ -118,10 +120,11 @@ class goodsDetail extends Component {
                 return res.json()
             }
         }).then((obj) => {
-            if (obj.code !==0) return;
+            if (obj.code === unLoginCode) return showPrompt({msg: obj.msg, cb: () => this.props.history.push('/user/login')})   
+            if (obj.code !== 0) return showPrompt({msg: obj.msg}) 
+            this.props.postCommetAction({C_content:obj.commet, _id: obj._id, C_user: obj.C_user})
             commentEle.value = '';
-            this.props.postCommetAction({C_content:obj.commet, _id: obj._id}
-        )})
+        })
     }
 }
 
@@ -156,6 +159,7 @@ class Blog_item extends React.Component {
 }
 
 class CommetItem extends Component { 
+   
     delCommet(e) {
         var self = this;
         var item = e.target.parentNode;
@@ -163,19 +167,24 @@ class CommetItem extends Component {
         var content = item.firstElementChild.innerHTML;
         new xhr({
             url: '/api/comments/' + goodid,
-            method: 'delete',
-            done: function(obj) {
-                if (obj.code ===0) {
-                    self.props.deleteCommetAction(+goodid) 
-                }
+            method: 'DELETE',
+            done: (obj) => {
+                if (obj.code === 0) self.props.deleteCommetAction(+goodid) 
+                if (obj.code === unLoginCode) return showPrompt({msg: obj.msg, cb: ()=> this.props.history.push('/user/login')})   
+                if (obj.code !== 0) return showPrompt({msg: obj.msg}) 
+    
             }
         })
         
     }
     render() {
+        let props = this.props;
         var item = this.props.item;
         return (
-            <li className="item" data-id={item._id}><span className="con">{item.C_content}</span><span className="del" onClick={(e)=>this.delCommet(e)}>删除</span></li>
+            <li className="item" data-id={item._id}>
+                <span className="con">{props.C_user +'评论: ' + item.C_content}</span>
+                { (props.C_user == props.author || props.C_user == props.user) && <span className="del" onClick={(e)=>this.delCommet(e)}>删除</span>}
+            </li>
         )
         
     }

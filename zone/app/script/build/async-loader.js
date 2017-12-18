@@ -1,45 +1,34 @@
+import React from "react";
+const asyncComponent = loadComponent =>
+  class AsyncComponent extends React.Component {
+    state = {
+      Component: null
+    };
 
-import React, {Component} from 'react';
-//export default {};
-
-/**
- * 异步的组件
- */
-export default function asyncLoader(component) {
-  return React.createClass({
-    getInitialState() {
-      return {
-        Component: null
+    componentWillMount() {
+      if (this.hasLoadedComponent()) {
+        return;
       }
-    },
 
-
-    componentDidMount() {
-      //模拟出loading的效果
-      // setTimeout(() => {
-      //   component((Component) => {
-      //     this.setState({
-      //       Component: Component
-      //     });
-      //   });
-      // }, 1000);
-      component((Component) => {
-        this.setState({
-          Component: Component
+      loadComponent()
+        .then(module => module.default)
+        .then(Component => {
+          this.setState({ Component });
+        })
+        .catch(err => {
+          console.error(`Cannot load component in <AsyncComponent />`);
+          throw err;
         });
-      });
-    },
+    }
 
+    hasLoadedComponent() {
+      return this.state.Component !== null;
+    }
 
     render() {
-      var Component = this.state.Component;
-
-      if (Component) {
-        let NewComponent = Component.default || Component;
-        return <NewComponent {... this.props}/>
-      } else {
-        return <div>Loading...</div>;
-      }
+      const { Component } = this.state;
+      return Component ? <Component {...this.props} /> : null;
     }
-  })
-}
+  };
+
+export default asyncComponent;
