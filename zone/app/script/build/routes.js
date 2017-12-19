@@ -33,6 +33,7 @@ class Bundle extends React.Component {
     this.setState({
       mod: null
     })
+    console.log(props)
     props.load((mod) => {
       this.setState({
         // handle both es imports and cjs
@@ -62,6 +63,8 @@ async function fetchAsyncCommpoent(name) {
     return await import('./components/'+name)
 }
 const App = AsyncComponent(() => fetchAsyncCommpoent('app'))
+const asyncIndex = AsyncComponent(Index, 1)
+const asyncLogin = AsyncComponent(login, 1)
 const goodsList = AsyncComponent(() => fetchAsyncCommpoent('goodslist'))
 const goodsUpload = AsyncComponent(() => fetchAsyncCommpoent('goodsupload'))
 const goodsDetail = AsyncComponent(() => fetchAsyncCommpoent('goodsdetail'))
@@ -76,8 +79,8 @@ var Routes = (
         <Route component={App} />
         <div className="route-content-box">
             <Switch>
-                <Route path="/" exact component={InitIndex} />  
-                <Route path="/user/login" component= {InitLogin}/>      
+                <Route path="/" exact component={asyncIndex} />  
+                <Route path="/user/login" component= {asyncLogin}/>      
                 <Route path="/user/register" component={register} />
                 <Route path="/goods/upload" component = {goodsUpload} />
                 <Route path="/goods/list" component = {goodsList}  />

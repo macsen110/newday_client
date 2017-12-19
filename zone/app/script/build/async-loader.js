@@ -1,5 +1,5 @@
 import React from "react";
-const asyncComponent = loadComponent =>
+const asyncComponent = (loadComponent, useBundleLoader) =>
   class AsyncComponent extends React.Component {
     state = {
       Component: null
@@ -9,12 +9,15 @@ const asyncComponent = loadComponent =>
       if (this.hasLoadedComponent()) {
         return;
       }
-
-      loadComponent()
-        .then(module => module.default)
-        .then(Component => {
-          this.setState({ Component });
-        })
+      //为了兼容使用bundle-loader的包
+      function fetchPromise() {
+        return new Promise((res, rej) => {
+          if (useBundleLoader) {loadComponent(mod => {res(mod)})}
+          else res(loadComponent())
+        });
+      }
+      fetchPromise()
+        .then(module => this.setState({ Component: module.default ? module.default : module }))
         .catch(err => {
           console.error(`Cannot load component in <AsyncComponent />`);
           throw err;

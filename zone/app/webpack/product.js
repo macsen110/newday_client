@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 //var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../template/pro/')
 var env = process.env.NODE_ENV;
-console.log(env)
+
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     
@@ -17,7 +17,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   plugins: [
     new webpack.DefinePlugin({
