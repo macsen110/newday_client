@@ -440,6 +440,12 @@ widget
 	padding-top: 20px;
 }
 
+.i-comment {
+	width: 18px;
+	height: 18px;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR…IvafevYaoXYDoEmBvDME5+80tq41ydkyQJE7h18UVJnAKpRm/Sbej9vwAAAABJRU5ErkJggg==);
+}
+
 .wrap-container {
 	max-width: 640px;
 	margin: 0 auto

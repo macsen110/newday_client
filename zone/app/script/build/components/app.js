@@ -57,9 +57,8 @@ class App extends React.Component {
                         <ul className="app-nav-list">
                             <Tab exact to="/">首页</Tab>
                             <Tab to="/goods/list">发现</Tab>
+                            <Tab to="/goods/upload">上传</Tab>
                             <Tab to="/user/login">登录</Tab>
-                            <Tab to="/communicate">@Me</Tab>
-
                         </ul>
                     </header>
                 </div>
@@ -75,7 +74,7 @@ class App extends React.Component {
                             <Tab exact to="/">首页</Tab>
                             <Tab to="/goods/list">发现</Tab>
                             <Tab to="/goods/upload">上传</Tab>
-                            <Tab to="/communicate">@Me</Tab>
+                            <Tab to="/communicate">我</Tab>
                         </ul>
                     </header>
                 </div>
