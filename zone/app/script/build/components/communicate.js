@@ -15,7 +15,7 @@ export default class Communicate extends Component {
         var _self = this;
         try {
             var Manager = require('socket.io-client');
-            var socket = new Manager("http://dev.macsen318.com");           
+            var socket = new Manager(perfixerURL);           
             socket.on('connect', () => _self.setState({socket: socket}))
             socket.on('chat', (obj) => _self.setChatList.bind(_self)(obj))
          }
