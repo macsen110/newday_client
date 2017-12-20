@@ -95,6 +95,7 @@ class goodsDetail extends Component {
                 return res.json()
             }
         }).then((obj) => {
+            if (obj.code === unLoginCode) return showPrompt({msg: obj.msg, cb: ()=> this.props.history.push('/user/login')})   
             if (obj.code == 0) {
                 self.props.history.push('/goods/list')
             }

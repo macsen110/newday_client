@@ -17,9 +17,7 @@ var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirect
 shell.config.silent = true
 shell.rm('-rf', assetsPath)
 shell.mkdir('-p', assetsPath)
-
 shell.cp('-R', 'static/*', assetsPath)
-shell.cp('-R', 'stylesheets', config.build.assetsRoot)
 shell.config.silent = false
 
 webpack(webpackConfig, function (err, stats) {

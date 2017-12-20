@@ -21,12 +21,12 @@ export default class goodsUpload extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        var form = this.refs.goodsUplodForm;
-        if (!form.title) {
+        var form = this.refs.goodsUplodForm;        
+        if (!form.title.value) {
             showPrompt('标题不能为空');
             return false;
         }
-        if (!form.content) {
+        if (!form.content.value) {
             showPrompt('内容不能为空');
             return false
         }

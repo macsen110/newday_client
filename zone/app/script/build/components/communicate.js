@@ -57,7 +57,7 @@ export default class Communicate extends Component {
                     })()}
                     <div className="chat-box" ref="chat_box"></div>
                     <input type="text" ref="chat_content" className="ipt"/>
-                    <botton className="btn" onClick={() => this.sendChat()} ref="send_chat_btn">submit</botton>
+                    <button className="btn" onClick={() => this.sendChat()} ref="send_chat_btn">submit</button>
                     {JSON.parse(isLogin) ? <Link to="/user/logout">注销账号</Link> : ''}
                 </div>
             </div>

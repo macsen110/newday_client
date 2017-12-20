@@ -53,6 +53,7 @@ textarea {
 	outline: none;
 	text-decoration: none;
 	background-color: transparent;
+	color: inherit
 }
 :focus {
 	outline: none
@@ -120,7 +121,7 @@ widget
   width: 100%;
   height: 2.5rem;
   border-width: 1px 0 0;
-  border-image: url(../images/border2.png) 2 stretch;
+  border-image: url(border.gif) 2 stretch;
   background-color: #fff;
 }
 .widget-bottom-nav .container .item {
@@ -175,7 +176,6 @@ widget
 }
 .widget-head-avatar {
   height: 4.3rem;
-  background: url('../images/bg_widget_avatar_header.png') no-repeat;
   background-size: cover;
   display: -webkit-box;
   display: -webkit-flex;
@@ -283,7 +283,7 @@ widget
 .widget-dialog .foot {
   border-width: 1px 0 0;
   border-style: solid;
-  border-image: url(../images/border2.png) 2 stretch;
+  border-image: url(border.gif) 2 stretch;
   height: 1.8rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -307,7 +307,7 @@ widget
 .widget-dialog .foot button:nth-of-type(2) {
   border-width: 0 0 0 1px;
   border-style: solid;
-  border-image: url(../images/border2.png) 2 stretch;
+  border-image: url(border.gif) 2 stretch;
 }
 
 .widget-prompt {
@@ -412,7 +412,8 @@ widget
 	text-align: center; 
 	color: #fff; 
 	background: #37c685; 
-	font-size: 1.25rem
+	font-size: 1.25rem;
+	-webkit-appearance: none
 }
 
 .title {
@@ -698,35 +699,38 @@ reader from server
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;	
+	padding: 0;
 }
 .app-list-page .item {
 	width: 100%;
-	padding: 1% 0;
+	padding: 2rem 0;
+	border-width: 1px 0 1px 0;
+	border: 1px solid #dbe2e8;
+	border-radius: 2px;
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(46,61,73,.08);
+	margin-bottom: 2rem;
 }
 .app-list-page .item a {
 	display: block;	
-	background-color: #f0f0f0;
+	
+}
+
+.app-list-page .item h3,
+.app-list-page .item h2,
+.app-list-page .item .content {
+	padding: 0 2rem;	
 }
 
 .app-list-page .item h3 {
-	padding: .8rem 0;
-	text-align: center;
-	border-width: 0 0 1px 0;
-	border-image: url(border.gif) 2 stretch
+	font-size: 24px
 }
 
 
-
-.app-list-page .item a .content {
-	padding: .8rem;
-}
 
 .app-list-page .item .more {
-	padding: .8rem 0;
-	text-align: center;
-	border-width:1px 0 0 0;
-	border-image: url(border.gif) 2 stretch;
-	background: #d8d8d8;
+	padding: 0 1rem;
+	text-align: right
 	
 }
 

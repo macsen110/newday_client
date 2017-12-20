@@ -2,6 +2,8 @@ var path = require('path')
 var config = require('./config/index')
 var webpack = require("webpack")
 var utils = require('./utils')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var NODE_ENV = process.env.NODE_ENV
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -24,10 +26,7 @@ module.exports = {
       "node_modules"
     ],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
-      'src': resolve('src'),
-      'assets': resolve('src/assets'),
-      'components': resolve('src/components')
+      'assets': resolve('assets'),    
     }
   },
   module: {
@@ -51,8 +50,27 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      // //解析.css文件
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }]
+        }),
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new ExtractTextPlugin({
+      filename: NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
+      allChunks: true,
+      disable: NODE_ENV !== 'production'
+    })
+  ]
 }
