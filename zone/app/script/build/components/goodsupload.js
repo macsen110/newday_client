@@ -21,15 +21,15 @@ export default class goodsUpload extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        var form = this.refs.goodsUplodForm;        
-        if (!form.title.value) {
-            showPrompt('标题不能为空');
-            return false;
-        }
-        if (!form.content.value) {
-            showPrompt('内容不能为空');
-            return false
-        }
+        var form = this.refs.goodsUplodForm;  
+        let type = this.state.initType;  
+        let fetchDescMapType = {
+            "image": '图片',
+            "video": "视频"
+        }    
+        if (!form.title.value) return showPrompt('标题不能为空');
+        if (!form.content.value) return showPrompt('内容不能为空');             
+        if (type !== 'note' && this.state.uploadFiles.length === 0) return showPrompt(`请上传${fetchDescMapType[type]}`)
         var url = '/api/goods/upload';
         var formdata = new FormData(form);
         var promise = new Promise(function(resolve, reject ){

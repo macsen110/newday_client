@@ -4,6 +4,22 @@ import { connect } from "react-redux";
 import { listGoodsAction, doneLoadingAction } from "../actions/actions";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Map, List, fromJS, OrderedMap, Seq } from "immutable";
+function formatDate(now) {
+  var year = now.getFullYear();
+  var month = now.getMonth() + 1;
+  var date = now.getDate();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+  return (
+    year + "-" + month + "-" + date + "   " + hour + ":" + minute + ":" + second
+  );
+}
+
+function filterContent(words, num) {
+  num = num || 100
+  return words.length > num ? words.slice(0, num) + '...' : words
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -44,11 +60,11 @@ class goodslist extends Component {
         );
       }
       return (
-        <div style={{ padding: 0.8 + "rem", color: "#333" }}>暂无数据</div>
+        <div style={{ padding: 2 + "rem", color: "#333" }}>暂无数据</div>
       );
     }
 
-    return <div className="app-list-page">loading22222...</div>;
+    return <div className="app-list-page">loading...</div>;
   }
 }
 class Blog_item extends React.Component {
@@ -58,6 +74,7 @@ class Blog_item extends React.Component {
     var category = item.category;
     var itemEle;
     var content = item.content ? <div>{item.content}</div> : "";
+    
     switch (category) {
       case "image":
         itemEle = (
@@ -81,7 +98,7 @@ class Blog_item extends React.Component {
         );
         break;
       case "note":
-        itemEle = <p className="content">{item.content}</p>;
+        itemEle = '';
         break;
       default:
         break;
@@ -89,9 +106,10 @@ class Blog_item extends React.Component {
     return (
       <li className="item">
         <Link to={"/goods/detail/" + item.goodsid}>
-          <h2>{item.user}</h2>
+          <h2><span className="avator">{item.user}</span><em className="time">{formatDate(new Date(item._time))}</em></h2>
           <h3>{item.title}</h3>
           {itemEle}
+          <p className="content">{filterContent(item.content)}</p>
           <p className="more">查看详情</p>
         </Link>
       </li>

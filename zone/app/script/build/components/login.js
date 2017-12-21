@@ -69,7 +69,8 @@ class Login extends React.Component {
                             this.props.history.push({pathname: '/goods/upload'})
                         }
                     });
-                };
+                }
+                else showPrompt(obj.msg)
             }, 
             error => console.log(error)
         )
