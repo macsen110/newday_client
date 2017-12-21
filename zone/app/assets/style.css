@@ -434,12 +434,13 @@ widget
 	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
 	border-radius: 4px;
 	border-color: #969696;
-
 }
 .pt20 {
 	padding-top: 20px;
 }
-
+.pt10 {
+	padding-top: 10px
+}
 .i-comment {
 	width: 18px;
 	height: 18px;

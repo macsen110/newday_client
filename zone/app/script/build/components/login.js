@@ -83,7 +83,7 @@ class Login extends React.Component {
                     <p className="pt20"><input type="text" name="username" className="ipt" placeholder="username" /></p>
                     <p className="pt20"><input type="password" name="password" className="ipt" placeholder="password" /></p>
                     <p className="pt20"><input type="submit" className="btn" /></p>
-                    <Link to="/user/register">注册</Link>
+                    <p className="pt10"><Link to="/user/register">注册</Link></p>
                 </form>
             </div>
         )
