@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {initAction} from '../actions/actions';
-import cookie from '../utils/cookie';
 function mapStateToProps(state, ownProps) {
     return {
         initData: state.initData
@@ -33,9 +32,9 @@ class App extends React.Component {
         super(props)
     }
     componentDidMount() {
-        cookie.cookie('macsen110', 'macsen110', {
-            path: '/'
-        })
+        // cookie.cookie('macsen110', 'macsen110', {
+        //     path: '/'
+        // })
         fetch(perfixerURL+"/api/home", {
             credentials: 'include'
         })

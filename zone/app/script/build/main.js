@@ -15,33 +15,32 @@ import {
 } from 'react-router-dom';
 import cookie from './utils/cookie';
 import routes from './routes';
-import ReactDOM from 'react-dom';
 import { createRedux } from 'redux';
 import { Provider } from 'react-redux';
-import configureStores from './stores/configureStores';
-
+import { configureStore, history } from './store/configureStore';
+import Root from './containers/Root';
 import createBrowserHistory from 'history/createBrowserHistory';
-import 'assets/style.css'
-const store = configureStores();
-const history = createBrowserHistory();
-cookie.cookie('test', 'ssss', {
-	path:'/',
-	domain: 'macsen318.com'
-})
-const render = () => {ReactDOM.render((
+import 'assets/style.css';
+import ReactDom, { render } from 'react-dom';
+const store = configureStore();
+render(
 	<AppContainer>
-		<Provider store={store}>
-			<Router history={history}>
-				<BrowserRouter basename="/zone">
-					{routes}
-				</BrowserRouter>
-			</Router>
-			
-		</Provider>
-	</AppContainer>
-), document.getElementById('router_container'));
-}
-render()
+			<Root store={store} history={history} />
+	</AppContainer>,
+	document.getElementById('root')
+);
+
 if (module.hot) {
-  module.hot.accept()
+	module.hot.accept('./containers/Root', () => {
+			const newConfigureStore = require('./store/configureStore');
+			const newStore = newConfigureStore.configureStore();
+			const newHistory = newConfigureStore.history;
+			const NewRoot = require('./containers/Root').default;
+			render(
+					<AppContainer>
+							<NewRoot store={newStore} history={newHistory} />
+					</AppContainer>,
+					document.getElementById('root')
+			);
+	});
 }
