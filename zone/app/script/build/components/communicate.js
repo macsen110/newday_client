@@ -3,7 +3,15 @@ import * as UI from 'yao-m-ui';
 import {
     Link
   } from 'react-router-dom';
-export default class Communicate extends Component {
+import {connect} from 'react-redux'; 
+  function mapStateToProps(state, ownProps) {
+    return {
+        showGood: state.showGood,
+        commets: state.commets,
+        initData: state.initData
+    };
+}
+class Communicate extends Component {
 	constructor(props, context) {  
         super(props, context);
         this.state = {
@@ -58,10 +66,11 @@ export default class Communicate extends Component {
                     <div className="chat-box" ref="chat_box"></div>
                     <input type="text" ref="chat_content" className="ipt"/>
                     <button className="btn" onClick={() => this.sendChat()} ref="send_chat_btn">submit</button>
-                    {JSON.parse(isLogin) ? <Link to="/user/logout">注销账号</Link> : ''}
+                    {this.props.initData.isLogin ? <Link to="/user/logout">注销账号</Link> : ''}
                 </div>
             </div>
         )
     }
     
 };
+export default connect(mapStateToProps, {})(Communicate);

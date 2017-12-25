@@ -71,7 +71,7 @@ class goodsDetail extends Component {
                     {commets.length ? 
                         <div className="comments-container">
                             <p className="comments-title">评论</p>
-                            <ul className="list">{commets.map((item, index) => <CommetItem history={this.props.history} user={this.props.initData.user} author={goodsObj.user} C_user ={item.C_user} deleteCommetAction = {this.props.deleteCommetAction}  key={index} item={item} />)}</ul>
+                            <ul className="list">{commets.map((item, index) => <CommetItem goodsId={goodsObj.id} history={this.props.history} user={this.props.initData.user} author={goodsObj.user} C_user ={item.C_user} deleteCommetAction = {this.props.deleteCommetAction}  key={index} item={item} />)}</ul>
                         </div> 
                         : ''
                     }                 
@@ -164,27 +164,29 @@ class CommetItem extends Component {
     delCommet(e) {
         var self = this;
         var item = e.target.parentNode;
-        var goodid = item.dataset.id;
+        var C_id = item.dataset.id;
         var content = item.firstElementChild.innerHTML;
+        let props = this.props;
+        let goodsId = props.goodsId
         new xhr({
-            url: '/api/comments/' + goodid,
+            url: '/api/comments/'+goodsId+'/'+C_id,
             method: 'DELETE',
             done: (obj) => {
-                if (obj.code === 0) self.props.deleteCommetAction(+goodid) 
+                if (obj.code === 0) self.props.deleteCommetAction(+C_id) 
                 if (obj.code === unLoginCode) return showPrompt({msg: obj.msg, cb: ()=> this.props.history.push('/user/login')})   
                 if (obj.code !== 0) return showPrompt({msg: obj.msg}) 
-    
             }
         })
         
     }
     render() {
         let props = this.props;
-        var item = this.props.item;
+        var item = props.item;
+        let goodsid = props.goodsid
         return (
             <li className="item" data-id={item._id}>
                 <span className="con">{props.C_user +'评论: ' + item.C_content}</span>
-                { (props.C_user == props.author || props.C_user == props.user) && <span className="del" onClick={(e)=>this.delCommet(e)}>删除</span>}
+                { (props.user == props.author || props.C_user == props.user) && <span className="del" onClick={(e)=>this.delCommet(e)}>删除</span>}
             </li>
         )
         

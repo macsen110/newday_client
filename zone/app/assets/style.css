@@ -442,9 +442,13 @@ widget
 	padding-top: 10px
 }
 .i-comment {
-	width: 18px;
-	height: 18px;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR…IvafevYaoXYDoEmBvDME5+80tq41ydkyQJE7h18UVJnAKpRm/Sbej9vwAAAABJRU5ErkJggg==);
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-right: 4px;
+	vertical-align: middle;
+	background-size: contain;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAZJJREFUWAntlr1KxEAUhTebNCI+gCxiqyAmYBrfQBG08AU2fy5Y2dvb2djmRyvBtGthZUofwVSCtY2mWtAke5IqK9edmaCShQkM2cy5986Xcyfs9HryWjAHlIrX9/2yC9ye5yn9LoA0GbTmQ0XYfP6v380Odc4hCcTaBtIh6RDLAZYu95B0iOUAS5d7SDrEcoClyz3EcmjmxIiT2/MPCa84Te5RWhiGK0VRRNC2KF10bgYIyRtUAUVRvsfVYVEUrQHmHg/bVF6buXohTdM2qeSyLNfzPH+gNLi5A20MbRUjVVV1CPAPKlZkrgayLCulkoIg+KLm0aZDwN5iLEN/xAsdo8Y7FSs6R7ZiXhHAnKFNl4jp47rWdX1kmubnvBwRjRsojmM1y7IrwJyiNSXGueM4FyKL8cRyAaE1S4AZ474PkAnuQ9d173gWEI3hAkLRASAGgHnDOALMk+hCvPG8QFW9FHvmwLbtF97ibeK4/jrgSoIvafevYaoXYDoEmBvDME5+80tq41ydkyQJE7h18UVJnAKpRm/Sbej9vwAAAABJRU5ErkJggg==);
 }
 
 .wrap-container {

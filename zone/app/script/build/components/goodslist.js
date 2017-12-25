@@ -110,7 +110,7 @@ class Blog_item extends React.Component {
           <h3>{item.title}</h3>
           {itemEle}
           <p className="content">{filterContent(item.content)}</p>
-          <p className="more">查看详情</p>
+          <p className="more"><i className="i-comment"></i>{item.comment_count}</p>
         </Link>
       </li>
     );

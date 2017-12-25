@@ -32,9 +32,6 @@ class App extends React.Component {
         super(props)
     }
     componentDidMount() {
-        // cookie.cookie('macsen110', 'macsen110', {
-        //     path: '/'
-        // })
         fetch(perfixerURL+"/api/home", {
             credentials: 'include'
         })
