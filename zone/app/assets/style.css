@@ -472,6 +472,7 @@ widget
 	background: #e9e9e9;
 	margin: 0;
 	border-bottom: 1px solid #e1e1e1;
+	z-index: 10
 }
 .app-nav-list {
 	width: 100%;
