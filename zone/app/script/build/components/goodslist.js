@@ -69,14 +69,16 @@ class goodslist extends Component {
 }
 class Blog_item extends React.Component {
   componentDidMount() {}
+  
   render() {
     var item = this.props.item;
     var category = item.category;
     var itemEle;
     var content = item.content ? <div>{item.content}</div> : "";
-    
+    let categoryDesc = '笔记'
     switch (category) {
       case "image":
+        categoryDesc = '图文'
         itemEle = (
           <div className="wrap-uri">
             <img
@@ -87,6 +89,7 @@ class Blog_item extends React.Component {
         );
         break;
       case "video":
+        categoryDesc = '视频'
         itemEle = (
           <div className="wrap-uri">
             <video
@@ -98,6 +101,7 @@ class Blog_item extends React.Component {
         );
         break;
       case "note":
+        categoryDesc = '笔记'
         itemEle = '';
         break;
       default:
@@ -106,7 +110,7 @@ class Blog_item extends React.Component {
     return (
       <li className="item">
         <Link to={"/goods/detail/" + item.goodsid}>
-          <h2><span className="avator">{item.user}</span><em className="time">{formatDate(new Date(item._time))}</em></h2>
+          <h2><span className="avator">{item.user}发布了{categoryDesc}</span><em className="time">{formatDate(new Date(item._time))}</em></h2>
           <h3>{item.title}</h3>
           {itemEle}
           <p className="content">{filterContent(item.content)}</p>

@@ -69,10 +69,10 @@ class register extends Component {
     render() {
         return (
             <div id="register_page" className="app-register-page">
-                <p className="page-title">register</p>
+                <p className="page-title">注册</p>
                 <form method="post" action="/api/users/saveuser" className="form1" ref = "registerForm" onSubmit={this.handleSubmit}>
-                    <p className="pt20"><input type="text" name="username" className="ipt" placeholder="username" /></p>
-                    <p className="pt20"><input type="password" name="password" className="ipt" placeholder="password" /></p>
+                    <p className="pt20"><input type="text" name="username" className="ipt" placeholder="用户名" /></p>
+                    <p className="pt20"><input type="password" name="password" className="ipt" placeholder="密码" /></p>
                     <p className="pt20"><input type="submit" className="btn" /></p>
                 </form>
             </div>
