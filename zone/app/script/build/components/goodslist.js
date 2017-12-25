@@ -83,7 +83,8 @@ class Blog_item extends React.Component {
           <div className="wrap-uri">
             <img
               src={"//res.macsen318.com" + item.path}
-              width={item.width / 2}
+              width={item.width}
+              height={item.height}
             />
           </div>
         );

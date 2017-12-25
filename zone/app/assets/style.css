@@ -644,7 +644,8 @@ widget
 }
 
 .app-detail-page .uri-list .item img {
-	width: 100%
+	max-width: 100%;
+	height: auto;
 }
 
 .app-detail-page .ipt {
@@ -770,11 +771,13 @@ reader from server
 	color: #999
 }
 
-.app-list-page .item img,
 .app-list-page .item video {
 	width: 100%;
 }
-
+.app-list-page .item img {
+	max-width: 100%;
+	height: auto
+}
 
 /**
 **Media Queries for Standard Devices
