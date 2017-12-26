@@ -32,9 +32,10 @@
 		}
 		this.tabNavContainer = this.tabNavContainer || document.querySelector('.tab-nav-container');
 		this.tabConContainer = this.tabConContainer || document.querySelector('.tab-con-container');
-		this.tabNavContainer && (this.tabNavItems = this.tabNavItems || this.tabNavContainer.children);
-		this.tabConContainer && (this.tabConItems = this.tabConItems || this.tabConContainer.children);
+		this.tabNavItems = this.tabNavItems || this.tabNavContainer.children;
+		this.tabConItems = this.tabConItems || this.tabConContainer.children;
 		this.curIdex = this.curIdex || 0;
+		this.activeClass = this.activeClass || 'on'
 		this.init()
 	}
 
@@ -43,7 +44,7 @@
 			init: function () {
 					var self = this;
 					self.change(this.curIdex);
-					var className = this.tabNavContainer.children[0].classList[0];
+					var className = this.tabNavItems[0].classList[0];
 					if (self.tabNavItems) {
 							_degegateDomFun(this.tabNavContainer, '.'+className, 'click', function () {
 								self.change([].indexOf.call(self.tabNavItems, this))
@@ -52,24 +53,25 @@
 			},
 			change: function(index) {
 					var self = this;
+					var activeClass = this.activeClass;
 					self.curIdex = index;
 					if (self.tabNavItems) {
 							[].forEach.call(self.tabNavItems, function (item, i) {
 									if (i !== index) {
-											item.classList.remove('on');
-											self.tabConItems[i].classList.remove('on')
+											item.classList.remove(activeClass);
+											self.tabConItems[i].classList.remove(activeClass)
 									}
 									else {
-											item.classList.add('on');
-											self.tabConItems[i].classList.add('on')
+											item.classList.add(activeClass);
+											self.tabConItems[i].classList.add(activeClass)
 									}
 							})
 
 					}
 					else {
 							[].forEach.call(self.tabConItems, function (item, i) {
-									if (i !== index) item.classList.remove('on')
-									else item.classList.add('on')
+									if (i !== index) item.classList.remove(activeClass)
+									else item.classList.add(activeClass)
 							})
 							
 					} 

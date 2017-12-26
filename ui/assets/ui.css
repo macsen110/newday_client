@@ -1,0 +1,158 @@
+@import '//www.macsen318.com/res/normalize.css';
+dl,
+dt,
+dd {
+  margin: 0;
+}
+html {
+  height: 100%
+}
+h1, h2, h3 {
+  margin: 0;
+  font-weight: normal
+}
+ol {
+  padding: 0;
+  margin-left: 20px
+}
+body {
+  min-height: 100%;
+  background-color: #edf1f5;
+  padding: 0;
+  margin: 0
+}
+.header {
+  background-color: #00a5e0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.logo {
+    width: 138px;
+    height: 42px;
+    line-height: 42px;
+    margin: 10px 0 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    overflow: hidden
+}
+section {
+  overflow: hidden;
+}
+.aside {
+  float: left;
+  width: 200px;
+  padding-bottom: 3999em;
+  margin-bottom: -3991em;
+  border-right: 1px solid #dbdee5;
+  background-color: #fff;
+}
+.aside-dl {
+  margin: 10px 0;
+}
+.aside-dt {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 20px;
+  color: #9facba;
+}
+.aside-nav {
+  padding-left: 20px;
+  height: 36px;
+  line-height: 36px;;
+}
+.aside-nav.active {
+  background-color: #00a5e0;
+  color: #fff;
+}
+.aside-nav.active > .icon {
+  color: #fff
+}
+.icon > svg{display:block;width:16px;height:16px;margin:2px;fill:currentColor;}
+.aside-nav > .icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+  vertical-align: -5px;
+  text-align: center;
+  line-height: 20px;
+  color: #00a5e0;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.main > section {
+  min-height: calc(100vh - 62px);
+  padding: 0 30px;
+  overflow: hidden;
+}
+.section-title {
+  margin: 36px 0 24px;
+  font-weight: 400;
+  font-size: 28px;
+}
+section .pre {
+  padding: 10px 1em;
+  margin: 1em 0;
+  border: 1px dashed #ccc;
+  background-color: #fff;
+  font-family: Consolas, monospace;
+  
+  word-wrap: break-word;
+}
+
+
+
+.ui-table {
+  width: 100%;
+  margin-top: 20px;
+  line-height: 21px;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse\9;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,1,.1);
+  border: 1px solid #d0d0d5;
+  border: 0 rgba(1,2,3,0)
+  
+}
+
+.ui-table th,.ui-table thead td {
+  line-height: 50px;
+  background-color: #f7f9fa;
+  text-align: left;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0
+}
+
+.ui-table tbody td {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  background-color: #fff;
+  border-bottom: 1px solid #ededed
+}
+
+.ui-table td,.ui-table th {
+  padding: 0 20px
+}
+
+.ui-table tr {
+  cursor: default
+}
+
+.ui-table tr:hover td {
+  background-color: #f2fcff
+}
+
+.ui-table tr.selected td {
+  background-color: #e0f7ff
+}
+
+.ui-table tr:last-child td {
+  padding-bottom: 15px;
+  border-bottom: 0
+}
