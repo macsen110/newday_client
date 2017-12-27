@@ -16,6 +16,11 @@
     </h3>
     <div class="desc">
       面向项目设计的弹框插件, 简单易用,配置可控
+      <h5>注意点</h5>
+      <p>1.关闭事件按钮元素类名需包含icon-dialog-cancel</p>
+      <p>2.取消事件按钮元素类名需包含btn-dialog-cancel</p>
+      <p>3.确定事件按钮元素类名须包括btn-dialog-ok</p>
+      <p>4.遮罩层元素类名须包括dialog-mask-bg</p>
     </div>
     <div class="box">
       <ol>
@@ -45,102 +50,141 @@
                 </td>
               </tr>
               <tr>
+                <td>title</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  弹框的标题值可以为字符串或者html片段
+                </td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  弹框的主体内容可以为字符串或者html代码片段
+                </td>
+              </tr>
+              <tr>
+                <td>foot</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  弹框的尾部内容,一般是按钮组合,比如关闭取消按钮
+                  <p>
+                    <code>&lt;button class="btn-dialog-cancel"&gt;取消&lt;/button&gt;
+                              &lt;button class="btn-dialog-ok"&gt;确定&lt;/button&gt;</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
                 <td>afterOpen</td>
                 <td>Function | false</td>
                 <td>
                   <code>Function</code>
                 </td>
-                <td>Dilog代码片段render到body中以后就调用</td>
+                <td>Dilog代码片段render到body中以后就调用,弹框内若有元素有绑定事件应写在此函数内</td>
               </tr>
               <tr>
-                <td>tabNavContainer</td>
-                <td>Object | false</td>
+                <td>afterClose</td>
+                <td>Function | false</td>
                 <td>
-                  <code>document.querySelector('.tab-nav-container')</code>
+                  <code>Function</code>
                 </td>
-                <td>tab 导航标签的父元素</td>
+                <td>点击关闭(取消按钮)之后触发的事件</td>
               </tr>
               <tr>
-                <td>tabConContainer</td>
-                <td>Object | false</td>
+                <td>afterOk</td>
+                <td>Function | false</td>
                 <td>
-                  <code>document.querySelector('.tab-con-container')</code>
+                  <code>Function</code>
                 </td>
-                <td>tab 内容标签的父元素</td>
+                <td>点击确定按钮之后触发的事件</td>
               </tr>
               <tr>
-                <td>tabNavItems</td>
-                <td>LikeArray | false</td>
+                <td>canMaskClose</td>
+                <td>Boolen | false</td>
                 <td>
-                  <code>为空</code>
+                  <code>true</code>
                 </td>
-                <td>tab 导航标签
-                  <br>例如 document.querySelectorAll('.nav-items'),
-                  <br> 不写的话默认取tabNavContainer的子元素
-                </td>
-              </tr>
-              <tr>
-                <td>tabConItems</td>
-                <td>LikeArray | false</td>
                 <td>
-                  <code>为空</code>
-                </td>
-                <td>tab 内容标签
-                  <br>例如 document.querySelectorAll('.nav-con-items')
-                  <br> 不写的话默认取tabConContainer子元素
-                  <br>
+                  点击蒙层是否调用关闭弹框事件
                 </td>
               </tr>
               <tr>
-                <td>callback</td>
-                <td>Function</td>
+                <td>isMask</td>
+                <td>Bollen | false</td>
+                <td>
+                  <code>true</code>
+                </td>
+                <td>
+                  弹框组件是否需要蒙层
+                </td>
+              </tr>
+              <tr>
+                <td>maskAction</td>
+                <td>Function | false</td>
                 <td>
                   <code>undefined</code>
                 </td>
-                <td>点击切换的回调。其中，上下文
-                  <code>this</code>指点击元素DOM对象。默认参数为当前点击的索引值</td>
+                <td>为点击蒙层而准备的函数</td>
               </tr>
+              <tr>
+                <td>close</td>
+                <td>Function | false</td>
+                <td>
+                  <code>Function</code>
+                </td>
+                <td>点击取消按钮(btn-dialog-cancel), 关闭按钮(btn-dialog-close)触发</td>
+              </tr>
+              <tr>
+                  <td>destory</td>
+                  <td>Function | false</td>
+                  <td>
+                    <code>Function</code>
+                  </td>
+                  <td>直接在页面中移除弹框</td>
+                </tr>
             </tbody>
           </table>
         </li>
         <li>
-          <p>demo,点击add 按钮可以增加nav标签</p>
-          <p>html 代码片段</p>
-          <pre class="pre"><code class="code">
-              &lt;ul class="tab-nav-container"&gt;
-                &lt;li class="item"&gt;nav-1&lt;/li&gt;
-                &lt;li class="item"&gt;nav-2&lt;/li&gt;
-              &lt;/ul&gt;
-              &lt;ul class="tab-con-container"&gt;
-                &lt;li class="item"&gt;con-1&lt;/li&gt;
-                &lt;li class="item"&gt;con-2&lt;/li&gt;
-              &lt;/ul&gt;
-          </code></pre>
+
           <p>js核心代码</p>
           <pre class="pre">
             <code class="code">
-              ui.TabWidget({
-                curIdex: 1,
-                callback: function (idx) {
-                  console.log(idx)
-                }
-              })
+                ui.Dialog({
+                  className: 'some-dialog-class'
+                  title: '我是标题',
+                  content: '我是内容',          
+                  afterClose: function() {
+                    console.log('我是点击关闭按钮以后调用的')
+                  },
+                  afterOpen: function () {
+                    console.log('我是弹框触渲染到页面发以后弹的')
+                  },
+                  afterOk: function () {
+                    console.log('我是点击确定按钮触发的')
+                  },
+                  foot: '&lt;button class="btn-dialog-ok"&gt;确定&lt;/button&gt;&lt;button class="btn-dialog-cancel"&gt;取消&lt;button&gt;'
+                })
           </code>
         </pre>
-        <div class="demo-container-box" id="tab_Widget_demo">
-            <h5>tab 切换demo展示 <button id="add_tab_btn">添加nav</button></h5>
-            <ul class="tab-nav-container">
-              <li class="item">nav-1</li>
-              <li class="item">nav-2</li>
-            </ul>
-            <ul class="tab-con-container">
-              <li class="item">content-1</li>
-              <li class="item">content-2</li>
-            </ul>
+          <div class="demo-container-box" id="dialog_demo">
+            <h5>tab 切换demo展示
+              <button id="dialog_demo_btn" class="btn">点我弹框</button>
+            </h5>
+
           </div>
         </li>
       </ol>
-      
+
     </div>
   </div>
   <script src="./assets/ui.js"></script>

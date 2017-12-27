@@ -42,14 +42,14 @@ function formatCodeTag(codeTag) {
  * totast插件
  */
 ;(function () {
-  var totastDom = document.getElementById('totast_demo');
-  var totastDomBtn1 = document.getElementById('totast_demo_btn1')
-  var totastDomBtn2 = document.getElementById('totast_demo_btn2')
-  if (totastDom) {
-    totastDomBtn1.addEventListener('click', function () {
+  var totastDemo = document.getElementById('totast_demo');
+  var totastDemoBtn1 = document.getElementById('totast_demo_btn1')
+  var totastDemoBtn2 = document.getElementById('totast_demo_btn2')
+  if (totastDemo) {
+    totastDemoBtn1.addEventListener('click', function () {
       window.YAO_M_UI.showPrompt('我是简单totast弹层,3秒消失')
     })
-    totastDomBtn2.addEventListener('click', function () {
+    totastDemoBtn2.addEventListener('click', function () {
       window.YAO_M_UI.showPrompt({
         msg: '<span style="color: red">我是</span>html代码',
         cb: function (idx) {
@@ -61,3 +61,30 @@ function formatCodeTag(codeTag) {
     })
   }
 } ())
+
+/**
+ * dialog 插件
+ */
+
+ ;(function () {
+   var dialogDemo = document.getElementById('dialog_demo');
+   var dialogDemoBtn = document.getElementById('dialog_demo_btn');
+   if (dialogDemo) {
+    dialogDemoBtn.addEventListener('click', function () {
+      window.YAO_M_UI.Dialog({
+        title: '我是标题',
+        content: '我是内容',
+        afterClose: function() {
+          console.log('我是点击关闭按钮以后调用的')
+        },
+        afterOpen: function () {
+          console.log('我是弹框触渲染到页面发以后弹的')
+        },
+        afterOk: function () {
+          console.log('我是点击确定按钮触发的')
+        },
+        foot: '<button class="btn-dialog-ok">确定</button><button class="btn-dialog-cancel">取消<button>'
+      })
+    })
+   }
+ }())
