@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>yao-m-ui 官方文档</title>
   <link href="./assets/ui.css" rel="stylesheet">
@@ -17,29 +16,34 @@
     <div class="aside">
       <dl class="aside-dl">
         <dt class="aside-dt">关于</dt>
-        <dd class="aside-nav">
+        <dd class="aside-nav" role="about">
           <i class="icon icon_nav_ux">
             <svg>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-maxcdn">
-                <svg viewBox="0 0 1759 1280" id="icon-maxcdn" width="100%" height="100%"><path d="M1745 517l-164 763h-334l178-832q13-56-15-88-27-33-83-33h-169l-204 953H620l204-953H538l-204 953H0l204-953L51 0h1276q101 0 189.5 40.5T1664 154q60 73 81 168.5t0 194.5z"></path></svg>
+                <svg viewBox="0 0 1759 1280" id="icon-maxcdn" width="100%" height="100%">
+                  <path d="M1745 517l-164 763h-334l178-832q13-56-15-88-27-33-83-33h-169l-204 953H620l204-953H538l-204 953H0l204-953L51 0h1276q101 0 189.5 40.5T1664 154q60 73 81 168.5t0 194.5z"></path>
+                </svg>
               </use>
             </svg>
           </i>
           规范化
         </dd>
-        <dd class="aside-nav">
-            <i class="icon icon_nav_ux">
-              <svg>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-wrench">
-                  <svg viewBox="0 0 1641 1643" id="icon-wrench" width="100%" height="100%"><path d="M363 1344q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm644-420l-682 682q-37 37-90 37-52 0-91-37L38 1498q-38-36-38-90 0-53 38-91l681-681q39 98 114.5 173.5T1007 924zm634-435q0 39-23 106-47 134-164.5 217.5T1195 896q-185 0-316.5-131.5T747 448t131.5-316.5T1195 0q58 0 121.5 16.5T1424 63q16 11 16 28t-16 28l-293 169v224l193 107q5-3 79-48.5t135.5-81T1609 454q15 0 23.5 10t8.5 25z"></path></svg>                </use>
-              </svg>
-            </i>
-            使用方法
-          </dd>
+        <dd class="aside-nav" role="use">
+          <i class="icon icon_nav_ux">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-wrench">
+                <svg viewBox="0 0 1641 1643" id="icon-wrench" width="100%" height="100%">
+                  <path d="M363 1344q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm644-420l-682 682q-37 37-90 37-52 0-91-37L38 1498q-38-36-38-90 0-53 38-91l681-681q39 98 114.5 173.5T1007 924zm634-435q0 39-23 106-47 134-164.5 217.5T1195 896q-185 0-316.5-131.5T747 448t131.5-316.5T1195 0q58 0 121.5 16.5T1424 63q16 11 16 28t-16 28l-293 169v224l193 107q5-3 79-48.5t135.5-81T1609 454q15 0 23.5 10t8.5 25z"></path>
+                </svg>
+              </use>
+            </svg>
+          </i>
+          使用方法
+        </dd>
       </dl>
       <dl class="aside-dl">
         <dt class="aside-dt">插件</dt>
-        <dd class="aside-nav">
+        <dd class="aside-nav" role="tab">
           <i class="icon icon_nav_ux">
             <svg>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-tags">
@@ -51,148 +55,36 @@
           </i>
           Tab 选项卡切换
         </dd>
+        <dd class="aside-nav" role="totast">
+          <i class="icon icon_nav_ux">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bolt">
+                <svg viewBox="0 0 901.6666870117188 1664" id="icon-bolt" width="100%" height="100%">
+                  <path d="M887.333 438q18 20 7 44l-540 1157q-13 25-42 25-4 0-14-2-17-5-25.5-19t-4.5-30l197-808-406 101q-4 1-12 1-18 0-31-11-18-15-13-39l201-825q4-14 16-23t28-9h328q19 0 32 12.5t13 29.5q0 8-5 18l-171 463 396-98q8-2 12-2 19 0 34 15z"></path>
+                </svg>
+              </use>
+            </svg>
+          </i>
+          totast轻提示
+        </dd>
+        <dd class="aside-nav" role="dialog">
+          <i class="icon icon_nav_ux">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-external-link">
+                <svg viewBox="0 0 1792 1536" id="icon-external-link" width="100%" height="100%"><path d="M1408 928v320q0 119-84.5 203.5T1120 1536H288q-119 0-203.5-84.5T0 1248V416q0-119 84.5-203.5T288 128h704q14 0 23 9t9 23v64q0 14-9 23t-23 9H288q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113V928q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10L695 983q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"></path></svg>
+              </use>
+            </svg>
+          </i>
+          Dialog弹框
+        </dd>
       </dl>
+
     </div>
     <section>
-      <div class="container-box">
-        <div class="box-item">
-          <h3 class="title">
-            使用方法
-            </h2>
-            <ol class="use-list">
-              <li>
-                <h4>使用npm import方式引入(Dialog为例)</h4>
-                <div class="pre">
-                  npm i yao-m-ui --save                  
-                  <br> import * as ui form 'yao-m-ui'
-                  <br>
-                  import "yao-m-ui/widget.css""
-                  <br> ui.Dialog({})
-                </div>
-              </li>
-              <li>
-                <h4>或者使用require加载</h4>
-                <div class="pre">
-                  npm i yao-m-ui --save
-                  <br> var ui = require('yao-m-ui')
-                  <br>
-                  require("yao-m-ui/widget.css"")
-                  <br> ui.Dialog({})
-
-                </div>
-                <li>
-                  <h4>
-                    或者直接script 标签引入 npm包目录下的index.js
-                  </h4>
-                  <div class="pre">
-                    <span>&lt;script src='./index.js&gt;&lt;/script&gt;</span>
-                    window.yaoMUI.Dialog({})
-
-                  </div>
-                </li>
-            </ol>
-        </div>
-        
-      </div>
-      <div class="box-item" role="tab">
-          <h3 class="title">
-            Tab 切换组件
-          </h3>
-          <div class="desc">
-              面向项目设计的选项卡，对类名和层级等无依赖，大家在布局的时候可以很灵活。支持异步添加的tab nav选项
-          </div>
-          <div class="box">
-            <ol>
-              <li>语法
-                <div class="pre">
-                    ui.TabWidget(options)
-                </div>
-              </li>
-              <li>
-                文档
-                <table width="100%" class="ui-table">
-                    <tbody><tr>
-                      <th scope="col" width="100">参数名称</th>
-                      <th scope="col" width="100">类型 | 是否必填</th>
-                      <th scope="col" width="160">默认值</th>
-                      <th scope="col">释义</th>
-                    </tr>
-
-                    
-                    <tr>
-                      <td>curIdex</td>
-                      <td>Number | false</td>
-                      <td><code>0</code></td>
-                      <td>选中选项卡的索引值。默认<code>0</code></td>
-                    </tr>
-                    <tr>
-                        <td>activeClass</td>
-                        <td>String | false</td>
-                        <td><code>.on</code></td>
-                        <td>当前选中nav标签和content标签的激活class 类名</td>
-                      </tr>
-                    <tr>
-                      <td>tabNavContainer</td>
-                      <td>String | false</td>
-                      <td><code>.tab-nav-container</code></td>
-                      <td>tab 导航标签的父元素</td>
-                    </tr>
-                    <tr>
-                        <td>tabConContainer</td>
-                        <td>String | false</td>
-                        <td><code>.tab-con-container</code></td>
-                        <td>tab 内容标签的父元素</td>
-                    </tr>
-                    <tr>
-                        <td>tabNavItems</td>
-                        <td>LikeArray | false</td>
-                        <td><code>为空</code></td>
-                        <td>tab 导航标签
-                          <br>例如 document.querySelectorAll('.nav-items'),<br>
-                          不写的话默认取tabNavContainer的子元素
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>tabConItems</td>
-                        <td>LikeArray | false</td>
-                        <td><code>为空</code></td>
-                        <td>tab 内容标签
-                          <br>例如 document.querySelectorAll('.nav-con-items')<br>
-                          不写的话默认取tabConContainer子元素<br>
-                          tabConItems 与 tabConContainer必填一项
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>callback</td>
-                      <td>Function</td>
-                      <td><code>undefined</code></td>
-                      <td>点击切换的回调。其中，上下文<code>this</code>指点击元素DOM对象。默认参数为当前点击的索引值</td>
-                    </tr>
-                  </tbody></table>
-              </li>
-              <li>
-                demo
-                <pre class="pre">
-                    ui.TabWidget({
-                      curIdex: 1,
-                      callback: function (idx) {
-                        alert(idx)
-                      }
-                    })
-                  </pre>
-                  <pre>
-                      body {
-                        color:red;
-                        cb: fuc
-                      }
-                      </pre>
-              </li>
-            </ol>
-          </div>
-        </div>
+      <iframe src="./about.html" frameborder="0" class="iframe-box"></iframe>
     </section>
   </div>
-  <script src="./assets/ui.js"></script>
+
   <script src="./assets/main.js"></script>
 </body>
 

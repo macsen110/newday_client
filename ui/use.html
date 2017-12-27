@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./assets/ui.css" rel="stylesheet">
+  <title>use</title>
+</head>
+<body>
+  <div class="container-box">
+    <div class="box-item">
+      <h3 class="title">
+        使用方法
+        </h2>
+        <ol class="use-list">
+          <li>
+            <h4>使用npm import方式引入(Dialog为例)</h4>
+            <div class="pre">
+              npm i yao-m-ui --save                  
+              <br> import * as ui form 'yao-m-ui'
+              <br>
+              import "yao-m-ui/widget.css""
+              <br> ui.Dialog({})
+            </div>
+          </li>
+          <li>
+            <h4>或者使用require加载</h4>
+            <div class="pre">
+              npm i yao-m-ui --save
+              <br> var ui = require('yao-m-ui')
+              <br>
+              require("yao-m-ui/widget.css"")
+              <br> ui.Dialog({})
+
+            </div>
+            <li>
+              <h4>
+                或者直接script 标签引入 npm包目录下的index.js
+              </h4>
+              <div class="pre">
+                <span>&lt;script src='./index.js&gt;&lt;/script&gt;</span>
+                window.yaoMUI.Dialog({})
+              </div>
+            </li>
+        </ol>
+    </div>
+    
+  </div>
+</body>
+</html>

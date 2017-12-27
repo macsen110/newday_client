@@ -11,6 +11,12 @@ h1, h2, h3 {
   margin: 0;
   font-weight: normal
 }
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
 ol {
   padding: 0;
   margin-left: 20px
@@ -20,6 +26,29 @@ body {
   background-color: #edf1f5;
   padding: 0;
   margin: 0
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 0px;  
+    height: 0px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);  
+    border-radius: 10px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
+    background-color: #555;  
 }
 .header {
   background-color: #00a5e0;
@@ -35,6 +64,25 @@ body {
     font-size: 18px;
     color: #fff;
     overflow: hidden
+}
+.btn {
+  display: inline-block;
+  line-height: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  border: 1px solid #d0d0d5;
+  border-radius: 4px;
+  padding: 9px 15px;
+  min-width: 50px;
+  background-color: #00a5e0;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: visible;
+  border: 0 none;
+  outline: none
 }
 section {
   overflow: hidden;
@@ -85,7 +133,7 @@ section {
 }
 
 .main > section {
-  min-height: calc(100vh - 62px);
+  height: calc(100vh - 62px);
   padding: 0 30px;
   overflow: hidden;
 }
@@ -94,7 +142,7 @@ section {
   font-weight: 400;
   font-size: 28px;
 }
-section .pre {
+.pre {
   padding: 10px 1em;
   margin: 1em 0;
   border: 1px dashed #ccc;
@@ -133,7 +181,8 @@ section .pre {
   padding-top: 14px;
   padding-bottom: 14px;
   background-color: #fff;
-  border-bottom: 1px solid #ededed
+  border-bottom: 1px solid #ededed;
+  word-break: break-all
 }
 
 .ui-table td,.ui-table th {
@@ -155,4 +204,127 @@ section .pre {
 .ui-table tr:last-child td {
   padding-bottom: 15px;
   border-bottom: 0
+}
+.iframe-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.demo-container-box {
+  padding: 15px;
+  background: #fff;
+}
+.demo-container-box h5 {
+  padding: 0 0 10px;
+  border-bottom: 1px solid #999;
+}
+.tab-nav-container {
+  overflow: hidden;
+  padding-left: 20px;
+}
+
+.tab-nav-container .item {
+  float: left;
+  width: 80px;
+  line-height: 36px;
+  text-align: center;
+  border: 1px solid #999;
+  margin-right: 10px;
+  background-color: #fff
+}
+.tab-nav-container .item.on {
+  border-bottom-color: #fff;
+}
+.tab-con-container {
+  border: 1px solid #999;
+  padding: 20px;
+  margin-top: -1px
+}
+.tab-con-container .item {
+  display: none
+}
+.tab-con-container .item.on {
+  display: block
+}
+
+
+
+
+/**
+widget
+*/
+.widget-dialog {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.widget-dialog .dialog-mask-bg {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.widget-dialog .main {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.widget-dialog .title {
+  padding: 12px 0;
+}
+.widget-dialog .content {
+  padding: 0 16px 10px;
+}
+.widget-dialog .foot {
+  height: 36px;
+  border-top: 1px solid #dcdddd;
+  display: -webkit-box;
+  display: flex;
+  overflow: hidden;
+}
+.widget-dialog .foot button {
+  display: block;
+  height: 100%;
+  font-size: 12px;
+  -webkit-box-flex: 1;
+  flex: 1;
+  width: 100%;
+  color: #01a0e4;
+  border: 0 none;
+  background: none;
+}
+.widget-dialog .foot button:nth-of-type(2) {
+  border-left: 1px solid #dcdddd;
+}
+.widget-prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 55%;
+  padding: 10px;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  z-index: 101;
 }

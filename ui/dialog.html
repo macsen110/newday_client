@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./assets/ui.css" rel="stylesheet">
+  <title>TabWidget</title>
+</head>
+
+<body>
+  <div class="box-item" role="tab">
+    <h3 class="title">
+      Dialog 弹框插件
+    </h3>
+    <div class="desc">
+      面向项目设计的弹框插件, 简单易用,配置可控
+    </div>
+    <div class="box">
+      <ol>
+        <li>语法
+          <div class="pre">
+            ui.Dialog(options)
+          </div>
+        </li>
+        <li>
+          文档
+          <table width="100%" class="ui-table">
+            <tbody>
+              <tr>
+                <th scope="col" width="100">参数名称</th>
+                <th scope="col" width="120">类型 | 是否必填</th>
+                <th scope="col" width="160">默认值</th>
+                <th scope="col">释义</th>
+              </tr>
+              <tr>
+                <td>className</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  组件root 标签下传入的css class名称, 业务中定制化组件需要在此重写
+                </td>
+              </tr>
+              <tr>
+                <td>afterOpen</td>
+                <td>Function | false</td>
+                <td>
+                  <code>Function</code>
+                </td>
+                <td>Dilog代码片段render到body中以后就调用</td>
+              </tr>
+              <tr>
+                <td>tabNavContainer</td>
+                <td>Object | false</td>
+                <td>
+                  <code>document.querySelector('.tab-nav-container')</code>
+                </td>
+                <td>tab 导航标签的父元素</td>
+              </tr>
+              <tr>
+                <td>tabConContainer</td>
+                <td>Object | false</td>
+                <td>
+                  <code>document.querySelector('.tab-con-container')</code>
+                </td>
+                <td>tab 内容标签的父元素</td>
+              </tr>
+              <tr>
+                <td>tabNavItems</td>
+                <td>LikeArray | false</td>
+                <td>
+                  <code>为空</code>
+                </td>
+                <td>tab 导航标签
+                  <br>例如 document.querySelectorAll('.nav-items'),
+                  <br> 不写的话默认取tabNavContainer的子元素
+                </td>
+              </tr>
+              <tr>
+                <td>tabConItems</td>
+                <td>LikeArray | false</td>
+                <td>
+                  <code>为空</code>
+                </td>
+                <td>tab 内容标签
+                  <br>例如 document.querySelectorAll('.nav-con-items')
+                  <br> 不写的话默认取tabConContainer子元素
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>
+                  <code>undefined</code>
+                </td>
+                <td>点击切换的回调。其中，上下文
+                  <code>this</code>指点击元素DOM对象。默认参数为当前点击的索引值</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <p>demo,点击add 按钮可以增加nav标签</p>
+          <p>html 代码片段</p>
+          <pre class="pre"><code class="code">
+              &lt;ul class="tab-nav-container"&gt;
+                &lt;li class="item"&gt;nav-1&lt;/li&gt;
+                &lt;li class="item"&gt;nav-2&lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;ul class="tab-con-container"&gt;
+                &lt;li class="item"&gt;con-1&lt;/li&gt;
+                &lt;li class="item"&gt;con-2&lt;/li&gt;
+              &lt;/ul&gt;
+          </code></pre>
+          <p>js核心代码</p>
+          <pre class="pre">
+            <code class="code">
+              ui.TabWidget({
+                curIdex: 1,
+                callback: function (idx) {
+                  console.log(idx)
+                }
+              })
+          </code>
+        </pre>
+        <div class="demo-container-box" id="tab_Widget_demo">
+            <h5>tab 切换demo展示 <button id="add_tab_btn">添加nav</button></h5>
+            <ul class="tab-nav-container">
+              <li class="item">nav-1</li>
+              <li class="item">nav-2</li>
+            </ul>
+            <ul class="tab-con-container">
+              <li class="item">content-1</li>
+              <li class="item">content-2</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+      
+    </div>
+  </div>
+  <script src="./assets/ui.js"></script>
+  <script src="./assets/iframe.js"></script>
+</body>
+
+</html>

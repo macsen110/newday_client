@@ -11,7 +11,7 @@
 			define(factory);
 	} 
 	else {
-			win.eventUtil = factory();
+			win.YAO_M_UI = factory();
 	}
 })(this, function () {
 	//module ...
@@ -461,8 +461,8 @@
 			}.bind(this))			
 		}
 		if (typeof args === 'string' || typeof args === 'number') this.msg = args;
-		this.init()
 		this.parentNode = this.parentNode || document.body;
+		this.init()
 	}
 	showPrompt.prototype = {
 		constructor: showPrompt,
@@ -474,15 +474,16 @@
 		open: function () {
 			this._container = document.createElement('div');
 			this._container.className = this.className ? this.className + ' widget-prompt' : 'widget-prompt';
+			console.log(this.msg)
 			this._container.innerHTML = this.msg;	
 			this.parentNode.appendChild(this._container)
 			this.promptTimer = setTimeout(function(){
 					this.destory();
 					if (this.cb) this.cb()
-			}.bind(this),3000);
+			}.bind(this),this.duration || 3000);
 		},
 		destory: function () {
-			this._container.parentNode.removeChild(this._container)
+			this._container && this._container.parentNode && this._container.parentNode.removeChild(this._container)
 			this._container = null;
 		}
 	}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./assets/ui.css" rel="stylesheet">
+  <title>TabWidget</title>
+</head>
+
+<body>
+  <div class="box-item" role="tab">
+    <h3 class="title">
+        totast提示
+    </h3>
+    <div class="desc">
+      页面中totast消息提示,n秒吼消失
+    </div>
+    <div class="box">
+      <ol>
+        <li>语法
+          <div class="pre">
+            ui.showPrompt(options)
+          </div>
+        </li>
+        <li>
+          文档
+          <table width="100%" class="ui-table">
+            <tbody>
+              <tr>
+                <th scope="col" width="100">参数名称</th>
+                <th scope="col" width="120">类型 | 是否必填</th>
+                <th scope="col" width="160">默认值</th>
+                <th scope="col">释义</th>
+              </tr>
+              <tr>
+                <td>msg</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>弹出的消息内容(支持文本或者是html代码片段）
+                </td>
+              </tr>
+              <tr>
+                <td>className</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>当前弹出的totast的dom块类名</td>
+              </tr>
+              <tr>
+                <td>duration</td>
+                <td>Number | false</td>
+                <td>
+                  <code>3000</code>
+                </td>
+                <td>弹框显示的时长,默认为3秒</td>
+              </tr>
+              
+              <tr>
+                <td>cb</td>
+                <td>Function | false</td>
+                <td>
+                  <code>为空</code>
+                </td>
+                <td>消失后调用,一般是一个callBack function;
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <p>demo,点击按钮弹出totast</p>
+          
+          <p>js核心代码</p>
+          <pre class="pre">
+            <code class="code">
+              ui.showPrompt('我是简单totast弹层,3秒消失')
+              或者
+              ui.showPrompt({
+                msg: '&lt;span style="color: red"&gt;我是&lt;/span&gt;html代码',
+                cb: function (idx) {
+                  alert('5秒完毕,我消失了')
+                },
+                className: 'some-class-name',
+                duration: 5000
+              })
+          </code>
+        </pre>
+        <div class="demo-container-box" id="totast_demo">
+            <h5>
+              totast 弹出层显示
+              <button class="btn" id="totast_demo_btn1">totast1</button>
+              <button class="btn" id="totast_demo_btn2">totast2</button>
+            </h5>
+            
+          </div>
+        </li>
+      </ol>
+      
+    </div>
+  </div>
+  <script src="./assets/ui.js"></script>
+  <script src="./assets/iframe.js"></script>
+</body>
+
+</html>
