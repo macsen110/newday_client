@@ -34,9 +34,9 @@
           <table width="100%" class="ui-table">
             <tbody>
               <tr>
-                <th scope="col" width="100">参数名称</th>
-                <th scope="col" width="120">类型 | 是否必填</th>
-                <th scope="col" width="160">默认值</th>
+                <th scope="col" width="120">参数名称</th>
+                <th scope="col" width="160">类型 | 是否必填</th>
+                <th scope="col" width="120">默认值</th>
                 <th scope="col">释义</th>
               </tr>
               <tr>
@@ -171,13 +171,14 @@
                   },
                   afterOk: function () {
                     console.log('我是点击确定按钮触发的')
+                    this.destory()
                   },
                   foot: '&lt;button class="btn-dialog-ok"&gt;确定&lt;/button&gt;&lt;button class="btn-dialog-cancel"&gt;取消&lt;button&gt;'
                 })
           </code>
         </pre>
           <div class="demo-container-box" id="dialog_demo">
-            <h5>tab 切换demo展示
+            <h5>Dialog 弹层demo展示
               <button id="dialog_demo_btn" class="btn">点我弹框</button>
             </h5>
 

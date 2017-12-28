@@ -1,4 +1,7 @@
 @import '//www.macsen318.com/res/normalize.css';
+* {
+  box-sizing: border-box
+}
 dl,
 dt,
 dd {
@@ -134,7 +137,7 @@ section {
 
 .main > section {
   height: calc(100vh - 62px);
-  padding: 0 30px;
+  padding:30px;
   overflow: hidden;
 }
 .section-title {
@@ -255,7 +258,7 @@ section {
 widget
 */
 .widget-dialog {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
@@ -327,4 +330,134 @@ widget
   font-size: 14px;
   text-align: center;
   z-index: 101;
+}
+
+
+/*
+* Swiper
+*/
+.easy-move-swiper {
+  overflow: hidden;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+.easy-move-swiper .item {
+  float: left;
+  width: 100%;
+  height: 100px;
+  background: orange;
+  color: #fff;
+  line-height: 100px;
+  text-align: center;
+}
+
+.pagination-list {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.pagination-list .item {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #cccccc;
+}
+.pagination-list .active {
+  background-color: orange;
+}
+.wrap-swiper-box {
+  width: 60%;
+  overflow: hidden;
+}
+
+/*
+easy-move
+*/
+.wrap-easymove-list {
+  width: 60%;
+  overflow: hidden;
+  border: 1px solid #999;
+}
+.easy-move-list {
+  overflow: hidden;
+  height: 100px;
+
+}
+.easy-move-list .item {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+  line-height: 100px;
+  text-align: center;
+  border-right: 1px solid #fff;
+
+}
+.easy-move-list .item.on {
+  color: #fff;
+  background-color: orange
+}
+.wrap-easymove-fullpage {
+  width: 60%;
+  height: 200px;
+  overflow: hidden;
+}
+.easy-move-fullpage {
+  height: 100%;
+  overflow: hidden;
+}
+.easy-move-fullpage .item {
+  text-align: center;
+  line-height: 200px;
+  background-color: orange
+}
+.easy-move-fullpage .item:nth-child(2n) {
+  background-color: red;
+  color: #fff;
+}
+
+
+/**
+**
+**
+*******/
+@-webkit-keyframes loading {
+  0% {
+    background-color: #333;
+  }
+  100% {
+    background-color: #efefef;
+  }
+}
+@keyframes loading {
+  0% {
+    background-color: #333;
+  }
+  100% {
+    background-color: #efefef;
+  }
+}
+.widget-loading{
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.widget-loading .mask {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.widget-loading .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  height: 100px;
+  width: 100px;
+  background: url(bg_loading.gif) no-repeat center;
 }

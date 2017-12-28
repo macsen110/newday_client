@@ -6,22 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="./assets/ui.css" rel="stylesheet">
-  <title>TabWidget</title>
+  <title>Loading</title>
 </head>
 
 <body>
   <div class="box-item" role="tab">
     <h3 class="title">
-        totast提示
+      Loading 组件
     </h3>
-    <div class="desc">
-      页面中totast消息提示,n秒吼消失
-    </div>
+    
     <div class="box">
       <ol>
         <li>语法
           <div class="pre">
-            ui.showPrompt(options)
+            ui.Loading(options)
           </div>
         </li>
         <li>
@@ -29,19 +27,10 @@
           <table width="100%" class="ui-table">
             <tbody>
               <tr>
-                <th scope="col" width="140">参数名称</th>
+                <th scope="col" width="160">参数名称</th>
                 <th scope="col" width="160">类型 | 是否必填</th>
                 <th scope="col" width="120">默认值</th>
                 <th scope="col">释义</th>
-              </tr>
-              <tr>
-                <td>msg</td>
-                <td>String | false</td>
-                <td>
-                  <code>''</code>
-                </td>
-                <td>弹出的消息内容(支持文本或者是html代码片段）
-                </td>
               </tr>
               <tr>
                 <td>className</td>
@@ -49,52 +38,67 @@
                 <td>
                   <code>''</code>
                 </td>
-                <td>当前弹出的totast的dom块类名</td>
+                <td>根组件元素的className</td>
               </tr>
               <tr>
-                <td>duration</td>
-                <td>Number | false</td>
+                <td>html</td>
+                <td>String | false</td>
                 <td>
-                  <code>3000</code>
+                  <code>''</code>
                 </td>
-                <td>弹框显示的时长,默认为3秒</td>
+                <td>loading 元素的html代码片段</td>
+              </tr>
+              <tr>
+                <td>parentNode</td>
+                <td>Element | false</td>
+                <td>
+                  <code>document.body</code>
+                </td>
+                <td>承载该组件的父元素</td>
               </tr>
               
               <tr>
-                <td>cb</td>
+                <td>start</td>
                 <td>Function | false</td>
                 <td>
-                  <code>为空</code>
+                  <code>Function</code>
                 </td>
-                <td>消失后调用,一般是一个callBack function;
+                <td>
+                  loading开始
                 </td>
               </tr>
+              <tr>
+                <td>end</td>
+                <td>Function | false</td>
+                <td>
+                  <code>Function</code>
+                </td>
+                <td>
+                  loading结束
+                </td>
+              </tr>
+              
             </tbody>
           </table>
         </li>
         <li>
-          <p>demo,点击按钮弹出totast</p>
+          <p>demo</p>
           
           <p>js核心代码</p>
           <pre class="pre">
             <code class="code">
-              ui.showPrompt('我是简单totast弹层,3秒消失')
-              或者
-              ui.showPrompt({
-                msg: '&lt;span style="color: red"&gt;我是&lt;/span&gt;html代码',
-                cb: function (idx) {
-                  alert('5秒完毕,我消失了')
-                },
-                className: 'some-class-name',
-                duration: 5000
+              var startLoadingBtn = document.getElementById('start_loading_btn')
+              var endLoadingBtn = document.getElementById('end_loading_btn')
+              startLoadingBtn.addEventListener('click', function () {
+                var loading = ui.Loading().start()
+                setTimeout(function () {loading.end()}, 5000)
               })
+              
           </code>
         </pre>
-        <div class="demo-container-box" id="totast_demo">
-            <h5>
-              totast 弹出层显示
-              <button class="btn" id="totast_demo_btn1">totast1</button>
-              <button class="btn" id="totast_demo_btn2">totast2</button>
+        <div class="demo-container-box" id="loading_demo">
+            <h5>tab 切换demo展示 
+              <button class="btn" id="start_loading_btn">开始loading</button>
             </h5>
             
           </div>

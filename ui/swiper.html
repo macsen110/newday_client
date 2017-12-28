@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./assets/ui.css" rel="stylesheet">
+  <title>TabWidget</title>
+</head>
+
+<body>
+  <div class="box-item" role="tab">
+    <h3 class="title">
+      easyMove 滑动插件
+    </h3>
+    <div class="desc">
+      简单的滑动插件,可用于pc和h5内置集成了swiper,简单易用,功能强悍
+    </div>
+    <div class="box">
+      <ol>
+        <li>语法
+          <div class="pre">
+            ui.easyMove(element, options)
+          </div>
+        </li>
+        <li>
+          element 滚动目标dom 节点
+        </li>
+        <li>
+          options 文档解析
+          <table width="100%" class="ui-table">
+            <tbody>
+              <tr>
+                <th scope="col" width="140">参数名称</th>
+                <th scope="col" width="160">类型 | 是否必填</th>
+                <th scope="col" width="120">默认值</th>
+                <th scope="col">释义</th>
+              </tr>
+              <tr>
+                <td>parentEle</td>
+                <td>String | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  手指touch或鼠标移动dom块 默认为 element
+                </td>
+              </tr>
+              <tr>
+                <td>index</td>
+                <td>Number | false</td>
+                <td>
+                  <code>0</code>
+                </td>
+                <td>
+                  move 定位到哪个子item
+                </td>
+              </tr>
+              <tr>
+                <td>focusIndex</td>
+                <td>Number | false</td>
+                <td>
+                  <code>0</code>
+                </td>
+                <td>
+                  聚焦到某个位置的索引值
+                </td>
+              </tr>
+              <tr>
+                <td>speed</td>
+                <td>Number | false</td>
+                <td>
+                  <code>''</code>
+                </td>
+                <td>
+                  滚动速率
+                </td>
+              </tr>
+              <tr>
+                <td>limitBorder</td>
+                <td>Bollen | false</td>
+                <td>
+                  <code>true</code>
+                </td>
+                <td>
+                  滑动后是否会回顶到边界
+                </td>
+              </tr>
+              <tr>
+                <td>showNum</td>
+                <td>Number | true</td>
+                <td>
+                  <code></code>
+                </td>
+                <td>显示的滑动的item数量</td>
+              </tr>
+              <tr>
+                <td>distance</td>
+                <td>Number | false</td>
+                <td>
+                  <code>50</code>
+                </td>
+                <td>自定义滑动距离,超过这个距离到达下一个场景</td>
+              </tr>
+              <tr>
+                <td>orientation</td>
+                <td>Number | false</td>
+                <td>
+                  <code>1</code>
+                </td>
+                <td>滑动方向 1为横向,2为纵向</td>
+              </tr>
+              <tr>
+                <td>touchMoveCb</td>
+                <td>Function | false</td>
+                <td>
+                  <code>Function </code>
+                </td>
+                <td>
+                  监听动画滑动事件回调
+                </td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>Function | false</td>
+                <td>
+                  <code>Function</code>
+                </td>
+                <td>
+                  动画完成后的回调
+                </td>
+              </tr>
+              <tr>
+                <td>autoPlay</td>
+                <td>Bollen | false</td>
+                <td>
+                  <code>false</code>
+                </td>
+                <td>是否可以自动播放</td>
+              </tr>
+              <tr>
+                <td>paginationList</td>
+                <td>Element | Object</td>
+                <td>
+                  <code>null</code>
+                </td>
+                <td>指示导航,多用于swiper滚动时下面的指示灯</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <div class="box-demo-item">
+            <h2>类swiper滑动</h2>
+            <p>html核心代码</p>
+            <pre class="pre">
+              <code class="code">
+                &lt;ul class="easy-move-list"&gt;
+                    &lt;li class="item"&gt;01&lt;/li&gt;
+                    &lt;li class="item"&gt;02&lt;/li&gt;
+                    &lt;li class="item" data-index=2&gt;03&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;ul class="pagination-list"&gt;
+                  &lt;li class="item"&gt;&lt;/li&gt;
+                  &lt;li class="item"&gt;&lt;/li&gt;
+                  &lt;li class="item"&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            </code></pre>
+            <p>js核心代码</p>
+            <pre class="pre">
+              <code class="code">
+                  ui.easyMove(document.querySelector('.easy-move-list'), {
+                    autoPlay: true,
+                    paginationList: document.querySelector('.pagination-list')
+                  })
+              </code>
+            </pre>
+            <div class="demo-container-box" id="easyMove_swiper_demo">
+              <h5>swipr</h5>
+              <div class="wrap-swiper-box">
+                <ul class="easy-move-swiper">
+                  <li class="item">01</li>
+                  <li class="item">02</li>
+                  <li class="item">03</li>
+                </ul>
+                <ul class="pagination-list">
+                  <li class="item"></li>
+                  <li class="item"></li>
+                  <li class="item"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="box-demo-item" id="easy_move_demo">
+            <h2>滚动元素</h2>
+            <p>js核心代码</p>
+            <pre class="pre">
+              <code class="code">
+                  ui.easyMove(document.getElementById('easy_move_list'), {
+                    index: 2,
+                    focusIndex: 1,
+                    showNum:4,
+                    limitBorder: true,
+                    touchMoveCb: function () {
+                      touchMoveCb.bind(easyMove)(easyMove.index)
+                    },
+                    callback: function (params) {
+                      easyCallback.bind(easyMove)(easyMove.index)
+                    }
+                  });
+              </code>
+            </pre>
+            <div class="wrap-easymove-list">
+              <ul id="easy_move_list" class="easy-move-list">
+                <li class="item">01</li>
+                <li class="item">02</li>
+                <li class="item">03</li>
+                <li class="item">04</li>
+                <li class="item">05</li>
+                <li class="item">06</li>
+                <li class="item">07</li>
+                <li class="item">08</li>
+              </ul>
+            </div>
+          </div>
+          <div class="box-demo-item" id="easy_move_demo">
+              <h2>类fullpage Demo (上下滑动翻页)</h2>
+              <p>js核心代码</p>
+              <pre class="pre">
+                <code class="code">
+                    ui.easyMove(document.getElementById('easy_move_fullpage'), {
+                      showNum: 1,
+                      limitBorder: true,
+                      orientation: 2,
+                      distance: 30,
+                      childHeight: 200
+                    });
+                </code>
+              </pre>
+              <div class="wrap-easymove-fullpage">
+                <ul id="easy_move_fullpage" class="easy-move-fullpage">
+                  <li class="item">01</li>
+                  <li class="item">02</li>
+                  <li class="item">03</li>
+                  <li class="item">04</li>
+                  <li class="item">05</li>
+                  <li class="item">06</li>
+                  <li class="item">07</li>
+                  <li class="item">08</li>
+                </ul>
+              </div>
+            </div>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+  <script src="./assets/ui.js"></script>
+  <script src="./assets/iframe.js"></script>
+</body>
+
+</html>

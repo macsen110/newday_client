@@ -183,6 +183,7 @@
 		this.moveDomArr = [];
 		this.originLength = element.children.length;
 		this.index = options.index ? options.index : 0;
+		this.duration = options.duration || 2000
 		if (this.autoPlay) {
 			for (var i = 0; i < this.originLength; i++) {
 				this.moveDomArr[i+1] = i;
@@ -190,7 +191,6 @@
 			this.moveDomArr[0] = this.originLength -1;
 			this.moveDomArr[this.originLength+1] = 0;
 			this.appendDom();
-		//	self._autoPlay()
 			this.index = this.index + 1;
 		}
 		this.child = element.children[0]; //选取一个子元素,以便可以随时获取其宽度
@@ -207,7 +207,7 @@
 		this.hasMoved = false; //是否触发过onTouchMove，用以区分点击与滑动
 		this.orientation = options.orientation || 1; //滑动的方向,1为横向, 2为纵向
 		this.distance = options.distance;//自定义滑动距离,
-		this.autoPlay = options.autoPlay;
+
 		if (this.parentEle.addEventListener) {
 			this.parentEle.addEventListener(isTouch?'touchstart':'mousedown', this, false);
 			this.element.addEventListener('webkitTransitionEnd', this, false);
@@ -239,7 +239,7 @@
 			if (self.orientation == 2) self.element.style.MozTransform = self.element.style.webkitTransform = 'translate3d(0,' + (-(self.index-self.focusIndex) * self.childHeight) + 'px,0)';
 			self.move(self.index)
 			self.paginationList && self.filterPagination(self.index)
-			if (this.autoMove) self._autoPlay()
+			if (this.autoPlay) self._autoPlay()
 		},
 		appendDom: function () {
 			var firstDom = this.element.children[0];
@@ -303,7 +303,7 @@
 			};
 			//将动画时间设为0，以便在按下时马上结束尚在进行的动画
 			self.element.style.webkitTransition = "-webkit-transform 0ms";
-			this.touchStartResetTargetIndex(this.index);
+			self.autoPlay && self.touchStartResetTargetIndex(this.index);
 		},
 		onTouchMove: function (e) {
 			var self = this;
@@ -331,6 +331,7 @@
 		},
 		onTouchEnd: function (e) {
 			var self = this;
+			
 			if (!self.hasMoved) {
 				if (self.orientation == 1)  self.deltaX = 0; //若没有滑动过，重置值
 				if (self.orientation == 2) self.deltaY = 0
@@ -353,21 +354,26 @@
 					
 			}
 			if (self.orientation == 2) {
+				
+
 					var height = self.childHeight;
 					var targetIndex;
 					if (self.distance) {
 							var remainderDistance = self.deltaY - parseInt(self.deltaY/height) * height;
+							
 							if (remainderDistance > 0) {
 									targetIndex = self.index - (parseInt(self.deltaY/height) + (remainderDistance - self.distance > 0 ? 1 : 0));
 							}
 							else {
+									
 									targetIndex = self.index - (parseInt(self.deltaY/height) + (Math.abs(remainderDistance) - self.distance > 0 ? -1 : 0));
 							} 
 					}
 					else targetIndex = self.index - Math.round(self.deltaY/height);
+					
 			}
-            
 			targetIndex = self.limitIndex(targetIndex);
+			
 			self.autoMove(targetIndex);
 			if (self.callback) {
 				var choseId = self.index + self.offset;
@@ -376,8 +382,7 @@
 			if (self.autoPlay) self._autoPlay()
 		},
 		transitionEnd: function (e) {
-			var self = this;
-			this.filterPagination(this.index)
+			this.paginationList && this.filterPagination(this.index)
 		},
 		autoMove: function (targetIndex) {
 			
@@ -403,7 +408,8 @@
 		},
 		limitIndex: function (targetIndex) {
 			var self = this;
-			if (this.autoMove && targetIndex == this.length) targetIndex = this.autoMoveResetTargetIndex()
+			
+			if (this.autoPlay && targetIndex == this.length) targetIndex = this.autoMoveResetTargetIndex()
 			if (!self.limitBorder) {
 				if (targetIndex < -self.offset) targetIndex = -self.offset;	
 				else if (targetIndex > self.length - 1 - self.offset) targetIndex = self.length - 1 - self.offset;
@@ -412,6 +418,7 @@
 				if (targetIndex < 0) targetIndex = 0;
 				else if ((targetIndex > self.length - self.showNum + self.focusIndex)) targetIndex = self.length -(self.showNum - self.focusIndex);
 			}
+			
 			targetIndex = targetIndex - self.focusIndex;
 			return targetIndex;
 		},
@@ -442,7 +449,7 @@
 			clearInterval(this.autoPlayId)
 		},
 		_autoPlay: function () {
-			this.autoPlayId = setInterval(function () {this.move(this.index + 1)}.bind(this), 2000)
+			this.autoPlayId = setInterval(function () {this.move(this.index + 1)}.bind(this), this.duration)
 		},
 		filterPagination: function (index) {
 			var curPaginationIndex = this.moveDomArr[index];
@@ -474,7 +481,6 @@
 		open: function () {
 			this._container = document.createElement('div');
 			this._container.className = this.className ? this.className + ' widget-prompt' : 'widget-prompt';
-			console.log(this.msg)
 			this._container.innerHTML = this.msg;	
 			this.parentNode.appendChild(this._container)
 			this.promptTimer = setTimeout(function(){
@@ -511,6 +517,7 @@
 				this.parentNode.appendChild(this._container)
 			} 
 			this._container.style.display = 'block';
+			return this;
 		},
 		end: function () {
 			this._container && (this._container.style.display = 'none');

@@ -1,3 +1,4 @@
+var ui = window.YAO_M_UI || {}
 ;(function () {
   var codeTagList = document.querySelectorAll('.code');
   if (codeTagList.length) {
@@ -29,7 +30,7 @@ function formatCodeTag(codeTag) {
     
   }
   function demoTab() {
-    return window.YAO_M_UI.TabWidget({
+    return ui.TabWidget({
       curIdex: 1,
       callback: function (idx) {
         console.log(idx)
@@ -47,10 +48,10 @@ function formatCodeTag(codeTag) {
   var totastDemoBtn2 = document.getElementById('totast_demo_btn2')
   if (totastDemo) {
     totastDemoBtn1.addEventListener('click', function () {
-      window.YAO_M_UI.showPrompt('我是简单totast弹层,3秒消失')
+      ui.showPrompt('我是简单totast弹层,3秒消失')
     })
     totastDemoBtn2.addEventListener('click', function () {
-      window.YAO_M_UI.showPrompt({
+      ui.showPrompt({
         msg: '<span style="color: red">我是</span>html代码',
         cb: function (idx) {
           alert('5秒完毕,我消失了')
@@ -71,7 +72,7 @@ function formatCodeTag(codeTag) {
    var dialogDemoBtn = document.getElementById('dialog_demo_btn');
    if (dialogDemo) {
     dialogDemoBtn.addEventListener('click', function () {
-      window.YAO_M_UI.Dialog({
+      ui.Dialog({
         title: '我是标题',
         content: '我是内容',
         afterClose: function() {
@@ -82,9 +83,79 @@ function formatCodeTag(codeTag) {
         },
         afterOk: function () {
           console.log('我是点击确定按钮触发的')
+          this.destory()
         },
-        foot: '<button class="btn-dialog-ok">确定</button><button class="btn-dialog-cancel">取消<button>'
+        foot: '<button class="btn-dialog-ok">确定</button><button class="btn-dialog-cancel">取消</button>'
       })
     })
    }
  }())
+
+ /**
+  * easy Move滚动Demo
+  */
+  ;(function () {
+    var swiperDemo = document.getElementById('easyMove_swiper_demo')
+    var easyMoveDemo = document.getElementById('easy_move_demo')
+    var fullpage = document.getElementById('easy_move_fullpage')
+    if (swiperDemo) {
+      ui.easyMove(document.querySelector('.easy-move-swiper'), {
+        autoPlay: true,
+        paginationList: document.querySelector('.pagination-list')
+      })
+    }
+    if (easyMoveDemo) {
+      function easyCallback (index) {
+        [].forEach.call(this.element.children, function (item, idx) {
+          if (index !== idx) item.classList.remove('on')
+          else item.classList.add('on')
+        })
+      }
+      var touchMoveCb = function (index) {
+        [].forEach.call(this.element.children, function (item, idx) {
+          item.classList.remove('on')
+        })
+      }
+      
+      var easyMove = ui.easyMove(document.getElementById('easy_move_list'), {
+				index: 2,
+				focusIndex: 1,
+				showNum:4,
+				limitBorder: true,
+				touchMoveCb: function () {
+          touchMoveCb.bind(easyMove)(easyMove.index)
+        },
+				callback: function (params) {
+          easyCallback.bind(easyMove)(easyMove.index)
+        }
+      });
+      
+    }
+    if (fullpage) {
+      ui.easyMove(fullpage, {
+        index: 0,
+        showNum: 1,
+        limitBorder: true,
+        orientation: 2,
+        distance: 30,
+        childHeight: 200
+      });
+    }
+  }())
+
+/***
+ * loading
+ */
+
+  ;(function () {
+    var loadingDemo = document.getElementById('loading_demo');
+    if(loadingDemo) {
+      var startLoadingBtn = document.getElementById('start_loading_btn')
+      var loading;
+      startLoadingBtn.addEventListener('click', function () {
+        loading = ui.Loading().start()
+        setTimeout(function () {loading.end()}, 5000)
+      })
+      
+    }
+  }())
