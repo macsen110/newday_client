@@ -15,7 +15,7 @@ html {
 	height: 100%;
 }
 body {
-	min-height: 100%;
+	height: 100%;
 	background-color: #f0f0f0;	
 }
 
@@ -70,7 +70,8 @@ table {
 	width: 100%;
 }
 body { 
-	overflow-x: hidden
+	overflow-x: hidden;
+	height: 100%;
 }
 
 textarea {
@@ -461,13 +462,16 @@ widget
 	margin: 0 auto
 }
 .app-container {
+	min-height: 100%;
 	max-width: 640px;
-	margin: 0 auto
+	margin: 0 auto;
+	background: #f8f8f8;
 }
 .wrap-header-container {
 	height: 40px;
 } 
 .header {
+	z-index: 10;
 	position: fixed;
 	top: 0;
 	left:50%;
@@ -476,8 +480,8 @@ widget
 	height: 40px;
 	background: #e9e9e9;
 	margin: 0;
-	border-bottom: 1px solid #e1e1e1;
-	z-index: 10;
+	box-shadow: inset 0 0 1px rgba(0,0,0,.12);
+	
 	transform: translate3d(-50%, 0, 0);
 	-webkit-transform: translate3d(-50%, 0, 0)
 }
@@ -535,7 +539,7 @@ widget
 .app-home-page,
 .app-detail-page,
 .app-list-page {
-	background-color: #f0f0f0;
+	
 	padding: 1rem;
 
 }
@@ -791,8 +795,11 @@ reader from server
 **
 ****************/
 
-@media (max-width:640px) {
-	
+@media (min-width:640px) {
+	.app-container {
+		border-right: 1px solid #dbe2e8;
+		border-left: 1px solid #dbe2e8;
+	}
 	/**********
 	**
 	**Selector for header
