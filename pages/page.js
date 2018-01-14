@@ -1,58 +1,61 @@
-(function () {
-  var page = {
-    _config: {
-      mode: 'hash'
-    },
-    _init: function (options) {
-      if (typeof options === 'object') {
-        for (var i in options) this._config[i] = options[i]
-      }
-      this._registerEvent()
-    },
-    _registerEvent: function () {
-
-    },
-    _route: function () {
-
-    },
-    sameOrigin: sameOrigin
-  },
-  /**
-   * Bind with the given `options`.
-   *
-   * Options:
-   *
-   *    - `click` bind to click events [true]
-   *    - `popstate` bind to popstate [true]
-   *    - `dispatch` perform initial dispatch [true]
-   *
-   * @param {Object} options
-   * @api public
-   */
-
-  page.start = function(options) {
-    options = options || {};
-    if (running) return;
-    running = true;
-    if (false === options.dispatch) dispatch = false;
-    if (false === options.decodeURLComponents) decodeURLComponents = false;
-    if (false !== options.popstate) window.addEventListener('popstate', onpopstate, false);
-    if (false !== options.click) {
-      document.addEventListener(clickEvent, onclick, false);
-    }
-    if (true === options.hashbang) hashbang = true;
-    if (!dispatch) return;
-    var url = (hashbang && ~location.hash.indexOf('#!')) ? location.hash.substr(2) + location.search : location.pathname + location.search + location.hash;
-    page.replace(url, null, true, dispatch);
-  };
-  /**
-    * Check if `href` is the same origin.
-  */
-
-  function sameOrigin(href) {
-    var origin = location.protocol + '//' + location.hostname;
-    if (location.port) origin += ':' + location.port;
-    return (href && (0 === href.indexOf(origin)));
+/**
+ * 简易路由系统适用于几
+ * 个简单的活动页面
+ */
+(function (win, factory) {
+	if (typeof exports === 'object') {
+			module.exports = factory();
+	} 
+	else if (typeof define === 'function' && define.amd) {
+			define(factory);
+	} 
+	else {
+			win.MINI_PAGE = factory();
+	}
+})(this, function () {
+  var APP = {};
+  APP._init = function () {
+    var self = this;
+    window.onpopstate = function (event) {
+			var stateObj = event.state;
+			if (stateObj) {
+				stateObj.urlAction = 1;
+				self.router.gotoPage(stateObj)
+			}
+		}
   }
-  window.page = pages._init;
+  APP._tools = {
+    setPath: function (obj) {
+			var path = location.pathname;
+			delete obj.replace;
+			return path + '?openId=' + encodeURIComponent(APP.uid) + '&appType=' + APP.openType + '&' + this.serializeObj(obj)
+		},
+		serializeObj: function (options) {
+			var arr = [];
+			for (var i in options) {
+				arr.push(i+'='+options[i]);				
+			}
+			return arr.join('&');
+    },
+    getLocationParam: function (url) {
+			var params = url.toString().slice(1).split("&");
+			var returnObject = {};
+			for(var i = 0; i != params.length; i++) {
+				var index = params[i].indexOf("=");
+				returnObject[params[i].slice(0, index)] = params[i].slice(index+1);
+			}
+			return returnObject;
+    },
+    setPageTitle: function (title) {
+			var $body = $('body');
+			document.title = title
+			// hack在微信等webview中无法修改document.title的情况
+			var $iframe = $('<iframe src="/fav.icon" style="height:0px; width: 0px; visibility: hidden"></iframe>').on('load', function() {
+				setTimeout(function() {
+					$iframe.off('load').remove()
+				}, 0)
+			}).appendTo($body) 
+		},
+  }
+  return APP;
 }())
