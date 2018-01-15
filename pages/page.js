@@ -10,25 +10,15 @@
 			define(factory);
 	} 
 	else {
-			win.MINI_PAGE = factory();
+			win.EASY_ROUTER = factory();
 	}
-})(this, function () {
+})(this, function() {
   var APP = {};
-  APP._init = function () {
-    var self = this;
-    window.onpopstate = function (event) {
-			var stateObj = event.state;
-			if (stateObj) {
-				stateObj.urlAction = 1;
-				self.router.gotoPage(stateObj)
-			}
-		}
-  }
-  APP._tools = {
+  APP.tools = {
     setPath: function (obj) {
 			var path = location.pathname;
 			delete obj.replace;
-			return path + '?openId=' + encodeURIComponent(APP.uid) + '&appType=' + APP.openType + '&' + this.serializeObj(obj)
+			return path + '?' + this.serializeObj(obj)
 		},
 		serializeObj: function (options) {
 			var arr = [];
@@ -56,6 +46,125 @@
 				}, 0)
 			}).appendTo($body) 
 		},
-  }
+		cbPathObj: function () {
+			var query = location.search;
+			if ('pageName' in this.getLocationParam(query))  {
+				var cbPathObj = this.getLocationParam(query);
+				if (cbPathObj.pageName !== 'index') {
+					delete cbPathObj.openId;
+					delete cbPathObj.appType;
+					return cbPathObj;
+				}
+			}
+			return undefined;
+		},
+		getType: function (fun) {
+			function isFunction(value) { return typeof value == "function" }
+			function isWindow(obj)     { return obj != null && obj == obj.window }
+			function isDocument(obj)   { return obj != null && obj.nodeType == obj.DOCUMENT_NODE }
+			function isObject(obj)     { return typeof obj == "object" }
+			function isPlainObject(obj) {
+				return isObject(obj) && !isWindow(obj) && Object.getPrototypeOf(obj) == Object.prototype
+			}
+			function isArray(value) { return value instanceof Array }
+			function likeArray(obj) { return typeof obj.length == 'number' }
+			if (isFunction(fun)) return 'function';
+			if (isPlainObject(fun)) return 'object';
+			return false;
+		}
+	};
+	APP.router = {
+		setRouter: function (stateObj, component) {
+			if (!('urlAction' in stateObj)) {
+				if (stateObj.replace) history.replaceState(stateObj, '', APP.tools.setPath(stateObj));
+				else history.pushState(stateObj, '', APP.tools.setPath(stateObj));
+			}
+			this.updatePageView(component, stateObj)
+		},
+		updatePageView: function (component, stateObj) {
+			this.endLoading();
+			if (this.curPathWidget) this.curPathWidget.destroy && this.curPathWidget.destroy();
+			this.curPathWidget = component
+		},
+		curPathWidget: undefined,
+		curPathName: undefined,
+		cbPathObj: APP.tools.cbPathObj(),
+		go: function (name, query) {
+			var stateObj = {};
+			var self = this;
+			stateObj.pageName = name;
+			if (APP.tools.getType(query) === 'object') {
+				for (var i in query) stateObj[i] = query[i];
+			}
+			self._gotoPage(stateObj)
+		},
+		replace: function (name, query) {
+			var stateObj = {};
+			var self = this;
+			stateObj.pageName = name;
+			stateObj.replace = 1;
+			if (APP.tools.getType(query) === 'object') {
+				for (var i in query) stateObj[i] = query[i];
+			}
+			self._gotoPage(stateObj)
+		},
+		_gotoPage: function (stateObj) {
+			this.curPathName = stateObj.pageName;
+			this._goPathNew(stateObj.pageName, stateObj);            
+		},
+		initJump: function () {
+			var stateObj = {};
+			if (this.cbPathObj) stateObj = this.cbPathObj;
+			else stateObj.pageName = 'home';
+			stateObj.replace = 1;
+			this._gotoPage(stateObj);
+			this.cbPath = null;
+		},
+		startLoading: function (type) {
+			var $loading = $('#layout_loading');
+			$loading.addClass('visible')
+		},
+		endLoading: function (type) {
+			// var $loading = $('#layout_loading');
+			// $loading.removeClass('visible')
+		},
+		_init(config) {
+			var self = this;
+			self._routerConfigArr = config || [];
+			self._registerListener();
+			self.initJump()
+		},
+		_registerListener() {
+			var self = this;
+			window.onpopstate = function (event) {
+				var stateObj = event.state;
+				if (stateObj) {
+					stateObj.urlAction = 1;
+					self._gotoPage(stateObj)
+				}
+			}
+		},
+		_goPathNew: function (path, stateObj) {
+			var self = this;
+			var filterCurRouterObjArr = self._routerConfigArr.filter(
+				function (item) {return item.pageName === path}
+			)
+			if (filterCurRouterObjArr.length) {
+				var filterCurRouterObj = filterCurRouterObjArr[0];
+				if (!filterCurRouterObj._updateInSide)  {
+					self.toDoRouterCb(stateObj, filterCurRouterObj.component)
+					self.setRouter(stateObj, filterCurRouterObj.component)
+				}
+				else self.toDoRouterCb(stateObj, filterCurRouterObj.component)
+			}
+			else alert(path + '路径尚未配置相关信息')
+		},
+		toDoRouterCb: function (stateObj, component) {
+			if (APP.tools.getType(component) === 'function') component(stateObj, this)
+			else if (APP.tools.getType(component) === 'object') {
+				component.init && component.init(stateObj, this)
+			}
+		}
+	};
   return APP;
-}())
+})
