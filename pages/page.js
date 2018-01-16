@@ -37,14 +37,8 @@
 			return returnObject;
     },
     setPageTitle: function (title) {
-			var $body = $('body');
-			document.title = title
-			// hack在微信等webview中无法修改document.title的情况
-			var $iframe = $('<iframe src="/fav.icon" style="height:0px; width: 0px; visibility: hidden"></iframe>').on('load', function() {
-				setTimeout(function() {
-					$iframe.off('load').remove()
-				}, 0)
-			}).appendTo($body) 
+			var $body = document.body;
+			title && (document.title = title);
 		},
 		cbPathObj: function () {
 			var query = location.search;
@@ -74,11 +68,12 @@
 		}
 	};
 	APP.router = {
-		setRouter: function (stateObj, component) {
+		setRouter: function (stateObj, component, title) {
 			if (!('urlAction' in stateObj)) {
-				if (stateObj.replace) history.replaceState(stateObj, '', APP.tools.setPath(stateObj));
-				else history.pushState(stateObj, '', APP.tools.setPath(stateObj));
+				if (stateObj.replace) history.replaceState(stateObj, title, APP.tools.setPath(stateObj));
+				else history.pushState(stateObj, title, APP.tools.setPath(stateObj));
 			}
+			APP.tools.setPageTitle(title)
 			this.updatePageView(component, stateObj)
 		},
 		updatePageView: function (component, stateObj) {
@@ -152,17 +147,17 @@
 			if (filterCurRouterObjArr.length) {
 				var filterCurRouterObj = filterCurRouterObjArr[0];
 				if (!filterCurRouterObj._updateInSide)  {
-					self.toDoRouterCb(stateObj, filterCurRouterObj.component)
-					self.setRouter(stateObj, filterCurRouterObj.component)
+					self.toDoRouterCb(stateObj, filterCurRouterObj.component, filterCurRouterObj.title)
+					self.setRouter(stateObj, filterCurRouterObj.component, filterCurRouterObj.title)
 				}
-				else self.toDoRouterCb(stateObj, filterCurRouterObj.component)
+				else self.toDoRouterCb(stateObj, filterCurRouterObj.component,filterCurRouterObj.title)
 			}
 			else alert(path + '路径尚未配置相关信息')
 		},
-		toDoRouterCb: function (stateObj, component) {
-			if (APP.tools.getType(component) === 'function') component(stateObj, this)
+		toDoRouterCb: function (stateObj, component, title) {
+			if (APP.tools.getType(component) === 'function') component(stateObj, this, title)
 			else if (APP.tools.getType(component) === 'object') {
-				component.init && component.init(stateObj, this)
+				component.init && component.init(stateObj, this, title)
 			}
 		}
 	};
