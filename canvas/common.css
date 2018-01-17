@@ -1,0 +1,208 @@
+@import '//www.macsen318.com/res/normalize.css';
+* {
+  box-sizing: border-box
+}
+dl,
+dt,
+dd {
+  margin: 0;
+}
+html {
+  height: 100%;
+  font-size: 20px;
+}
+h1, h2, h3 {
+  margin: 0;
+  font-weight: normal
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
+ol {
+  padding: 0;
+  margin-left: 20px
+}
+body {
+  min-height: 100%;
+  background-color: #edf3ff;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.page-declare-safety,
+.page-declare-safety .clip-image-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  
+}
+
+    
+    
+.page-declare-safety  .body .container {
+  position: relative;
+  
+  width: 12rem;
+  margin: 1rem auto .75rem;
+  
+}
+
+.page-declare-safety  .body .container .pic {
+  width: 100%;
+  height: auto
+}
+
+.page-declare-safety  .body .container .btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #FFFFFF;
+  line-height: 2.55555556;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+
+}
+
+.page-declare-safety .body .container .btn:after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+/*.page-declare-safety {
+  background: -webkit-gradient(linear, 0 0, 1 bottom, from(rgba(134, 84, 233, 1)), to(rgba(226, 91, 193, 1))) fixed;
+}*/
+
+.page-declare-safety .upload-pic {
+  z-index: 2;
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.page-declare-safety .clip-image-container {
+  z-index: 10;
+  display: none;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.page-declare-safety .clip-image-container .clip-img {
+  position: absolute;
+  max-width: 100%;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+
+
+.page-declare-safety .clip-image-container .overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  border: 1px solid rgba(255, 255, 255, .6);
+  pointer-events: none;
+}
+#down_load,
+.down-load {
+  display: block;
+  width: 100%;
+  height: 44px;
+  background: red;
+}
+
+.page-declare-safety .clip-image-container .tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2.4rem;
+  display: -webkit-box;
+  -webkit-box-pack: end;
+  -webkit-box-align: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+
+.page-declare-safety .clip-image-container .btn {
+  display: block;
+  line-height: 1.6rem;
+  margin-right: .4rem;
+  color: #fff;
+  padding: 0 1.2rem ;
+  border-radius: .2rem;
+  border: 0 none;
+}
+.page-declare-safety .clip-image-container .ok {
+  background-color: #739ffe;
+}
+.page-declare-safety .clip-image-container .cancel {
+  background-color: #9da5b9;
+}
+.widget-bottom-nav .container {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5rem;
+  border-width: 1px 0 0;
+  border-image: url(../border2.png) 2 stretch;
+  background-color: #fff;
+}
+.widget-bottom-nav .container .item {
+  float: left;
+  height: 100%;
+  width: 33.33333333%;
+  padding-top: .5rem;
+
+  font-size: 0.7rem;
+  text-align: center;
+  color: #5b6373;
+}
+.widget-bottom-nav .container .item.active {
+  color: #789ef6;
+  pointer-events: none;
+}
+.widget-bottom-nav .container .item:last-child.active {
+  color: #f38fcf;
+}
+.widget-bottom-nav .container .item > * {
+  display: block;
+  line-height: 1.5rem;
+  border-right: 1px solid rgba(91, 99, 115, 0.17);
+}
+.widget-bottom-nav .container .item:last-child a {
+  border: 0;
+}
