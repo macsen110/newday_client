@@ -27,12 +27,13 @@
       </div>
     </div>
     <div class="body">
-      <div class="container active">
+      <div class="container default">
           <input type="file" class="upload-pic" accept="image/*" id="upload_pic">
           <div class="wrap-pic">
-              <img src="" alt="" class="pic">
+              <canvas id="preview_img_box" width="240" height="240"></canvas>    
+              <img src="./no_img.png" alt="" class="pic">
           </div>
-          <a download="" href="" class="down-btn btn">下载图片</a>
+          <a download="" href="" class="down-btn btn btn-pri">下载图片</a>
       </div>
     </div>
     <div class="widget-bottom-nav " id="bottom_nav">

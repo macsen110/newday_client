@@ -53,8 +53,8 @@ body {
 }
 
 .page-declare-safety  .body .container .pic {
-  width: 100%;
-  height: auto
+  width: 12rem;
+  height: 12rem;
 }
 
 .page-declare-safety  .body .container .btn {
@@ -74,9 +74,19 @@ body {
   border-radius: 5px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   overflow: hidden;
-
+  background-color: #1AAD19
 }
-
+.page-declare-safety .body .container.default .btn,
+.page-declare-safety .body .container.default canvas {
+  display: none
+}
+.page-declare-safety .body .container.active .btn,
+.page-declare-safety .body .container.active canvas {
+  display: block
+}
+.page-declare-safety .body .container.active .pic {
+  display: none;
+}
 .page-declare-safety .body .container .btn:after {
     content: " ";
     width: 200%;

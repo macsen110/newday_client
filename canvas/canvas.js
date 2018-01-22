@@ -9,9 +9,14 @@
       iptFile.addEventListener('change',function () {
         var files = this.files;
         if(files.length) {
-          page._renderFile(files);
+					page._renderFile(files);
+					this.value = '';
         }
-      });
+			});
+			this.$rootDom.find('.down-btn')
+				.click(function () {
+					this.download()
+				}.bind(this))
       this._bindClipImg()
     },
     _renderFile: function (files) {
@@ -128,9 +133,6 @@
 					imgPointY = imgPointY > 0 ? 0: -imgPointY;
 					var img = new Image;
 					img.src = self.clip.$img[0].src;
-					console.log(crop_canvas.width)
-					console.log(crop_canvas.height)
-					console.log(imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height)
 					crop_canvas.getContext("2d").drawImage(img, imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height);  
 					return crop_canvas.toDataURL("image/png");
 				}
@@ -204,17 +206,27 @@
 		},
 		_previewImg: function (imgData) {
 			var self = this;
-			var $targetDom = self.$rootDom.find('.pic');
-			var wrapTargetDom = self.$rootDom.find('.wrap-pic');
-			wrapTargetDom.addClass('active');
+			var $container = self.$rootDom.find('.container');
+			$container.addClass('active');
 			self.imgData = imgData;
 			self.isImgChange = true;
-			$targetDom[0].src = imgData;
+			var img = new Image;
+			img.src = imgData;
+			img.onload = function () {
+				document.getElementById('preview_img_box').getContext("2d").drawImage(img, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, 240, 240)
+			}
+			
+			
+					
+		},
+		download: function () {
+			var self = this;
 			self.$rootDom
 					.find('.down-btn')
-					.attr('href', imgData)
+					.attr('href', document.getElementById('preview_img_box').toDataURL("image/png"))
 					.attr('download', 'aa.png')
-		},
+					//.click()
+		}
 	}
 	
   
