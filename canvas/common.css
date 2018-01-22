@@ -178,7 +178,6 @@ body {
   width: 100%;
   height: 2.5rem;
   border-width: 1px 0 0;
-  border-image: url(../border2.png) 2 stretch;
   background-color: #fff;
 }
 .widget-bottom-nav .container .item {

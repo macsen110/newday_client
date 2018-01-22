@@ -57,7 +57,7 @@
     _getRectWidth: function (w, h) {
 			return Math.min.call(null, w, h)
 		},
-    _bindClipImg: function () {
+		_bindClipImg: function () {
 			var self = this;
 			self.clip = {};
 			self.clip.$clipContainer = self.$rootDom.find('.clip-image-container');
@@ -128,12 +128,11 @@
 					imgPointY = imgPointY > 0 ? 0: -imgPointY;
 					var img = new Image;
 					img.src = self.clip.$img[0].src;
-					//alert(crop_canvas.width)
-				   // alert('imgPointX: ' + imgPointX +' imgPointY: ' + imgPointY + 'width: '+ width+' imgHeight:'+height+' cvsPointX: ' + cvsPointX+' cvsPointY: ' + cvsPointY);
+					console.log(crop_canvas.width)
+					console.log(crop_canvas.height)
+					console.log(imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height)
 					crop_canvas.getContext("2d").drawImage(img, imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height);  
 					return crop_canvas.toDataURL("image/png");
-				  
-				  //return drawImageIOSFix(crop_canvas, img, imgPointX, imgPointY, width, self.clip.originImgSizeObj.height - 2*imgPointY, 0, 0, 375, 375);
 				}
 				catch(e) {
 					alert(e)
@@ -173,10 +172,10 @@
 				imgRatio = width / height;
 				//如果图片维度超过了给定的maxWidth 1500，
 				//为了保持图片宽高比，计算画布的大小
-				if(width > maxWidth){
-						width = maxWidth;
-						height = width / imgRatio;
-				}   
+				// if(width > maxWidth){
+				// 		width = maxWidth;
+				// 		height = width / imgRatio;
+				// }   
 				cvs.width = width;
 				cvs.height = height;
 				if (rotateDeg) {
@@ -190,15 +189,10 @@
 					ctx.drawImage(img, 0, 0);
 				} catch (e) {
 					alert(e)
-				}
-				
-				
+				}				
 				self.clip.$img.attr('src', cvs.toDataURL("image/png"));
 
-				self.$rootDom
-					.find('.down-btn')
-					.attr('href', cvs.toDataURL("image/png"))
-					.attr('download', 'aa.png')
+				
 				
 			}
 			
@@ -216,7 +210,10 @@
 			self.imgData = imgData;
 			self.isImgChange = true;
 			$targetDom[0].src = imgData;
-			
+			self.$rootDom
+					.find('.down-btn')
+					.attr('href', imgData)
+					.attr('download', 'aa.png')
 		},
 	}
 	
