@@ -134,6 +134,7 @@
 					var img = new Image;
 					img.src = self.clip.$img[0].src;
 					crop_canvas.getContext("2d").drawImage(img, imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height);  
+					self.clip.$clipContainer.append(crop_canvas);
 					return crop_canvas.toDataURL("image/png");
 				}
 				catch(e) {
@@ -149,7 +150,7 @@
 		},
     _clipImage: function (src, rotateDeg) {
 			var self = this;
-			self.clip.$clipContainer.show();
+			
 			self.clip.fullWidth = self.clip.$clipContainer.width();
 			self.clip.fullHeight = self.clip.$clipContainer.height();
 			self.clip.overLayWidth =  self._getRectWidth(self.clip.fullWidth, self.clip.fullHeight);
@@ -193,7 +194,9 @@
 					alert(e)
 				}				
 				self.clip.$img.attr('src', cvs.toDataURL("image/png"));
-
+				self.clip.$img.on('load', function () {
+					self.createCanvasBox($(this))
+				})
 				
 				
 			}
@@ -203,6 +206,26 @@
 				// APP.ui.showPrompt('图片渲染失败,请稍后重试!')
 				// self.clip.$clipContainer.hide();
 			}
+		},
+		createCanvasBox:function ($img) {
+			this.clip.$clipContainer.show()
+			var self = this;
+			var canvas = document.getElementById('create_canvas_box');
+			var w = $img.width();
+			var h = $img.height();
+
+			
+			canvas.id = 'create_canvas_box';
+			canvas.width = w;
+			canvas.height = h;
+			self.clip.$clipContainer.append(canvas);
+			$img.remove()
+		
+			console.log($img[0].naturalWidth, $img[0].naturalHeight, w, h, 0, 0);
+			canvas.getContext("2d").drawImage($img[0],0,0, $img[0].naturalWidth, $img[0].naturalHeight, 0, 0, w, h);
+			
+			
+			
 		},
 		_previewImg: function (imgData) {
 			var self = this;
