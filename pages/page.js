@@ -1,6 +1,7 @@
 /**
- * 简易路由系统适用于几
- * 个简单的活动页面
+ * 简易路由系统
+ * 上手快
+ * 配置简单
  */
 (function (win, factory) {
 	if (typeof exports === 'object') {
@@ -14,7 +15,7 @@
 	}
 })(this, function() {
   var APP = {};
-  APP.tools = {
+  var _tools = {
     setPath: function (obj) {
 			var path = location.pathname;
 			delete obj.replace;
@@ -67,13 +68,13 @@
 			return false;
 		}
 	};
-	APP.router = {
+	APP = {
 		setRouter: function (stateObj, component, title) {
 			if (!('urlAction' in stateObj)) {
-				if (stateObj.replace) history.replaceState(stateObj, title, APP.tools.setPath(stateObj));
-				else history.pushState(stateObj, title, APP.tools.setPath(stateObj));
+				if (stateObj.replace) history.replaceState(stateObj, title, _tools.setPath(stateObj));
+				else history.pushState(stateObj, title, _tools.setPath(stateObj));
 			}
-			APP.tools.setPageTitle(title)
+			_tools.setPageTitle(title)
 			this.updatePageView(component, stateObj)
 		},
 		updatePageView: function (component, stateObj) {
@@ -83,12 +84,12 @@
 		},
 		curPathWidget: undefined,
 		curPathName: undefined,
-		cbPathObj: APP.tools.cbPathObj(),
+		cbPathObj: _tools.cbPathObj(),
 		go: function (name, query) {
 			var stateObj = {};
 			var self = this;
 			stateObj.pageName = name;
-			if (APP.tools.getType(query) === 'object') {
+			if (_tools.getType(query) === 'object') {
 				for (var i in query) stateObj[i] = query[i];
 			}
 			self._gotoPage(stateObj)
@@ -98,7 +99,7 @@
 			var self = this;
 			stateObj.pageName = name;
 			stateObj.replace = 1;
-			if (APP.tools.getType(query) === 'object') {
+			if (_tools.getType(query) === 'object') {
 				for (var i in query) stateObj[i] = query[i];
 			}
 			self._gotoPage(stateObj)
@@ -155,8 +156,8 @@
 			else alert(path + '路径尚未配置相关信息')
 		},
 		toDoRouterCb: function (stateObj, component, title) {
-			if (APP.tools.getType(component) === 'function') component(stateObj, this, title)
-			else if (APP.tools.getType(component) === 'object') {
+			if (_tools.getType(component) === 'function') component(stateObj, this, title)
+			else if (_tools.getType(component) === 'object') {
 				component.init && component.init(stateObj, this, title)
 			}
 		}

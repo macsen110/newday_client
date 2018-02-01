@@ -51,7 +51,7 @@
 				if (self.weekPregnantListAll && !updatedDataSign) {
 					sessionStorage.setItem('updatedDataSign', 1);
 					APP.ui.showPrompt('数据更新成功');
-					APP.afterInitConsumerFun()
+					
 				}
 			}())
 		},
@@ -467,7 +467,7 @@
 						if (self.weekPregnantListAll && !updatedDataSign) {
 							sessionStorage.setItem('updatedDataSign', 1);
 							APP.ui.showPrompt('数据更新成功');
-							APP.afterInitConsumerFun()
+							
 						}
 					}
 				}

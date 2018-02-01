@@ -1,12 +1,7 @@
-webpackJsonp([9],{
-
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+/**
  * Created by wudi on 15/11/30.
  */
- !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_RESULT__ = (function($){  
+ define(['zepto'], function($){  
 	//初始化page  
 	/**
 	**@isAgreeAccredit 请求接口,验证是否授权绑卡
@@ -19,9 +14,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 		$rootDom: $('#page_container'),
 		ui: {},
 		ready: function (stateObj) {
-			var html = __webpack_require__(68);
-			if (APP.router.curPathName == stateObj.pageName) {
-				APP.router.setRouter(stateObj, this)
+			var html = require('./tpl/home.html');
+			if (!APP.router.curPathName || APP.router.curPathName == stateObj.pageName) {
 				this.show(html)
 			}
 		},
@@ -57,6 +51,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 			}())        
 		},
 		init: function (stateObj) {
+			
+
 			this.ready(stateObj)
 		},
 		reqAccredit: function () { 
@@ -102,17 +98,4 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 	return pageInitObj
 
 	
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-
-
-/***/ }),
-
-/***/ 68:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"page-index\" id=\"page_index\">\n    <div class=\"bg\"></div> \n    <div class=\"content\">\n        <i class=\"words\"></i>\n        <a href=\"javascript:void(0)\" class=\"icon\"></a>\n    </div>       \n</div>    \n\n";
-
-/***/ })
-
-});
+})
