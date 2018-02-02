@@ -14,6 +14,7 @@
 		$rootDom: $('#page_container'),
 		ui: {},
 		ready: function (stateObj) {
+			console.log('00ps 1200')
 			var html = require('./tpl/home.html');
 			if (!APP.router.curPathName || APP.router.curPathName == stateObj.pageName) {
 				this.show(html)

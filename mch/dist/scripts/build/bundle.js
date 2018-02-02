@@ -34,7 +34,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		23: 0
+/******/ 		2: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -91,7 +91,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"22":"app","24":"home"}[chunkId]||chunkId) + ".min.js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"home","1":"app"}[chunkId]||chunkId) + ".min.js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -147,7 +147,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1747,717 +1747,560 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/* Zepto v1.1.4 - zepto event ajax form ie - z
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_RESULT__;/*
- * RSA, a suite of routines for performing RSA public-key computations in JavaScript.
- * Copyright 1998-2005 David Shapiro.
- * Dave Shapiro
- * dave@ohdave.com 
- * changed by Fuchun, 2010-05-06
- * fcrpg2005@gmail.com
- */
-!(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-var RSAUtils;
-(function($w) {
-
-if(typeof $w.RSAUtils === 'undefined')
-	RSAUtils = {};
-
-var biRadixBase = 2;
-var biRadixBits = 16;
-var bitsPerDigit = biRadixBits;
-var biRadix = 1 << 16; // = 2^16 = 65536
-var biHalfRadix = biRadix >>> 1;
-var biRadixSquared = biRadix * biRadix;
-var maxDigitVal = biRadix - 1;
-var maxInteger = 9999999999999998;
-
-//maxDigits:
-//Change this to accommodate your largest number size. Use setMaxDigits()
-//to change it!
-//
-//In general, if you're working with numbers of size N bits, you'll need 2*N
-//bits of storage. Each digit holds 16 bits. So, a 1024-bit key will need
-//
-//1024 * 2 / 16 = 128 digits of storage.
-//
-var maxDigits;
-var ZERO_ARRAY;
-var bigZero, bigOne;
-
-var BigInt = $w.BigInt = function(flag) {
-	if (typeof flag == "boolean" && flag == true) {
-		this.digits = null;
-	} else {
-		this.digits = ZERO_ARRAY.slice(0);
-	}
-	this.isNeg = false;
-};
-
-RSAUtils.setMaxDigits = function(value) {
-	maxDigits = value;
-	ZERO_ARRAY = new Array(maxDigits);
-	for (var iza = 0; iza < ZERO_ARRAY.length; iza++) ZERO_ARRAY[iza] = 0;
-	bigZero = new BigInt();
-	bigOne = new BigInt();
-	bigOne.digits[0] = 1;
-};
-RSAUtils.setMaxDigits(20);
-
-//The maximum number of digits in base 10 you can convert to an
-//integer without JavaScript throwing up on you.
-var dpl10 = 15;
-
-RSAUtils.biFromNumber = function(i) {
-	var result = new BigInt();
-	result.isNeg = i < 0;
-	i = Math.abs(i);
-	var j = 0;
-	while (i > 0) {
-		result.digits[j++] = i & maxDigitVal;
-		i = Math.floor(i / biRadix);
-	}
-	return result;
-};
-
-//lr10 = 10 ^ dpl10
-var lr10 = RSAUtils.biFromNumber(1000000000000000);
-
-RSAUtils.biFromDecimal = function(s) {
-	var isNeg = s.charAt(0) == '-';
-	var i = isNeg ? 1 : 0;
-	var result;
-	// Skip leading zeros.
-	while (i < s.length && s.charAt(i) == '0') ++i;
-	if (i == s.length) {
-		result = new BigInt();
-	}
-	else {
-		var digitCount = s.length - i;
-		var fgl = digitCount % dpl10;
-		if (fgl == 0) fgl = dpl10;
-		result = RSAUtils.biFromNumber(Number(s.substr(i, fgl)));
-		i += fgl;
-		while (i < s.length) {
-			result = RSAUtils.biAdd(RSAUtils.biMultiply(result, lr10),
-					RSAUtils.biFromNumber(Number(s.substr(i, dpl10))));
-			i += dpl10;
-		}
-		result.isNeg = isNeg;
-	}
-	return result;
-};
-
-RSAUtils.biCopy = function(bi) {
-	var result = new BigInt(true);
-	result.digits = bi.digits.slice(0);
-	result.isNeg = bi.isNeg;
-	return result;
-};
-
-RSAUtils.reverseStr = function(s) {
-	var result = "";
-	for (var i = s.length - 1; i > -1; --i) {
-		result += s.charAt(i);
-	}
-	return result;
-};
-
-var hexatrigesimalToChar = [
-	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-	'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-	'u', 'v', 'w', 'x', 'y', 'z'
-];
-
-RSAUtils.biToString = function(x, radix) { // 2 <= radix <= 36
-	var b = new BigInt();
-	b.digits[0] = radix;
-	var qr = RSAUtils.biDivideModulo(x, b);
-	var result = hexatrigesimalToChar[qr[1].digits[0]];
-	while (RSAUtils.biCompare(qr[0], bigZero) == 1) {
-		qr = RSAUtils.biDivideModulo(qr[0], b);
-		digit = qr[1].digits[0];
-		result += hexatrigesimalToChar[qr[1].digits[0]];
-	}
-	return (x.isNeg ? "-" : "") + RSAUtils.reverseStr(result);
-};
-
-RSAUtils.biToDecimal = function(x) {
-	var b = new BigInt();
-	b.digits[0] = 10;
-	var qr = RSAUtils.biDivideModulo(x, b);
-	var result = String(qr[1].digits[0]);
-	while (RSAUtils.biCompare(qr[0], bigZero) == 1) {
-		qr = RSAUtils.biDivideModulo(qr[0], b);
-		result += String(qr[1].digits[0]);
-	}
-	return (x.isNeg ? "-" : "") + RSAUtils.reverseStr(result);
-};
-
-var hexToChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'a', 'b', 'c', 'd', 'e', 'f'];
-
-RSAUtils.digitToHex = function(n) {
-	var mask = 0xf;
-	var result = "";
-	for (var i = 0; i < 4; ++i) {
-		result += hexToChar[n & mask];
-		n >>>= 4;
-	}
-	return RSAUtils.reverseStr(result);
-};
-
-RSAUtils.biToHex = function(x) {
-	var result = "";
-	var n = RSAUtils.biHighIndex(x);
-	for (var i = RSAUtils.biHighIndex(x); i > -1; --i) {
-		result += RSAUtils.digitToHex(x.digits[i]);
-	}
-	return result;
-};
-
-RSAUtils.charToHex = function(c) {
-	var ZERO = 48;
-	var NINE = ZERO + 9;
-	var littleA = 97;
-	var littleZ = littleA + 25;
-	var bigA = 65;
-	var bigZ = 65 + 25;
-	var result;
-
-	if (c >= ZERO && c <= NINE) {
-		result = c - ZERO;
-	} else if (c >= bigA && c <= bigZ) {
-		result = 10 + c - bigA;
-	} else if (c >= littleA && c <= littleZ) {
-		result = 10 + c - littleA;
-	} else {
-		result = 0;
-	}
-	return result;
-};
-
-RSAUtils.hexToDigit = function(s) {
-	var result = 0;
-	var sl = Math.min(s.length, 4);
-	for (var i = 0; i < sl; ++i) {
-		result <<= 4;
-		result |= RSAUtils.charToHex(s.charCodeAt(i));
-	}
-	return result;
-};
-
-RSAUtils.biFromHex = function(s) {
-	var result = new BigInt();
-	var sl = s.length;
-	for (var i = sl, j = 0; i > 0; i -= 4, ++j) {
-		result.digits[j] = RSAUtils.hexToDigit(s.substr(Math.max(i - 4, 0), Math.min(i, 4)));
-	}
-	return result;
-};
-
-RSAUtils.biFromString = function(s, radix) {
-	var isNeg = s.charAt(0) == '-';
-	var istop = isNeg ? 1 : 0;
-	var result = new BigInt();
-	var place = new BigInt();
-	place.digits[0] = 1; // radix^0
-	for (var i = s.length - 1; i >= istop; i--) {
-		var c = s.charCodeAt(i);
-		var digit = RSAUtils.charToHex(c);
-		var biDigit = RSAUtils.biMultiplyDigit(place, digit);
-		result = RSAUtils.biAdd(result, biDigit);
-		place = RSAUtils.biMultiplyDigit(place, radix);
-	}
-	result.isNeg = isNeg;
-	return result;
-};
-
-RSAUtils.biDump = function(b) {
-	return (b.isNeg ? "-" : "") + b.digits.join(" ");
-};
-
-RSAUtils.biAdd = function(x, y) {
-	var result;
-
-	if (x.isNeg != y.isNeg) {
-		y.isNeg = !y.isNeg;
-		result = RSAUtils.biSubtract(x, y);
-		y.isNeg = !y.isNeg;
-	}
-	else {
-		result = new BigInt();
-		var c = 0;
-		var n;
-		for (var i = 0; i < x.digits.length; ++i) {
-			n = x.digits[i] + y.digits[i] + c;
-			result.digits[i] = n % biRadix;
-			c = Number(n >= biRadix);
-		}
-		result.isNeg = x.isNeg;
-	}
-	return result;
-};
-
-RSAUtils.biSubtract = function(x, y) {
-	var result;
-	if (x.isNeg != y.isNeg) {
-		y.isNeg = !y.isNeg;
-		result = RSAUtils.biAdd(x, y);
-		y.isNeg = !y.isNeg;
-	} else {
-		result = new BigInt();
-		var n, c;
-		c = 0;
-		for (var i = 0; i < x.digits.length; ++i) {
-			n = x.digits[i] - y.digits[i] + c;
-			result.digits[i] = n % biRadix;
-			// Stupid non-conforming modulus operation.
-			if (result.digits[i] < 0) result.digits[i] += biRadix;
-			c = 0 - Number(n < 0);
-		}
-		// Fix up the negative sign, if any.
-		if (c == -1) {
-			c = 0;
-			for (var i = 0; i < x.digits.length; ++i) {
-				n = 0 - result.digits[i] + c;
-				result.digits[i] = n % biRadix;
-				// Stupid non-conforming modulus operation.
-				if (result.digits[i] < 0) result.digits[i] += biRadix;
-				c = 0 - Number(n < 0);
-			}
-			// Result is opposite sign of arguments.
-			result.isNeg = !x.isNeg;
-		} else {
-			// Result is same sign.
-			result.isNeg = x.isNeg;
-		}
-	}
-	return result;
-};
-
-RSAUtils.biHighIndex = function(x) {
-	var result = x.digits.length - 1;
-	while (result > 0 && x.digits[result] == 0) --result;
-	return result;
-};
-
-RSAUtils.biNumBits = function(x) {
-	var n = RSAUtils.biHighIndex(x);
-	var d = x.digits[n];
-	var m = (n + 1) * bitsPerDigit;
-	var result;
-	for (result = m; result > m - bitsPerDigit; --result) {
-		if ((d & 0x8000) != 0) break;
-		d <<= 1;
-	}
-	return result;
-};
-
-RSAUtils.biMultiply = function(x, y) {
-	var result = new BigInt();
-	var c;
-	var n = RSAUtils.biHighIndex(x);
-	var t = RSAUtils.biHighIndex(y);
-	var u, uv, k;
-
-	for (var i = 0; i <= t; ++i) {
-		c = 0;
-		k = i;
-		for (var j = 0; j <= n; ++j, ++k) {
-			uv = result.digits[k] + x.digits[j] * y.digits[i] + c;
-			result.digits[k] = uv & maxDigitVal;
-			c = uv >>> biRadixBits;
-			//c = Math.floor(uv / biRadix);
-		}
-		result.digits[i + n + 1] = c;
-	}
-	// Someone give me a logical xor, please.
-	result.isNeg = x.isNeg != y.isNeg;
-	return result;
-};
-
-RSAUtils.biMultiplyDigit = function(x, y) {
-	var n, c, uv, result;
-
-	result = new BigInt();
-	n = RSAUtils.biHighIndex(x);
-	c = 0;
-	for (var j = 0; j <= n; ++j) {
-		uv = result.digits[j] + x.digits[j] * y + c;
-		result.digits[j] = uv & maxDigitVal;
-		c = uv >>> biRadixBits;
-		//c = Math.floor(uv / biRadix);
-	}
-	result.digits[1 + n] = c;
-	return result;
-};
-
-RSAUtils.arrayCopy = function(src, srcStart, dest, destStart, n) {
-	var m = Math.min(srcStart + n, src.length);
-	for (var i = srcStart, j = destStart; i < m; ++i, ++j) {
-		dest[j] = src[i];
-	}
-};
-
-var highBitMasks = [0x0000, 0x8000, 0xC000, 0xE000, 0xF000, 0xF800,
-        0xFC00, 0xFE00, 0xFF00, 0xFF80, 0xFFC0, 0xFFE0,
-        0xFFF0, 0xFFF8, 0xFFFC, 0xFFFE, 0xFFFF];
-
-RSAUtils.biShiftLeft = function(x, n) {
-	var digitCount = Math.floor(n / bitsPerDigit);
-	var result = new BigInt();
-	RSAUtils.arrayCopy(x.digits, 0, result.digits, digitCount,
-	          result.digits.length - digitCount);
-	var bits = n % bitsPerDigit;
-	var rightBits = bitsPerDigit - bits;
-	for (var i = result.digits.length - 1, i1 = i - 1; i > 0; --i, --i1) {
-		result.digits[i] = ((result.digits[i] << bits) & maxDigitVal) |
-		                   ((result.digits[i1] & highBitMasks[bits]) >>>
-		                    (rightBits));
-	}
-	result.digits[0] = ((result.digits[i] << bits) & maxDigitVal);
-	result.isNeg = x.isNeg;
-	return result;
-};
-
-var lowBitMasks = [0x0000, 0x0001, 0x0003, 0x0007, 0x000F, 0x001F,
-        0x003F, 0x007F, 0x00FF, 0x01FF, 0x03FF, 0x07FF,
-        0x0FFF, 0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF];
-
-RSAUtils.biShiftRight = function(x, n) {
-	var digitCount = Math.floor(n / bitsPerDigit);
-	var result = new BigInt();
-	RSAUtils.arrayCopy(x.digits, digitCount, result.digits, 0,
-	          x.digits.length - digitCount);
-	var bits = n % bitsPerDigit;
-	var leftBits = bitsPerDigit - bits;
-	for (var i = 0, i1 = i + 1; i < result.digits.length - 1; ++i, ++i1) {
-		result.digits[i] = (result.digits[i] >>> bits) |
-		                   ((result.digits[i1] & lowBitMasks[bits]) << leftBits);
-	}
-	result.digits[result.digits.length - 1] >>>= bits;
-	result.isNeg = x.isNeg;
-	return result;
-};
-
-RSAUtils.biMultiplyByRadixPower = function(x, n) {
-	var result = new BigInt();
-	RSAUtils.arrayCopy(x.digits, 0, result.digits, n, result.digits.length - n);
-	return result;
-};
-
-RSAUtils.biDivideByRadixPower = function(x, n) {
-	var result = new BigInt();
-	RSAUtils.arrayCopy(x.digits, n, result.digits, 0, result.digits.length - n);
-	return result;
-};
-
-RSAUtils.biModuloByRadixPower = function(x, n) {
-	var result = new BigInt();
-	RSAUtils.arrayCopy(x.digits, 0, result.digits, 0, n);
-	return result;
-};
-
-RSAUtils.biCompare = function(x, y) {
-	if (x.isNeg != y.isNeg) {
-		return 1 - 2 * Number(x.isNeg);
-	}
-	for (var i = x.digits.length - 1; i >= 0; --i) {
-		if (x.digits[i] != y.digits[i]) {
-			if (x.isNeg) {
-				return 1 - 2 * Number(x.digits[i] > y.digits[i]);
-			} else {
-				return 1 - 2 * Number(x.digits[i] < y.digits[i]);
-			}
-		}
-	}
-	return 0;
-};
-
-RSAUtils.biDivideModulo = function(x, y) {
-	var nb = RSAUtils.biNumBits(x);
-	var tb = RSAUtils.biNumBits(y);
-	var origYIsNeg = y.isNeg;
-	var q, r;
-	if (nb < tb) {
-		// |x| < |y|
-		if (x.isNeg) {
-			q = RSAUtils.biCopy(bigOne);
-			q.isNeg = !y.isNeg;
-			x.isNeg = false;
-			y.isNeg = false;
-			r = biSubtract(y, x);
-			// Restore signs, 'cause they're references.
-			x.isNeg = true;
-			y.isNeg = origYIsNeg;
-		} else {
-			q = new BigInt();
-			r = RSAUtils.biCopy(x);
-		}
-		return [q, r];
-	}
-
-	q = new BigInt();
-	r = x;
-
-	// Normalize Y.
-	var t = Math.ceil(tb / bitsPerDigit) - 1;
-	var lambda = 0;
-	while (y.digits[t] < biHalfRadix) {
-		y = RSAUtils.biShiftLeft(y, 1);
-		++lambda;
-		++tb;
-		t = Math.ceil(tb / bitsPerDigit) - 1;
-	}
-	// Shift r over to keep the quotient constant. We'll shift the
-	// remainder back at the end.
-	r = RSAUtils.biShiftLeft(r, lambda);
-	nb += lambda; // Update the bit count for x.
-	var n = Math.ceil(nb / bitsPerDigit) - 1;
-
-	var b = RSAUtils.biMultiplyByRadixPower(y, n - t);
-	while (RSAUtils.biCompare(r, b) != -1) {
-		++q.digits[n - t];
-		r = RSAUtils.biSubtract(r, b);
-	}
-	for (var i = n; i > t; --i) {
-    var ri = (i >= r.digits.length) ? 0 : r.digits[i];
-    var ri1 = (i - 1 >= r.digits.length) ? 0 : r.digits[i - 1];
-    var ri2 = (i - 2 >= r.digits.length) ? 0 : r.digits[i - 2];
-    var yt = (t >= y.digits.length) ? 0 : y.digits[t];
-    var yt1 = (t - 1 >= y.digits.length) ? 0 : y.digits[t - 1];
-		if (ri == yt) {
-			q.digits[i - t - 1] = maxDigitVal;
-		} else {
-			q.digits[i - t - 1] = Math.floor((ri * biRadix + ri1) / yt);
-		}
-
-		var c1 = q.digits[i - t - 1] * ((yt * biRadix) + yt1);
-		var c2 = (ri * biRadixSquared) + ((ri1 * biRadix) + ri2);
-		while (c1 > c2) {
-			--q.digits[i - t - 1];
-			c1 = q.digits[i - t - 1] * ((yt * biRadix) | yt1);
-			c2 = (ri * biRadix * biRadix) + ((ri1 * biRadix) + ri2);
-		}
-
-		b = RSAUtils.biMultiplyByRadixPower(y, i - t - 1);
-		r = RSAUtils.biSubtract(r, RSAUtils.biMultiplyDigit(b, q.digits[i - t - 1]));
-		if (r.isNeg) {
-			r = RSAUtils.biAdd(r, b);
-			--q.digits[i - t - 1];
-		}
-	}
-	r = RSAUtils.biShiftRight(r, lambda);
-	// Fiddle with the signs and stuff to make sure that 0 <= r < y.
-	q.isNeg = x.isNeg != origYIsNeg;
-	if (x.isNeg) {
-		if (origYIsNeg) {
-			q = RSAUtils.biAdd(q, bigOne);
-		} else {
-			q = RSAUtils.biSubtract(q, bigOne);
-		}
-		y = RSAUtils.biShiftRight(y, lambda);
-		r = RSAUtils.biSubtract(y, r);
-	}
-	// Check for the unbelievably stupid degenerate case of r == -0.
-	if (r.digits[0] == 0 && RSAUtils.biHighIndex(r) == 0) r.isNeg = false;
-
-	return [q, r];
-};
-
-RSAUtils.biDivide = function(x, y) {
-	return RSAUtils.biDivideModulo(x, y)[0];
-};
-
-RSAUtils.biModulo = function(x, y) {
-	return RSAUtils.biDivideModulo(x, y)[1];
-};
-
-RSAUtils.biMultiplyMod = function(x, y, m) {
-	return RSAUtils.biModulo(RSAUtils.biMultiply(x, y), m);
-};
-
-RSAUtils.biPow = function(x, y) {
-	var result = bigOne;
-	var a = x;
-	while (true) {
-		if ((y & 1) != 0) result = RSAUtils.biMultiply(result, a);
-		y >>= 1;
-		if (y == 0) break;
-		a = RSAUtils.biMultiply(a, a);
-	}
-	return result;
-};
-
-RSAUtils.biPowMod = function(x, y, m) {
-	var result = bigOne;
-	var a = x;
-	var k = y;
-	while (true) {
-		if ((k.digits[0] & 1) != 0) result = RSAUtils.biMultiplyMod(result, a, m);
-		k = RSAUtils.biShiftRight(k, 1);
-		if (k.digits[0] == 0 && RSAUtils.biHighIndex(k) == 0) break;
-		a = RSAUtils.biMultiplyMod(a, a, m);
-	}
-	return result;
-};
-
-
-$w.BarrettMu = function(m) {
-	this.modulus = RSAUtils.biCopy(m);
-	this.k = RSAUtils.biHighIndex(this.modulus) + 1;
-	var b2k = new BigInt();
-	b2k.digits[2 * this.k] = 1; // b2k = b^(2k)
-	this.mu = RSAUtils.biDivide(b2k, this.modulus);
-	this.bkplus1 = new BigInt();
-	this.bkplus1.digits[this.k + 1] = 1; // bkplus1 = b^(k+1)
-	this.modulo = BarrettMu_modulo;
-	this.multiplyMod = BarrettMu_multiplyMod;
-	this.powMod = BarrettMu_powMod;
-};
-
-function BarrettMu_modulo(x) {
-	var $dmath = RSAUtils;
-	var q1 = $dmath.biDivideByRadixPower(x, this.k - 1);
-	var q2 = $dmath.biMultiply(q1, this.mu);
-	var q3 = $dmath.biDivideByRadixPower(q2, this.k + 1);
-	var r1 = $dmath.biModuloByRadixPower(x, this.k + 1);
-	var r2term = $dmath.biMultiply(q3, this.modulus);
-	var r2 = $dmath.biModuloByRadixPower(r2term, this.k + 1);
-	var r = $dmath.biSubtract(r1, r2);
-	if (r.isNeg) {
-		r = $dmath.biAdd(r, this.bkplus1);
-	}
-	var rgtem = $dmath.biCompare(r, this.modulus) >= 0;
-	while (rgtem) {
-		r = $dmath.biSubtract(r, this.modulus);
-		rgtem = $dmath.biCompare(r, this.modulus) >= 0;
-	}
-	return r;
-}
-
-function BarrettMu_multiplyMod(x, y) {
-	/*
-	x = this.modulo(x);
-	y = this.modulo(y);
-	*/
-	var xy = RSAUtils.biMultiply(x, y);
-	return this.modulo(xy);
-}
-
-function BarrettMu_powMod(x, y) {
-	var result = new BigInt();
-	result.digits[0] = 1;
-	var a = x;
-	var k = y;
-	while (true) {
-		if ((k.digits[0] & 1) != 0) result = this.multiplyMod(result, a);
-		k = RSAUtils.biShiftRight(k, 1);
-		if (k.digits[0] == 0 && RSAUtils.biHighIndex(k) == 0) break;
-		a = this.multiplyMod(a, a);
-	}
-	return result;
-}
-
-var RSAKeyPair = function(encryptionExponent, decryptionExponent, modulus) {
-	var $dmath = RSAUtils;
-	this.e = $dmath.biFromHex(encryptionExponent);
-	this.d = $dmath.biFromHex(decryptionExponent);
-	this.m = $dmath.biFromHex(modulus);
-	// We can do two bytes per digit, so
-	// chunkSize = 2 * (number of digits in modulus - 1).
-	// Since biHighIndex returns the high index, not the number of digits, 1 has
-	// already been subtracted.
-	this.chunkSize = 2 * $dmath.biHighIndex(this.m);
-	this.radix = 16;
-	this.barrett = new $w.BarrettMu(this.m);
-};
-
-RSAUtils.getKeyPair = function(encryptionExponent, decryptionExponent, modulus) {
-	return new RSAKeyPair(encryptionExponent, decryptionExponent, modulus);
-};
-
-if(typeof $w.twoDigit === 'undefined') {
-	$w.twoDigit = function(n) {
-		return (n < 10 ? "0" : "") + String(n);
-	};
-}
-
-// Altered by Rob Saunders (rob@robsaunders.net). New routine pads the
-// string after it has been converted to an array. This fixes an
-// incompatibility with Flash MX's ActionScript.
-RSAUtils.encryptedString = function(key, s) {
-	var a = [];
-	var sl = s.length;
-	var i = 0;
-	while (i < sl) {
-		a[i] = s.charCodeAt(i);
-		i++;
-	}
-
-	while (a.length % key.chunkSize != 0) {
-		a[i++] = 0;
-	}
-
-	var al = a.length;
-	var result = "";
-	var j, k, block;
-	for (i = 0; i < al; i += key.chunkSize) {
-		block = new BigInt();
-		j = 0;
-		for (k = i; k < i + key.chunkSize; ++j) {
-			block.digits[j] = a[k++];
-			block.digits[j] += a[k++] << 8;
-		}
-		var crypt = key.barrett.powMod(block, key.e);
-		var text = key.radix == 16 ? RSAUtils.biToHex(crypt) : RSAUtils.biToString(crypt, key.radix);
-		result += text + " ";
-	}
-	return result.substring(0, result.length - 1); // Remove last space.
-};
-
-RSAUtils.decryptedString = function(key, s) {
-	var blocks = s.split(" ");
-	var result = "";
-	var i, j, block;
-	for (i = 0; i < blocks.length; ++i) {
-		var bi;
-		if (key.radix == 16) {
-			bi = RSAUtils.biFromHex(blocks[i]);
-		}
-		else {
-			bi = RSAUtils.biFromString(blocks[i], key.radix);
-		}
-		block = key.barrett.powMod(bi, key.d);
-		for (j = 0; j <= RSAUtils.biHighIndex(block); ++j) {
-			result += String.fromCharCode(block.digits[j] & 255,
-			                              block.digits[j] >> 8);
-		}
-	}
-	// Remove trailing null, if any.
-	if (result.charCodeAt(result.length - 1) == 0) {
-		result = result.substring(0, result.length - 1);
-	}
-	return result;
-};
-
-RSAUtils.setMaxDigits(130);
-
-})(window);
-    return RSAUtils;
-}).call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+__webpack_require__(0);
+__webpack_require__(2);
+__webpack_require__(3);
+module.exports = __webpack_require__(4);
 
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*!art-template - Template Engine | http://aui.github.com/artTemplate/*/
 !function(){function a(a){return a.replace(t,"").replace(u,",").replace(v,"").replace(w,"").replace(x,"").split(y)}function b(a){return"'"+a.replace(/('|\\)/g,"\\$1").replace(/\r/g,"\\r").replace(/\n/g,"\\n")+"'"}function c(c,d){function e(a){return m+=a.split(/\n/).length-1,k&&(a=a.replace(/\s+/g," ").replace(/<!--[\w\W]*?-->/g,"")),a&&(a=s[1]+b(a)+s[2]+"\n"),a}function f(b){var c=m;if(j?b=j(b,d):g&&(b=b.replace(/\n/g,function(){return m++,"$line="+m+";"})),0===b.indexOf("=")){var e=l&&!/^=[=#]/.test(b);if(b=b.replace(/^=[=#]?|[\s;]*$/g,""),e){var f=b.replace(/\s*\([^\)]+\)/,"");n[f]||/^(include|print)$/.test(f)||(b="$escape("+b+")")}else b="$string("+b+")";b=s[1]+b+s[2]}return g&&(b="$line="+c+";"+b),r(a(b),function(a){if(a&&!p[a]){var b;b="print"===a?u:"include"===a?v:n[a]?"$utils."+a:o[a]?"$helpers."+a:"$data."+a,w+=a+"="+b+",",p[a]=!0}}),b+"\n"}var g=d.debug,h=d.openTag,i=d.closeTag,j=d.parser,k=d.compress,l=d.escape,m=1,p={$data:1,$filename:1,$utils:1,$helpers:1,$out:1,$line:1},q="".trim,s=q?["$out='';","$out+=",";","$out"]:["$out=[];","$out.push(",");","$out.join('')"],t=q?"$out+=text;return $out;":"$out.push(text);",u="function(){var text=''.concat.apply('',arguments);"+t+"}",v="function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);"+t+"}",w="'use strict';var $utils=this,$helpers=$utils.$helpers,"+(g?"$line=0,":""),x=s[0],y="return new String("+s[3]+");";r(c.split(h),function(a){a=a.split(i);var b=a[0],c=a[1];1===a.length?x+=e(b):(x+=f(b),c&&(x+=e(c)))});var z=w+x+y;g&&(z="try{"+z+"}catch(e){throw {filename:$filename,name:'Render Error',message:e.message,line:$line,source:"+b(c)+".split(/\\n/)[$line-1].replace(/^\\s+/,'')};}");try{var A=new Function("$data","$filename",z);return A.prototype=n,A}catch(B){throw B.temp="function anonymous($data,$filename) {"+z+"}",B}}var d=function(a,b){return"string"==typeof b?q(b,{filename:a}):g(a,b)};d.version="3.0.0",d.config=function(a,b){e[a]=b};var e=d.defaults={openTag:"<%",closeTag:"%>",escape:!0,cache:!0,compress:!1,parser:null},f=d.cache={};d.render=function(a,b){return q(a,b)};var g=d.renderFile=function(a,b){var c=d.get(a)||p({filename:a,name:"Render Error",message:"Template not found"});return b?c(b):c};d.get=function(a){var b;if(f[a])b=f[a];else if("object"==typeof document){var c=document.getElementById(a);if(c){var d=(c.value||c.innerHTML).replace(/^\s*|\s*$/g,"");b=q(d,{filename:a})}}return b};var h=function(a,b){return"string"!=typeof a&&(b=typeof a,"number"===b?a+="":a="function"===b?h(a.call(a)):""),a},i={"<":"&#60;",">":"&#62;",'"':"&#34;","'":"&#39;","&":"&#38;"},j=function(a){return i[a]},k=function(a){return h(a).replace(/&(?![\w#]+;)|[<>"']/g,j)},l=Array.isArray||function(a){return"[object Array]"==={}.toString.call(a)},m=function(a,b){var c,d;if(l(a))for(c=0,d=a.length;d>c;c++)b.call(a,a[c],c,a);else for(c in a)b.call(a,a[c],c)},n=d.utils={$helpers:{},$include:g,$string:h,$escape:k,$each:m};d.helper=function(a,b){o[a]=b};var o=d.helpers=n.$helpers;d.onerror=function(a){var b="Template Error\n\n";for(var c in a)b+="<"+c+">\n"+a[c]+"\n\n";"object"==typeof console&&console.error(b)};var p=function(a){return d.onerror(a),function(){return"{Template Error}"}},q=d.compile=function(a,b){function d(c){try{return new i(c,h)+""}catch(d){return b.debug?p(d)():(b.debug=!0,q(a,b)(c))}}b=b||{};for(var g in e)void 0===b[g]&&(b[g]=e[g]);var h=b.filename;try{var i=c(a,b)}catch(j){return j.filename=h||"anonymous",j.name="Syntax Error",p(j)}return d.prototype=i.prototype,d.toString=function(){return i.toString()},h&&b.cache&&(f[h]=d),d},r=n.$each,s="break,case,catch,continue,debugger,default,delete,do,else,false,finally,for,function,if,in,instanceof,new,null,return,switch,this,throw,true,try,typeof,var,void,while,with,abstract,boolean,byte,char,class,const,double,enum,export,extends,final,float,goto,implements,import,int,interface,long,native,package,private,protected,public,short,static,super,synchronized,throws,transient,volatile,arguments,let,yield,undefined",t=/\/\*[\w\W]*?\*\/|\/\/[^\n]*\n|\/\/[^\n]*$|"(?:[^"\\]|\\[\w\W])*"|'(?:[^'\\]|\\[\w\W])*'|\s*\.\s*[$\w\.]+/g,u=/[^\w$]+/g,v=new RegExp(["\\b"+s.replace(/,/g,"\\b|\\b")+"\\b"].join("|"),"g"),w=/^\d[^,]*|,\d[^,]*/g,x=/^,+|,+$/g,y=/^$|,+/;e.openTag="{{",e.closeTag="}}";var z=function(a,b){var c=b.split(":"),d=c.shift(),e=c.join(":")||"";return e&&(e=", "+e),"$helpers."+d+"("+a+e+")"};e.parser=function(a){a=a.replace(/^\s/,"");var b=a.split(" "),c=b.shift(),e=b.join(" ");switch(c){case"if":a="if("+e+"){";break;case"else":b="if"===b.shift()?" if("+b.join(" ")+")":"",a="}else"+b+"{";break;case"/if":a="}";break;case"each":var f=b[0]||"$data",g=b[1]||"as",h=b[2]||"$value",i=b[3]||"$index",j=h+","+i;"as"!==g&&(f="[]"),a="$each("+f+",function("+j+"){";break;case"/each":a="});";break;case"echo":a="print("+e+");";break;case"print":case"include":a=c+"("+b.join(",")+");";break;default:if(/^\s*\|\s*[\w\$]/.test(e)){var k=!0;0===a.indexOf("#")&&(a=a.substr(1),k=!1);for(var l=0,m=a.split("|"),n=m.length,o=m[l++];n>l;l++)o=z(o,m[l]);a=(k?"=":"=#")+o}else a=d.helpers[c]?"=#"+c+"("+b.join(",")+");":"="+a}return a}, true?!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(){return d}).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"undefined"!=typeof exports?module.exports=d:this.template=d}();
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/*
+
+ Style HTML
+---------------
+
+  Written by Nochum Sossonko, (nsossonko@hotmail.com)
+
+  Based on code initially developed by: Einar Lielmanis, <elfz@laacz.lv>
+    http://jsbeautifier.org/
+
+
+  You are free to use this in any way you want, in case you find this useful or working for you.
+
+  Usage:
+    style_html(html_source);
+
+    style_html(html_source, options);
+
+  The options are:
+    indent_size (default 4)          — indentation size,
+    indent_char (default space)      — character to indent with,
+    max_char (default 70)            -  maximum amount of characters per line,
+    brace_style (default "collapse") - "collapse" | "expand" | "end-expand"
+            put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line.
+    unformatted (defaults to inline tags) - list of tags, that shouldn't be reformatted
+    indent_scripts (default normal)  - "keep"|"separate"|"normal"
+
+    e.g.
+
+    style_html(html_source, {
+      'indent_size': 2,
+      'indent_char': ' ',
+      'max_char': 78,
+      'brace_style': 'expand',
+      'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']
+    });
+*/
+
+function style_html(html_source, options) {
+//Wrapper function to invoke all the necessary constructors and deal with the output.
+
+  var multi_parser,
+      indent_size,
+      indent_character,
+      max_char,
+      brace_style,
+      unformatted;
+
+  options = options || {};
+  indent_size = options.indent_size || 4;
+  indent_character = options.indent_char || ' ';
+  brace_style = options.brace_style || 'collapse';
+  max_char = options.max_char == 0 ? Infinity : options.max_char || 70;
+  unformatted = options.unformatted || ['a', 'span', 'bdo', 'em', 'strong', 'dfn', 'code', 'samp', 'kbd', 'var', 'cite', 'abbr', 'acronym', 'q', 'sub', 'sup', 'tt', 'i', 'b', 'big', 'small', 'u', 's', 'strike', 'font', 'ins', 'del', 'pre', 'address', 'dt', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+  function Parser() {
+
+    this.pos = 0; //Parser position
+    this.token = '';
+    this.current_mode = 'CONTENT'; //reflects the current Parser mode: TAG/CONTENT
+    this.tags = { //An object to hold tags, their position, and their parent-tags, initiated with default values
+      parent: 'parent1',
+      parentcount: 1,
+      parent1: ''
+    };
+    this.tag_type = '';
+    this.token_text = this.last_token = this.last_text = this.token_type = '';
+
+    this.Utils = { //Uilities made available to the various functions
+      whitespace: "\n\r\t ".split(''),
+      single_token: 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,param,img,isindex,?xml,embed,?php,?,?='.split(','), //all the single tags for HTML
+      extra_liners: 'head,body,/html'.split(','), //for tags that need a line of whitespace before them
+      in_array: function (what, arr) {
+        for (var i=0; i<arr.length; i++) {
+          if (what === arr[i]) {
+            return true;
+          }
+        }
+        return false;
+      }
+    }
+
+    this.get_content = function () { //function to capture regular content between tags
+
+      var input_char = '',
+          content = [],
+          space = false; //if a space is needed
+
+      while (this.input.charAt(this.pos) !== '<') {
+        if (this.pos >= this.input.length) {
+          return content.length?content.join(''):['', 'TK_EOF'];
+        }
+
+        input_char = this.input.charAt(this.pos);
+        this.pos++;
+        this.line_char_count++;
+
+        if (this.Utils.in_array(input_char, this.Utils.whitespace)) {
+          if (content.length) {
+            space = true;
+          }
+          this.line_char_count--;
+          continue; //don't want to insert unnecessary space
+        }
+        else if (space) {
+          if (this.line_char_count >= this.max_char) { //insert a line when the max_char is reached
+            content.push('\n');
+            for (var i=0; i<this.indent_level; i++) {
+              content.push(this.indent_string);
+            }
+            this.line_char_count = 0;
+          }
+          else{
+            content.push(' ');
+            this.line_char_count++;
+          }
+          space = false;
+        }
+        content.push(input_char); //letter at-a-time (or string) inserted to an array
+      }
+      return content.length?content.join(''):'';
+    }
+
+    this.get_contents_to = function (name) { //get the full content of a script or style to pass to js_beautify
+      if (this.pos == this.input.length) {
+        return ['', 'TK_EOF'];
+      }
+      var input_char = '';
+      var content = '';
+      var reg_match = new RegExp('\<\/' + name + '\\s*\>', 'igm');
+      reg_match.lastIndex = this.pos;
+      var reg_array = reg_match.exec(this.input);
+      var end_script = reg_array?reg_array.index:this.input.length; //absolute end of script
+      if(this.pos < end_script) { //get everything in between the script tags
+        content = this.input.substring(this.pos, end_script);
+        this.pos = end_script;
+      }
+      return content;
+    }
+
+    this.record_tag = function (tag){ //function to record a tag and its parent in this.tags Object
+      if (this.tags[tag + 'count']) { //check for the existence of this tag type
+        this.tags[tag + 'count']++;
+        this.tags[tag + this.tags[tag + 'count']] = this.indent_level; //and record the present indent level
+      }
+      else { //otherwise initialize this tag type
+        this.tags[tag + 'count'] = 1;
+        this.tags[tag + this.tags[tag + 'count']] = this.indent_level; //and record the present indent level
+      }
+      this.tags[tag + this.tags[tag + 'count'] + 'parent'] = this.tags.parent; //set the parent (i.e. in the case of a div this.tags.div1parent)
+      this.tags.parent = tag + this.tags[tag + 'count']; //and make this the current parent (i.e. in the case of a div 'div1')
+    }
+
+    this.retrieve_tag = function (tag) { //function to retrieve the opening tag to the corresponding closer
+      if (this.tags[tag + 'count']) { //if the openener is not in the Object we ignore it
+        var temp_parent = this.tags.parent; //check to see if it's a closable tag.
+        while (temp_parent) { //till we reach '' (the initial value);
+          if (tag + this.tags[tag + 'count'] === temp_parent) { //if this is it use it
+            break;
+          }
+          temp_parent = this.tags[temp_parent + 'parent']; //otherwise keep on climbing up the DOM Tree
+        }
+        if (temp_parent) { //if we caught something
+          this.indent_level = this.tags[tag + this.tags[tag + 'count']]; //set the indent_level accordingly
+          this.tags.parent = this.tags[temp_parent + 'parent']; //and set the current parent
+        }
+        delete this.tags[tag + this.tags[tag + 'count'] + 'parent']; //delete the closed tags parent reference...
+        delete this.tags[tag + this.tags[tag + 'count']]; //...and the tag itself
+        if (this.tags[tag + 'count'] == 1) {
+          delete this.tags[tag + 'count'];
+        }
+        else {
+          this.tags[tag + 'count']--;
+        }
+      }
+    }
+
+    this.get_tag = function () { //function to get a full tag and parse its type
+      var input_char = '',
+          content = [],
+          space = false,
+          tag_start, tag_end;
+
+      do {
+        if (this.pos >= this.input.length) {
+          return content.length?content.join(''):['', 'TK_EOF'];
+        }
+
+        input_char = this.input.charAt(this.pos);
+        this.pos++;
+        this.line_char_count++;
+
+        if (this.Utils.in_array(input_char, this.Utils.whitespace)) { //don't want to insert unnecessary space
+          space = true;
+          this.line_char_count--;
+          continue;
+        }
+
+        if (input_char === "'" || input_char === '"') {
+          if (!content[1] || content[1] !== '!') { //if we're in a comment strings don't get treated specially
+            input_char += this.get_unformatted(input_char);
+            space = true;
+          }
+        }
+
+        if (input_char === '=') { //no space before =
+          space = false;
+        }
+
+        if (content.length && content[content.length-1] !== '=' && input_char !== '>'
+            && space) { //no space after = or before >
+          if (this.line_char_count >= this.max_char) {
+            this.print_newline(false, content);
+            this.line_char_count = 0;
+          }
+          else {
+            content.push(' ');
+            this.line_char_count++;
+          }
+          space = false;
+        }
+        if (input_char === '<') {
+            tag_start = this.pos - 1;
+        }
+        content.push(input_char); //inserts character at-a-time (or string)
+      } while (input_char !== '>');
+
+      var tag_complete = content.join('');
+      var tag_index;
+      if (tag_complete.indexOf(' ') != -1) { //if there's whitespace, thats where the tag name ends
+        tag_index = tag_complete.indexOf(' ');
+      }
+      else { //otherwise go with the tag ending
+        tag_index = tag_complete.indexOf('>');
+      }
+      var tag_check = tag_complete.substring(1, tag_index).toLowerCase();
+      if (tag_complete.charAt(tag_complete.length-2) === '/' ||
+          this.Utils.in_array(tag_check, this.Utils.single_token)) { //if this tag name is a single tag type (either in the list or has a closing /)
+        this.tag_type = 'SINGLE';
+      }
+      else if (tag_check === 'script') { //for later script handling
+        this.record_tag(tag_check);
+        this.tag_type = 'SCRIPT';
+      }
+      else if (tag_check === 'style') { //for future style handling (for now it justs uses get_content)
+        this.record_tag(tag_check);
+        this.tag_type = 'STYLE';
+      }
+      else if (this.Utils.in_array(tag_check, unformatted)) { // do not reformat the "unformatted" tags
+        var comment = this.get_unformatted('</'+tag_check+'>', tag_complete); //...delegate to get_unformatted function
+        content.push(comment);
+        // Preserve collapsed whitespace either before or after this tag.
+        if (tag_start > 0 && this.Utils.in_array(this.input.charAt(tag_start - 1), this.Utils.whitespace)){
+            content.splice(0, 0, this.input.charAt(tag_start - 1));
+        }
+        tag_end = this.pos - 1;
+        if (this.Utils.in_array(this.input.charAt(tag_end + 1), this.Utils.whitespace)){
+            content.push(this.input.charAt(tag_end + 1));
+        }
+        this.tag_type = 'SINGLE';
+      }
+      else if (tag_check.charAt(0) === '!') { //peek for <!-- comment
+        if (tag_check.indexOf('[if') != -1) { //peek for <!--[if conditional comment
+          if (tag_complete.indexOf('!IE') != -1) { //this type needs a closing --> so...
+            var comment = this.get_unformatted('-->', tag_complete); //...delegate to get_unformatted
+            content.push(comment);
+          }
+          this.tag_type = 'START';
+        }
+        else if (tag_check.indexOf('[endif') != -1) {//peek for <!--[endif end conditional comment
+          this.tag_type = 'END';
+          this.unindent();
+        }
+        else if (tag_check.indexOf('[cdata[') != -1) { //if it's a <[cdata[ comment...
+          var comment = this.get_unformatted(']]>', tag_complete); //...delegate to get_unformatted function
+          content.push(comment);
+          this.tag_type = 'SINGLE'; //<![CDATA[ comments are treated like single tags
+        }
+        else {
+          var comment = this.get_unformatted('-->', tag_complete);
+          content.push(comment);
+          this.tag_type = 'SINGLE';
+        }
+      }
+      else {
+        if (tag_check.charAt(0) === '/') { //this tag is a double tag so check for tag-ending
+          this.retrieve_tag(tag_check.substring(1)); //remove it and all ancestors
+          this.tag_type = 'END';
+        }
+        else { //otherwise it's a start-tag
+          this.record_tag(tag_check); //push it on the tag stack
+          this.tag_type = 'START';
+        }
+        if (this.Utils.in_array(tag_check, this.Utils.extra_liners)) { //check if this double needs an extra line
+          this.print_newline(true, this.output);
+        }
+      }
+      return content.join(''); //returns fully formatted tag
+    }
+
+    this.get_unformatted = function (delimiter, orig_tag) { //function to return unformatted content in its entirety
+
+      if (orig_tag && orig_tag.toLowerCase().indexOf(delimiter) != -1) {
+        return '';
+      }
+      var input_char = '';
+      var content = '';
+      var space = true;
+      do {
+
+        if (this.pos >= this.input.length) {
+          return content;
+        }
+
+        input_char = this.input.charAt(this.pos);
+        this.pos++
+
+        if (this.Utils.in_array(input_char, this.Utils.whitespace)) {
+          if (!space) {
+            this.line_char_count--;
+            continue;
+          }
+          if (input_char === '\n' || input_char === '\r') {
+            content += '\n';
+            /*  Don't change tab indention for unformatted blocks.  If using code for html editing, this will greatly affect <pre> tags if they are specified in the 'unformatted array'
+            for (var i=0; i<this.indent_level; i++) {
+              content += this.indent_string;
+            }
+            space = false; //...and make sure other indentation is erased
+            */
+            this.line_char_count = 0;
+            continue;
+          }
+        }
+        content += input_char;
+        this.line_char_count++;
+        space = true;
+
+
+      } while (content.toLowerCase().indexOf(delimiter) == -1);
+      return content;
+    }
+
+    this.get_token = function () { //initial handler for token-retrieval
+      var token;
+
+      if (this.last_token === 'TK_TAG_SCRIPT' || this.last_token === 'TK_TAG_STYLE') { //check if we need to format javascript
+       var type = this.last_token.substr(7)
+       token = this.get_contents_to(type);
+        if (typeof token !== 'string') {
+          return token;
+        }
+        return [token, 'TK_' + type];
+      }
+      if (this.current_mode === 'CONTENT') {
+        token = this.get_content();
+        if (typeof token !== 'string') {
+          return token;
+        }
+        else {
+          return [token, 'TK_CONTENT'];
+        }
+      }
+
+      if (this.current_mode === 'TAG') {
+        token = this.get_tag();
+        if (typeof token !== 'string') {
+          return token;
+        }
+        else {
+          var tag_name_type = 'TK_TAG_' + this.tag_type;
+          return [token, tag_name_type];
+        }
+      }
+    }
+
+    this.get_full_indent = function (level) {
+      level = this.indent_level + level || 0;
+      if (level < 1)
+        return '';
+
+      return Array(level + 1).join(this.indent_string);
+    }
+
+
+    this.printer = function (js_source, indent_character, indent_size, max_char, brace_style) { //handles input/output and some other printing functions
+
+      this.input = js_source || ''; //gets the input for the Parser
+      this.output = [];
+      this.indent_character = indent_character;
+      this.indent_string = '';
+      this.indent_size = indent_size;
+      this.brace_style = brace_style;
+      this.indent_level = 0;
+      this.max_char = max_char;
+      this.line_char_count = 0; //count to see if max_char was exceeded
+
+      for (var i=0; i<this.indent_size; i++) {
+        this.indent_string += this.indent_character;
+      }
+
+      this.print_newline = function (ignore, arr) {
+        this.line_char_count = 0;
+        if (!arr || !arr.length) {
+          return;
+        }
+        if (!ignore) { //we might want the extra line
+          while (this.Utils.in_array(arr[arr.length-1], this.Utils.whitespace)) {
+            arr.pop();
+          }
+        }
+        arr.push('\n');
+        for (var i=0; i<this.indent_level; i++) {
+          arr.push(this.indent_string);
+        }
+      }
+
+      this.print_token = function (text) {
+        this.output.push(text);
+      }
+
+      this.indent = function () {
+        this.indent_level++;
+      }
+
+      this.unindent = function () {
+        if (this.indent_level > 0) {
+          this.indent_level--;
+        }
+      }
+    }
+    return this;
+  }
+
+  /*_____________________--------------------_____________________*/
+
+  multi_parser = new Parser(); //wrapping functions Parser
+  multi_parser.printer(html_source, indent_character, indent_size, max_char, brace_style); //initialize starting values
+
+  while (true) {
+      var t = multi_parser.get_token();
+      multi_parser.token_text = t[0];
+      multi_parser.token_type = t[1];
+
+    if (multi_parser.token_type === 'TK_EOF') {
+      break;
+    }
+
+    switch (multi_parser.token_type) {
+      case 'TK_TAG_START':
+        multi_parser.print_newline(false, multi_parser.output);
+        multi_parser.print_token(multi_parser.token_text);
+        multi_parser.indent();
+        multi_parser.current_mode = 'CONTENT';
+        break;
+      case 'TK_TAG_STYLE':
+      case 'TK_TAG_SCRIPT':
+        multi_parser.print_newline(false, multi_parser.output);
+        multi_parser.print_token(multi_parser.token_text);
+        multi_parser.current_mode = 'CONTENT';
+        break;
+      case 'TK_TAG_END':
+        //Print new line only if the tag has no content and has child
+        if (multi_parser.last_token === 'TK_CONTENT' && multi_parser.last_text === '') {
+            var tag_name = multi_parser.token_text.match(/\w+/)[0];
+            var tag_extracted_from_last_output = multi_parser.output[multi_parser.output.length -1].match(/<\s*(\w+)/);
+            if (tag_extracted_from_last_output === null || tag_extracted_from_last_output[1] !== tag_name)
+                multi_parser.print_newline(true, multi_parser.output);
+        }
+        multi_parser.print_token(multi_parser.token_text);
+        multi_parser.current_mode = 'CONTENT';
+        break;
+      case 'TK_TAG_SINGLE':
+        // Don't add a newline before elements that should remain unformatted.
+        var tag_check = multi_parser.token_text.match(/^\s*<([a-z]+)/i);
+        if (!tag_check || !multi_parser.Utils.in_array(tag_check[1], unformatted)){
+            multi_parser.print_newline(false, multi_parser.output);
+        }
+        multi_parser.print_token(multi_parser.token_text);
+        multi_parser.current_mode = 'CONTENT';
+        break;
+      case 'TK_CONTENT':
+        if (multi_parser.token_text !== '') {
+          multi_parser.print_token(multi_parser.token_text);
+        }
+        multi_parser.current_mode = 'TAG';
+        break;
+      case 'TK_STYLE':
+      case 'TK_SCRIPT':
+        if (multi_parser.token_text !== '') {
+          multi_parser.output.push('\n');
+          var text = multi_parser.token_text;
+          if (multi_parser.token_type == 'TK_SCRIPT') {
+            var _beautifier = typeof js_beautify == 'function' && js_beautify;
+          } else if (multi_parser.token_type == 'TK_STYLE') {
+            var _beautifier = typeof css_beautify == 'function' && css_beautify;
+          }
+
+          if (options.indent_scripts == "keep") {
+            var script_indent_level = 0;
+          } else if (options.indent_scripts == "separate") {
+            var script_indent_level = -multi_parser.indent_level;
+          } else {
+            var script_indent_level = 1;
+          }
+
+          var indentation = multi_parser.get_full_indent(script_indent_level);
+          if (_beautifier) {
+            // call the Beautifier if avaliable
+            text = _beautifier(text.replace(/^\s*/, indentation), options);
+          } else {
+            // simply indent the string otherwise
+            var white = text.match(/^\s*/)[0];
+            var _level = white.match(/[^\n\r]*$/)[0].split(multi_parser.indent_string).length - 1;
+            var reindent = multi_parser.get_full_indent(script_indent_level -_level);
+            text = text.replace(/^\s*/, indentation)
+                   .replace(/\r\n|\r|\n/g, '\n' + reindent)
+                   .replace(/\s*$/, '');
+          }
+          if (text) {
+            multi_parser.print_token(text);
+            multi_parser.print_newline(true, multi_parser.output);
+          }
+        }
+        multi_parser.current_mode = 'TAG';
+        break;
+    }
+    multi_parser.last_token = multi_parser.token_type;
+    multi_parser.last_text = multi_parser.token_text;
+  }
+  return multi_parser.output.join('');
+}
+
+module.exports = {
+  prettyPrint: style_html
+};
 
 /***/ }),
 /* 4 */
@@ -3266,558 +3109,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function ()
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-__webpack_require__(0);
-__webpack_require__(3);
-__webpack_require__(6);
-module.exports = __webpack_require__(4);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-/*
-
- Style HTML
----------------
-
-  Written by Nochum Sossonko, (nsossonko@hotmail.com)
-
-  Based on code initially developed by: Einar Lielmanis, <elfz@laacz.lv>
-    http://jsbeautifier.org/
-
-
-  You are free to use this in any way you want, in case you find this useful or working for you.
-
-  Usage:
-    style_html(html_source);
-
-    style_html(html_source, options);
-
-  The options are:
-    indent_size (default 4)          — indentation size,
-    indent_char (default space)      — character to indent with,
-    max_char (default 70)            -  maximum amount of characters per line,
-    brace_style (default "collapse") - "collapse" | "expand" | "end-expand"
-            put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line.
-    unformatted (defaults to inline tags) - list of tags, that shouldn't be reformatted
-    indent_scripts (default normal)  - "keep"|"separate"|"normal"
-
-    e.g.
-
-    style_html(html_source, {
-      'indent_size': 2,
-      'indent_char': ' ',
-      'max_char': 78,
-      'brace_style': 'expand',
-      'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']
-    });
-*/
-
-function style_html(html_source, options) {
-//Wrapper function to invoke all the necessary constructors and deal with the output.
-
-  var multi_parser,
-      indent_size,
-      indent_character,
-      max_char,
-      brace_style,
-      unformatted;
-
-  options = options || {};
-  indent_size = options.indent_size || 4;
-  indent_character = options.indent_char || ' ';
-  brace_style = options.brace_style || 'collapse';
-  max_char = options.max_char == 0 ? Infinity : options.max_char || 70;
-  unformatted = options.unformatted || ['a', 'span', 'bdo', 'em', 'strong', 'dfn', 'code', 'samp', 'kbd', 'var', 'cite', 'abbr', 'acronym', 'q', 'sub', 'sup', 'tt', 'i', 'b', 'big', 'small', 'u', 's', 'strike', 'font', 'ins', 'del', 'pre', 'address', 'dt', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-
-  function Parser() {
-
-    this.pos = 0; //Parser position
-    this.token = '';
-    this.current_mode = 'CONTENT'; //reflects the current Parser mode: TAG/CONTENT
-    this.tags = { //An object to hold tags, their position, and their parent-tags, initiated with default values
-      parent: 'parent1',
-      parentcount: 1,
-      parent1: ''
-    };
-    this.tag_type = '';
-    this.token_text = this.last_token = this.last_text = this.token_type = '';
-
-    this.Utils = { //Uilities made available to the various functions
-      whitespace: "\n\r\t ".split(''),
-      single_token: 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,param,img,isindex,?xml,embed,?php,?,?='.split(','), //all the single tags for HTML
-      extra_liners: 'head,body,/html'.split(','), //for tags that need a line of whitespace before them
-      in_array: function (what, arr) {
-        for (var i=0; i<arr.length; i++) {
-          if (what === arr[i]) {
-            return true;
-          }
-        }
-        return false;
-      }
-    }
-
-    this.get_content = function () { //function to capture regular content between tags
-
-      var input_char = '',
-          content = [],
-          space = false; //if a space is needed
-
-      while (this.input.charAt(this.pos) !== '<') {
-        if (this.pos >= this.input.length) {
-          return content.length?content.join(''):['', 'TK_EOF'];
-        }
-
-        input_char = this.input.charAt(this.pos);
-        this.pos++;
-        this.line_char_count++;
-
-        if (this.Utils.in_array(input_char, this.Utils.whitespace)) {
-          if (content.length) {
-            space = true;
-          }
-          this.line_char_count--;
-          continue; //don't want to insert unnecessary space
-        }
-        else if (space) {
-          if (this.line_char_count >= this.max_char) { //insert a line when the max_char is reached
-            content.push('\n');
-            for (var i=0; i<this.indent_level; i++) {
-              content.push(this.indent_string);
-            }
-            this.line_char_count = 0;
-          }
-          else{
-            content.push(' ');
-            this.line_char_count++;
-          }
-          space = false;
-        }
-        content.push(input_char); //letter at-a-time (or string) inserted to an array
-      }
-      return content.length?content.join(''):'';
-    }
-
-    this.get_contents_to = function (name) { //get the full content of a script or style to pass to js_beautify
-      if (this.pos == this.input.length) {
-        return ['', 'TK_EOF'];
-      }
-      var input_char = '';
-      var content = '';
-      var reg_match = new RegExp('\<\/' + name + '\\s*\>', 'igm');
-      reg_match.lastIndex = this.pos;
-      var reg_array = reg_match.exec(this.input);
-      var end_script = reg_array?reg_array.index:this.input.length; //absolute end of script
-      if(this.pos < end_script) { //get everything in between the script tags
-        content = this.input.substring(this.pos, end_script);
-        this.pos = end_script;
-      }
-      return content;
-    }
-
-    this.record_tag = function (tag){ //function to record a tag and its parent in this.tags Object
-      if (this.tags[tag + 'count']) { //check for the existence of this tag type
-        this.tags[tag + 'count']++;
-        this.tags[tag + this.tags[tag + 'count']] = this.indent_level; //and record the present indent level
-      }
-      else { //otherwise initialize this tag type
-        this.tags[tag + 'count'] = 1;
-        this.tags[tag + this.tags[tag + 'count']] = this.indent_level; //and record the present indent level
-      }
-      this.tags[tag + this.tags[tag + 'count'] + 'parent'] = this.tags.parent; //set the parent (i.e. in the case of a div this.tags.div1parent)
-      this.tags.parent = tag + this.tags[tag + 'count']; //and make this the current parent (i.e. in the case of a div 'div1')
-    }
-
-    this.retrieve_tag = function (tag) { //function to retrieve the opening tag to the corresponding closer
-      if (this.tags[tag + 'count']) { //if the openener is not in the Object we ignore it
-        var temp_parent = this.tags.parent; //check to see if it's a closable tag.
-        while (temp_parent) { //till we reach '' (the initial value);
-          if (tag + this.tags[tag + 'count'] === temp_parent) { //if this is it use it
-            break;
-          }
-          temp_parent = this.tags[temp_parent + 'parent']; //otherwise keep on climbing up the DOM Tree
-        }
-        if (temp_parent) { //if we caught something
-          this.indent_level = this.tags[tag + this.tags[tag + 'count']]; //set the indent_level accordingly
-          this.tags.parent = this.tags[temp_parent + 'parent']; //and set the current parent
-        }
-        delete this.tags[tag + this.tags[tag + 'count'] + 'parent']; //delete the closed tags parent reference...
-        delete this.tags[tag + this.tags[tag + 'count']]; //...and the tag itself
-        if (this.tags[tag + 'count'] == 1) {
-          delete this.tags[tag + 'count'];
-        }
-        else {
-          this.tags[tag + 'count']--;
-        }
-      }
-    }
-
-    this.get_tag = function () { //function to get a full tag and parse its type
-      var input_char = '',
-          content = [],
-          space = false,
-          tag_start, tag_end;
-
-      do {
-        if (this.pos >= this.input.length) {
-          return content.length?content.join(''):['', 'TK_EOF'];
-        }
-
-        input_char = this.input.charAt(this.pos);
-        this.pos++;
-        this.line_char_count++;
-
-        if (this.Utils.in_array(input_char, this.Utils.whitespace)) { //don't want to insert unnecessary space
-          space = true;
-          this.line_char_count--;
-          continue;
-        }
-
-        if (input_char === "'" || input_char === '"') {
-          if (!content[1] || content[1] !== '!') { //if we're in a comment strings don't get treated specially
-            input_char += this.get_unformatted(input_char);
-            space = true;
-          }
-        }
-
-        if (input_char === '=') { //no space before =
-          space = false;
-        }
-
-        if (content.length && content[content.length-1] !== '=' && input_char !== '>'
-            && space) { //no space after = or before >
-          if (this.line_char_count >= this.max_char) {
-            this.print_newline(false, content);
-            this.line_char_count = 0;
-          }
-          else {
-            content.push(' ');
-            this.line_char_count++;
-          }
-          space = false;
-        }
-        if (input_char === '<') {
-            tag_start = this.pos - 1;
-        }
-        content.push(input_char); //inserts character at-a-time (or string)
-      } while (input_char !== '>');
-
-      var tag_complete = content.join('');
-      var tag_index;
-      if (tag_complete.indexOf(' ') != -1) { //if there's whitespace, thats where the tag name ends
-        tag_index = tag_complete.indexOf(' ');
-      }
-      else { //otherwise go with the tag ending
-        tag_index = tag_complete.indexOf('>');
-      }
-      var tag_check = tag_complete.substring(1, tag_index).toLowerCase();
-      if (tag_complete.charAt(tag_complete.length-2) === '/' ||
-          this.Utils.in_array(tag_check, this.Utils.single_token)) { //if this tag name is a single tag type (either in the list or has a closing /)
-        this.tag_type = 'SINGLE';
-      }
-      else if (tag_check === 'script') { //for later script handling
-        this.record_tag(tag_check);
-        this.tag_type = 'SCRIPT';
-      }
-      else if (tag_check === 'style') { //for future style handling (for now it justs uses get_content)
-        this.record_tag(tag_check);
-        this.tag_type = 'STYLE';
-      }
-      else if (this.Utils.in_array(tag_check, unformatted)) { // do not reformat the "unformatted" tags
-        var comment = this.get_unformatted('</'+tag_check+'>', tag_complete); //...delegate to get_unformatted function
-        content.push(comment);
-        // Preserve collapsed whitespace either before or after this tag.
-        if (tag_start > 0 && this.Utils.in_array(this.input.charAt(tag_start - 1), this.Utils.whitespace)){
-            content.splice(0, 0, this.input.charAt(tag_start - 1));
-        }
-        tag_end = this.pos - 1;
-        if (this.Utils.in_array(this.input.charAt(tag_end + 1), this.Utils.whitespace)){
-            content.push(this.input.charAt(tag_end + 1));
-        }
-        this.tag_type = 'SINGLE';
-      }
-      else if (tag_check.charAt(0) === '!') { //peek for <!-- comment
-        if (tag_check.indexOf('[if') != -1) { //peek for <!--[if conditional comment
-          if (tag_complete.indexOf('!IE') != -1) { //this type needs a closing --> so...
-            var comment = this.get_unformatted('-->', tag_complete); //...delegate to get_unformatted
-            content.push(comment);
-          }
-          this.tag_type = 'START';
-        }
-        else if (tag_check.indexOf('[endif') != -1) {//peek for <!--[endif end conditional comment
-          this.tag_type = 'END';
-          this.unindent();
-        }
-        else if (tag_check.indexOf('[cdata[') != -1) { //if it's a <[cdata[ comment...
-          var comment = this.get_unformatted(']]>', tag_complete); //...delegate to get_unformatted function
-          content.push(comment);
-          this.tag_type = 'SINGLE'; //<![CDATA[ comments are treated like single tags
-        }
-        else {
-          var comment = this.get_unformatted('-->', tag_complete);
-          content.push(comment);
-          this.tag_type = 'SINGLE';
-        }
-      }
-      else {
-        if (tag_check.charAt(0) === '/') { //this tag is a double tag so check for tag-ending
-          this.retrieve_tag(tag_check.substring(1)); //remove it and all ancestors
-          this.tag_type = 'END';
-        }
-        else { //otherwise it's a start-tag
-          this.record_tag(tag_check); //push it on the tag stack
-          this.tag_type = 'START';
-        }
-        if (this.Utils.in_array(tag_check, this.Utils.extra_liners)) { //check if this double needs an extra line
-          this.print_newline(true, this.output);
-        }
-      }
-      return content.join(''); //returns fully formatted tag
-    }
-
-    this.get_unformatted = function (delimiter, orig_tag) { //function to return unformatted content in its entirety
-
-      if (orig_tag && orig_tag.toLowerCase().indexOf(delimiter) != -1) {
-        return '';
-      }
-      var input_char = '';
-      var content = '';
-      var space = true;
-      do {
-
-        if (this.pos >= this.input.length) {
-          return content;
-        }
-
-        input_char = this.input.charAt(this.pos);
-        this.pos++
-
-        if (this.Utils.in_array(input_char, this.Utils.whitespace)) {
-          if (!space) {
-            this.line_char_count--;
-            continue;
-          }
-          if (input_char === '\n' || input_char === '\r') {
-            content += '\n';
-            /*  Don't change tab indention for unformatted blocks.  If using code for html editing, this will greatly affect <pre> tags if they are specified in the 'unformatted array'
-            for (var i=0; i<this.indent_level; i++) {
-              content += this.indent_string;
-            }
-            space = false; //...and make sure other indentation is erased
-            */
-            this.line_char_count = 0;
-            continue;
-          }
-        }
-        content += input_char;
-        this.line_char_count++;
-        space = true;
-
-
-      } while (content.toLowerCase().indexOf(delimiter) == -1);
-      return content;
-    }
-
-    this.get_token = function () { //initial handler for token-retrieval
-      var token;
-
-      if (this.last_token === 'TK_TAG_SCRIPT' || this.last_token === 'TK_TAG_STYLE') { //check if we need to format javascript
-       var type = this.last_token.substr(7)
-       token = this.get_contents_to(type);
-        if (typeof token !== 'string') {
-          return token;
-        }
-        return [token, 'TK_' + type];
-      }
-      if (this.current_mode === 'CONTENT') {
-        token = this.get_content();
-        if (typeof token !== 'string') {
-          return token;
-        }
-        else {
-          return [token, 'TK_CONTENT'];
-        }
-      }
-
-      if (this.current_mode === 'TAG') {
-        token = this.get_tag();
-        if (typeof token !== 'string') {
-          return token;
-        }
-        else {
-          var tag_name_type = 'TK_TAG_' + this.tag_type;
-          return [token, tag_name_type];
-        }
-      }
-    }
-
-    this.get_full_indent = function (level) {
-      level = this.indent_level + level || 0;
-      if (level < 1)
-        return '';
-
-      return Array(level + 1).join(this.indent_string);
-    }
-
-
-    this.printer = function (js_source, indent_character, indent_size, max_char, brace_style) { //handles input/output and some other printing functions
-
-      this.input = js_source || ''; //gets the input for the Parser
-      this.output = [];
-      this.indent_character = indent_character;
-      this.indent_string = '';
-      this.indent_size = indent_size;
-      this.brace_style = brace_style;
-      this.indent_level = 0;
-      this.max_char = max_char;
-      this.line_char_count = 0; //count to see if max_char was exceeded
-
-      for (var i=0; i<this.indent_size; i++) {
-        this.indent_string += this.indent_character;
-      }
-
-      this.print_newline = function (ignore, arr) {
-        this.line_char_count = 0;
-        if (!arr || !arr.length) {
-          return;
-        }
-        if (!ignore) { //we might want the extra line
-          while (this.Utils.in_array(arr[arr.length-1], this.Utils.whitespace)) {
-            arr.pop();
-          }
-        }
-        arr.push('\n');
-        for (var i=0; i<this.indent_level; i++) {
-          arr.push(this.indent_string);
-        }
-      }
-
-      this.print_token = function (text) {
-        this.output.push(text);
-      }
-
-      this.indent = function () {
-        this.indent_level++;
-      }
-
-      this.unindent = function () {
-        if (this.indent_level > 0) {
-          this.indent_level--;
-        }
-      }
-    }
-    return this;
-  }
-
-  /*_____________________--------------------_____________________*/
-
-  multi_parser = new Parser(); //wrapping functions Parser
-  multi_parser.printer(html_source, indent_character, indent_size, max_char, brace_style); //initialize starting values
-
-  while (true) {
-      var t = multi_parser.get_token();
-      multi_parser.token_text = t[0];
-      multi_parser.token_type = t[1];
-
-    if (multi_parser.token_type === 'TK_EOF') {
-      break;
-    }
-
-    switch (multi_parser.token_type) {
-      case 'TK_TAG_START':
-        multi_parser.print_newline(false, multi_parser.output);
-        multi_parser.print_token(multi_parser.token_text);
-        multi_parser.indent();
-        multi_parser.current_mode = 'CONTENT';
-        break;
-      case 'TK_TAG_STYLE':
-      case 'TK_TAG_SCRIPT':
-        multi_parser.print_newline(false, multi_parser.output);
-        multi_parser.print_token(multi_parser.token_text);
-        multi_parser.current_mode = 'CONTENT';
-        break;
-      case 'TK_TAG_END':
-        //Print new line only if the tag has no content and has child
-        if (multi_parser.last_token === 'TK_CONTENT' && multi_parser.last_text === '') {
-            var tag_name = multi_parser.token_text.match(/\w+/)[0];
-            var tag_extracted_from_last_output = multi_parser.output[multi_parser.output.length -1].match(/<\s*(\w+)/);
-            if (tag_extracted_from_last_output === null || tag_extracted_from_last_output[1] !== tag_name)
-                multi_parser.print_newline(true, multi_parser.output);
-        }
-        multi_parser.print_token(multi_parser.token_text);
-        multi_parser.current_mode = 'CONTENT';
-        break;
-      case 'TK_TAG_SINGLE':
-        // Don't add a newline before elements that should remain unformatted.
-        var tag_check = multi_parser.token_text.match(/^\s*<([a-z]+)/i);
-        if (!tag_check || !multi_parser.Utils.in_array(tag_check[1], unformatted)){
-            multi_parser.print_newline(false, multi_parser.output);
-        }
-        multi_parser.print_token(multi_parser.token_text);
-        multi_parser.current_mode = 'CONTENT';
-        break;
-      case 'TK_CONTENT':
-        if (multi_parser.token_text !== '') {
-          multi_parser.print_token(multi_parser.token_text);
-        }
-        multi_parser.current_mode = 'TAG';
-        break;
-      case 'TK_STYLE':
-      case 'TK_SCRIPT':
-        if (multi_parser.token_text !== '') {
-          multi_parser.output.push('\n');
-          var text = multi_parser.token_text;
-          if (multi_parser.token_type == 'TK_SCRIPT') {
-            var _beautifier = typeof js_beautify == 'function' && js_beautify;
-          } else if (multi_parser.token_type == 'TK_STYLE') {
-            var _beautifier = typeof css_beautify == 'function' && css_beautify;
-          }
-
-          if (options.indent_scripts == "keep") {
-            var script_indent_level = 0;
-          } else if (options.indent_scripts == "separate") {
-            var script_indent_level = -multi_parser.indent_level;
-          } else {
-            var script_indent_level = 1;
-          }
-
-          var indentation = multi_parser.get_full_indent(script_indent_level);
-          if (_beautifier) {
-            // call the Beautifier if avaliable
-            text = _beautifier(text.replace(/^\s*/, indentation), options);
-          } else {
-            // simply indent the string otherwise
-            var white = text.match(/^\s*/)[0];
-            var _level = white.match(/[^\n\r]*$/)[0].split(multi_parser.indent_string).length - 1;
-            var reindent = multi_parser.get_full_indent(script_indent_level -_level);
-            text = text.replace(/^\s*/, indentation)
-                   .replace(/\r\n|\r|\n/g, '\n' + reindent)
-                   .replace(/\s*$/, '');
-          }
-          if (text) {
-            multi_parser.print_token(text);
-            multi_parser.print_newline(true, multi_parser.output);
-          }
-        }
-        multi_parser.current_mode = 'TAG';
-        break;
-    }
-    multi_parser.last_token = multi_parser.token_type;
-    multi_parser.last_text = multi_parser.token_text;
-  }
-  return multi_parser.output.join('');
-}
-
-module.exports = {
-  prettyPrint: style_html
-};
 
 /***/ })
 /******/ ]);

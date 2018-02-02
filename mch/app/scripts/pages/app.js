@@ -2,7 +2,7 @@
  * Created by wudi on 15/11/30.
  */
 define(["zepto", "../lib/ui"], function($, ui) {
-  var router = require("yao-easy-router");
+  var router = require("yao-easy-router");  
   var APP = {
     version: "1.0.0",
     /**
