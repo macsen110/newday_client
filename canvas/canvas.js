@@ -48,6 +48,7 @@
 																orientation === 3 ? 180*Math.PI/180 : 0;
 							//	handler.doReadImgFile(file, $img, $container, rotateDeg);
 						} 
+						alert(orientation)
 						self._clipImage(e.target.result, rotateDeg);  
 					});
 				}
