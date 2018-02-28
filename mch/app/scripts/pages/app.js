@@ -86,6 +86,7 @@ define(["zepto", "../lib/ui"], function($, ui) {
     //self._todo();
     //self.router.originalUrl = location.href;
     self.bindUI();
+    APP.router._init([])
   };
 
   APP._getOpenType = function() {
@@ -359,25 +360,13 @@ define(["zepto", "../lib/ui"], function($, ui) {
   APP.profileInfo = {};
   APP.saveProfileInfo = function(status, response, successCb) {
     var self = this;
-    //等于1是没有卡
-    if (status == 1) {
-      localStorage.removeItem("profileInfo");
-      localStorage.removeItem("reportList");
-      sessionStorage.clear();
-      self.profileInfo.emStatus = status;
-      if (successCb) successCb(status);
-      else self.router.replace("antenatal");
-    } else {
-      personInfoObj(response.data.customerList[0], 1);
-    }
+    personInfoObj(response.data.customerList[0], 1);
     function personInfoObj(obj, cardLens) {
       self.profileInfo = obj;
       self.profileInfo.uid = APP.uid;
       self.profileInfo.emChannel = response.emChannel;
 			self.profileInfo.emStatus = status;
-			
-      if (successCb) successCb(status, cardLens);
-      else self.router.replace("home");
+      self.router.replace("antenatal");
     }
   };
   // APP.router = {
@@ -420,7 +409,7 @@ define(["zepto", "../lib/ui"], function($, ui) {
   // 	}
 
   // };
-  APP.router = {};
+  //APP.router = {};
   // var asyncLoad = function(path, stateObj, title) {
   //   var load = require("bundle-loader?lazy&name=[name]!./" + path + ".js");
   //   load(function(component) {
@@ -429,33 +418,43 @@ define(["zepto", "../lib/ui"], function($, ui) {
   //   });
 	// };
 	
-  var asyncFun = async function(path) {
-    var getComponent = r =>
-      require.ensure([], require => require("./home"), "home");
-    var component = await getComponent(path);
-    return component;
-  };
-  Promise.resolve(asyncFun()).then(function(home) {
+  // var asyncFun = async function(path) {
+  //   var getComponent = r =>
+  //     require.ensure([], require => require("./home"), "home");
+  //   var component = await getComponent(path);
+  //   return component;
+  // };
+  // Promise.resolve(asyncFun()).then(function(home) {
 		
-    var config = [
-      {
-        pageName: "home",
-        title: "首页",
-        component: home
-      }
-    ];
-    APP.router = router._init(config);
-    APP.init();
-  });
+  //   var config = [
+  //     {
+  //       pageName: "home",
+  //       title: "首页",
+  //       component: home
+  //     }
+  //   ];
+  //   APP.router = router._init(config);
+  //   APP.init();
+  // });
+
 	Object.defineProperty(window, "APP", {
 		value: APP
-	});
-  // APP.router._goPathNew = function(path, stateObj) {
-  //   var load = require("bundle-loader?lazy&name=[name]!./" + path + ".js");
-  //   load(function(component) {
-  //     if (APP.router.curPathName == stateObj.pageName) component.init(stateObj);
-  //   });
-  // };
-
+  });
+  APP.router = router; 
+  APP.router.startLoading = function () {}
+  APP.router.endLoading = function () {}
+  APP.router._goPathNew = function(path, stateObj) {
+    var load = require("bundle-loader?lazy&name=[name]!./" + path + ".js");
+    
+    load(function(component) {
+      APP.router.setRouter(stateObj,component,'')
+      if (APP.router.curPathName == stateObj.pageName) {
+        
+        component.init(stateObj);
+      }
+    });
+  };
+  APP.init()
+  
   return {};
 });

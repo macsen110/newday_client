@@ -75,7 +75,7 @@
 				contentType : 'application/json',
 				success : function(response) {
 					//response = JSON.parse(response);
-					if (response.ret == 1) {
+					if (response.ret == 0) {
 						var emStatus = response.data.emStatus;
 						self.ui.dialog && self.ui.dialog.destory();
 						APP.saveProfileInfo(emStatus, response);
