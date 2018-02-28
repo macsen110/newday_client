@@ -1,9 +1,20 @@
 ;(function () {
   var page = {
     init: function () {
+			//this.demo()
       this.bindUI()
     },
-    $rootDom: $('body'),
+		$rootDom: $('body'),
+		demo: function () {
+			var cvs = document.getElementById('create_canvas_box')
+			var ctx = cvs.getContext('2d')
+			// cvs.width = 100;
+			// cvs.height = 30;
+			ctx.fillStyle = 'blue';
+			ctx.rotate(90 * Math.PI / 180);
+			ctx.translate(30, -100)
+			ctx.fillRect(0,0,100,30);
+		},
     bindUI: function () {
       var iptFile = document.querySelector('.upload-pic')
       iptFile.addEventListener('change',function () {
@@ -31,10 +42,7 @@
 					return;
 				} 
 				try {
-
-				
 					EXIF.getData(file, function(){
-
 						var orientation = this.exifdata.Orientation,
 								rotateDeg = 0;
 						if(typeof orientation === "undefined" || orientation === 1){ 
@@ -48,15 +56,12 @@
 																orientation === 3 ? 180*Math.PI/180 : 0;
 							//	handler.doReadImgFile(file, $img, $container, rotateDeg);
 						} 
-						alert(orientation)
 						self._clipImage(e.target.result, rotateDeg);  
 					});
 				}
 				catch (e) {
 					console.log(e)
 				}
-				//创建截图过程,裁剪图片
-				//self._clipImage(e.target.result);
 			}
 			reader.readAsDataURL(file);
     },
@@ -90,68 +95,23 @@
 				//e.preventDefault();
 			})
 			$btn_ok.on('click', function (e) {
-				self._previewImg(createImageData());
+				self._previewImg();
 				self._resetClipImgStatus();
 				
 			})
 			$btn_cancel.on('click', function () {
 				self._resetClipImgStatus();
 			})
-			function createImageData() {
-				try{
-					var radion = (self.clip.originImgSizeObj.width / self.clip.overLayWidth) > 1 ? (self.clip.originImgSizeObj.width / self.clip.overLayWidth) : 1;
-					var imgPointY = (-self.clip.$overLay.offset().top + self.clip.$img.offset().top) * radion;
-					var imgPointX =  self.clip.$img.offset().left * radion;
-					var width = self.clip.originImgSizeObj.width;
-					var height =  self.clip.originImgSizeObj.height; 
-					var crop_canvas = document.createElement('canvas');  
-					var cvsPointX;
-					var cvsPointY;
-					crop_canvas.width = self.clip.originImgSizeObj.width > self.clip.overLayWidth ? self.clip.originImgSizeObj.width : self.clip.overLayWidth;  
-					crop_canvas.height = crop_canvas.width; 
-					var context = crop_canvas.getContext("2d");
-					context.fillStyle="#ffffff";
-					context.fillRect(0,0,crop_canvas.width,crop_canvas.height);
-					//alert('imgPointX: ' + imgPointX +' imgPointY: ' + imgPointY + 'width: '+ width+' imgHeight:'+height+' cvsPointX: ' + cvsPointX+' cvsPointY: ' + cvsPointY);
-					if (width < self.clip.overLayWidth) {
-						if (imgPointY > 0) height = self.clip.overLayWidth - imgPointY > height ? height : self.clip.overLayWidth - imgPointY;
-						else height = height - Math.abs(imgPointY);
-						if (imgPointX > 0) width = self.clip.overLayWidth - imgPointX > width ?  width : width - (imgPointX - self.clip.overLayWidth);
-						if (imgPointX < 0 ) width = width - Math.abs(imgPointX);
-					}
-					else {
-						if (width < height) height = height - Math.abs(imgPointY) > width ? width : height - Math.abs(imgPointY)
-						else {
-							if (imgPointY > 0) height = width - Math.abs(imgPointY) > height ? height : width - imgPointY;
-							else height = height + imgPointY
-						}
-						//height = width - Math.abs(imgPointY) > height ? height : (imgPointY > 0 ? height - Math.abs(width - imgPointY) : height + imgPointY)
-						width = width - Math.abs(imgPointX);
-					}
-					cvsPointX =  imgPointX > 0 ?  imgPointX : 0;
-					cvsPointY =  imgPointY > 0 ?  imgPointY : 0;
-					imgPointX = imgPointX > 0 ?  0 : -imgPointX;
-					imgPointY = imgPointY > 0 ? 0: -imgPointY;
-					var img = new Image;
-					img.src = self.clip.$img[0].src;
-					crop_canvas.getContext("2d").drawImage(img, imgPointX, imgPointY, width, height, cvsPointX, cvsPointY, width, height);  
-					self.clip.$clipContainer.append(crop_canvas);
-					return crop_canvas.toDataURL("image/png");
-				}
-				catch(e) {
-					alert(e)
-				}
-			}
 		},
 		_resetClipImgStatus: function () {
 			var self = this;
 			self.clip.$clipContainer.hide();
 			self.clip.$img[0].removeAttribute('style');
 			self.clip.$img[0].src = '';
+		
 		},
     _clipImage: function (src, rotateDeg) {
 			var self = this;
-			
 			self.clip.fullWidth = self.clip.$clipContainer.width();
 			self.clip.fullHeight = self.clip.$clipContainer.height();
 			self.clip.overLayWidth =  self._getRectWidth(self.clip.fullWidth, self.clip.fullHeight);
@@ -159,7 +119,6 @@
 				width: self.clip.overLayWidth,
 				height: self.clip.overLayWidth
 			})
-
 			var img = new Image();
 			img.src = src;
 			img.onload = function () {
@@ -167,37 +126,60 @@
 				self.clip.originImgSizeObj.width = this.width;
 				self.clip.originImgSizeObj.height = this.height;
 				var cvs = document.createElement('canvas');
+				cvs.id = 'create_canvas_box';
 				var ctx = cvs.getContext('2d');
-				var destX;
-				var destY;
+				var destX = 0;
+				var destY = 0;
 				var width = img.naturalWidth,
 				maxWidth = window.innerWidth,
         height = img.naturalHeight,
 				imgRatio = width / height;
 				//如果图片维度超过了给定的maxWidth 1500，
 				//为了保持图片宽高比，计算画布的大小
-				// if(width > maxWidth){
-				// 		width = maxWidth;
-				// 		height = width / imgRatio;
-				// }   
+				if(width > maxWidth){
+						width = maxWidth;
+						height = width / imgRatio;
+				} 
 				cvs.width = width;
-				cvs.height = height;
+				cvs.height = height;  
+				self.clip.$clipContainer.show()
+				self.clip.$clipContainer.append(cvs);
 				if (rotateDeg) {
-						ctx.translate(cvs.width / 2, cvs.height / 2);
+						cvs.width = cvs.height = img.naturalWidth > img.naturalHeight ? img.naturalWidth : img.naturalHeight;
 						ctx.rotate(rotateDeg);
-						destX = -width / 2,
-						destY = -height / 2;
+						ctx.translate(0, -Math.abs(img.naturalWidth - Math.abs(img.naturalWidth-img.naturalHeight)/2))
+						ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, destX, destY, img.naturalWidth, img.naturalHeight);
+						var newImg = new Image;
+						newImg.src = cvs.toDataURL("image/png");
+						newImg.onload = function () {
+							cvs.remove()
+							var w = img.naturalHeight;
+							var h = this.height;
+							var newCanvas =  document.createElement('canvas');
+							newCanvas.id = 'create_canvas_box';
+							if(w > maxWidth){
+								w = maxWidth;
+								h = w * imgRatio;
+							} 
+							newCanvas.width = w;
+							newCanvas.height = h;
+							var newCtx = newCanvas.getContext('2d');
+							self.clip.$clipContainer.append(newCanvas);
+							newCtx.drawImage(newImg, Math.abs((img.naturalWidth-img.naturalHeight)/2), 0, img.naturalHeight, img.naturalWidth, 0, 0, w, h);
+							self.clip.$img.attr('src', newCanvas.toDataURL("image/png"));
+						}
+						self.clip.$img.attr('src', cvs.toDataURL("image/png"));
 				}
+				else ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, destX, destY, width, height);
+				//console.log(destY)
 				
 				try {
-					ctx.drawImage(img, 0, 0);
+					
 				} catch (e) {
 					alert(e)
 				}				
-				self.clip.$img.attr('src', cvs.toDataURL("image/png"));
-				self.clip.$img.on('load', function () {
-					self.createCanvasBox($(this))
-				})
+				
+				
 				
 				
 			}
@@ -208,48 +190,23 @@
 				// self.clip.$clipContainer.hide();
 			}
 		},
-		createCanvasBox:function ($img) {
-			this.clip.$clipContainer.show()
-			var self = this;
-			var canvas = document.getElementById('create_canvas_box');
-			var w = $img.width();
-			var h = $img.height();
-
-			
-			canvas.id = 'create_canvas_box';
-			canvas.width = w;
-			canvas.height = h;
-			self.clip.$clipContainer.append(canvas);
-			$img.remove()
-		
-			console.log($img[0].naturalWidth, $img[0].naturalHeight, w, h, 0, 0);
-			canvas.getContext("2d").drawImage($img[0],0,0, $img[0].naturalWidth, $img[0].naturalHeight, 0, 0, w, h);
-			
-			
-			
-		},
 		_previewImg: function (imgData) {
 			var self = this;
 			var $container = self.$rootDom.find('.container');
 			$container.addClass('active');
-			self.imgData = imgData;
-			self.isImgChange = true;
-			var img = new Image;
-			img.src = imgData;
-			img.onload = function () {
-				document.getElementById('preview_img_box').getContext("2d").drawImage(img, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, 240, 240)
-			}
+			var previewResultImg = document.getElementById('preview_result_img')
+			var canvas = document.getElementById('create_canvas_box');
+			previewResultImg.src = canvas.toDataURL("image/png")
+			canvas.remove()
+			self.$rootDom
+					.find('.down-btn')
+					.attr('href', canvas.toDataURL("image/png"))
+					.attr('download', 'aa.png')
 			
-			
-					
 		},
 		download: function () {
 			var self = this;
-			self.$rootDom
-					.find('.down-btn')
-					.attr('href', document.getElementById('preview_img_box').toDataURL("image/png"))
-					.attr('download', 'aa.png')
-					//.click()
+			
 		}
 	}
 	

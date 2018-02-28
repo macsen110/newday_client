@@ -46,15 +46,15 @@ body {
     
 .page-declare-safety  .body .container {
   position: relative;
-  
   width: 12rem;
   margin: 1rem auto .75rem;
   
 }
 
 .page-declare-safety  .body .container .pic {
-  width: 12rem;
-  height: 12rem;
+  width: 240px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .page-declare-safety  .body .container .btn {
@@ -84,9 +84,7 @@ body {
 .page-declare-safety .body .container.active canvas {
   display: block
 }
-.page-declare-safety .body .container.active .pic {
-  display: none;
-}
+
 .page-declare-safety .body .container .btn:after {
     content: " ";
     width: 200%;
@@ -129,9 +127,18 @@ body {
   top: 50%;
   -webkit-transform: translate3d(-50%, -50%, 0);
   transform: translate3d(-50%, -50%, 0);
+  visibility: hidden;
 }
 
-
+#create_canvas_box {
+  /* position: absolute;
+  max-width: 100%;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0); */
+}
 
 .page-declare-safety .clip-image-container .overlay {
   position: absolute;
@@ -150,6 +157,7 @@ body {
 }
 
 .page-declare-safety .clip-image-container .tip {
+  z-index: 10;
   position: absolute;
   left: 0;
   top: 0;
