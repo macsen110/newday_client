@@ -27,7 +27,7 @@
 				$(this).find('input').attr('checked', true);
 				setTimeout(function () {
 					if (APP.router.curPathName == stateObj.pageName) {
-						APP.router.gotoPage({pageName: 'pregnant_record', pregnantStatus: 1})
+						APP.router._gotoPage({pageName: 'pregnant_record', pregnantStatus: 1})
 					}
 				}, 1000)
 				sessionStorage.setItem('select_pregnant_status', 1)
@@ -42,7 +42,7 @@
 				}
 				sessionStorage.setItem('select_pregnant_status', 2)
 				$(this).find('input').attr('checked', true);
-				APP.router.gotoPage({pageName: 'declare_safety', pregnantStatus: 2})
+				APP.router._gotoPage({pageName: 'declare_safety', pregnantStatus: 2})
 				APP.tools.recordBehavior('/infanthospital/v1/superApply', {applyType: 2})
 			})
 		},

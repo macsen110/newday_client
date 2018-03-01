@@ -102,7 +102,7 @@
 				contentType : 'application/json',
 				success: function (res) {
 					if (res.ret == 1) {
-						APP.router.gotoPage({
+						APP.router._gotoPage({
 							pageName: 'create_safety_share',
 							pic: encodeURIComponent(res.data.safyPicturesPath)
 						})

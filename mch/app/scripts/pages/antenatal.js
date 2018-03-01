@@ -461,7 +461,7 @@
 					sessionStorage.removeItem('weekPregnantList');
 					sessionStorage.removeItem('weekPregnantListNew');
 					sessionStorage.setItem('weekPregnantListAll', JSON.stringify(self.weekPregnantListAll));
-					if (data.length) APP.router.gotoPage({pageName: 'antenatal', replace: 1})
+					if (data.length) APP.router._gotoPage({pageName: 'antenatal', replace: 1})
 					else {
 						var updatedDataSign = sessionStorage.getItem('updatedDataSign');
 						if (self.weekPregnantListAll && !updatedDataSign) {

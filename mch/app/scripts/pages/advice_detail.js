@@ -119,7 +119,7 @@ define(['zepto','template'], function($, template) {
                     if (response.ret == 1) {
                         self._saveAdvicemobile(data.changeMobile, data.uid)
                         APP.ui.showPrompt('提交成功',  function () {
-                            APP.router.gotoPage({pageName: 'profile'});
+                            APP.router._gotoPage({pageName: 'profile'});
                         });
                         return;
                     }

@@ -83,10 +83,10 @@ define(["zepto", "../lib/ui"], function($, ui) {
       api: "https://www.macsen318.com/api"
     };
     self.ui = ui;
-    //self._todo();
-    //self.router.originalUrl = location.href;
+    self._todo();
+    self.router.originalUrl = location.href;
     self.bindUI();
-    APP.router._init([])
+    
   };
 
   APP._getOpenType = function() {
@@ -366,7 +366,8 @@ define(["zepto", "../lib/ui"], function($, ui) {
       self.profileInfo.uid = APP.uid;
       self.profileInfo.emChannel = response.emChannel;
 			self.profileInfo.emStatus = status;
-      self.router.replace("antenatal");
+      //self.router.replace("antenatal");
+      APP.router._init([])
     }
   };
   // APP.router = {
@@ -396,7 +397,7 @@ define(["zepto", "../lib/ui"], function($, ui) {
   // 		if (this.cbPathObj) stateObj = this.cbPathObj;
   // 		else stateObj.pageName = 'antenatal';
   // 		stateObj.replace = 1;
-  // 		this.gotoPage(stateObj);
+  // 		this._gotoPage(stateObj);
   // 		this.cbPath = null;
   // 	},
   // 	startLoading: function (type) {
@@ -447,7 +448,7 @@ define(["zepto", "../lib/ui"], function($, ui) {
     var load = require("bundle-loader?lazy&name=[name]!./" + path + ".js");
     
     load(function(component) {
-      APP.router.setRouter(stateObj,component,'')
+      //APP.router.setRouter(stateObj,component,'')
       if (APP.router.curPathName == stateObj.pageName) {
         
         component.init(stateObj);

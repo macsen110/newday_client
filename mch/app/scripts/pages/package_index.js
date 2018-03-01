@@ -26,7 +26,7 @@
 				var pageName = $(this).data('href');
 				if (pageName == 'gallery') APP.tools.recordBehavior('/infanthospital/v1/superApply', {applyType: 4})
 				if (pageName == 'declare_safety') APP.tools.recordBehavior('/infanthospital/v1/superApply', {applyType: 3})
-				APP.router.gotoPage({pageName: pageName})
+				APP.router._gotoPage({pageName: pageName})
 			})
 		},
 		init: function (stateObj) {

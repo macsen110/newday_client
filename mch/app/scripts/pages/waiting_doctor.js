@@ -82,7 +82,7 @@
 						return;
 					}
 					APP.router.endLoading();
-					APP.ui.showPrompt(response.msg);
+					APP.ui.showPrompt(res.msg);
 				},
 				error: function () {
 					APP.router.endLoading();
@@ -103,7 +103,7 @@
 		_startTimeCount: function () {
 		  var self = this;
 		  self.timeCount = setInterval(function () {
-			  APP.router.gotoPage({replace: 1, pageName: 'waiting_doctor'})
+			  APP.router._gotoPage({replace: 1, pageName: 'waiting_doctor'})
 		  }, 10000)  
 		},
 		_endTimeCount: function () {

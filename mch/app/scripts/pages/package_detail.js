@@ -182,7 +182,7 @@ define(['zepto','template'], function($, template) {
 									success: function (res) {
 										that.openDialog.destory();
 										APP.profileInfo.superMm = 1;
-										APP.router.gotoPage({pageName: 'package_detail', replace: 1})
+										APP.router._gotoPage({pageName: 'package_detail', replace: 1})
 									},
 									error:function (res) {
 										that.openDialog.destory();

@@ -248,7 +248,7 @@
 			} 
 			if (APP.profileInfo.childState == 0) {
 				localStorage.setItem('babyInfoObj', JSON.stringify(babyInfoObj))
-				APP.router.gotoPage({pageName: 'create_safety'});
+				APP.router._gotoPage({pageName: 'create_safety'});
 				return;
 			}
 			var data = {
@@ -272,9 +272,9 @@
 								dateBorn: dateBorn,
 								pic: encodeURIComponent(res.data.babyPicturesPath)
 							}
-							APP.router.gotoPage(obj);
+							APP.router._gotoPage(obj);
 						}
-						else APP.router.gotoPage({pageName: 'pregnant_record', pregnantStatus: 2})
+						else APP.router._gotoPage({pageName: 'pregnant_record', pregnantStatus: 2})
 					}
 
 				}
