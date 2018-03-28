@@ -365,9 +365,9 @@ define(["zepto", "../lib/ui"], function($, ui) {
       self.profileInfo = obj;
       self.profileInfo.uid = APP.uid;
       self.profileInfo.emChannel = response.emChannel;
-			self.profileInfo.emStatus = status;
-      //self.router.replace("antenatal");
+      self.profileInfo.emStatus = status;
       APP.router._init([])
+      self.router.replace("antenatal");
     }
   };
   // APP.router = {
@@ -446,11 +446,8 @@ define(["zepto", "../lib/ui"], function($, ui) {
   APP.router.endLoading = function () {}
   APP.router._goPathNew = function(path, stateObj) {
     var load = require("bundle-loader?lazy&name=[name]!./" + path + ".js");
-    
     load(function(component) {
-      //APP.router.setRouter(stateObj,component,'')
-      if (APP.router.curPathName == stateObj.pageName) {
-        
+      if (APP.router.curPathName == stateObj.pageName) {        
         component.init(stateObj);
       }
     });

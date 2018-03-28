@@ -56,34 +56,7 @@ xhr.prototype = {
   new xhr({
     url: 'https://raw.githubusercontent.com/macsen110/yao-easy-router/master/README.md',
     done: function (data) {
-      document.body.innerHTML = marked(data)
+      document.getElementById('container').innerHTML = marked(data)
     }
   })
-  var config = [
-    {
-      pageName: 'home',
-      title:'home',
-      component: {
-        init: function (obj, r_instance) {
-          console.log(obj)
-          console.log(r_instance)
-        }
-      }
-    },
-    {
-      pageName: 'list',
-      title:'list',
-      component: function (obj, r_instance, title) {
-        r_instance.setRouter(obj, r_instance, title)
-      },
-      _updateInSide: 1
-    },
-  ]
-  var router = EASY_ROUTER.router;
-  router._init(config);
-  setTimeout(function () {
-    router.replace('list', {
-      id: 110
-    })
-  }, 6000)
 }())

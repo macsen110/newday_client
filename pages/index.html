@@ -269,10 +269,26 @@
     table th:first-child {
       border-left: none
     }
+    #loading {
+      position: absolute;
+      width: 75%;
+      height: 40px;
+      background: rgba(0,0,0, .8);
+      line-height: 40px;
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      text-align: center;
+      border-radius: 4px;
+      transform: translate3d(-50%, -50%, 0);
+    }
   </style>
 </head>
 
 <body>
+  <div class="content" id="container">
+    <div id="loading">正在加载...</div>
+  </div>
   <script src="./marked.js"></script>
   <script src="./page.js"></script>
   <script src="./index.js"></script>
