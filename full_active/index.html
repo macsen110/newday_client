@@ -159,7 +159,7 @@
     // .separate
     start = () => setInterval(() => {
       new xhr({
-        url: 'https://yzadmin.111.com.cn/statistics/v1/count',
+        url: '/statistics/v1/count',
         method: 'POST',
         done: (res) => {
           console.log(res.data.inquery)
