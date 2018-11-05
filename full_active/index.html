@@ -156,7 +156,7 @@
       done: (res) => {
         sepa = new Flip({
           node: $('.separate'),
-          from: res.data.inquery,
+          from: res.data.inquery + 602,
           duration: 1,
           separator: ','
         })
@@ -173,7 +173,7 @@
         done: (res) => {
           console.log(res.data.inquery)
           sepa.flipTo({
-            to: res.data.inquery
+            to: res.data.inquery + 602
           })
 
         }
