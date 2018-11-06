@@ -66,8 +66,9 @@
       transform: translate3d(-50%, -50%, 0);
       width: 100%;
       font-size: 120px;
-      
+
     }
+
     .logo {
 
       display: block;
@@ -148,39 +149,50 @@
 
 
     const $ = s => document.querySelector(s)
-    let sepa;
     let start;
-    new xhr({
-      url: '/statistics/v1/count',
-      method: 'POST',
-      done: (res) => {
-        sepa = new Flip({
-          node: $('.separate'),
-          from: res.data.inquery + 602,
-          duration: 1,
-          separator: ','
-        })
-        //start()
+    let reset = ' 999998';
+    let result = 1000004;
+    let sepa = new Flip({
+      node: $('.separate'),
+      from: reset,
+      duration: 1,
+      separator: ','
+    });
+    
+    // new xhr({
+    //   url: '/statistics/v1/count',
+    //   method: 'POST',
+    //   done: (res) => {
+    //     sepa = new Flip({
+    //       node: $('.separate'),
+    //       from: res.data.inquery + 602,
+    //       duration: 1,
+    //       separator: ','
+    //     })
+    //     //
 
-      }
-    })
+    //   }
+    // })
 
     // .separate
-    start = () => setInterval(() => {
-      new xhr({
-        url: '/statistics/v1/count',
-        method: 'POST',
-        done: (res) => {
-          console.log(res.data.inquery)
-          sepa.flipTo({
-            to: res.data.inquery + 602
-          })
-
-        }
+    start = () => setTimeout(() => {
+      sepa.flipTo({
+        to: result
       })
-    }, 4000)
+      // new xhr({
+      //   url: '/statistics/v1/count',
+      //   method: 'POST',
+      //   done: (res) => {
+      //     console.log(res.data.inquery)
+      //     sepa.flipTo({
+      //       to: res.data.inquery + 602
+      //     })
 
+      //   }
+      // })
+    }, 2000);
 
+start();
 
 
     //fetch('https://yzadmin.111.com.cn/statistics/v1/count').then()
