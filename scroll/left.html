@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />            
+        <meta name="keywords" content="关键字1,关键字2" />        
+        <meta name="Description" content="描述信息" />
+        <title>水平循环滚动</title>
+        <!--CSS/JS-->
+        <style type="text/css">
+            *{margin:0;padding:0;}
+            ul,li{list-style:none;display:block;}
+            #scrollBox{background: #FFF;margin:40px auto;overflow:hidden;border: 1px dashed #CCC;width: 500px;}
+            #scrollBox #con1,#scrollBox #con2{float:left;margin-left:10px;}		
+            #innerdiv {float: left;width: 800%;}
+            
+        </style>
+        
+        
+    </head>
+ <body>
+        <!--div-->
+    <div id="scrollBox">
+		<div id="innerdiv">
+			<div id="con1">
+				<p>01</p>
+                <p>02</p>
+                <p>03</p>
+			</div>
+			<div id="con2"></div>
+		</div>
+    </div>
+    <script type="text/javascript">            
+                var area =document.getElementById('scrollBox');
+                var con1 = document.getElementById('con1');
+                //var con2 = document.getElementById('con2');
+                //con2.innerHTML=con1.innerHTML;
+				 area.scrollLeft=0;				 
+               function scrollUp(){
+                if(area.scrollLeft>=con2.offsetWidth){
+                    area.scrollLeft=0;
+                }else{
+                    area.scrollLeft+=5;
+                }
+                }                
+                var time = 50;
+                var mytimer=setInterval(scrollUp,time);
+                area.onmouseover=function(){
+                    clearInterval(mytimer);
+                }
+                area.onmouseout=function(){
+                    mytimer=setInterval(scrollUp,time);
+                }
+				/*
+				var speed=10; //数字越大速度越慢
+				var tab=document.getElementById('scrollBox');
+				var tab1=document.getElementById('con1');
+				var tab2=document.getElementById('con2');
+				tab2.innerHTML=tab1.innerHTML;
+				function Marquee(){
+				if(tab2.offsetWidth-tab.scrollLeft<=0)
+				tab.scrollLeft-=tab1.offsetWidth
+				else{
+				tab.scrollLeft++;
+				}
+				}
+				var MyMar=setInterval(Marquee,speed);
+				tab.onmouseover=function() {clearInterval(MyMar)};
+				tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
+				*/
+
+        </script>
+ </body>
+ 
+</html>
