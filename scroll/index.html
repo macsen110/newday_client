@@ -1,82 +1,272 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <style type="text/css">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
         * {
             padding: 0;
             margin: 0;
-        }
-            /*1.跑马灯CSS*/
-            .marquee {
-                position: relative;
-                font-size: 1.2rem;
-                line-height: 1.4rem;
-                height: 1.4rem;
-                overflow: hidden;
-                color: #666;
-            }
-            .marquee li {
-                overflow: hidden;
-                margin-left: 26.5%;
-            }
-        </style>
-    </head>
 
-    <body>
-        <!-- 2.跑马灯HTML -->
-        <div class="marquee vip_zmd_area">
+        }
+
+        /*1.跑马灯CSS*/
+        .marquee {
+            position: relative;
+            font-size: 1.2rem;
+            line-height: 1.4rem;
+            height: 1.4rem;
+            overflow: hidden;
+            color: #666;
+        }
+
+        .marquee li {
+            overflow: hidden;
+            margin-left: 26.5%;
+        }
+
+        #widget-marquee {
+            position: absolute;
+            bottom: 100px;
+            left: 100px;
+            width: 100px;
+            height: 150px;
+            border: 1px solid #333;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        #widget-marquee .marquee-container {
+
+            height: 100%;
+            width: 100%;
+
+        }
+
+        #widget-marquee * {
+            box-sizing: border-box;
+        }
+
+        #widget-marquee .marquee-box {
+            height: 150px;
+            width: 100%;
+
+        }
+
+        #widget-marquee .marquee-row {
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+        }
+        #widget-marquee .marquee-row-inner {
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            width: 800%;
+        }
+        #widget-marquee .marquee-row-inner .marquee-row-item {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            margin-left: 10px;
+        }
+
+        #widget-marquee .marquee-row-inner .marquee-row-item:last-child {
+            visibility: hidden;
+        }
+
+        #widget-marquee .marquee-row-inner.visible .marquee-row-item:last-child {
+            visibility: visible
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 2.跑马灯HTML -->
+    <div class="marquee widget-marquee">
+        <div class="widget-marquee-contaier">
             <ul id="marqueebox">
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员1</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员2</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员3</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员4</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员5</li>
+                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员6</li>
             </ul>
         </div>
-        <!---->
-    </body>
-    <script type="text/javascript">
-        //3.跑马灯JS
-        startmarquee(20, 2000); //速度，间隔
-        function startmarquee(speed, delay) {
+    </div>
+
+    <div id="widget-marquee">
+        <div class="marquee-container">
+            <ul class="widget-marquee-box">
+
+            </ul>
+        </div>
+
+    </div>
+    <!---->
+</body>
+<script type="text/javascript">
+    var __Config = {
+        limit: 5,
+        dataInterval: 100,
+        fadeSpeed: 200,
+        slideSpeed: 2000,
+        content: [
+            {
+                row: '恭喜中国平安张*升级为超级会员1'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员2'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员3'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员4'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员5'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员6'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员7'
+            }
+        ],
+        carousel: {
+            enable: false,
+            speed: 5000
+        }
+
+    }
+    var __Scroll = {
+        __timerLeft: [],
+        __container: null,
+        init: function (dom, options) {
+            this.__container = dom;
+            var _content = options.content;
+            var _rowNums = _content.length;
+            var _limit = options.limit;
+            var _boxNums = Math.ceil(_rowNums / _limit);
+            var _html = '';
+            for (var _i = 0; _i < _boxNums; _i++) {
+                var _ul = '<ul class="marquee-box">';
+                var _items = ''
+                for (var _j = _i * 5; _j < (_i + 1) * 5; _j++) {
+                    if (_j >= _rowNums) break;
+                    _items += '<li class="marquee-row">'
+                        +'<div class="marquee-row-inner">'
+                            + '<div class="marquee-row-item">' + _content[_j].row + '</div>'
+                            + '<div class="marquee-row-item">' + _content[_j].row + '</div>'
+                        +'</div>'
+                        + '</li>'
+                }
+                _ul = _ul + _items + '</ul>';
+                _html = _html + _ul;
+            }
+            dom.innerHTML = _html;
+            //[].forEach.call(dom.querySelectorAll('.marquee-row-item'), this.__renderMarqueeRow.bind(this))
+            if (_boxNums > 1) this.__loopScrollUp(this.__container, document.querySelector('.marquee-box'), 20, 2000, _boxNums * 2)
+        },
+        __renderMarqueeRow(item, idx) {
+            var _w = item.clientWidth;
+            if (_w > this.__container.clientWidth) {
+                item.parentElement.classList.add('visible')
+            }
+        },
+        __loopRowTimeList: [],
+        __loopScrollUp(o, box, speed, delay, _boxNums) {
+            var _n = 0;
             var p = false;
             var t;
             var sh;
-            var o = document.getElementById("marqueebox");
-            var lh = document.querySelector('.marquee').clientHeight;
+            var lh = box.scrollHeight;
             o.innerHTML += o.innerHTML;
-
             o.style.marginTop = 0;
-            o.onmouseover = function() {
-                p = true;
-            }
-            o.onmouseout = function() {
-                p = false;
-            }
-
-            function start() {
-                sh = o.offsetHeight;
+            var _start = () => {
+                console.log(_n % _boxNums);
+                _n++
+                sh = o.scrollHeight;
                 o.style.height = sh + 'px';
-                t = setInterval(scrolling, speed);
-                if(!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
+                t = setInterval(_scrolling, speed);
+                if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
             }
 
-            function scrolling() {
-                if(parseInt(o.style.marginTop) % lh != 0) {
+            var _scrolling = () => {
+                if (parseInt(o.style.marginTop) % lh != 0) {
                     o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-                    if(Math.abs(parseInt(o.style.marginTop)) >= sh / 2) o.style.marginTop = 0;
+                    if (Math.abs(parseInt(o.style.marginTop)) >= sh / 1) o.style.marginTop = 0;
                 } else {
+                    console.log(120)
                     clearInterval(t);
-                    setTimeout(start, delay);
+                    setTimeout(_start, delay);
                 }
             }
-            setTimeout(start, delay);
-            // start();
+            var time = 50;
+            setInterval(this.loopScrollLeft.bind(null, item.parentElement.parentElement, item), time);
+            //_start()
+            setTimeout(_start, delay);
+        },
+        renderUI: function (dom, list, options) {
+
+        },
+        __stopScrollLeft() {
+
+        },
+        __loopScrollLeft: function (area, _con2) {
+            if (area.scrollLeft >= _con2.offsetWidth) {
+                area.scrollLeft = 0;
+            } else {
+                area.scrollLeft += 5;
+            }
+        },
+        __cleartimerLeft: () => {
+
         }
-    </script>
+
+    }
+    __Scroll.init(document.getElementById('widget-marquee').querySelector('.marquee-container'), __Config)
+    //3.跑马灯JS
+    startmarquee(20, 2000); //速度，间隔
+    function startmarquee(speed, delay) {
+        var p = false;
+        var t;
+        var sh;
+        var o = document.getElementById("marqueebox");
+        var lh = document.querySelector('.marquee').clientHeight;
+        o.innerHTML += o.innerHTML;
+
+        o.style.marginTop = 0;
+        o.onmouseover = function () {
+            p = true;
+        }
+        o.onmouseout = function () {
+            p = false;
+        }
+
+        function start() {
+            sh = o.offsetHeight;
+            o.style.height = sh + 'px';
+            t = setInterval(scrolling, speed);
+            if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
+        }
+
+        function scrolling() {
+            if (parseInt(o.style.marginTop) % lh != 0) {
+                o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
+                if (Math.abs(parseInt(o.style.marginTop)) >= sh / 2) o.style.marginTop = 0;
+            } else {
+                clearInterval(t);
+                setTimeout(start, delay);
+            }
+        }
+        setTimeout(start, delay);
+        // start();
+    }
+</script>
 
 </html>
