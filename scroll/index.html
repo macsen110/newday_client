@@ -6,10 +6,99 @@
     <title></title>
     <style type="text/css">
         * {
-            padding: 0;
-            margin: 0;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: none;
+    font-family: Arial,'Microsoft YaHei';
+    box-sizing: border-box
+}
 
-        }
+h1,h2,h3,h4,h5,em,i,strong,em,i {
+    font-style: normal;
+    font-weight: 400;
+    font-family: inherit
+}
+
+p {
+    font-family: inherit
+}
+
+button {
+    background: 0 0;
+    border: 0
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+    font-size: calc(111.25%);
+    font-size: -webkit-calc(125% + 20 * (100vw - 320px) / 320)
+}
+
+body {
+    min-height: 100%;
+    min-width: 100%;
+    line-height: 1.5;
+    color: #484849;
+    overflow-x: hidden;
+    font-size: 14px;
+    background: #f6f6f6;
+    -webkit-overflow-scrolling: touch
+}
+
+select {
+    border: 0;
+    background: 0 0;
+    color: inherit
+}
+
+img {
+    vertical-align: top;
+    border: 0
+}
+
+input,textarea {
+    user-select: text;
+    border: 0 none;
+    font-size: inherit
+}
+
+input:focus,select:focus,textarea:focus,button:focus {
+    outline: 0
+}
+
+input[type=text],input[type=password],input[type=search],input[type=tel],input[type=number],input[type=email],input[type=url],input[type=radio],input[type=date],input[type=checkbox],textarea {
+    -webkit-appearance: none;
+    background-color: transparent
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none
+}
+
+a {
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    color: inherit
+}
+
+li {
+    list-style: none
+}
+
+.clear {
+    zoom:1}
+
+.clear:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden
+}
 
 
         #widget-marquee {
@@ -106,21 +195,6 @@
                 row: '恭喜中国平安张*升级为超级会员2'
             },
             {
-                row: '恭喜中超级会员3'
-            },
-            {
-                row: '恭喜中国平安张*升级为超级会员1'
-            },
-            {
-                row: '恭喜中国平安张*升级为超级会员2'
-            },
-            {
-                row: '恭喜中国平安张*升级为超级会员3'
-            },
-            {
-                row: '恭喜中国平安张*升级为超级会员1'
-            },
-            {
                 row: '恭喜中国平安张*升级为超级会员2'
             },
             {
@@ -197,27 +271,29 @@
                 sh = o.offsetHeight;
                 o.style.height = sh + 'px';
                 t = setInterval(_scrolling, options.carousel.speed);
+                
                 if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
             }
             var _scrolling = function () {
                 if (parseInt(o.style.marginTop) % lh != 0) {
-                    _this.__stopScrollLeft(_n % _boxNums)
+                    _this.__stopScrollLeft(_n)
                     o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
                     if (Math.abs(parseInt(o.style.marginTop)) >= sh * (_boxNums - 1)) {
                         clearInterval(t);
                         _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_boxNums - 1], options.slideSpeed)
                         setTimeout(function () {
-                            o.style.marginTop = 0;
+                            _this.__stopScrollLeft(_boxNums - 1)
+                            o.style.marginTop = 0
                             _n = 0;
-                            _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
                             setTimeout(_start, options.carousel.delay);
+                            _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
                         }, options.carousel.delay)
                     }
                 }
                 else {
                     clearInterval(t);
-                    setTimeout(_start, options.carousel.delay);
                     _n++
+                    setTimeout(_start, options.carousel.delay);
                     _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
                 }
             }
@@ -225,10 +301,17 @@
         },
         __stopScrollLeft: function (idx) {
             if (this.__loopRowTimeList.length == 0) return;
+            this.__resetScrollLeft(idx)
             this.__loopRowTimeList.forEach(function (item) {
                 clearInterval(item)
             })
             this.__loopRowTimeList = []
+        },
+        __resetScrollLeft: function (idx) {
+            [].forEach.call(this.__container.querySelectorAll('.marquee-box')[idx].children, function (_item) {
+                _item.scrollLeft && (_item.scrollLeft = 0)
+            })
+
         },
         __startScrollLeft: function (area, _w) {
             if (area.scrollLeft >= _w) {
