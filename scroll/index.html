@@ -11,26 +11,12 @@
 
         }
 
-        /*1.跑马灯CSS*/
-        .marquee {
-            position: relative;
-            font-size: 1.2rem;
-            line-height: 1.4rem;
-            height: 1.4rem;
-            overflow: hidden;
-            color: #666;
-        }
-
-        .marquee li {
-            overflow: hidden;
-            margin-left: 26.5%;
-        }
 
         #widget-marquee {
             position: absolute;
             bottom: 100px;
             left: 100px;
-            width: 100px;
+            width: 200px;
             height: 150px;
             border: 1px solid #333;
             overflow: hidden;
@@ -87,20 +73,6 @@
 </head>
 
 <body>
-    <!-- 2.跑马灯HTML -->
-    <div class="marquee widget-marquee">
-        <div class="widget-marquee-contaier">
-            <ul id="marqueebox">
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员1</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员2</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员3</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员4</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员5</li>
-                <li class="tp"><span class="colorfff">恭喜中国平安张*升级为</span>超级会员6</li>
-            </ul>
-        </div>
-    </div>
-
     <div id="widget-marquee">
         <div class="marquee-container">
             <ul class="widget-marquee-box">
@@ -134,20 +106,42 @@
                 row: '恭喜中国平安张*升级为超级会员2'
             },
             {
+                row: '恭喜中超级会员3'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员1'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员2'
+            },
+            {
                 row: '恭喜中国平安张*升级为超级会员3'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员1'
+            },
+            {
+                row: '恭喜中国平安张*升级为超级会员2'
+            },
+            {
+                row: '恭喜'
             },
         ],
         carousel: {
             enable: false,
-            speed: 5000
+            speed: 20,
+            delay: 5000
         }
 
     }
     var __Scroll = {
-        __timerLeft: [],
         __container: null,
-        init: function (dom, options) {
+        __init: function (dom, options) {
             this.__container = dom;
+            this.options = options;
+            this.__renderUI(dom, options)
+        },
+        __renderUI: function (dom, options) {
             var _content = options.content;
             var _rowNums = _content.length;
             var _limit = options.limit;
@@ -169,55 +163,67 @@
                 _html = _html + _ul;
             }
             dom.innerHTML = _html;
-            if (_boxNums > 1) this.__loopScrollUp(this.__container, document.querySelector('.marquee-box'), 20, 2000, _boxNums * 2)
+            this.__bindUI(dom, options, _boxNums)
+        },
+        __bindUI: function (dom, options, _boxNums) {
+            if (_boxNums > 1) this.__loopScrollUp(this.__container, options, _boxNums)
             this.__marqueeRowAddVisible(dom.querySelectorAll('.marquee-box')[0], options.slideSpeed);
         },
-        __marqueeRowAddVisible(curMarqueeBox, speed) {
+        __marqueeRowAddVisible: function (curMarqueeBox, speed) {
             var _this = this;
-            curMarqueeBox.querySelectorAll('.marquee-row-item').forEach((element, idx) => {
-                var _w = element.clientWidth;
-                if (_w > _this.__container.clientWidth) {
-                    element.parentElement.classList.add('visible')
-                    _this.__loopRowTimeList.push(setInterval(_this.__startScrollLeft.bind(null, curMarqueeBox.children[idx], _w), 50))
-                }
-            });
+            setTimeout(function () {
+                curMarqueeBox.querySelectorAll('.marquee-row-item').forEach(function (element, idx) {
+                    var _w = element.clientWidth;
+                    if (_w > _this.__container.clientWidth) {
+                        element.parentElement.classList.add('visible')
+                        _this.__loopRowTimeList.push(setInterval(_this.__startScrollLeft.bind(null, curMarqueeBox.children[idx], _w), speed))
+                    }
+
+                });
+            }, 1000)
         },
         __loopRowTimeList: [],
-        __loopScrollUp(o, box, speed, delay, _boxNums) {
+        __loopScrollUp: function (o, options, _boxNums) {
             var _this = this;
             var _n = 0;
             var p = false;
             var t;
             var sh;
-            var lh = box.scrollHeight;
-            o.innerHTML += o.innerHTML;
+            var lh = o.offsetHeight;
+            //o.innerHTML += o.innerHTML;
             o.style.marginTop = 0;
-            var _start = () => {
-                sh = o.scrollHeight;
+            //_boxNums = _boxNums * 2;
+            var _start = function () {
+                sh = o.offsetHeight;
                 o.style.height = sh + 'px';
-                t = setInterval(_scrolling, speed);
+                t = setInterval(_scrolling, options.carousel.speed);
                 if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-                
             }
-
-            var _scrolling = () => {
+            var _scrolling = function () {
                 if (parseInt(o.style.marginTop) % lh != 0) {
                     _this.__stopScrollLeft(_n % _boxNums)
                     o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-                    if (Math.abs(parseInt(o.style.marginTop)) >= sh / 1) o.style.marginTop = 0;
-                } else {
+                    if (Math.abs(parseInt(o.style.marginTop)) >= sh * (_boxNums - 1)) {
+                        clearInterval(t);
+                        _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_boxNums - 1], options.slideSpeed)
+                        setTimeout(function () {
+                            o.style.marginTop = 0;
+                            _n = 0;
+                            _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
+                            setTimeout(_start, options.carousel.delay);
+                        }, options.carousel.delay)
+                    }
+                }
+                else {
                     clearInterval(t);
-                    setTimeout(_start, delay);
+                    setTimeout(_start, options.carousel.delay);
                     _n++
-                    _this.__marqueeRowAddVisible(this.__container.querySelectorAll('.marquee-box')[_n % _boxNums], 50)
+                    _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
                 }
             }
-            setTimeout(_start, delay);
+            setTimeout(_start, options.carousel.delay);
         },
-        renderUI: function (dom, list, options) {
-
-        },
-        __stopScrollLeft(idx) {
+        __stopScrollLeft: function (idx) {
             if (this.__loopRowTimeList.length == 0) return;
             this.__loopRowTimeList.forEach(function (item) {
                 clearInterval(item)
@@ -225,56 +231,15 @@
             this.__loopRowTimeList = []
         },
         __startScrollLeft: function (area, _w) {
-            //console.log(_con2.offsetWidth)
             if (area.scrollLeft >= _w) {
                 area.scrollLeft = 0;
             } else {
                 area.scrollLeft += 5;
             }
-        },
-        __cleartimerLeft: () => {
-
         }
 
     }
-    __Scroll.init(document.getElementById('widget-marquee').querySelector('.marquee-container'), __Config)
-    //3.跑马灯JS
-    startmarquee(20, 2000); //速度，间隔
-    function startmarquee(speed, delay) {
-        var p = false;
-        var t;
-        var sh;
-        var o = document.getElementById("marqueebox");
-        var lh = document.querySelector('.marquee').clientHeight;
-        o.innerHTML += o.innerHTML;
-
-        o.style.marginTop = 0;
-        o.onmouseover = function () {
-            p = true;
-        }
-        o.onmouseout = function () {
-            p = false;
-        }
-
-        function start() {
-            sh = o.offsetHeight;
-            o.style.height = sh + 'px';
-            t = setInterval(scrolling, speed);
-            if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-        }
-
-        function scrolling() {
-            if (parseInt(o.style.marginTop) % lh != 0) {
-                o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-                if (Math.abs(parseInt(o.style.marginTop)) >= sh / 2) o.style.marginTop = 0;
-            } else {
-                clearInterval(t);
-                setTimeout(start, delay);
-            }
-        }
-        setTimeout(start, delay);
-        // start();
-    }
+    __Scroll.__init(document.querySelector('.marquee-container'), __Config)
 </script>
 
 </html>
