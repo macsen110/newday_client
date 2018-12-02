@@ -1,0 +1,57 @@
+#widget-marquee {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+    width: 200px;
+    height: 150px;
+    border: 1px solid #333;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#widget-marquee .marquee-container {
+
+    height: 100%;
+    width: 100%;
+
+}
+
+#widget-marquee * {
+    box-sizing: border-box;
+}
+
+#widget-marquee .marquee-box {
+    height: 150px;
+    width: 100%;
+
+}
+
+#widget-marquee .marquee-row {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+#widget-marquee .marquee-row-inner {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    width: 800%;
+}
+
+#widget-marquee .marquee-row-inner .marquee-row-item,
+#widget-marquee .marquee-row-inner .marquee-row-item-last {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+#widget-marquee .marquee-row-inner .marquee-row-item-last {
+    visibility: hidden;
+}
+
+#widget-marquee .marquee-row-inner.visible .marquee-row-item-last {
+    visibility: visible
+}
