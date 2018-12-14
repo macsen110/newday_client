@@ -32,26 +32,12 @@
     overflow: hidden;
 }
 
-#widget-marquee .marquee-row-inner {
-    height: 30px;
-    line-height: 30px;
-    overflow: hidden;
-    width: 800%;
-}
 
-#widget-marquee .marquee-row-inner .marquee-row-item,
-#widget-marquee .marquee-row-inner .marquee-row-item-last {
+
+#widget-marquee .marquee-row .marquee-row-item {
     float: left;
     height: 30px;
     line-height: 30px;
     overflow: hidden;
     margin-left: 10px;
-}
-
-#widget-marquee .marquee-row-inner .marquee-row-item-last {
-    visibility: hidden;
-}
-
-#widget-marquee .marquee-row-inner.visible .marquee-row-item-last {
-    visibility: visible
 }

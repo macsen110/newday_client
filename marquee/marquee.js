@@ -24,10 +24,7 @@ define([
                 for (var _j = _i * 5; _j < (_i + 1) * 5; _j++) {
                     if (_j >= _rowNums) break;
                     _items += '<li class="marquee-row">'
-                        + '<div class="marquee-row-inner">'
                         + '<div class="marquee-row-item">' + _content[_j].row + '</div>'
-                        + '<div class="marquee-row-item-last">' + _content[_j].row + '</div>'
-                        + '</div>'
                         + '</li>'
                 }
                 _ul = _ul + _items + '</ul>';
@@ -46,7 +43,6 @@ define([
                 curMarqueeBox.querySelectorAll('.marquee-row-item').forEach(function (element, idx) {
                     var _w = element.clientWidth;
                     if (_w > _this.__container.clientWidth) {
-                        element.parentElement.classList.add('visible')
                         _this.__loopRowTimeList.push(setInterval(_this.__startScrollLeft.bind(null, curMarqueeBox.children[idx], _w), speed))
                     }
 
