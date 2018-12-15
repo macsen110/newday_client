@@ -23,21 +23,22 @@
 #widget-marquee .marquee-box {
     height: 150px;
     width: 100%;
-
 }
 
 #widget-marquee .marquee-row {
     height: 30px;
     line-height: 30px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
     overflow: hidden;
 }
 
 
 
 #widget-marquee .marquee-row .marquee-row-item {
-    float: left;
+    
     height: 30px;
     line-height: 30px;
-    overflow: hidden;
-    margin-left: 10px;
+    white-space: nowrap;
+    
 }

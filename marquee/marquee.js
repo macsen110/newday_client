@@ -34,19 +34,23 @@ define([
             this.__bindUI(dom, options, _boxNums)
         },
         __bindUI: function (dom, options, _boxNums) {
-            if (_boxNums > 1) this.__loopScrollUp(this.__container, options, _boxNums)
+            //if (_boxNums > 1) this.__loopScrollUp(this.__container, options, _boxNums)
             this.__marqueeRowAddVisible(dom.querySelectorAll('.marquee-box')[0], options.slideSpeed);
         },
         __marqueeRowAddVisible: function (curMarqueeBox, speed) {
             var _this = this;
+            _this.curMarqueeBox = curMarqueeBox;
             setTimeout(function () {
                 curMarqueeBox.querySelectorAll('.marquee-row-item').forEach(function (element, idx) {
-                    var _w = element.clientWidth;
-                    if (_w > _this.__container.clientWidth) {
-                        _this.__loopRowTimeList.push(setInterval(_this.__startScrollLeft.bind(null, curMarqueeBox.children[idx], _w), speed))
+                    var _w = element.scrollWidth;
+                    if (_w > element.parentElement.clientWidth) {
+                        element.style.width = _w + 'px'
+                        var diffWidth = _w - element.parentElement.clientWidth
+                        _this.__loopRowTimeList.push({idx: idx, diffWidth: diffWidth, element})
                     }
 
                 });
+                if (_this.__loopRowTimeList.length > 0) _this.__startScrollLeft(_this.__loopRowTimeList[0])
             }, 1000)
         },
         __loopRowTimeList: [],
@@ -106,12 +110,20 @@ define([
             })
 
         },
-        __startScrollLeft: function (area, _w) {
-            if (area.scrollLeft >= _w) {
-                area.scrollLeft = 0;
-            } else {
-                area.scrollLeft += 5;
+        __startScrollLeft: function (options) {
+            var start = null;
+            var element = options.element;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                var progress = timestamp - start;
+                element.style.transform = 'translateX(-' + Math.min(progress / (1000/options.diffWidth), options.diffWidth) + 'px)';
+                if (progress < 1000) {
+                    window.requestAnimationFrame(step);
+                }
             }
+
+            window.requestAnimationFrame(step);
         }
 
     }
