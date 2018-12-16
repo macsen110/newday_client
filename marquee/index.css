@@ -3,7 +3,6 @@
     bottom: 100px;
     left: 100px;
     width: 200px;
-    height: 150px;
     border: 1px solid #333;
     overflow: hidden;
     box-sizing: border-box;
@@ -11,8 +10,7 @@
 
 #widget-marquee .marquee-container {
 
-    height: 100%;
-    width: 100%;
+background-color: #002B44 ;
 
 }
 
@@ -21,27 +19,52 @@
 }
 
 #widget-marquee .marquee-box {
-    height: 150px;
     width: 100%;
 }
 
 #widget-marquee .marquee-row {
+    position: relative;
     height: 30px;
-    line-height: 30px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    overflow: hidden;
-    transition: all 1s ease
+    padding: 0 10px;
+    transition: all 1s ease;
+    background: rgba(140,235,255,.1);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.54);
+    margin-bottom: 5px
+}
+#widget-marquee .marquee-row.hidden {
+    visibility: hidden;
 }
 #widget-marquee .marquee-row.flip {
     transform: rotateX(360deg)
 }
 
-
-#widget-marquee .marquee-row .marquee-row-item {
+#widget-marquee .marquee-row .marquee-item-wrap {
     
+    overflow: hidden;
+}
+#widget-marquee .marquee-row .marquee-item-shadow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20px;
+    height: 30px;
+    transition: all 1s ease;
+    transform: perspective(300px) scaleX(0.96) rotateX(-90deg);
+    background: #025465;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.54);
+}
+#widget-marquee .marquee-row.cur {
+    margin-bottom: 15px
+}
+#widget-marquee .marquee-row.cur .marquee-item-shadow {
+    
+    transform: perspective(300px) scaleX(0.96) rotateX(-60deg);
+}
+#widget-marquee .marquee-row .marquee-row-item {
+
     height: 30px;
     line-height: 30px;
+    overflow: hidden;
     white-space: nowrap;
-    
+    color: #fff;
 }
