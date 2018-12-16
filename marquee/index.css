@@ -31,8 +31,11 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     overflow: hidden;
+    transition: all 1s ease
 }
-
+#widget-marquee .marquee-row.flip {
+    transform: rotateX(360deg)
+}
 
 
 #widget-marquee .marquee-row .marquee-row-item {

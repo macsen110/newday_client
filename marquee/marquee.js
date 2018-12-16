@@ -10,6 +10,7 @@ define([
         __init: function (dom, options) {
             this.__container = dom;
             this.options = options;
+            this.__contentArr = []
             this.__renderUI(dom, options)
         },
         __renderUI: function (dom, options) {
@@ -17,27 +18,34 @@ define([
             var _rowNums = _content.length;
             var _limit = options.limit;
             var _boxNums = Math.ceil(_rowNums / _limit);
-            var _html = '';
+            var _ul = '<ul class="marquee-box"></ul>';
+            dom.innerHTML = _ul;
             for (var _i = 0; _i < _boxNums; _i++) {
-                var _ul = '<ul class="marquee-box">';
-                var _items = ''
-                for (var _j = _i * 5; _j < (_i + 1) * 5; _j++) {
-                    if (_j >= _rowNums) break;
-                    _items += '<li class="marquee-row">'
-                        + '<div class="marquee-row-item">' + _content[_j].row + '</div>'
-                        + '</li>'
-                }
-                _ul = _ul + _items + '</ul>';
-                _html = _html + _ul;
+                var _startPos = _i * 5;
+                var _endPos = (_i+ 1) * 5 >= _rowNums ? _rowNums : (_i+ 1) * 5;
+                this.__contentArr.push(_content.slice(_startPos, _endPos))
             }
-            dom.innerHTML = _html;
-            this.__bindUI(dom, options, _boxNums)
+            this.__renderRowItems(dom.querySelector('.marquee-box'), 0)
+            
         },
-        __bindUI: function (dom, options, _boxNums) {
-            //if (_boxNums > 1) this.__loopScrollUp(this.__container, options, _boxNums)
-            this.__marqueeRowAddVisible(dom.querySelectorAll('.marquee-box')[0], options.slideSpeed);
+        __renderRowItems: function (curMarqueeBox, curListIdx) {
+            if (curListIdx === this.__contentArr.length) curListIdx = 0
+            var _this = this;
+            var curMarqueeList = _this.__contentArr[curListIdx]
+            var _items = '';
+            for (var _i = 0; _i < curMarqueeList.length; _i++) {
+                _items += '<li class="marquee-row">'
+                    + '<div class="marquee-row-item">' + curMarqueeList[_i].row + '</div>'
+                    + '</li>'
+            }
+            curMarqueeBox.innerHTML = _items;
+            this.__bindUI(curMarqueeBox, curListIdx)
         },
-        __marqueeRowAddVisible: function (curMarqueeBox, speed) {
+        __bindUI: function (curMarqueeBox, curListIdx) {
+            this.__loopRowTimeList = []
+            this.__marqueeRowAddVisible(curMarqueeBox, curListIdx);
+        },
+        __marqueeRowAddVisible: function (curMarqueeBox, curListIdx) {
             var _this = this;
             _this.curMarqueeBox = curMarqueeBox;
             setTimeout(function () {
@@ -50,76 +58,38 @@ define([
                     }
 
                 });
-                if (_this.__loopRowTimeList.length > 0) _this.__startScrollLeft(_this.__loopRowTimeList[0])
+                if (_this.__loopRowTimeList.length > 0) _this.__startScrollLeft(_this.__loopRowTimeList[0], 0,curListIdx)
             }, 1000)
         },
         __loopRowTimeList: [],
-        __loopScrollUp: function (o, options, _boxNums) {
+        __loopScrollUp: function (curListIdx) {
+            this.__renderRowItems(this.__container.querySelector('.marquee-box'), curListIdx+1)
+        },
+        __resetScrollLeft: function (options, idx, curListIdx) {
             var _this = this;
-            var _n = 0;
-            var p = false;
-            var t;
-            var sh;
-            var lh = o.offsetHeight;
-            //o.innerHTML += o.innerHTML;
-            o.style.marginTop = 0;
-            //_boxNums = _boxNums * 2;
-            var _start = function () {
-                sh = o.offsetHeight;
-                o.style.height = sh + 'px';
-                t = setInterval(_scrolling, options.carousel.speed);
-
-                if (!p) o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-            }
-            var _scrolling = function () {
-                if (parseInt(o.style.marginTop) % lh != 0) {
-                    _this.__stopScrollLeft(_n)
-                    o.style.marginTop = parseInt(o.style.marginTop) - 1 + "px";
-                    if (Math.abs(parseInt(o.style.marginTop)) >= sh * (_boxNums - 1)) {
-                        clearInterval(t);
-                        _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_boxNums - 1], options.slideSpeed)
-                        setTimeout(function () {
-                            _this.__stopScrollLeft(_boxNums - 1)
-                            o.style.marginTop = 0
-                            _n = 0;
-                            setTimeout(_start, options.carousel.delay);
-                            _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
-                        }, options.carousel.delay)
-                    }
-                }
-                else {
-                    clearInterval(t);
-                    _n++
-                    setTimeout(_start, options.carousel.delay);
-                    _this.__marqueeRowAddVisible(o.querySelectorAll('.marquee-box')[_n], options.slideSpeed)
-                }
-            }
-            setTimeout(_start, options.carousel.delay);
+            var element = options.element;
+            element.style.transform = 'translateX(0)';
+            if ((idx + 1) !== _this.__loopRowTimeList.length) this.__startScrollLeft(_this.__loopRowTimeList[idx+1], idx+1, curListIdx)
+            else this.__loopScrollUp(curListIdx)
         },
-        __stopScrollLeft: function (idx) {
-            if (this.__loopRowTimeList.length == 0) return;
-            this.__resetScrollLeft(idx)
-            this.__loopRowTimeList.forEach(function (item) {
-                clearInterval(item)
-            })
-            this.__loopRowTimeList = []
-        },
-        __resetScrollLeft: function (idx) {
-            [].forEach.call(this.__container.querySelectorAll('.marquee-box')[idx].children, function (_item) {
-                _item.scrollLeft && (_item.scrollLeft = 0)
-            })
+        __nextScrollLeft: function (idx) {
+            
 
         },
-        __startScrollLeft: function (options) {
+        __startScrollLeft: function (options, idx, curListIdx) {
             var start = null;
             var element = options.element;
-
+            var _this = this;
             function step(timestamp) {
                 if (!start) start = timestamp;
                 var progress = timestamp - start;
                 element.style.transform = 'translateX(-' + Math.min(progress / (1000/options.diffWidth), options.diffWidth) + 'px)';
                 if (progress < 1000) {
                     window.requestAnimationFrame(step);
+                }
+                else {
+                    window.cancelAnimationFrame(step)
+                    _this.__resetScrollLeft(options, idx, curListIdx)
                 }
             }
 
