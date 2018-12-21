@@ -24,7 +24,7 @@ background-color: #002B44 ;
 
 #widget-marquee .marquee-row {
     position: relative;
-    height: 30px;
+    height: 40px;
     padding: 0 10px;
     transition: all 1s ease;
     background: rgba(140,235,255,.1);
@@ -46,7 +46,7 @@ background-color: #002B44 ;
     position: absolute;
     left: 0;
     right: 0;
-    top: 20px;
+    top: 30px;
     height: 30px;
     transition: all 1s ease;
     transform: perspective(300px) scaleX(0.96) rotateX(-90deg);
@@ -62,9 +62,16 @@ background-color: #002B44 ;
 }
 #widget-marquee .marquee-row .marquee-row-item {
 
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     overflow: hidden;
     white-space: nowrap;
     color: #fff;
+    font-size: 16px;
+}
+#widget-marquee .marquee-row.cur .marquee-row-item {
+    font-size: 18px
+}
+#widget-marquee .marquee-row .row-item-index {
+    margin-right: 16px
 }

@@ -30,13 +30,19 @@ define([
 
         },
         __renderRowItems: function (curMarqueeBox, curListIdx) {
-
+            
             var _this = this;
+            console.log(_this.limit)
             var curMarqueeList = _this.__contentArr[curListIdx]
             var _items = '';
             for (var _i = 0; _i < curMarqueeList.length; _i++) {
                 _items += '<li class="marquee-row">'
-                    + '<div class="marquee-item-wrap"><div class="marquee-row-item">' + curMarqueeList[_i].row + '</div></div>'
+                    + '<div class="marquee-item-wrap">'
+                    +   '<div class="marquee-row-item">'
+                    +       '<i class="row-item-index">'+(curListIdx * _this.options.limit + (_i+1))+'.</i>' 
+                    +       curMarqueeList[_i].row 
+                    +   '</div>'
+                    + '</div>'
                     + '<div class="marquee-item-shadow"></div>'
                     + '</li>'
             }
@@ -80,7 +86,10 @@ define([
             [].forEach.call(_this.curMarqueeBox.children, function (item, idx) {
                 setTimeout(function () {
                     var element = item.querySelector('.marquee-row-item');
-                    var _newCon = (nextLoopList[idx] && nextLoopList[idx].row) || ''
+                    var _newCon = ''
+                    if (nextLoopList[idx] && nextLoopList[idx].row) {
+                        _newCon =  '<i class="row-item-index">'+(nextListIdx * _this.options.limit + (idx+1))+'.</i>' + nextLoopList[idx].row
+                    }
                     element.style.width = '100%'
                     setTimeout(function () {
                         if (!_newCon) item.classList.add('hidden');
