@@ -59,9 +59,8 @@ define([
                 curMarqueeBox.querySelectorAll('.marquee-row-item').forEach(function (element, idx) {
                     var _w = element.scrollWidth;
                     if (_w > element.parentElement.clientWidth) {
-                        element.style.width = _w + 'px'
-                        var diffWidth = _w - element.parentElement.clientWidth
-                        _this.__loopRowTimeList.push({ idx: idx, diffWidth: diffWidth, element })
+                        
+                        _this.__loopRowTimeList.push({ idx: idx,  element })
                     }
 
                 });
@@ -92,12 +91,16 @@ define([
                     }
                     element.style.width = '100%'
                     setTimeout(function () {
-                        if (!_newCon) item.classList.add('hidden');
+                        
+                        if (!_newCon) {
+                            element.innerHTML = _newCon
+                            item.classList.add('hidden');
+                        }
                         else {
                             item.classList.remove('hidden')
-                            _this.__startFlip(item)
+                            _this.__startFlip(item, element, _newCon)
                         }
-                        element.innerHTML = _newCon
+                        //
                     }, 500)
                     if (idx === _this.curMarqueeBox.children.length -1) {
                         setTimeout(function () {
@@ -107,17 +110,20 @@ define([
                 }, (idx + 1) * 1000)
             })
         },
-        __startFlip: function (element) {
+        __startFlip: function (item, element, _newCon) {
             var start = null;
+            var numbers = Number(item.dataset.numbers) || 0; 
             function step(timestamp) {
                 if (!start) start = timestamp;
                 var progress = timestamp - start;
-                element.style.transform = 'rotateX(-' + Math.min(360, progress / (1000 / 360)) + 'deg)';
+                item.style.transform = 'rotateX(-' + Math.min((numbers+1)*360, progress / (1000 / (((numbers+1)*360)))+numbers * 360) + 'deg)';
                 if (progress < 1000) {
                     window.requestAnimationFrame(step);
                 }
                 else {
                     window.cancelAnimationFrame(step)
+                    element.innerHTML = _newCon
+                    item.dataset.numbers = numbers + 1
                 }
             }
             window.requestAnimationFrame(step)
@@ -139,16 +145,19 @@ define([
             var _marqueeItem = element.parentElement.parentElement;
             var _this = this;
             _marqueeItem.classList.add('cur');
+            var _w = element.scrollWidth;
+            element.style.width = _w + 'px'
+            var diffWidth = _w - element.parentElement.clientWidth
             function step(timestamp) {
                 if (!start) start = timestamp;
                 var progress = timestamp - start;
-                element.style.transform = 'translateX(-' + Math.min(progress / (1000 / options.diffWidth), options.diffWidth) + 'px)';
+                element.style.transform = 'translateX(-' + Math.min(progress / (1000 / diffWidth), diffWidth) + 'px)';
                 if (progress < 1000) {
                     window.requestAnimationFrame(step);
                 }
                 else {
                     window.cancelAnimationFrame(step)
-                    _this.__resetScrollLeft(options, idx, curListIdx)
+                   _this.__resetScrollLeft(options, idx, curListIdx)
                 }
             }
             setTimeout(function () {
