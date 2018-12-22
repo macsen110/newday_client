@@ -3,20 +3,25 @@
     bottom: 100px;
     left: 100px;
     width: 200px;
-    border: 1px solid #333;
     overflow: hidden;
     box-sizing: border-box;
 }
-
-#widget-marquee .marquee-container {
-
-background-color: #002B44 ;
-
-}
-
 #widget-marquee * {
     box-sizing: border-box;
+    color: #fff;
 }
+#widget-marquee .marquee-container {
+
+    background-color: #002B44 ;
+
+}
+
+#widget-marquee .marquee-title {
+    margin-bottom: 12px;
+    font-size: 20px
+}
+
+
 
 #widget-marquee .marquee-box {
     width: 100%;

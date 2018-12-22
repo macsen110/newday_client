@@ -19,7 +19,8 @@ define([
             var _limit = options.limit;
             var _boxNums = Math.ceil(_rowNums / _limit);
             var _ul = '<ul class="marquee-box"></ul>';
-            dom.innerHTML = _ul;
+            var _titleBox = '<div class="marquee-title">'+options.title+'</div>'
+            dom.innerHTML = _titleBox + _ul ;
             this.curMarqueeBox = dom.querySelector('.marquee-box');
             for (var _i = 0; _i < _boxNums; _i++) {
                 var _startPos = _i * 5;
@@ -93,13 +94,14 @@ define([
                     setTimeout(function () {
                         
                         if (!_newCon) {
-                            element.innerHTML = _newCon
-                            item.classList.add('hidden');
+                            // element.innerHTML = _newCon
+                            // item.classList.add('hidden');
                         }
                         else {
                             item.classList.remove('hidden')
-                            _this.__startFlip(item, element, _newCon)
+                            
                         }
+                        _this.__startFlip(item, element, _newCon)
                         //
                     }, 500)
                     if (idx === _this.curMarqueeBox.children.length -1) {
@@ -122,6 +124,9 @@ define([
                 }
                 else {
                     window.cancelAnimationFrame(step)
+                    if (!_newCon) {
+                        item.classList.add('hidden');
+                    }
                     element.innerHTML = _newCon
                     item.dataset.numbers = numbers + 1
                 }
