@@ -31,15 +31,54 @@
       <p><a href="mailto:839945193@qq.com">Contact</a> | macsen318.com</p>
     </div>
   </div>
-  <script>    
-    if (navigator.serviceWorker != null) {
-
-    navigator.serviceWorker.register('./cache/sw.js')
-    .then(function(registration) {
-      console.log('Registered event22s at scope: ', registration.scope);
-    });
-  }
- </script>
+  <script type="text/javascript">
+    window.VConsole && new VConsole();
+    window.__swConfig = {
+        use: true,
+        updateReload: 1,
+        unstalledReload: 0,
+        swUpdateCb: null,
+        version: 3
+    };
+    window.onload = function () {
+        requestNotice().finally(appendRegister)
+    }
+    function appendRegister() {
+      var hostname = location.hostname;
+      var protocol = location.protocol;
+      if (!"serviceWorker" in navigator) return;
+      if (protocol === 'http:' && hostname != '127.0.0.1' && hostname !== 'localhost') return;
+      var script = document.createElement('script');
+      var firstScript = document.getElementsByTagName('script')[0];
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = './sw-register.js?v=' + Date.now();
+      firstScript.parentNode.insertBefore(script, firstScript);
+    }
+    function requestNotice() {
+      
+      return new Promise((resolve, reject) => {
+        if (!('PushManager' in window)) {
+          // Push isn't supported on this browser, disable or hide UI.
+          return reject();
+        }
+        const permissionPromise = Notification.requestPermission(result => {
+            resolve(result);
+        });
+        if (permissionPromise) {
+            permissionPromise.then(resolve);
+        }
+      })
+      .then(result => {
+          if (result === 'granted') {
+              return result
+          }
+          else {
+              console.log('no permission');
+          }
+      });
+    }
+  </script>
 </body>
 
 </html>
