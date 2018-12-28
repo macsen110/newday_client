@@ -145,7 +145,8 @@ function networkedOrCached(request) {
 function networkedAndCache(request) {
   return fetch(request)
     .then((response) => {
-      if (response.status === 404) throw response; 
+      console.log('response: ', response)
+      if (response.status === 404 || !response.ok) throw response; 
       var copy = response.clone();
       caches.open(cacheKey('resources'))
         .then((cache) => {
@@ -191,6 +192,7 @@ function cachedOrOffline(request) {
 function offlineResponse(request) {
   log('(offline: )', request.method, request.url);
   if (request.url.match(/\.(jpg|png|gif|svg|jpeg)(\?.*)?$/)) {
+
     return caches.match('./public/sw/offline/offline.svg');
   } else {
     return caches.match('./public/sw/offline/offline.html');
@@ -246,6 +248,36 @@ function shouldFetchAndCache(request) {
 function developmentMode() {
   return __DEVELOPMENT__ || __DEBUG__;
 }
+
+self.addEventListener('push', event => {
+  let body;
+
+  if (event.data) {
+    body = event.data.text();
+  } else {
+    body = 'Default body';
+  }
+
+  const options = {
+    body: body,
+    icon: 'images/notification-flat.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {action: 'explore', title: 'Go to the site',
+        icon: 'images/checkmark.png'},
+      {action: 'close', title: 'Close the notification',
+        icon: 'images/xmark.png'},
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('Push Notification', options)
+  );
+});
 
 self.addEventListener('install', onInstall);
 

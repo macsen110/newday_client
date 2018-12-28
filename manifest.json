@@ -1,6 +1,6 @@
 {
-  "name": "1药网",
-  "short_name": "1药网",
+  "name": "Macsen110",
+  "short_name": "Macsen110",
   "icons": [
     {
       "src": "./public/sw/icons/android-chrome-192x192.png",
@@ -16,5 +16,11 @@
   "background_color": "#F3F3F3",
   "display": "standalone",
   "theme_color":"#F3F3F3",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "related_applications": [
+    {
+        "platform": "play",
+        "id": "com.baidu.samples.apps.iosched"
+    }
+  ]
 }
