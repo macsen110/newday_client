@@ -97,7 +97,7 @@ window.addEventListener('beforeinstallprompt', function (e) {
     // 存储事件
     dfdPrompt = e;
     // 显示按钮
-    button.style.display = 'block';
+    button.style.visibility = 'visible';
     // 阻止默认事件
     e.preventDefault();
     return false;
@@ -114,7 +114,7 @@ button.addEventListener('click', function (e) {
         alert(choiceResult.outcome);
     });
     // 隐藏按钮
-    button.style.display = 'visible';
+    button.style.display = 'hidden';
     dfdPrompt = null;
 });
 }());
