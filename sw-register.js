@@ -68,7 +68,6 @@ function subscribe(serviceWorkerReg) {
             }
           };
         };
-        reg.showNotification('Hello World!');
       })
       .catch(function(e) {
         console.error("Error during service worker registration:", e);

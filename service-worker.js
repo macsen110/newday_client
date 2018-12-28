@@ -260,7 +260,7 @@ self.addEventListener('push', event => {
 
   const options = {
     body: body,
-    icon: 'images/notification-flat.png',
+    icon: './public/sw/icons/android-chrome-512x512.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -268,9 +268,9 @@ self.addEventListener('push', event => {
     },
     actions: [
       {action: 'explore', title: 'Go to the site',
-        icon: 'images/checkmark.png'},
+      icon: './public/sw/icons/android-chrome-512x512.png'},
       {action: 'close', title: 'Close the notification',
-        icon: 'images/xmark.png'},
+      icon: './public/sw/icons/android-chrome-512x512.png'},
     ]
   };
 
