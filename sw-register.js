@@ -114,7 +114,7 @@ button.addEventListener('click', function (e) {
         alert(choiceResult.outcome);
     });
     // 隐藏按钮
-    button.style.display = 'none';
+    button.style.display = 'visible';
     dfdPrompt = null;
 });
 }());
