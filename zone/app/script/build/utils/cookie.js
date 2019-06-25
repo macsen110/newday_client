@@ -76,7 +76,7 @@ export default {
         exp.setTime(exp.getTime() - 1000);
         var cval=that.cookie(name);
         if(cval!=null){
-            document.cookie=name+"=; expire="+exp.toGMTString()+"; path=/;domain=.111.com.cn";
+            document.cookie=name+"=; expire="+exp.toGMTString()+"; path=/;domain=.macsen318.com";
             // document.cookie= name + "="+cval+";path='/'"+";domain='.111.com.cn'"+";expires="+exp.toGMTString();
         }
     },
