@@ -62,14 +62,14 @@
   <script type="text/javascript">
     window.VConsole && new VConsole();
     window.__swConfig = {
-        use: true,
+        use: false,
         updateReload: 1,
         unstalledReload: 0,
         swUpdateCb: null,
         version: 3
     };
     window.onload = function () {
-        requestNotice().finally(appendRegister)
+        //requestNotice().finally(appendRegister)
     }
     function appendRegister() {
       var hostname = location.hostname;
