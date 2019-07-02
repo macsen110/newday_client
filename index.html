@@ -14,36 +14,22 @@
   <script>
     window.vConsole
     try {
-
-
       var app = tcb.init({
         env: 'newday318-6e42j'
       })
-      var auth = app.auth()
-      auth.weixinAuthProvider({
-        appid: 'wxb46ca3911441b655',  //微信应用appid
-        scope: 'snsapi_base'     //网页授权类型
-      })
-      console.log(app)
-      const db = app.database();
-      const collection = db.collection('users');
-      collection.get()
-        .then(_res => console.log(_res))
-        .catch(_err => console.log(_err))
-      app.callFunction({
-        name: 'HPImageArchive',
-        data: {
-          idx: Math.floor(Math.random() * 10)
-        }
-      })
-      .then((res) => {
-        console.log('then')
-        console.log(res)
-      })
-      .catch(err => {
-        console.log('err')
-        console.log(err)
-      })
+      app
+        .auth({ persistence: 'session' })
+        .weixinAuthProvider({
+          appid: 'wxb46ca3911441b655',  //微信应用appid
+          scope: 'snsapi_base'     //网页授权类型
+        })
+        .signIn(function (err, res) {
+          console.log(err)
+          console.log('res')
+          console.log(res)
+          
+        })
+
     } catch (e) {
       console.log(111)
       console.log(e)
