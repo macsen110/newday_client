@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as UI from 'yao-m-ui';
 import {
     Link
   } from 'react-router-dom';

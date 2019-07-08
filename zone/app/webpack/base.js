@@ -4,7 +4,7 @@ var webpack = require("webpack")
 var utils = require('./utils')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var NODE_ENV = process.env.NODE_ENV
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -20,20 +20,29 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
     modules: [
       '../../',
       "node_modules"
     ],
     alias: {
-      'assets': resolve('assets'),    
+      'assets': resolve('assets'),
     }
   },
   module: {
-    rules: [      
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
       {
         test: /\.js$/,
-         use: ['babel-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -66,6 +75,7 @@ module.exports = {
       }
     ]
   },
+  mode: NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
     new ExtractTextPlugin({
       filename: NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),

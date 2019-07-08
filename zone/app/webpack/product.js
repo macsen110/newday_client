@@ -19,16 +19,13 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
+  optimization: {
+    minimize: false
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env || 'development'),
       'perfixerURL': JSON.stringify('https://www.macsen318.com')
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

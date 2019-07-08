@@ -1,19 +1,11 @@
 import React, { useState }  from 'react';
 import xhr from '../utils/xhr';
 import {
-    BrowserRouter as Router,
-    Route,
     Link
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { initAction } from '../actions/actions';
 import { showPrompt } from 'yao-m-ui';
-// import createBrowserHistory from 'history/createBrowserHistory';
-// const history = createBrowserHistory();
-//Login views
-/**
- * 
- */
 function Example() {
     // Declare a new state variable, which we'll call "count"
     const [count, setCount] = useState(0);

@@ -1,11 +1,6 @@
 
 import React, {Component} from 'react';
 import xhr from '../utils/xhr';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {showGoodAction, postCommetAction, deleteCommetAction, listCommetsAction} from '../actions/actions';
 import { showPrompt } from 'yao-m-ui';

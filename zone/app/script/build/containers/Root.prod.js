@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Route, Router, BrowserRouter} from 'react-router-dom';
+import {Router, BrowserRouter} from 'react-router-dom';
 import routes from '../routes';
 export default function Root({store, history}) {
     return (

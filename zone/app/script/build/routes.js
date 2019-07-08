@@ -1,63 +1,13 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Link,
   Switch
 } from 'react-router-dom';
 
 import Index from 'bundle-loader?lazy!./components/index';
 import login from 'bundle-loader?lazy!./components/login';
-
 // import communicate from './components/communicate';
 import AsyncComponent from './async-loader';
-
-class Bundle extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            mod: null
-        }
-    }
-  componentWillMount() {
-    this.load(this.props)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.load !== this.props.load) {
-      this.load(nextProps)
-    }
-  }
-
-  load(props) {
-    this.setState({
-      mod: null
-    })
-    props.load((mod) => {
-      this.setState({
-        // handle both es imports and cjs
-        mod: mod.default ? mod.default : mod
-      })
-    })
-  }
-
-  render() {
-    return this.state.mod ? this.props.children(this.state.mod) : null
-  }
-}
-
-const InitIndex = (props) => (
-    <Bundle load={Index}>
-        {(InitIndex) => <InitIndex {...props} />}
-    </Bundle>
-)
-
-
-const InitLogin = (props) => (
-    <Bundle load={login}>
-        {(InitLogin) => <InitLogin {...props} />}
-    </Bundle>
-)
 async function fetchAsyncCommpoent(name) {
     return await import('./components/'+name)
 }

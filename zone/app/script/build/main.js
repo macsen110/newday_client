@@ -7,21 +7,10 @@ return
 import 'react-hot-loader/patch';
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
-import {
-  Router,
-  Route,
-	Link,
-	BrowserRouter
-} from 'react-router-dom';
-import cookie from './utils/cookie';
-import routes from './routes';
-import { createRedux } from 'redux';
-import { Provider } from 'react-redux';
 import { configureStore, history } from './store/configureStore';
 import Root from './containers/Root';
-import createBrowserHistory from 'history/createBrowserHistory';
 import 'assets/style.css';
-import ReactDom, { render } from 'react-dom';
+import  { render } from 'react-dom';
 const store = configureStore();
 render(
 	<AppContainer>

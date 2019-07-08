@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
   NavLink
 } from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {initAction} from '../actions/actions';
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         initData: state.initData
     };
 }
 
-class Tab extends React.Component {
+class Tab extends Component {
     constructor(props, context) {
         super(props, context)
     }
@@ -77,8 +74,6 @@ class App extends React.Component {
             )
 
         }
-
-        return (<p>loading...</p>)
     }
 };
 export default connect(mapStateToProps, {initAction})(App);
