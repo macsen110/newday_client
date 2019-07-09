@@ -182,7 +182,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/ts_zone";
+/******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -14854,4 +14854,4 @@ Root.propTypes = {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=app.83c9a001b6e9a09b48a9.js.map
+//# sourceMappingURL=app.7f9dbb0f9a32a11189ab.js.map
