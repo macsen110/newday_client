@@ -12,15 +12,7 @@
   <meta name=theme-color content=#1976d2>
   <meta name=apple-mobile-web-app-capable content=yes>
   <meta name=apple-mobile-web-app-status-bar-style content=black>
-  <meta name=apple-mobile-web-app-title content=111>
-  <meta name=msapplication-TileImage content=./public/sw/icons/android-chrome-192x192.png>
-  <meta name=msapplication-TileColor content=#1976d2>
-  <link rel=apple-touch-icon href=./public/swicons/android-chrome-192x192.png>
-  <link rel=apple-touch-startup-image media="(device-width: 320px)" href=./public/sw/launches/apple-launch-640x1136.png>
-  <link rel=apple-touch-startup-image media="(device-width: 375px)" href=./public/sw/launches/apple-launch-750x1334.png>
-  <link rel=apple-touch-startup-image media="(device-width: 414px)" href=./public/sw/launches/apple-launch-1242x2208.png>
-  <link rel=apple-touch-startup-image media="(device-width: 768px)" href=./public/sw/launches/apple-launch-1536x2048.png>
-  <link rel="manifest" href="manifest.json">
+  <meta name=apple-mobile-web-app-title content=macsen>
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-title" content="">
   <meta name="description" content="">
@@ -59,55 +51,7 @@
       <p><a href="mailto:839945193@qq.com">Contact</a> | macsen318.com</p>
     </div>
   </div>
-  <script type="text/javascript">
-    window.VConsole && new VConsole();
-    window.__swConfig = {
-        use: false,
-        updateReload: 1,
-        unstalledReload: 0,
-        swUpdateCb: null,
-        version: 3
-    };
-    window.onload = function () {
-        //requestNotice().finally(appendRegister)
-    }
-    function appendRegister() {
-      var hostname = location.hostname;
-      var protocol = location.protocol;
-      if (!"serviceWorker" in navigator) return;
-      if (protocol === 'http:' && hostname != '127.0.0.1' && hostname !== 'localhost') return;
-      var script = document.createElement('script');
-      var firstScript = document.getElementsByTagName('script')[0];
-      script.type = 'text/javascript';
-      script.async = true;
-      script.src = './sw-register.js?v=' + Date.now();
-      firstScript.parentNode.insertBefore(script, firstScript);
-    }
-    
-    function requestNotice() {
-      
-      return new Promise((resolve, reject) => {
-        if (!('PushManager' in window)) {
-          // Push isn't supported on this browser, disable or hide UI.
-          return reject();
-        }
-        const permissionPromise = Notification.requestPermission(result => {
-            resolve(result);
-        });
-        if (permissionPromise) {
-            permissionPromise.then(resolve);
-        }
-      })
-      .then(result => {
-          if (result === 'granted') {
-              return result
-          }
-          else {
-              console.log('no permission');
-          }
-      });
-    }
-  </script>
+ 
 </body>
 
 </html>
