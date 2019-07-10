@@ -20,6 +20,7 @@ const communicate = AsyncComponent(() => fetchAsyncCommpoent('communicate'))
 const register = AsyncComponent(() => fetchAsyncCommpoent('register'))
 const logout = AsyncComponent(() => fetchAsyncCommpoent('logout'))
 const notFound = AsyncComponent(() => fetchAsyncCommpoent('notfind'))
+const tsHook = AsyncComponent(() => fetchAsyncCommpoent('ts_hook'))
 
 var Routes = (
     <div>
@@ -34,6 +35,7 @@ var Routes = (
                 <Route path="/goods/detail/:id" component={goodsDetail}/>
                 <Route path="/communicate" component={communicate}/>
                 <Route path="/user/logout" component={logout} />
+                <Route path="/ts_hook" component={tsHook} />
                 <Route component={notFound} />
             </Switch>
         </div>

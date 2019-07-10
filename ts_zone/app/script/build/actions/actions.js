@@ -5,10 +5,10 @@ export const POSTCOMMET = 'POSTCOMMET';
 export const DELETECOMMET = 'DELETECOMMET';
 export const LISTCOMMETS = 'LISTCOMMETS';
 export const DONELOADING = 'DONELOADING';
-export function initAction(obj) {
+export function initAction(value) {
 	return {
 		type: INITACTION,
-		value: obj
+		value
 	}
 }
 export function listGoodsAction(value) {
