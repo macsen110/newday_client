@@ -3,7 +3,7 @@ type actionType = {
 	type: string,
 	value: any
 }
-export default function commets(state=[],action:actionType) {
+export default function commets(state:any,action:actionType) {
 	switch(action.type) {
 		case POSTCOMMET:
 			state.push(action.value);

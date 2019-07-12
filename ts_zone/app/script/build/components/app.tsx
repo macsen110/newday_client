@@ -59,7 +59,7 @@ function App() {
         .then(() => dispatch({ type: LOGIN }))
         .catch(() => dispatch({ type: LOGOUT }))
     }, [])
-    if (!loginStatus) return <LogoutHeader />
-    return <LoginHeader />
+    if (!loginStatus) return <LoginHeader />
+    return <LogoutHeader />
 };
 export default App;
