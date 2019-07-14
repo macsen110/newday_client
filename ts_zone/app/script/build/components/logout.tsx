@@ -1,37 +1,32 @@
-import React from 'react';
+import * as React from 'react';
 import xhr from '../utils/xhr';
-import {connect} from 'react-redux'; 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
-import {initAction} from '../actions/actions';
+import reducer from '../reducers/init'
+import { LOGOUT } from '../actions';
+const {
+    useEffect,
+    useReducer
+} = React
 //register views
-class logout extends React.Component {
-    //static contextTypes = Object.assign({},{history: PropTypes.history});
-    componentWillMount() {
-        var self = this;
+function Logout(props: any) {
+    const [state, dispatch] = useReducer(reducer, {isLogin: false})
+    useEffect(() => {
         new xhr({
             url: '/api/users/logout',
-            done: function(callData) {
-                if(callData.code == 0) {
-                    self.props.initAction({isLogin: false});
-                    self.props.history.push('/')
+            done: function (callData) {
+                if (callData.code == 0) {
+                    dispatch({type: LOGOUT})
+                    props.history.replace({ pathname: '/' })
                 }
             },
             withCredentials: true,
-            faild: function() {
+            faild: function () {
                 var error = new Error('something wrong')
 
             }
         })
-    }
-    render() {
-        return (
-            <div></div>
-        )
-    }
+    }, [])
+
+    return (<></>)
 }
 
-export default connect(null, {initAction})(logout);
+export default Logout;

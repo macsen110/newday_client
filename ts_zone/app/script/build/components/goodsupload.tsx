@@ -1,7 +1,6 @@
 import * as React from 'react';
 import xhr from '../utils/xhr';
 import { showPrompt } from 'yao-m-ui';
-import { any } from '_@types_prop-types@15.7.1@@types/prop-types';
 const {
     useState,
     useRef,
@@ -19,15 +18,14 @@ export default function goodsUpload(props) {
     }
     const handleUploadFiles = (e) => {
         var filesArr = [];
-        var upFiles:[] = e.target.files;
-        let i:any = 0;
+        var upFiles: [] = e.target.files;
+        let i: any = 0;
         for (i in upFiles) {
             if (i >= 0) filesArr.push(upFiles[i]);
         }
         setUploadFiles(filesArr)
-        
     }
-    const readFile = (file:any) => {
+    const readFile = (file: any) => {
         var createObjectURLfun = function (file) {
             if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) {
                 // @ts-ignore
@@ -45,8 +43,8 @@ export default function goodsUpload(props) {
                 return ''
         }
     }
-    const getDesc = (type:string) => {
-        var typeDesc:string;
+    const getDesc = (type: string) => {
+        var typeDesc: string;
         switch (type) {
             case 'video':
                 typeDesc = "视频";
@@ -61,9 +59,9 @@ export default function goodsUpload(props) {
         }
         return typeDesc
     }
-    const handleSubmit = (e:any) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
-        let form:any = formRef.current  
+        let form: any = formRef.current
         let fetchDescMapType = {
             "image": '图片',
             "video": "视频"
@@ -91,16 +89,13 @@ export default function goodsUpload(props) {
 
         })
         promise.then(
-            (obj:any) => {
+            (obj: any) => {
                 if (obj.code == 0) showPrompt({ msg: obj.msg, cb: () => props.history.push('/goods/list') });
                 else if (obj.code === unLoginCode) showPrompt({ msg: obj.msg, cb: () => props.history.push('/user/login') });
             },
             error => console.log(error)
         )
     }
-    
-
-
 
     return (
         <div id="app_upload_page" className="app-upload-page">
@@ -110,7 +105,7 @@ export default function goodsUpload(props) {
                     <input type="text" name="title" className="ipt" placeholder="文章标题" />
                 </p>
                 <div className="select-type">
-                    发布{typeDesc}
+                    发布{getDesc(type)}
                     <i className="sign"></i>
                     <select name="category" onChange={changeSelectType} defaultValue="image">
                         <option value="image">图文</option>
@@ -118,37 +113,28 @@ export default function goodsUpload(props) {
                         <option value="video">视频</option>
                     </select>
                 </div>
-                {(() => {
-                    if (type != 'note') {
-                        return (
-                            <div className="wrap-upload-ipt">
-                                上传{typeDesc}
-                                <input type="file" onChange={handleUploadFiles} multiple="multiple" accept={type + "/*"} name="pics" className="ipt" placeholder="file" />
-                            </div>
-                        )
-                    }
-                    
-                })()}
-                {(() => {
-                    if (uploadFiles.length) {
-                        return (<ul className="filesList">
-                            {uploadFiles.map((item:any, index) => {
-                                return <li className="item" key={index}>
-                                    {readFile(item)}
-                                    <em className="filename">{item.name}</em>
-                                    <em>{item.size}k</em>
-                                </li>
-                            })}
-                        </ul>)
-                    }
-                    return (<>)
-                })()}
+                {(type !== 'note') && (
+                    <div className="wrap-upload-ipt">
+                        上传{typeDesc}
+                        <input type="file" onChange={handleUploadFiles} multiple={true} accept={type + "/*"} name="pics" className="ipt" placeholder="file" />
+                    </div>
+                )
+                }
+                {(uploadFiles.length > 0) && (<ul className="filesList">
+                    {uploadFiles.map((item: any, index) => {
+                        return <li className="item" key={index}>
+                            {readFile(item)}
+                            <em className="filename">{item.name}</em>
+                            <em>{item.size}k</em>
+                        </li>
+                    })}
+                </ul>)
+                }
                 <p className="pt20"><textarea className="ipt" name="content" placeholder="正文" /></p>
                 <p className="pt20">
                     <input type="submit" className="btn" value="提交文章" />
                 </p>
             </form>
-        </div>
-    )
+        </div>)
 }
 
