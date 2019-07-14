@@ -2,12 +2,14 @@ import * as React from 'react';
 import {
     NavLink
 } from 'react-router-dom';
-import reducer from '../reducers/init'
+import reducer, {getInitState} from '../reducers/init'
 import {LOGIN, LOGOUT} from '../actions'
 const {
     useReducer,
-    useEffect
+    useEffect,
+    useCallback
 } = React
+// such as https://blog.csdn.net/weixin_42461410/article/details/88650304
 function LogoutHeader() {
     return (
         <div className="wrap-header-container">
@@ -30,7 +32,7 @@ function LoginHeader() {
                     <Tab to="/">首页</Tab>
                     <Tab to="/goods/list">发现</Tab>
                     <Tab to="/goods/upload">上传</Tab>
-                    <Tab to="/communicate">我</Tab>
+                    <Tab to="/user/logout">注销</Tab>
                 </ul>
             </header>
         </div>
@@ -45,7 +47,8 @@ function Tab(props: any) {
 
 //home views
 function App() {
-    const [state, dispatch] = useReducer(reducer, { isLogin: false })
+    const [state, dispatch] = useReducer(reducer, getInitState(), () => getInitState())
+    console.log('init status', state)
     const loginStatus = state.isLogin;
     useEffect(() => {
         // @ts-ignore
@@ -56,10 +59,11 @@ function App() {
         .then((res) => {
             if (res.ok) return res.json()
         })
-        .then(() => dispatch({ type: LOGIN }))
+        .then((obj:any) => dispatch({ type: obj.isLogin ? LOGIN : LOGOUT }))
         .catch(() => dispatch({ type: LOGOUT }))
     }, [])
-    if (!loginStatus) return <LoginHeader />
+    console.log('login status', getInitState())
+    if (getInitState().isLogin) return <LoginHeader />
     return <LogoutHeader />
 };
 export default App;

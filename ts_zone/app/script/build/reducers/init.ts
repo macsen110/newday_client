@@ -4,14 +4,20 @@ type StateType = {
 type ActionType = {
   type: 'LOGOUT' | 'LOGIN'
 }
-const initialState = { isLogin: false };
+let initialState = { isLogin: false };
+export function getInitState() {
+  return initialState
+}
 export default function reducer(state: StateType, action: ActionType) {
   switch (action.type) {
     case 'LOGIN':
-      return { isLogin: true}
+      initialState = { isLogin: true}
+      break;
     case 'LOGOUT':
-      return { isLogin: false};
+      initialState = { isLogin: false};
+      break;
     default:
       return initialState;
   }
+  return initialState
 }
