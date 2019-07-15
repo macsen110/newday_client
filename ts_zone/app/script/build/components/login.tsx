@@ -4,14 +4,14 @@ import {
     Link
 } from 'react-router-dom';
 import { showPrompt } from 'yao-m-ui';
-import reducer from '../reducers/init'
+import {FetchesContext} from '../context'
 import {LOGIN} from '../actions'
 const {
     useRef,
-    useReducer
+    useContext
 } = React
 function Login(props) {
-    const [state, dispatch] = useReducer(reducer, { isLogin: false })
+    const {state, dispatch} = useContext(FetchesContext)
     let loginForm = useRef<HTMLFormElement>(null);
     const handleSubmit = (e: any) => {
         e.preventDefault();

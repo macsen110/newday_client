@@ -1,14 +1,14 @@
 import * as React from 'react';
 import xhr from '../utils/xhr';
-import reducer from '../reducers/init'
 import { LOGOUT } from '../actions';
+import {FetchesContext} from '../context'
 const {
     useEffect,
-    useReducer
+    useContext
 } = React
 //register views
 function Logout(props: any) {
-    const [state, dispatch] = useReducer(reducer, {isLogin: false})
+    const {state, dispatch} = useContext(FetchesContext)
     useEffect(() => {
         new xhr({
             url: '/api/users/logout',

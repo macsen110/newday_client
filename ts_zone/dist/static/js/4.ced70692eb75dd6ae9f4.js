@@ -1,14 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ 17:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -88,197 +89,11 @@ function () {
   return xhr;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (xhr);
+/* harmony default export */ __webpack_exports__["default"] = (xhr);
 
 /***/ }),
 
-/***/ 39:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(56);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(0);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _utils_xhr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(13);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11);
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(yao_m_ui__WEBPACK_IMPORTED_MODULE_12__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function Example() {
-  // Declare a new state variable, which we'll call "count"
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_7__["useState"])(0),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_6___default()(_useState, 2),
-      count = _useState2[0],
-      setCount = _useState2[1];
-
-  return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", null, "You clicked ", count, " times"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
-    onClick: function onClick() {
-      return setCount(count + 1);
-    }
-  }, "Click me"));
-}
-
-var Login =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(Login, _React$Component);
-
-  //static contextTypes = Object.assign({},{history: PropTypes.history});
-  function Login(props, context) {
-    var _this;
-
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Login);
-
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(Login).call(this, props, context));
-    _this.handleSubmit = _this.handleSubmit.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
-    return _this;
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Login, [{
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-      var form = this.refs.registerForm;
-
-      if (!form['username'].value) {
-        Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_12__["showPrompt"])('请填写用户名!');
-        return false;
-      }
-
-      if (!form['password'].value) {
-        Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_12__["showPrompt"])('请填写密码');
-        return false;
-      }
-
-      var senddata = JSON.stringify({
-        username: form['username'].value,
-        password: form['password'].value,
-        test: null
-      });
-      var url = form.action;
-      var promise = new Promise(function (resolve, reject) {
-        new _utils_xhr__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"]({
-          setHeader: 'application/json',
-          sendData: senddata,
-          method: 'POST',
-          url: '/api/users/validuser',
-          done: function done(callData) {
-            resolve(callData);
-          },
-          faild: function faild() {
-            var error = new Error('something wrong');
-            reject(error);
-          }
-        });
-      });
-      promise.then(function (obj) {
-        if (obj.code == 0) {
-          Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_12__["showPrompt"])({
-            msg: obj.msg,
-            cb: function cb() {
-              _this2.props.initAction({
-                isLogin: obj.isLogin,
-                user: obj.user
-              });
-
-              _this2.props.history.push({
-                pathname: '/goods/upload'
-              });
-            }
-          });
-        } else Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_12__["showPrompt"])(obj.msg);
-      }, function (error) {
-        return console.log(error);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        id: "register_page",
-        className: "app-register-page"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "page-title"
-      }, "\u767B\u5F55"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("form", {
-        method: "post",
-        action: "/api/users/validuser",
-        className: "form1",
-        ref: "registerForm",
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
-        type: "text",
-        name: "username",
-        className: "ipt",
-        placeholder: "\u7528\u6237\u540D"
-      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
-        type: "password",
-        name: "password",
-        className: "ipt",
-        placeholder: "\u5BC6\u7801"
-      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
-        type: "submit",
-        className: "btn"
-      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("p", {
-        className: "pt10"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Link"], {
-        to: "/user/register"
-      }, "\u6CE8\u518C"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(Example, null));
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.location !== this.props.location) {// navigated!
-      }
-    }
-  }]);
-
-  return Login;
-}(react__WEBPACK_IMPORTED_MODULE_7___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__[/* connect */ "b"])(null, {
-  initAction: _actions_actions__WEBPACK_IMPORTED_MODULE_11__[/* initAction */ "j"]
-})(Login));
-
-/***/ }),
-
-/***/ 5:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -767,77 +582,143 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 56:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithHoles = __webpack_require__(78);
+"use strict";
 
-var iterableToArrayLimit = __webpack_require__(79);
-
-var nonIterableRest = __webpack_require__(80);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var xhr_1 = __webpack_require__(12);
+var yao_m_ui_1 = __webpack_require__(14);
+var useState = React.useState, useRef = React.useRef, useEffect = React.useEffect;
+var unLoginCode = '00002';
+function goodsUpload(props) {
+    var _a = useState('image'), type = _a[0], setType = _a[1];
+    var _b = useState([]), uploadFiles = _b[0], setUploadFiles = _b[1];
+    var _c = useState(''), typeDesc = _c[0], setTypeDesc = _c[1];
+    var formRef = useRef(null);
+    var changeSelectType = function (e) {
+        setType(e.target.value);
+        setUploadFiles([]);
+    };
+    var handleUploadFiles = function (e) {
+        var filesArr = [];
+        var upFiles = e.target.files;
+        var i = 0;
+        for (i in upFiles) {
+            if (i >= 0)
+                filesArr.push(upFiles[i]);
+        }
+        setUploadFiles(filesArr);
+    };
+    var readFile = function (file) {
+        var createObjectURLfun = function (file) {
+            if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) {
+                // @ts-ignore
+                return window.webkitURL.createObjectURL(file);
+            }
+            else {
+                return window.URL.createObjectURL(file);
+            }
+        };
+        switch (type) {
+            case 'image':
+                return React.createElement("img", { src: createObjectURLfun(file) });
+            case 'video':
+                return React.createElement("img", { src: "/imgs/video.jpg" });
+            default:
+                return '';
+        }
+    };
+    var getDesc = function (type) {
+        var typeDesc;
+        switch (type) {
+            case 'video':
+                typeDesc = "视频";
+                break;
+            case 'note':
+                typeDesc = "笔记";
+                break;
+            case 'image':
+            default:
+                typeDesc = "图文";
+                break;
+        }
+        return typeDesc;
+    };
+    var handleSubmit = function (e) {
+        e.preventDefault();
+        var form = formRef.current;
+        var fetchDescMapType = {
+            "image": '图片',
+            "video": "视频"
+        };
+        if (!form)
+            return;
+        if (!form.title.value)
+            return yao_m_ui_1.showPrompt('标题不能为空');
+        if (!form.content.value)
+            return yao_m_ui_1.showPrompt('内容不能为空');
+        if (type !== 'note' && uploadFiles.length === 0)
+            return yao_m_ui_1.showPrompt("\u8BF7\u4E0A\u4F20" + fetchDescMapType[type]);
+        var url = '/api/goods/upload';
+        var formdata = new FormData(form);
+        var promise = new Promise(function (resolve, reject) {
+            new xhr_1.default({
+                cache: false,
+                sendData: formdata,
+                method: 'POST',
+                url: url + '?time=' + Date.parse(new Date().toString()),
+                done: function (callData) {
+                    resolve(callData);
+                },
+                faild: function (error) {
+                    reject(error);
+                }
+            });
+        });
+        promise.then(function (obj) {
+            if (obj.code == 0)
+                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/goods/list'); } });
+            else if (obj.code === unLoginCode)
+                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/user/login'); } });
+        }, function (error) { return console.log(error); });
+    };
+    return (React.createElement("div", { id: "app_upload_page", className: "app-upload-page" },
+        React.createElement("p", { className: "page-title" }, "\u6DFB\u52A0\u6587\u7AE0"),
+        React.createElement("form", { method: "post", action: "/api/goods/upload", className: "form1", onSubmit: handleSubmit, ref: formRef },
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "text", name: "title", className: "ipt", placeholder: "\u6587\u7AE0\u6807\u9898" })),
+            React.createElement("div", { className: "select-type" },
+                "\u53D1\u5E03",
+                getDesc(type),
+                React.createElement("i", { className: "sign" }),
+                React.createElement("select", { name: "category", onChange: changeSelectType, defaultValue: "image" },
+                    React.createElement("option", { value: "image" }, "\u56FE\u6587"),
+                    React.createElement("option", { value: "note" }, "\u7B14\u8BB0"),
+                    React.createElement("option", { value: "video" }, "\u89C6\u9891"))),
+            (type !== 'note') && (React.createElement("div", { className: "wrap-upload-ipt" },
+                "\u4E0A\u4F20",
+                typeDesc,
+                React.createElement("input", { type: "file", onChange: handleUploadFiles, multiple: true, accept: type + "/*", name: "pics", className: "ipt", placeholder: "file" }))),
+            (uploadFiles.length > 0) && (React.createElement("ul", { className: "filesList" }, uploadFiles.map(function (item, index) {
+                return React.createElement("li", { className: "item", key: index },
+                    readFile(item),
+                    React.createElement("em", { className: "filename" }, item.name),
+                    React.createElement("em", null,
+                        item.size,
+                        "k"));
+            }))),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("textarea", { className: "ipt", name: "content", placeholder: "\u6B63\u6587" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "submit", className: "btn", value: "\u63D0\u4EA4\u6587\u7AE0" })))));
 }
+exports.default = goodsUpload;
 
-module.exports = _slicedToArray;
-
-/***/ }),
-
-/***/ 78:
-/***/ (function(module, exports) {
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-module.exports = _arrayWithHoles;
-
-/***/ }),
-
-/***/ 79:
-/***/ (function(module, exports) {
-
-function _iterableToArrayLimit(arr, i) {
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-module.exports = _iterableToArrayLimit;
-
-/***/ }),
-
-/***/ 80:
-/***/ (function(module, exports) {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
-
-module.exports = _nonIterableRest;
 
 /***/ })
 
 }]);
-//# sourceMappingURL=1.5561aee83b46ffdcd614.js.map
+//# sourceMappingURL=4.ced70692eb75dd6ae9f4.js.map

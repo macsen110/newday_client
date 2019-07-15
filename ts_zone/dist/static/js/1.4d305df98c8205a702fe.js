@@ -1,14 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ 17:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -88,11 +89,11 @@ function () {
   return xhr;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (xhr);
+/* harmony default export */ __webpack_exports__["default"] = (xhr);
 
 /***/ }),
 
-/***/ 5:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -581,161 +582,103 @@ function () {
 
 /***/ }),
 
-/***/ 64:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _utils_xhr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__);
 
-
-
-
-
-
-
-
-
-
-
- // import createBrowserHistory from 'history/createBrowserHistory';
-// const history = createBrowserHistory();
-//register views
-
-var register =
-/*#__PURE__*/
-function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(register, _Component);
-
-  function register(props, context) {
-    var _this;
-
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, register);
-
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(register).call(this, props, context));
-    _this.handleSubmit = _this.handleSubmit.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
-    return _this;
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(register, [{
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-      var form = this.refs.registerForm;
-
-      if (!form['username'].value) {
-        Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])('请填写用户名!');
-        return false;
-      }
-
-      if (!form['password'].value) {
-        Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])('请填写密码');
-        return false;
-      }
-
-      var url = '/api/users/saveuser';
-      var formdata = 'username=' + form.username.value + '&password=' + form.password.value + "&test=" + null;
-      var promise = new Promise(function (resolve, reject) {
-        new _utils_xhr__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"]({
-          setHeader: 'application/x-www-form-urlencoded',
-          sendData: formdata,
-          method: 'POST',
-          url: url,
-          withCredentials: true,
-          done: function done(callData) {
-            resolve(callData);
-          },
-          faild: function faild() {
-            var error = new Error('something wrong');
-            reject(error);
-          }
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var xhr_1 = __webpack_require__(12);
+var react_router_dom_1 = __webpack_require__(11);
+var yao_m_ui_1 = __webpack_require__(14);
+var context_1 = __webpack_require__(10);
+var actions_1 = __webpack_require__(7);
+var useRef = React.useRef, useContext = React.useContext;
+function Login(props) {
+    var _a = useContext(context_1.FetchesContext), state = _a.state, dispatch = _a.dispatch;
+    var loginForm = useRef(null);
+    var handleSubmit = function (e) {
+        e.preventDefault();
+        var form = loginForm.current;
+        if (!form)
+            return;
+        if (!form['username'].value) {
+            yao_m_ui_1.showPrompt('请填写用户名!');
+            return false;
+        }
+        if (!form['password'].value) {
+            yao_m_ui_1.showPrompt('请填写密码');
+            return false;
+        }
+        var senddata = JSON.stringify({
+            username: form['username'].value,
+            password: form['password'].value,
+            test: null
         });
-      });
-      promise.then(function (obj) {
-        if (obj.code === 0) {
-          Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-            msg: obj.msg,
-            cb: function cb() {
-              _this2.props.initAction({
-                isLogin: obj.isLogin,
-                user: obj.user
-              });
-
-              _this2.props.history.push({
-                pathname: '/goods/upload'
-              });
+        return new Promise(function (resolve, reject) {
+            new xhr_1.default({
+                setHeader: 'application/json',
+                sendData: senddata,
+                method: 'POST',
+                url: '/api/users/validuser',
+                done: function (callData) {
+                    resolve(callData);
+                },
+                faild: function () {
+                    var error = new Error('something wrong');
+                    reject(error);
+                }
+            });
+        })
+            .then(function (obj) {
+            if (obj.code == 0) {
+                yao_m_ui_1.showPrompt({
+                    msg: "登陆成功",
+                    cb: function () {
+                        dispatch({ type: actions_1.LOGIN });
+                        props.history.push({ pathname: '/goods/upload' });
+                    }
+                });
             }
-          });
-        } else Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])(obj.msg);
-      }, function (error) {
-        return console.log(error);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
-        id: "register_page",
-        className: "app-register-page"
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-        className: "page-title"
-      }, "\u6CE8\u518C"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("form", {
-        method: "post",
-        action: "/api/users/saveuser",
-        className: "form1",
-        ref: "registerForm",
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
-        type: "text",
-        name: "username",
-        className: "ipt",
-        placeholder: "\u7528\u6237\u540D"
-      })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
-        type: "password",
-        name: "password",
-        className: "ipt",
-        placeholder: "\u5BC6\u7801"
-      })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-        className: "pt20"
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("input", {
-        type: "submit",
-        className: "btn"
-      }))));
-    }
-  }]);
+            else
+                yao_m_ui_1.showPrompt(obj.msg);
+        }, function (error) { return console.log(error); });
+    };
+    return (React.createElement("div", { id: "register_page", className: "app-register-page" },
+        React.createElement("p", { className: "page-title" }, "\u767B\u5F55"),
+        React.createElement("form", { method: "post", action: "/api/users/validuser", className: "form1", ref: loginForm, onSubmit: handleSubmit },
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "text", name: "username", className: "ipt", placeholder: "\u7528\u6237\u540D" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "password", name: "password", className: "ipt", placeholder: "\u5BC6\u7801" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "submit", className: "btn" })),
+            React.createElement("p", { className: "pt10" },
+                React.createElement(react_router_dom_1.Link, { to: "/user/register" }, "\u6CE8\u518C")))));
+}
+exports.default = Login;
 
-  return register;
-}(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__[/* connect */ "b"])(null, {
-  initAction: _actions_actions__WEBPACK_IMPORTED_MODULE_9__[/* initAction */ "j"]
-})(register));
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LOGIN = 'LOGIN';
+exports.LOGOUT = 'LOGOUT';
+exports.LISTGOODS = 'LISTGOODS';
+exports.SHOWGOOD = 'SHOWGOOD';
+exports.POSTCOMMET = 'POSTCOMMET';
+exports.DELETECOMMET = 'DELETECOMMET';
+exports.LISTCOMMETS = 'LISTCOMMETS';
+exports.DONELOADING = 'DONELOADING';
+
 
 /***/ })
 
 }]);
-//# sourceMappingURL=5.0cc13cab39042f616b6d.js.map
+//# sourceMappingURL=1.4d305df98c8205a702fe.js.map

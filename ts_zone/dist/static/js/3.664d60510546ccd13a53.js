@@ -1,14 +1,15 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ 17:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -88,11 +89,11 @@ function () {
   return xhr;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (xhr);
+/* harmony default export */ __webpack_exports__["default"] = (xhr);
 
 /***/ }),
 
-/***/ 5:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -581,358 +582,98 @@ function () {
 
 /***/ }),
 
-/***/ 59:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 37:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _utils_xhr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5);
-/* harmony import */ var yao_m_ui__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__);
 
-
-
-
-
-
-
-
-
-
-
-var unLoginCode = '00002';
-
-function mapStateToProps(state, ownProps) {
-  return {
-    showGood: state.showGood,
-    commets: state.commets,
-    initData: state.initData
-  };
-}
-
-var goodsDetail =
-/*#__PURE__*/
-function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(goodsDetail, _Component);
-
-  //static contextTypes = Object.assign({},{history: PropTypes.history});
-  function goodsDetail(props) {
-    var _this;
-
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, goodsDetail);
-
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(goodsDetail).call(this, props));
-    _this.submitComment = _this.submitComment.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
-    _this.deleteGoods = _this.deleteGoods.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
-    return _this;
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(goodsDetail, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var self = this;
-      var promise = new Promise(function (resolve, reject) {
-        new _utils_xhr__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"]({
-          url: '/api/goods/detail/' + self.props.match.params.id,
-          done: function done(callData) {
-            resolve(callData);
-          },
-          faild: function faild() {
-            var error = new Error('something wrong');
-            reject(error);
-          }
-        });
-      });
-      promise.then(function (obj) {
-        _this2.props.showGoodAction(obj.detail);
-
-        _this2.props.listCommetsAction(obj.commets);
-      }, function (error) {
-        return console.log(error);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var goodsObj = this.props.showGood;
-      var commets = this.props.commets;
-
-      if (goodsObj) {
-        var files = goodsObj.files;
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
-          className: "app-detail-page"
-        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-          className: "page-title"
-        }, goodsObj.title), files.length > 0 && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("ul", {
-          className: "uri-list"
-        }, files.map(function (item, index) {
-          return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Blog_item, {
-            key: index,
-            item: item,
-            category: goodsObj.category
-          });
-        })), goodsObj.content != '' && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-          className: "content"
-        }, goodsObj.content), commets.length ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
-          className: "comments-container"
-        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
-          className: "comments-title"
-        }, "\u8BC4\u8BBA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("ul", {
-          className: "list"
-        }, commets.map(function (item, index) {
-          return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CommetItem, {
-            goodsId: goodsObj.id,
-            history: _this3.props.history,
-            user: _this3.props.initData.user,
-            author: goodsObj.user,
-            C_user: item.C_user,
-            deleteCommetAction: _this3.props.deleteCommetAction,
-            key: index,
-            item: item
-          });
-        }))) : '', react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
-          ref: "wrapComment"
-        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("textarea", {
-          className: "ipt"
-        }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
-          onClick: this.submitComment,
-          className: "btn"
-        }, "\u63D0\u4EA4\u8BC4\u8BBA"))), this.props.initData.user === goodsObj.user && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
-          onClick: this.deleteGoods,
-          className: "icon-delete-page"
-        }, "x"));
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", null, this.props.match.params.id);
-    }
-  }, {
-    key: "deleteGoods",
-    value: function deleteGoods() {
-      var _this4 = this;
-
-      var self = this;
-      fetch("https://www.macsen318.com" + '/api/goods/delete/' + self.props.match.params.id, {
-        method: 'DELETE',
-        credentials: "include"
-      }).then(function (res) {
-        if (res.ok) {
-          return res.json();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var xhr_1 = __webpack_require__(12);
+var yao_m_ui_1 = __webpack_require__(14);
+var context_1 = __webpack_require__(10);
+var actions_1 = __webpack_require__(7);
+var useRef = React.useRef, useContext = React.useContext;
+function Register(props) {
+    var _a = useContext(context_1.FetchesContext), state = _a.state, dispatch = _a.dispatch;
+    var registerForm = useRef(null);
+    var handleSubmit = function (e) {
+        e.preventDefault();
+        var form = registerForm.current;
+        if (!form)
+            return;
+        if (!form['username'].value) {
+            yao_m_ui_1.showPrompt('请填写用户名!');
+            return false;
         }
-      }).then(function (obj) {
-        if (obj.code === unLoginCode) return Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-          msg: obj.msg,
-          cb: function cb() {
-            return _this4.props.history.push('/user/login');
-          }
-        });
-
-        if (obj.code == 0) {
-          self.props.history.push('/goods/list');
+        if (!form['password'].value) {
+            yao_m_ui_1.showPrompt('请填写密码');
+            return false;
         }
-      });
-    }
-  }, {
-    key: "submitComment",
-    value: function submitComment() {
-      var _this5 = this;
-
-      var wrap_comment = this.refs.wrapComment;
-      var commentEle = wrap_comment.querySelector('textarea');
-      var self = this;
-      var commentData = JSON.stringify({
-        goodsid: self.props.match.params.id,
-        comment: commentEle.value.trim()
-      });
-      fetch("https://www.macsen318.com" + '/api/comments/', {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: commentData
-      }).then(function (res) {
-        if (res.ok) {
-          return res.json();
-        }
-      }).then(function (obj) {
-        if (obj.code === unLoginCode) return Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-          msg: obj.msg,
-          cb: function cb() {
-            return _this5.props.history.push('/user/login');
-          }
-        });
-        if (obj.code !== 0) return Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-          msg: obj.msg
-        });
-
-        _this5.props.postCommetAction({
-          C_content: obj.commet,
-          _id: obj._id,
-          C_user: obj.C_user
-        });
-
-        commentEle.value = '';
-      });
-    }
-  }]);
-
-  return goodsDetail;
-}(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
-
-var Blog_item =
-/*#__PURE__*/
-function (_React$Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(Blog_item, _React$Component);
-
-  function Blog_item() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Blog_item);
-
-    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(Blog_item).apply(this, arguments));
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Blog_item, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
-    key: "render",
-    value: function render() {
-      var item = this.props.item;
-      var category = this.props.category;
-      var itemEle;
-
-      switch (category) {
-        case 'image':
-          itemEle = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
-            src: '//res.macsen318.com' + item.path,
-            width: item.width
-          });
-          break;
-
-        case 'video':
-          itemEle = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("video", {
-            src: '//res.macsen318.com' + item.path,
-            controls: "controls",
-            autoPlay: true
-          });
-          break;
-
-        case 'note':
-          if (item.url) {
-            itemEle = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, item.content), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
-              src: '//res.macsen318.com' + item.path,
-              width: item.width / 2
-            })));
-          } else {
-            itemEle = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, item.content);
-          }
-
-          break;
-
-        default:
-          break;
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", {
-        className: "item"
-      }, itemEle);
-    }
-  }]);
-
-  return Blog_item;
-}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
-
-var CommetItem =
-/*#__PURE__*/
-function (_Component2) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(CommetItem, _Component2);
-
-  function CommetItem() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, CommetItem);
-
-    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(CommetItem).apply(this, arguments));
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(CommetItem, [{
-    key: "delCommet",
-    value: function delCommet(e) {
-      var _this6 = this;
-
-      var self = this;
-      var item = e.target.parentNode;
-      var C_id = item.dataset.id;
-      var content = item.firstElementChild.innerHTML;
-      var props = this.props;
-      var goodsId = props.goodsId;
-      new _utils_xhr__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"]({
-        url: '/api/comments/' + goodsId + '/' + C_id,
-        method: 'DELETE',
-        done: function done(obj) {
-          if (obj.code === 0) self.props.deleteCommetAction(+C_id);
-          if (obj.code === unLoginCode) return Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-            msg: obj.msg,
-            cb: function cb() {
-              return _this6.props.history.push('/user/login');
+        var url = '/api/users/saveuser';
+        var formdata = 'username=' + form.username.value + '&password=' + form.password.value + "&test=" + null;
+        return new Promise(function (resolve, reject) {
+            new xhr_1.default({
+                setHeader: 'application/x-www-form-urlencoded',
+                sendData: formdata,
+                method: 'POST',
+                url: url,
+                withCredentials: true,
+                done: function (callData) {
+                    resolve(callData);
+                },
+                faild: function () {
+                    var error = new Error('something wrong');
+                    reject(error);
+                }
+            });
+        }).then(function (obj) {
+            if (obj.code === 0) {
+                dispatch({ type: actions_1.LOGIN });
+                yao_m_ui_1.showPrompt({
+                    msg: obj.msg,
+                    cb: function () {
+                        dispatch({ type: actions_1.LOGIN });
+                        props.history.push({ pathname: '/goods/upload' });
+                    }
+                });
             }
-          });
-          if (obj.code !== 0) return Object(yao_m_ui__WEBPACK_IMPORTED_MODULE_10__["showPrompt"])({
-            msg: obj.msg
-          });
-        }
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this7 = this;
+            else
+                yao_m_ui_1.showPrompt(obj.msg);
+        }, function (error) { return console.log(error); });
+    };
+    return (React.createElement("div", { id: "register_page", className: "app-register-page" },
+        React.createElement("p", { className: "page-title" }, "\u6CE8\u518C"),
+        React.createElement("form", { method: "post", action: "/api/users/saveuser", className: "form1", ref: registerForm, onSubmit: handleSubmit },
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "text", name: "username", className: "ipt", placeholder: "\u7528\u6237\u540D" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "password", name: "password", className: "ipt", placeholder: "\u5BC6\u7801" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "submit", className: "btn" })))));
+}
+exports.default = Register;
 
-      var props = this.props;
-      var item = props.item;
-      var goodsid = props.goodsid;
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", {
-        className: "item",
-        "data-id": item._id
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
-        className: "con"
-      }, props.C_user + '评论: ' + item.C_content), (props.user == props.author || props.C_user == props.user) && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
-        className: "del",
-        onClick: function onClick(e) {
-          return _this7.delCommet(e);
-        }
-      }, "\u5220\u9664"));
-    }
-  }]);
 
-  return CommetItem;
-}(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
+/***/ }),
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__[/* connect */ "b"])(mapStateToProps, {
-  showGoodAction: _actions_actions__WEBPACK_IMPORTED_MODULE_9__[/* showGoodAction */ "n"],
-  listCommetsAction: _actions_actions__WEBPACK_IMPORTED_MODULE_9__[/* listCommetsAction */ "k"],
-  postCommetAction: _actions_actions__WEBPACK_IMPORTED_MODULE_9__[/* postCommetAction */ "m"],
-  deleteCommetAction: _actions_actions__WEBPACK_IMPORTED_MODULE_9__[/* deleteCommetAction */ "h"]
-})(goodsDetail));
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LOGIN = 'LOGIN';
+exports.LOGOUT = 'LOGOUT';
+exports.LISTGOODS = 'LISTGOODS';
+exports.SHOWGOOD = 'SHOWGOOD';
+exports.POSTCOMMET = 'POSTCOMMET';
+exports.DELETECOMMET = 'DELETECOMMET';
+exports.LISTCOMMETS = 'LISTCOMMETS';
+exports.DONELOADING = 'DONELOADING';
+
 
 /***/ })
 
 }]);
-//# sourceMappingURL=3.90170aaec4a424b7db00.js.map
+//# sourceMappingURL=3.664d60510546ccd13a53.js.map

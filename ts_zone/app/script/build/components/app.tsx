@@ -2,13 +2,13 @@ import * as React from 'react';
 import {
     NavLink
 } from 'react-router-dom';
-import reducer, {getInitState} from '../reducers/init'
 import {LOGIN, LOGOUT} from '../actions'
+import {FetchesContext} from '../context'
 const {
-    useReducer,
     useEffect,
-    useCallback
+    useContext
 } = React
+//const Context = createContext();
 // such as https://blog.csdn.net/weixin_42461410/article/details/88650304
 function LogoutHeader() {
     return (
@@ -47,9 +47,8 @@ function Tab(props: any) {
 
 //home views
 function App() {
-    const [state, dispatch] = useReducer(reducer, getInitState(), () => getInitState())
-    console.log('init status', state)
-    const loginStatus = state.isLogin;
+    const {state, dispatch} = useContext(FetchesContext)
+    console.log(state)
     useEffect(() => {
         // @ts-ignore
         fetch(perfixerURL+"/api/home", {
@@ -62,8 +61,8 @@ function App() {
         .then((obj:any) => dispatch({ type: obj.isLogin ? LOGIN : LOGOUT }))
         .catch(() => dispatch({ type: LOGOUT }))
     }, [])
-    console.log('login status', getInitState())
-    if (getInitState().isLogin) return <LoginHeader />
+    console.log('login status', state.isLogin)
+    if (state.isLogin) return <LoginHeader />
     return <LogoutHeader />
 };
 export default App;

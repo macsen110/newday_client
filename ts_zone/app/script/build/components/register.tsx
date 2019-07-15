@@ -1,15 +1,15 @@
 import * as React from 'react';
 import xhr from '../utils/xhr';
 import { showPrompt } from 'yao-m-ui';
-import reducer from '../reducers/init'
+import {FetchesContext} from '../context'
 import {LOGIN} from '../actions'
 const {
     useRef,
-    useReducer
+    useContext
 } = React
 
 function Register(props:any) {
-    const [state, dispatch] = useReducer(reducer, { isLogin: false })
+    const {state, dispatch} = useContext(FetchesContext)
     let registerForm = useRef<HTMLFormElement>(null);
     const handleSubmit = (e: any) => {
         e.preventDefault();
