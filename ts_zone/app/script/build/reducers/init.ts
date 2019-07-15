@@ -1,7 +1,7 @@
 type StateType = {
   isLogin: boolean
 }
-type ActionType = {
+interface ActionType {
   type: 'LOGOUT' | 'LOGIN'
 }
 let initialState = { isLogin: false };

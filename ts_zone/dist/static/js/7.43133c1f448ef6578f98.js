@@ -37,7 +37,7 @@ function LoginHeader() {
     return (React.createElement("div", { className: "wrap-header-container" },
         React.createElement("header", { className: "header" },
             React.createElement("ul", { className: "app-nav-list" },
-                React.createElement(Tab, { to: "/" }, "\u9996\u9875"),
+                React.createElement(Tab, { exact: true, to: "/" }, "\u9996\u9875"),
                 React.createElement(Tab, { to: "/goods/list" }, "\u53D1\u73B0"),
                 React.createElement(Tab, { to: "/goods/upload" }, "\u4E0A\u4F20"),
                 React.createElement(Tab, { to: "/user/logout" }, "\u6CE8\u9500")))));
@@ -91,4 +91,4 @@ exports.DONELOADING = 'DONELOADING';
 /***/ })
 
 }]);
-//# sourceMappingURL=7.519aecb1a1edd942127e.js.map
+//# sourceMappingURL=7.43133c1f448ef6578f98.js.map

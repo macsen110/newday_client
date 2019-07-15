@@ -29,7 +29,7 @@ function LoginHeader() {
         <div className="wrap-header-container">
             <header className="header">
                 <ul className="app-nav-list">
-                    <Tab to="/">首页</Tab>
+                    <Tab exact to="/">首页</Tab>
                     <Tab to="/goods/list">发现</Tab>
                     <Tab to="/goods/upload">上传</Tab>
                     <Tab to="/user/logout">注销</Tab>

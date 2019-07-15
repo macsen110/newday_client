@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "static/js/" + ({}[chunkId]||chunkId) + "." + {"0":"c1afe1deb7e3d9d3b45b","1":"b0bb00530ac5f4da777a","2":"c8eb64963e9260adad37","3":"85e7090354d8f3a553d1","4":"e2ce637e226fc003d7ce","5":"b4d991d4935a3fa28358","6":"3215f8cac67909c89885","7":"519aecb1a1edd942127e","8":"b05d986e26599e5ede8e","9":"36e1c7600265dfa86939","10":"b8cfcebccaccc82aff4b","11":"9d5abfb6b246ce458bf5"}[chunkId] + ".js"
+/******/ 		return __webpack_require__.p + "static/js/" + ({}[chunkId]||chunkId) + "." + {"0":"c1afe1deb7e3d9d3b45b","1":"b0bb00530ac5f4da777a","2":"c8eb64963e9260adad37","3":"85e7090354d8f3a553d1","4":"e2ce637e226fc003d7ce","5":"b4d991d4935a3fa28358","6":"3215f8cac67909c89885","7":"43133c1f448ef6578f98","8":"b05d986e26599e5ede8e","9":"36e1c7600265dfa86939","10":"b8cfcebccaccc82aff4b","11":"9d5abfb6b246ce458bf5"}[chunkId] + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -3409,7 +3409,7 @@ if (true) {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(65);
+  module.exports = __webpack_require__(64);
 } else {}
 
 /***/ }),
@@ -5011,12 +5011,6 @@ exports.isSuspense = function (a) {
 
 /***/ }),
 /* 64 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5036,7 +5030,7 @@ exports.isSuspense = function (a) {
 
 var aa = __webpack_require__(0),
     n = __webpack_require__(33),
-    r = __webpack_require__(66);
+    r = __webpack_require__(65);
 
 function ba(a, b, c, d, e, f, g, h) {
   if (!a) {
@@ -11350,18 +11344,18 @@ var Wi = {
 module.exports = Xi.default || Xi;
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(67);
+  module.exports = __webpack_require__(66);
 } else {}
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11761,6 +11755,12 @@ exports.unstable_getFirstCallbackNode = function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(34)))
 
 /***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12104,9 +12104,6 @@ var configureStore_history = Object(esm_history["a" /* createBrowserHistory */])
 var Root = __webpack_require__(37);
 var Root_default = /*#__PURE__*/__webpack_require__.n(Root);
 
-// EXTERNAL MODULE: ./assets/style.css
-var style = __webpack_require__(64);
-
 // EXTERNAL MODULE: ./node_modules/_react-dom@16.8.6@react-dom/index.js
 var _react_dom_16_8_6_react_dom = __webpack_require__(47);
 
@@ -12116,6 +12113,9 @@ var init_default = /*#__PURE__*/__webpack_require__.n(init);
 
 // EXTERNAL MODULE: ./script/build/context/index.js
 var context = __webpack_require__(8);
+
+// EXTERNAL MODULE: ./assets/style.css
+var style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./script/build/main.js
 /**************
@@ -12136,7 +12136,7 @@ return
 
 
 
-function Roots() {
+function Roots(props) {
   var _useReducer = Object(_react_16_8_6_react["useReducer"])(init_default.a, {
     isLogin: false
   }),
@@ -12149,27 +12149,13 @@ function Roots() {
       state: state,
       dispatch: dispatch
     }
-  }, _react_16_8_6_react_default.a.createElement(Root_default.a, {
-    history: configureStore_history
-  }));
+  }, props.children);
 }
 
-Object(_react_dom_16_8_6_react_dom["render"])(_react_16_8_6_react_default.a.createElement(_react_hot_loader_4_12_5_react_hot_loader["AppContainer"], null, _react_16_8_6_react_default.a.createElement(Roots, null)), document.getElementById('root')); // if (module.hot) {
-// 	module.hot.accept('./containers/Root', () => {
-// 		const newConfigureStore = require('./store/configureStore');
-// 		const newHistory = newConfigureStore.history;
-// 		const NewRoot = require('./containers/Root').default;
-// 		render(
-// 			<AppContainer>
-// 				<FetchesContext.Provider value={{ state, dispatch }}>
-// 					<NewRoot history={newHistory} />
-// 				</FetchesContext.Provider>
-// 			</AppContainer>,
-// 			document.getElementById('root')
-// 		);
-// 	});
-// }
+Object(_react_dom_16_8_6_react_dom["render"])(_react_16_8_6_react_default.a.createElement(_react_hot_loader_4_12_5_react_hot_loader["AppContainer"], null, _react_16_8_6_react_default.a.createElement(Roots, null, _react_16_8_6_react_default.a.createElement(Root_default.a, {
+  history: configureStore_history
+}))), document.getElementById('root'));
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=app.dfcfa9c9604ba15937a0.js.map
+//# sourceMappingURL=app.bccb81bf6938207e2af0.js.map
