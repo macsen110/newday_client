@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ 30:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,9 +18,9 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(11);
-var actions_1 = __webpack_require__(7);
-var context_1 = __webpack_require__(10);
+var react_router_dom_1 = __webpack_require__(9);
+var actions_1 = __webpack_require__(5);
+var context_1 = __webpack_require__(8);
 var useEffect = React.useEffect, useContext = React.useContext;
 //const Context = createContext();
 // such as https://blog.csdn.net/weixin_42461410/article/details/88650304
@@ -49,7 +49,6 @@ function Tab(props) {
 //home views
 function App() {
     var _a = useContext(context_1.FetchesContext), state = _a.state, dispatch = _a.dispatch;
-    console.log(state);
     useEffect(function () {
         // @ts-ignore
         fetch("https://www.macsen318.com" + "/api/home", {
@@ -63,7 +62,6 @@ function App() {
             .then(function (obj) { return dispatch({ type: obj.isLogin ? actions_1.LOGIN : actions_1.LOGOUT }); })
             .catch(function () { return dispatch({ type: actions_1.LOGOUT }); });
     }, []);
-    console.log('login status', state.isLogin);
     if (state.isLogin)
         return React.createElement(LoginHeader, null);
     return React.createElement(LogoutHeader, null);
@@ -74,7 +72,7 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 7:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93,4 +91,4 @@ exports.DONELOADING = 'DONELOADING';
 /***/ })
 
 }]);
-//# sourceMappingURL=7.c251dbd7826b8480f53f.js.map
+//# sourceMappingURL=7.519aecb1a1edd942127e.js.map

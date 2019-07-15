@@ -1,15 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -93,7 +93,7 @@ function () {
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -582,231 +582,87 @@ function () {
 
 /***/ }),
 
-/***/ 32:
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var xhr_1 = __webpack_require__(12);
-var actions_1 = __webpack_require__(7);
-var yao_m_ui_1 = __webpack_require__(14);
-var showGoodTs_1 = __webpack_require__(53);
-var commetsTs_1 = __webpack_require__(54);
-var useReducer = React.useReducer, useEffect = React.useEffect, useRef = React.useRef;
-var unLoginCode = '00002';
-function _fetchGoods(id) {
-    return new Promise(function (resolve, reject) {
-        new xhr_1.default({
-            url: '/api/goods/detail/' + id,
-            done: function (callData) {
-                resolve(callData);
-            },
-            faild: function () {
-                var error = new Error('something wrong');
-                reject(error);
-            }
-        });
-    });
-}
-function _delCommet(C_id, goodsid) {
-    return new Promise(function (res, rej) {
-        new xhr_1.default({
-            url: '/api/comments/' + goodsid + '/' + C_id,
-            method: 'DELETE',
-            done: function (obj) {
-                if (obj.code === 0)
-                    res(+C_id);
-                if (obj.code === unLoginCode)
-                    return yao_m_ui_1.showPrompt({ msg: obj.msg });
-                if (obj.code !== 0)
-                    return yao_m_ui_1.showPrompt({ msg: obj.msg });
-            }
-        });
-    });
-}
-function _submitCommet(goodsid, content) {
-    var commentData = JSON.stringify({
-        goodsid: goodsid,
-        content: content
-    });
-    // @ts-ignore
-    return fetch("https://www.macsen318.com" + '/api/comments/', {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: commentData
-    }).then(function (res) {
-        if (res.ok) {
-            return res.json();
+var xhr_1 = __webpack_require__(11);
+var react_router_dom_1 = __webpack_require__(9);
+var yao_m_ui_1 = __webpack_require__(12);
+var context_1 = __webpack_require__(8);
+var actions_1 = __webpack_require__(5);
+var useRef = React.useRef, useContext = React.useContext;
+function Login(props) {
+    var _a = useContext(context_1.FetchesContext), state = _a.state, dispatch = _a.dispatch;
+    var loginForm = useRef(null);
+    var handleSubmit = function (e) {
+        e.preventDefault();
+        var form = loginForm.current;
+        if (!form)
+            return;
+        if (!form['username'].value) {
+            yao_m_ui_1.showPrompt('请填写用户名!');
+            return false;
         }
-    }).then(function (obj) {
-        if (obj.code === unLoginCode)
-            return yao_m_ui_1.showPrompt({ msg: obj.msg });
-        if (obj.code !== 0)
-            return yao_m_ui_1.showPrompt({ msg: obj.msg });
-    });
-}
-function _delGoods(id) {
-    // @ts-ignore
-    return fetch("https://www.macsen318.com" + '/api/goods/delete/' + id, {
-        method: 'DELETE',
-        credentials: "include"
-    }).then(function (res) {
-        if (res.ok) {
-            return res.json();
+        if (!form['password'].value) {
+            yao_m_ui_1.showPrompt('请填写密码');
+            return false;
         }
-    }).then(function (obj) {
-        return obj;
-        //if (obj.code === unLoginCode) return showPrompt({ msg: obj.msg, cb: () => props.history.push('/user/login') })
-        //if (obj.code == 0) {
-        //props.history.push('/goods/list')
-        //}
-    });
-}
-function GoodsDetail(props) {
-    var _a = useReducer(showGoodTs_1.default, {}), state = _a[0], dispatch = _a[1];
-    var _b = useReducer(commetsTs_1.default, []), commets = _b[0], dispatchCommets = _b[1];
-    var files = state.files || '';
-    useEffect(function () {
-        _fetchGoods(props.match.params.id).then(function (obj) {
-            dispatch({ type: actions_1.SHOWGOOD, value: obj.detail });
-            dispatchCommets({ type: actions_1.LISTCOMMETS, value: obj.commets });
+        var senddata = JSON.stringify({
+            username: form['username'].value,
+            password: form['password'].value,
+            test: null
         });
-    }, []);
-    var deleteGoods = function () {
-        _delGoods(props.match.params.id);
-    };
-    if (state.id) {
-        return (React.createElement("div", { className: "app-detail-page" },
-            React.createElement("p", { className: "page-title" }, state.title),
-            files.length > 0 && (React.createElement("ul", { className: "uri-list" }, files.map(function (item, index) { return React.createElement(Blog_item, { key: index, item: item, category: state.category }); }))),
-            state.content != '' && (React.createElement("p", { className: "content" }, state.content)),
-            React.createElement(Commets, { commets: commets, goodsid: state.id })));
-    }
-    return (React.createElement("div", null, props.match.params.id));
-}
-function Blog_item(props) {
-    var item = props.item;
-    var category = props.category;
-    var itemEle;
-    switch (category) {
-        case 'image':
-            itemEle = React.createElement("img", { src: '//res.macsen318.com' + item.path, width: item.width });
-            break;
-        case 'video':
-            itemEle = React.createElement("video", { src: '//res.macsen318.com' + item.path, autoPlay: true });
-            break;
-        case 'note':
-            if (item.url) {
-                itemEle = React.createElement("div", null,
-                    React.createElement("p", null, item.content),
-                    React.createElement("p", null,
-                        React.createElement("img", { src: '//res.macsen318.com' + item.path, width: item.width / 2 })));
-            }
-            else {
-                itemEle = React.createElement("p", null, item.content);
-            }
-            break;
-        default:
-            break;
-    }
-    return (React.createElement("li", { className: "item" }, itemEle));
-}
-function Commets(props) {
-    var commets = props.commets, goodsid = props.goodsid;
-    if (commets.length) {
-        return (React.createElement("div", { className: "commets-container" },
-            React.createElement("ul", { className: "commets-list" }, commets.map(function (item, index) { return React.createElement(CommetItem, { goodsid: goodsid, C_content: item.C_content, key: index, C_id: item._id }); })),
-            React.createElement(InputContainer, { goodsid: goodsid })));
-    }
-    return (React.createElement("div", { className: "commets-contain" },
-        React.createElement(InputContainer, { goodsid: goodsid })));
-}
-function CommetItem(props) {
-    var C_content = props.C_content, C_id = props.C_id, goodsid = props.goodsid;
-    var delCommet = function (e) {
-        var item = e.target.parentNode;
-        var C_id = item.dataset.id;
-        _delCommet(C_id, goodsid);
-    };
-    return (React.createElement("li", { className: "item", "data-id": C_id },
-        React.createElement("span", { className: "con" }, '游客评论: ' + C_content),
-        React.createElement("span", { className: "del", onClick: function (e) { return delCommet(e); } }, "\u5220\u9664")));
-}
-function InputContainer(props) {
-    var wrap_comment = useRef(null);
-    var submitCommet = function () {
-        var commentEle = wrap_comment.current;
-        _submitCommet(props.goodsid, commentEle ? commentEle.value : '');
-    };
-    return (React.createElement("div", { className: "input-container" },
-        React.createElement("textarea", { className: "ipt", ref: wrap_comment }),
-        React.createElement("p", null,
-            React.createElement("button", { onClick: submitCommet, className: "btn" }, "\u63D0\u4EA4\u8BC4\u8BBA"))));
-}
-exports.default = GoodsDetail;
-
-
-/***/ }),
-
-/***/ 53:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var actions_1 = __webpack_require__(7);
-function showGood(state, action) {
-    switch (action.type) {
-        case actions_1.SHOWGOOD:
-            return action.value;
-        default:
-            return state;
-    }
-}
-exports.default = showGood;
-
-
-/***/ }),
-
-/***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var actions_1 = __webpack_require__(7);
-function commets(state, action) {
-    switch (action.type) {
-        case actions_1.POSTCOMMET:
-            state.push(action.value);
-            return state.slice();
-        case actions_1.LISTCOMMETS:
-            return action.value;
-        case actions_1.DELETECOMMET:
-            var index = void 0;
-            for (var i = 0; i < state.length; i++) {
-                if (state[i]._id === action.value) {
-                    index = i;
-                    state.splice(index, 1);
-                    break;
+        return new Promise(function (resolve, reject) {
+            new xhr_1.default({
+                setHeader: 'application/json',
+                sendData: senddata,
+                method: 'POST',
+                url: '/api/users/validuser',
+                done: function (callData) {
+                    resolve(callData);
+                },
+                faild: function () {
+                    var error = new Error('something wrong');
+                    reject(error);
                 }
+            });
+        })
+            .then(function (obj) {
+            if (obj.code == 0) {
+                yao_m_ui_1.showPrompt({
+                    msg: "登陆成功",
+                    cb: function () {
+                        dispatch({ type: actions_1.LOGIN });
+                        props.history.push({ pathname: '/goods/upload' });
+                    }
+                });
             }
-            return state.slice();
-        default:
-            return state.slice();
-    }
+            else
+                yao_m_ui_1.showPrompt(obj.msg);
+        }, function (error) { return console.log(error); });
+    };
+    return (React.createElement("div", { id: "register_page", className: "app-register-page" },
+        React.createElement("p", { className: "page-title" }, "\u767B\u5F55"),
+        React.createElement("form", { method: "post", action: "/api/users/validuser", className: "form1", ref: loginForm, onSubmit: handleSubmit },
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "text", name: "username", className: "ipt", placeholder: "\u7528\u6237\u540D" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "password", name: "password", className: "ipt", placeholder: "\u5BC6\u7801" })),
+            React.createElement("p", { className: "pt20" },
+                React.createElement("input", { type: "submit", className: "btn" })),
+            React.createElement("p", { className: "pt10" },
+                React.createElement(react_router_dom_1.Link, { to: "/user/register" }, "\u6CE8\u518C")))));
 }
-exports.default = commets;
+exports.default = Login;
 
 
 /***/ }),
 
-/***/ 7:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -825,4 +681,4 @@ exports.DONELOADING = 'DONELOADING';
 /***/ })
 
 }]);
-//# sourceMappingURL=2.f073715afff5c34d0f96.js.map
+//# sourceMappingURL=1.b0bb00530ac5f4da777a.js.map

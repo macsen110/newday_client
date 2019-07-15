@@ -1,15 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -93,7 +93,7 @@ function () {
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -582,143 +582,247 @@ function () {
 
 /***/ }),
 
-/***/ 34:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var xhr_1 = __webpack_require__(12);
-var yao_m_ui_1 = __webpack_require__(14);
-var useState = React.useState, useRef = React.useRef, useEffect = React.useEffect;
+var xhr_1 = __webpack_require__(11);
+var actions_1 = __webpack_require__(5);
+var yao_m_ui_1 = __webpack_require__(12);
+var showGoodTs_1 = __webpack_require__(50);
+var commetsTs_1 = __webpack_require__(51);
+var useReducer = React.useReducer, useEffect = React.useEffect, useRef = React.useRef;
 var unLoginCode = '00002';
-function goodsUpload(props) {
-    var _a = useState('image'), type = _a[0], setType = _a[1];
-    var _b = useState([]), uploadFiles = _b[0], setUploadFiles = _b[1];
-    var _c = useState(''), typeDesc = _c[0], setTypeDesc = _c[1];
-    var formRef = useRef(null);
-    var changeSelectType = function (e) {
-        setType(e.target.value);
-        setUploadFiles([]);
-    };
-    var handleUploadFiles = function (e) {
-        var filesArr = [];
-        var upFiles = e.target.files;
-        var i = 0;
-        for (i in upFiles) {
-            if (i >= 0)
-                filesArr.push(upFiles[i]);
+function _fetchGoods(id) {
+    return new Promise(function (resolve, reject) {
+        new xhr_1.default({
+            url: '/api/goods/detail/' + id,
+            done: function (callData) {
+                resolve(callData);
+            },
+            faild: function () {
+                var error = new Error('something wrong');
+                reject(error);
+            }
+        });
+    });
+}
+function _delCommet(C_id, goodsid) {
+    return new Promise(function (res, rej) {
+        new xhr_1.default({
+            url: '/api/comments/' + goodsid + '/' + C_id,
+            method: 'DELETE',
+            done: function (obj) {
+                if (obj.code === 0)
+                    res(+C_id);
+                if (obj.code === unLoginCode)
+                    return yao_m_ui_1.showPrompt({ msg: obj.msg });
+                if (obj.code !== 0)
+                    return yao_m_ui_1.showPrompt({ msg: obj.msg });
+            }
+        });
+    });
+}
+function _submitCommet(goodsid, content) {
+    var commentData = JSON.stringify({
+        goodsid: goodsid,
+        content: content
+    });
+    // @ts-ignore
+    return fetch("https://www.macsen318.com" + '/api/comments/', {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: commentData
+    }).then(function (res) {
+        if (res.ok) {
+            return res.json();
         }
-        setUploadFiles(filesArr);
+    }).then(function (obj) {
+        if (obj.code === unLoginCode)
+            return yao_m_ui_1.showPrompt({ msg: obj.msg });
+        if (obj.code !== 0)
+            return yao_m_ui_1.showPrompt({ msg: obj.msg });
+    });
+}
+function _delGoods(id) {
+    // @ts-ignore
+    return fetch("https://www.macsen318.com" + '/api/goods/delete/' + id, {
+        method: 'DELETE',
+        credentials: "include"
+    }).then(function (res) {
+        if (res.ok) {
+            return res.json();
+        }
+    }).then(function (obj) {
+        return obj;
+        //if (obj.code === unLoginCode) return showPrompt({ msg: obj.msg, cb: () => props.history.push('/user/login') })
+        //if (obj.code == 0) {
+        //props.history.push('/goods/list')
+        //}
+    });
+}
+function GoodsDetail(props) {
+    var _a = useReducer(showGoodTs_1.default, {}), state = _a[0], dispatch = _a[1];
+    var _b = useReducer(commetsTs_1.default, []), commets = _b[0], dispatchCommets = _b[1];
+    var files = state.files || '';
+    useEffect(function () {
+        _fetchGoods(props.match.params.id).then(function (obj) {
+            dispatch({ type: actions_1.SHOWGOOD, value: obj.detail });
+            dispatchCommets({ type: actions_1.LISTCOMMETS, value: obj.commets });
+        });
+    }, []);
+    var deleteGoods = function () {
+        _delGoods(props.match.params.id);
     };
-    var readFile = function (file) {
-        var createObjectURLfun = function (file) {
-            if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) {
-                // @ts-ignore
-                return window.webkitURL.createObjectURL(file);
+    if (state.id) {
+        return (React.createElement("div", { className: "app-detail-page" },
+            React.createElement("p", { className: "page-title" }, state.title),
+            files.length > 0 && (React.createElement("ul", { className: "uri-list" }, files.map(function (item, index) { return React.createElement(Blog_item, { key: index, item: item, category: state.category }); }))),
+            state.content != '' && (React.createElement("p", { className: "content" }, state.content)),
+            React.createElement(Commets, { commets: commets, goodsid: state.id })));
+    }
+    return (React.createElement("div", null, props.match.params.id));
+}
+function Blog_item(props) {
+    var item = props.item;
+    var category = props.category;
+    var itemEle;
+    switch (category) {
+        case 'image':
+            itemEle = React.createElement("img", { src: '//res.macsen318.com' + item.path, width: item.width });
+            break;
+        case 'video':
+            itemEle = React.createElement("video", { src: '//res.macsen318.com' + item.path, autoPlay: true });
+            break;
+        case 'note':
+            if (item.url) {
+                itemEle = React.createElement("div", null,
+                    React.createElement("p", null, item.content),
+                    React.createElement("p", null,
+                        React.createElement("img", { src: '//res.macsen318.com' + item.path, width: item.width / 2 })));
             }
             else {
-                return window.URL.createObjectURL(file);
+                itemEle = React.createElement("p", null, item.content);
             }
-        };
-        switch (type) {
-            case 'image':
-                return React.createElement("img", { src: createObjectURLfun(file) });
-            case 'video':
-                return React.createElement("img", { src: "/imgs/video.jpg" });
-            default:
-                return '';
-        }
-    };
-    var getDesc = function (type) {
-        var typeDesc;
-        switch (type) {
-            case 'video':
-                typeDesc = "视频";
-                break;
-            case 'note':
-                typeDesc = "笔记";
-                break;
-            case 'image':
-            default:
-                typeDesc = "图文";
-                break;
-        }
-        return typeDesc;
-    };
-    var handleSubmit = function (e) {
-        e.preventDefault();
-        var form = formRef.current;
-        var fetchDescMapType = {
-            "image": '图片',
-            "video": "视频"
-        };
-        if (!form)
-            return;
-        if (!form.title.value)
-            return yao_m_ui_1.showPrompt('标题不能为空');
-        if (!form.content.value)
-            return yao_m_ui_1.showPrompt('内容不能为空');
-        if (type !== 'note' && uploadFiles.length === 0)
-            return yao_m_ui_1.showPrompt("\u8BF7\u4E0A\u4F20" + fetchDescMapType[type]);
-        var url = '/api/goods/upload';
-        var formdata = new FormData(form);
-        var promise = new Promise(function (resolve, reject) {
-            new xhr_1.default({
-                cache: false,
-                sendData: formdata,
-                method: 'POST',
-                url: url + '?time=' + Date.parse(new Date().toString()),
-                done: function (callData) {
-                    resolve(callData);
-                },
-                faild: function (error) {
-                    reject(error);
-                }
-            });
-        });
-        promise.then(function (obj) {
-            if (obj.code == 0)
-                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/goods/list'); } });
-            else if (obj.code === unLoginCode)
-                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/user/login'); } });
-        }, function (error) { return console.log(error); });
-    };
-    return (React.createElement("div", { id: "app_upload_page", className: "app-upload-page" },
-        React.createElement("p", { className: "page-title" }, "\u6DFB\u52A0\u6587\u7AE0"),
-        React.createElement("form", { method: "post", action: "/api/goods/upload", className: "form1", onSubmit: handleSubmit, ref: formRef },
-            React.createElement("p", { className: "pt20" },
-                React.createElement("input", { type: "text", name: "title", className: "ipt", placeholder: "\u6587\u7AE0\u6807\u9898" })),
-            React.createElement("div", { className: "select-type" },
-                "\u53D1\u5E03",
-                getDesc(type),
-                React.createElement("i", { className: "sign" }),
-                React.createElement("select", { name: "category", onChange: changeSelectType, defaultValue: "image" },
-                    React.createElement("option", { value: "image" }, "\u56FE\u6587"),
-                    React.createElement("option", { value: "note" }, "\u7B14\u8BB0"),
-                    React.createElement("option", { value: "video" }, "\u89C6\u9891"))),
-            (type !== 'note') && (React.createElement("div", { className: "wrap-upload-ipt" },
-                "\u4E0A\u4F20",
-                typeDesc,
-                React.createElement("input", { type: "file", onChange: handleUploadFiles, multiple: true, accept: type + "/*", name: "pics", className: "ipt", placeholder: "file" }))),
-            (uploadFiles.length > 0) && (React.createElement("ul", { className: "filesList" }, uploadFiles.map(function (item, index) {
-                return React.createElement("li", { className: "item", key: index },
-                    readFile(item),
-                    React.createElement("em", { className: "filename" }, item.name),
-                    React.createElement("em", null,
-                        item.size,
-                        "k"));
-            }))),
-            React.createElement("p", { className: "pt20" },
-                React.createElement("textarea", { className: "ipt", name: "content", placeholder: "\u6B63\u6587" })),
-            React.createElement("p", { className: "pt20" },
-                React.createElement("input", { type: "submit", className: "btn", value: "\u63D0\u4EA4\u6587\u7AE0" })))));
+            break;
+        default:
+            break;
+    }
+    return (React.createElement("li", { className: "item" }, itemEle));
 }
-exports.default = goodsUpload;
+function Commets(props) {
+    var commets = props.commets, goodsid = props.goodsid;
+    if (commets.length) {
+        return (React.createElement("div", { className: "commets-container" },
+            React.createElement("ul", { className: "commets-list" }, commets.map(function (item, index) { return React.createElement(CommetItem, { goodsid: goodsid, C_content: item.C_content, key: index, C_id: item._id }); })),
+            React.createElement(InputContainer, { goodsid: goodsid })));
+    }
+    return (React.createElement("div", { className: "commets-contain" },
+        React.createElement(InputContainer, { goodsid: goodsid })));
+}
+function CommetItem(props) {
+    var C_content = props.C_content, C_id = props.C_id, goodsid = props.goodsid;
+    var delCommet = function (e) {
+        var item = e.target.parentNode;
+        var C_id = item.dataset.id;
+        _delCommet(C_id, goodsid);
+    };
+    return (React.createElement("li", { className: "item", "data-id": C_id },
+        React.createElement("span", { className: "con" }, '游客评论: ' + C_content),
+        React.createElement("span", { className: "del", onClick: function (e) { return delCommet(e); } }, "\u5220\u9664")));
+}
+function InputContainer(props) {
+    var wrap_comment = useRef(null);
+    var submitCommet = function () {
+        var commentEle = wrap_comment.current;
+        _submitCommet(props.goodsid, commentEle ? commentEle.value : '');
+    };
+    return (React.createElement("div", { className: "input-container" },
+        React.createElement("textarea", { className: "ipt", ref: wrap_comment }),
+        React.createElement("p", null,
+            React.createElement("button", { onClick: submitCommet, className: "btn" }, "\u63D0\u4EA4\u8BC4\u8BBA"))));
+}
+exports.default = GoodsDetail;
+
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LOGIN = 'LOGIN';
+exports.LOGOUT = 'LOGOUT';
+exports.LISTGOODS = 'LISTGOODS';
+exports.SHOWGOOD = 'SHOWGOOD';
+exports.POSTCOMMET = 'POSTCOMMET';
+exports.DELETECOMMET = 'DELETECOMMET';
+exports.LISTCOMMETS = 'LISTCOMMETS';
+exports.DONELOADING = 'DONELOADING';
+
+
+/***/ }),
+
+/***/ 50:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var actions_1 = __webpack_require__(5);
+function showGood(state, action) {
+    switch (action.type) {
+        case actions_1.SHOWGOOD:
+            return action.value;
+        default:
+            return state;
+    }
+}
+exports.default = showGood;
+
+
+/***/ }),
+
+/***/ 51:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var actions_1 = __webpack_require__(5);
+function commets(state, action) {
+    switch (action.type) {
+        case actions_1.POSTCOMMET:
+            state.push(action.value);
+            return state.slice();
+        case actions_1.LISTCOMMETS:
+            return action.value;
+        case actions_1.DELETECOMMET:
+            var index = void 0;
+            for (var i = 0; i < state.length; i++) {
+                if (state[i]._id === action.value) {
+                    index = i;
+                    state.splice(index, 1);
+                    break;
+                }
+            }
+            return state.slice();
+        default:
+            return state.slice();
+    }
+}
+exports.default = commets;
 
 
 /***/ })
 
 }]);
-//# sourceMappingURL=4.ced70692eb75dd6ae9f4.js.map
+//# sourceMappingURL=2.c8eb64963e9260adad37.js.map

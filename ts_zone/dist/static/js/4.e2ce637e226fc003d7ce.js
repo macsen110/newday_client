@@ -1,15 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -93,7 +93,7 @@ function () {
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (win, factory) {
@@ -582,103 +582,143 @@ function () {
 
 /***/ }),
 
-/***/ 22:
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var xhr_1 = __webpack_require__(12);
-var react_router_dom_1 = __webpack_require__(11);
-var yao_m_ui_1 = __webpack_require__(14);
-var context_1 = __webpack_require__(10);
-var actions_1 = __webpack_require__(7);
-var useRef = React.useRef, useContext = React.useContext;
-function Login(props) {
-    var _a = useContext(context_1.FetchesContext), state = _a.state, dispatch = _a.dispatch;
-    var loginForm = useRef(null);
+var xhr_1 = __webpack_require__(11);
+var yao_m_ui_1 = __webpack_require__(12);
+var useState = React.useState, useRef = React.useRef, useEffect = React.useEffect;
+var unLoginCode = '00002';
+function goodsUpload(props) {
+    var _a = useState('image'), type = _a[0], setType = _a[1];
+    var _b = useState([]), uploadFiles = _b[0], setUploadFiles = _b[1];
+    var _c = useState(''), typeDesc = _c[0], setTypeDesc = _c[1];
+    var formRef = useRef(null);
+    var changeSelectType = function (e) {
+        setType(e.target.value);
+        setUploadFiles([]);
+    };
+    var handleUploadFiles = function (e) {
+        var filesArr = [];
+        var upFiles = e.target.files;
+        var i = 0;
+        for (i in upFiles) {
+            if (i >= 0)
+                filesArr.push(upFiles[i]);
+        }
+        setUploadFiles(filesArr);
+    };
+    var readFile = function (file) {
+        var createObjectURLfun = function (file) {
+            if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) {
+                // @ts-ignore
+                return window.webkitURL.createObjectURL(file);
+            }
+            else {
+                return window.URL.createObjectURL(file);
+            }
+        };
+        switch (type) {
+            case 'image':
+                return React.createElement("img", { src: createObjectURLfun(file) });
+            case 'video':
+                return React.createElement("img", { src: "/imgs/video.jpg" });
+            default:
+                return '';
+        }
+    };
+    var getDesc = function (type) {
+        var typeDesc;
+        switch (type) {
+            case 'video':
+                typeDesc = "视频";
+                break;
+            case 'note':
+                typeDesc = "笔记";
+                break;
+            case 'image':
+            default:
+                typeDesc = "图文";
+                break;
+        }
+        return typeDesc;
+    };
     var handleSubmit = function (e) {
         e.preventDefault();
-        var form = loginForm.current;
+        var form = formRef.current;
+        var fetchDescMapType = {
+            "image": '图片',
+            "video": "视频"
+        };
         if (!form)
             return;
-        if (!form['username'].value) {
-            yao_m_ui_1.showPrompt('请填写用户名!');
-            return false;
-        }
-        if (!form['password'].value) {
-            yao_m_ui_1.showPrompt('请填写密码');
-            return false;
-        }
-        var senddata = JSON.stringify({
-            username: form['username'].value,
-            password: form['password'].value,
-            test: null
-        });
-        return new Promise(function (resolve, reject) {
+        if (!form.title.value)
+            return yao_m_ui_1.showPrompt('标题不能为空');
+        if (!form.content.value)
+            return yao_m_ui_1.showPrompt('内容不能为空');
+        if (type !== 'note' && uploadFiles.length === 0)
+            return yao_m_ui_1.showPrompt("\u8BF7\u4E0A\u4F20" + fetchDescMapType[type]);
+        var url = '/api/goods/upload';
+        var formdata = new FormData(form);
+        var promise = new Promise(function (resolve, reject) {
             new xhr_1.default({
-                setHeader: 'application/json',
-                sendData: senddata,
+                cache: false,
+                sendData: formdata,
                 method: 'POST',
-                url: '/api/users/validuser',
+                url: url + '?time=' + Date.parse(new Date().toString()),
                 done: function (callData) {
                     resolve(callData);
                 },
-                faild: function () {
-                    var error = new Error('something wrong');
+                faild: function (error) {
                     reject(error);
                 }
             });
-        })
-            .then(function (obj) {
-            if (obj.code == 0) {
-                yao_m_ui_1.showPrompt({
-                    msg: "登陆成功",
-                    cb: function () {
-                        dispatch({ type: actions_1.LOGIN });
-                        props.history.push({ pathname: '/goods/upload' });
-                    }
-                });
-            }
-            else
-                yao_m_ui_1.showPrompt(obj.msg);
+        });
+        promise.then(function (obj) {
+            if (obj.code == 0)
+                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/goods/list'); } });
+            else if (obj.code === unLoginCode)
+                yao_m_ui_1.showPrompt({ msg: obj.msg, cb: function () { return props.history.push('/user/login'); } });
         }, function (error) { return console.log(error); });
     };
-    return (React.createElement("div", { id: "register_page", className: "app-register-page" },
-        React.createElement("p", { className: "page-title" }, "\u767B\u5F55"),
-        React.createElement("form", { method: "post", action: "/api/users/validuser", className: "form1", ref: loginForm, onSubmit: handleSubmit },
+    return (React.createElement("div", { id: "app_upload_page", className: "app-upload-page" },
+        React.createElement("p", { className: "page-title" }, "\u6DFB\u52A0\u6587\u7AE0"),
+        React.createElement("form", { method: "post", action: "/api/goods/upload", className: "form1", onSubmit: handleSubmit, ref: formRef },
             React.createElement("p", { className: "pt20" },
-                React.createElement("input", { type: "text", name: "username", className: "ipt", placeholder: "\u7528\u6237\u540D" })),
+                React.createElement("input", { type: "text", name: "title", className: "ipt", placeholder: "\u6587\u7AE0\u6807\u9898" })),
+            React.createElement("div", { className: "select-type" },
+                "\u53D1\u5E03",
+                getDesc(type),
+                React.createElement("i", { className: "sign" }),
+                React.createElement("select", { name: "category", onChange: changeSelectType, defaultValue: "image" },
+                    React.createElement("option", { value: "image" }, "\u56FE\u6587"),
+                    React.createElement("option", { value: "note" }, "\u7B14\u8BB0"),
+                    React.createElement("option", { value: "video" }, "\u89C6\u9891"))),
+            (type !== 'note') && (React.createElement("div", { className: "wrap-upload-ipt" },
+                "\u4E0A\u4F20",
+                typeDesc,
+                React.createElement("input", { type: "file", onChange: handleUploadFiles, multiple: true, accept: type + "/*", name: "pics", className: "ipt", placeholder: "file" }))),
+            (uploadFiles.length > 0) && (React.createElement("ul", { className: "filesList" }, uploadFiles.map(function (item, index) {
+                return React.createElement("li", { className: "item", key: index },
+                    readFile(item),
+                    React.createElement("em", { className: "filename" }, item.name),
+                    React.createElement("em", null,
+                        item.size,
+                        "k"));
+            }))),
             React.createElement("p", { className: "pt20" },
-                React.createElement("input", { type: "password", name: "password", className: "ipt", placeholder: "\u5BC6\u7801" })),
+                React.createElement("textarea", { className: "ipt", name: "content", placeholder: "\u6B63\u6587" })),
             React.createElement("p", { className: "pt20" },
-                React.createElement("input", { type: "submit", className: "btn" })),
-            React.createElement("p", { className: "pt10" },
-                React.createElement(react_router_dom_1.Link, { to: "/user/register" }, "\u6CE8\u518C")))));
+                React.createElement("input", { type: "submit", className: "btn", value: "\u63D0\u4EA4\u6587\u7AE0" })))));
 }
-exports.default = Login;
-
-
-/***/ }),
-
-/***/ 7:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOGIN = 'LOGIN';
-exports.LOGOUT = 'LOGOUT';
-exports.LISTGOODS = 'LISTGOODS';
-exports.SHOWGOOD = 'SHOWGOOD';
-exports.POSTCOMMET = 'POSTCOMMET';
-exports.DELETECOMMET = 'DELETECOMMET';
-exports.LISTCOMMETS = 'LISTCOMMETS';
-exports.DONELOADING = 'DONELOADING';
+exports.default = goodsUpload;
 
 
 /***/ })
 
 }]);
-//# sourceMappingURL=1.4d305df98c8205a702fe.js.map
+//# sourceMappingURL=4.e2ce637e226fc003d7ce.js.map

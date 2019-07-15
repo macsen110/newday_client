@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ 33:
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,9 +18,9 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var actions_1 = __webpack_require__(7);
-var listGoodsTs_1 = __webpack_require__(55);
-var react_router_dom_1 = __webpack_require__(11);
+var actions_1 = __webpack_require__(5);
+var listGoodsTs_1 = __webpack_require__(52);
+var react_router_dom_1 = __webpack_require__(9);
 var useReducer = React.useReducer, useEffect = React.useEffect;
 function formatDate(now) {
     var year = now.getFullYear();
@@ -103,28 +103,7 @@ exports.default = Goodslist;
 
 /***/ }),
 
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var actions_1 = __webpack_require__(7);
-function listGoods(state, action) {
-    if (state === void 0) { state = []; }
-    switch (action.type) {
-        case actions_1.LISTGOODS:
-            return action.value;
-        default:
-            return state;
-    }
-}
-exports.default = listGoods;
-
-
-/***/ }),
-
-/***/ 7:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -140,7 +119,28 @@ exports.LISTCOMMETS = 'LISTCOMMETS';
 exports.DONELOADING = 'DONELOADING';
 
 
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var actions_1 = __webpack_require__(5);
+function listGoods(state, action) {
+    if (state === void 0) { state = []; }
+    switch (action.type) {
+        case actions_1.LISTGOODS:
+            return action.value;
+        default:
+            return state;
+    }
+}
+exports.default = listGoods;
+
+
 /***/ })
 
 }]);
-//# sourceMappingURL=6.a4ed3cf037d82abd9786.js.map
+//# sourceMappingURL=6.3215f8cac67909c89885.js.map

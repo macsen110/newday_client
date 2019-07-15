@@ -48,7 +48,6 @@ function Tab(props: any) {
 //home views
 function App() {
     const {state, dispatch} = useContext(FetchesContext)
-    console.log(state)
     useEffect(() => {
         // @ts-ignore
         fetch(perfixerURL+"/api/home", {
@@ -61,7 +60,6 @@ function App() {
         .then((obj:any) => dispatch({ type: obj.isLogin ? LOGIN : LOGOUT }))
         .catch(() => dispatch({ type: LOGOUT }))
     }, [])
-    console.log('login status', state.isLogin)
     if (state.isLogin) return <LoginHeader />
     return <LogoutHeader />
 };
