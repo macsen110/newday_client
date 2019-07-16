@@ -20,7 +20,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   optimization: {
-    minimize: false
+    minimize: true
   },
   plugins: [
     new webpack.DefinePlugin({
