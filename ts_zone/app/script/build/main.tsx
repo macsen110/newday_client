@@ -6,14 +6,19 @@ return
 'use strict';
 import 'react-hot-loader/patch';
 import { AppContainer } from 'react-hot-loader';
-import React, { useReducer } from 'react';
-import { history } from './store/configureStore';
+import * as React from 'react';
+import { createBrowserHistory } from 'history';
 import Root from './containers/Root';
 import { render } from 'react-dom';
 import reducer from './reducers/init'
 import { FetchesContext } from './context'
 import 'assets/style.css';
-function Roots(props) {
+
+const {
+	useReducer
+} = React
+const history = createBrowserHistory();
+function Roots(props:any) {
 	const [state, dispatch] = useReducer(reducer, { isLogin: false })
 	return <FetchesContext.Provider value={{ state, dispatch }}>{props.children}</FetchesContext.Provider>
 }

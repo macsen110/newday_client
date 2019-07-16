@@ -1,18 +1,17 @@
-import React from 'react';
+import * as React from "react";
 import {
   Route,
   Switch
 } from 'react-router-dom';
+import AsyncComponent from '@loadable/component'
 
-import Index from 'bundle-loader?lazy!./components/index';
-import login from 'bundle-loader?lazy!./components/login';
-import AsyncComponent from './async-loader';
+//import AsyncComponent from './async-loader';
 async function fetchAsyncCommpoent(name) {
     return await import('./components/'+name)
 }
 const App = AsyncComponent(() => fetchAsyncCommpoent('app'))
-const asyncIndex = AsyncComponent(Index, 1)
-const asyncLogin = AsyncComponent(login, 1)
+const asyncIndex = AsyncComponent(() => fetchAsyncCommpoent('index'))
+const asyncLogin = AsyncComponent(() => fetchAsyncCommpoent('login'))
 const goodsList = AsyncComponent(() => fetchAsyncCommpoent('goodslist'))
 const goodsUpload = AsyncComponent(() => fetchAsyncCommpoent('goodsupload'))
 const goodsDetail = AsyncComponent(() => fetchAsyncCommpoent('goodsdetail'))

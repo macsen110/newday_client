@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from "react";
 import { Router, BrowserRouter } from 'react-router-dom';
 import routes from '../routes';
 export default function Root({ history }) {
@@ -9,9 +8,5 @@ export default function Root({ history }) {
                 {routes}
             </BrowserRouter>
         </Router>
-    );
+    )
 }
-
-Root.propTypes = {
-    history: PropTypes.object.isRequired
-};
