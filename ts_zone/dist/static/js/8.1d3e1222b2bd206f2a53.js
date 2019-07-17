@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{22:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var a=t(0);n.default=function(){return a.createElement("div",{className:"app-notfind-page"},"hi,404")}}}]);
-//# sourceMappingURL=8.1d3e1222b2bd206f2a53.js.map
