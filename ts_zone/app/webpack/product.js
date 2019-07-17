@@ -1,19 +1,20 @@
-var path = require('path')
-var webpack = require('webpack')
-var config = require('./config/index')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./base')
-var utils = require('./utils')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-//var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var htmlTplPath = path.join(__dirname, '../template/pro/')
-var env = process.env.NODE_ENV;
+const path = require('path')
+const webpack = require('webpack')
+const config = require('./config/index')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./base')
+const utils = require('./utils')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const htmlTplPath = path.join(__dirname, '../template/pro/')
+const env = process.env.NODE_ENV;
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-var webpackConfig = merge(baseWebpackConfig, {
+const webpackConfig = merge(baseWebpackConfig, {
   module: {
-
+    
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   entry: {
@@ -26,6 +27,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
       cacheGroups: {
         vendors: {
@@ -34,6 +36,12 @@ var webpackConfig = merge(baseWebpackConfig, {
           chunks: 'initial',
           priority: 2,
           minChunks: 2,
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
         },
       }
     },
@@ -54,7 +62,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 })
 
 if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -72,7 +80,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 module.exports = webpackConfig

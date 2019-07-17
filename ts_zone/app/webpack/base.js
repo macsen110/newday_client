@@ -1,9 +1,9 @@
 var path = require('path')
 var config = require('./config/index')
-var webpack = require("webpack")
 var utils = require('./utils')
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var NODE_ENV = process.env.NODE_ENV
+const devMode = NODE_ENV !== 'production';
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -63,25 +63,31 @@ module.exports = {
       // //解析.css文件
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader',
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              minimize: true
-            }
-          }]
-        }),
+              // only enable hot in development
+              hmr: devMode,
+              // if hmr does not work, this is a forceful method.
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+        ],
+            
       }
     ]
   },
   mode: NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
-    new ExtractTextPlugin({
-      filename: NODE_ENV !== 'production' ? 'style.css' : utils.assetsPath('css/style.css'),
-      allChunks: true,
-      disable: NODE_ENV !== 'production'
-    })
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: devMode ? '[name].css' : utils.assetsPath('css/[name].[chunkhash].css'),
+      chunkFilename: devMode ? '[name].css' : utils.assetsPath('css/[name].[chunkhash].css'),
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
+    }),
   ],
   externals: {
     "yao-m-ui": 'YAO_M_UI'
