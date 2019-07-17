@@ -9,7 +9,7 @@ tabNavItems 触发切换的element
 tabConItems  显示区域的内容elements
 curIndex 当前显示的index
 *****/
-function TabWidget(this:any,args:any) {
+function TabWidget(this:any,args:any): void {
 	if (args && ("object" == typeof args)) {
 		for (var arg in args) {
 			this[arg] = args[arg];
@@ -70,7 +70,7 @@ TabWidget.prototype = {
  * *
  * *****/
 //弹框
-function Dialog(this: any, options: any) {
+function Dialog(this: any, options: any):void {
 	this.title = null;
 	this.content = null;
 	this.foot = null;
@@ -159,9 +159,9 @@ Dialog.prototype = {
  * *easy Move
  * *页面滑动插件
  * *******/
-function easyMove(this: any, element, options) {
+function easyMove(this: any, element, options):void {
 	var isTouch = 'ontouchstart' in window;
-	if (!element) return null;
+	if (!element) return;
 	this.element = element;
 	this.parentEle = options.parentEle || this.element;
 	this.autoPlay = options.autoPlay;
@@ -450,7 +450,7 @@ easyMove.prototype = {
 
 }
 
-function showPrompt(this:any, args) {
+function showPrompt(this:any, args):void {
 	if (typeof args === 'object') {
 		Object.keys(args).forEach((key) =>{
 			this[key] = args[key]
@@ -484,7 +484,7 @@ showPrompt.prototype = {
 	}
 }
 
-function Loading(this:any, args) {
+function Loading(this:any, args:object):void {
 	if (typeof args === 'object') {
 		Object.keys(args).forEach((key) => {
 			this[key] = args[key]
@@ -576,11 +576,11 @@ function _getDomByEle(curentEl, selector) {
 };
 var _loading = new (Loading as any)()
 export default {
-	TabWidget: function (args) { return new (TabWidget as any)(args) },
-	Dialog: function (args) { return new (Dialog as any) (args) },
-	easyMove: function (dom, args) { return new (easyMove as any)(dom, args) },
-	showPrompt: function (args) { return new (showPrompt as any)(args) },
-	Loading: function (args) { return new (Loading as any)(args) },
+	TabWidget: function (args:object) { return new TabWidget(args) },
+	Dialog: function (args:object) { return new Dialog(args) },
+	easyMove: function (dom:HTMLDivElement, args:object) { return new easyMove(dom, args) },
+	showPrompt: function (args:object | string) { return new showPrompt(args) },
+	Loading: function (args:object) { return new Loading(args) },
 	startLoading: function () { _loading && _loading.start() },
 	endLoading: function () { _loading && _loading.end() }
 }

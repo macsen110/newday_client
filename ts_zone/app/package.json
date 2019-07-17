@@ -7,21 +7,12 @@
     "build": "node webpack/build.js"
   },
   "dependencies": {
-    "@loadable/component": "^5.10.2",
     "@types/react-router-dom": "^4.3.4",
-    "bundle-loader": "^0.5.5",
     "history": "^4.9.0",
-    "immutable": "^3.7.5",
-    "object-assign": "^3.0.0",
-    "prop-types": "^15.5.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.0.1",
-    "socket.io": "^2.0.3",
-    "websocket": "^1.0.21",
-    "whatwg-fetch": "^0.10.1",
     "yao-m-ui": "^0.2.14"
   },
   "devDependencies": {
@@ -35,11 +26,10 @@
     "@babel/preset-react": "^7.0.0",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
-    "async": "^1.4.2",
     "babel-loader": "^8.0.6",
     "chalk": "^2.1.0",
+    "compression-webpack-plugin": "^3.0.0",
     "css-loader": "^0.28.7",
-    "debug": "~2.2.0",
     "events": "^1.0.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.6",
@@ -55,6 +45,7 @@
     "typescript": "^3.5.2",
     "url-loader": "^0.6.2",
     "webpack": "^4.35.2",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
   }

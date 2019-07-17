@@ -10,7 +10,7 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    app: resolve('script/build/main')
+    app: resolve('script/build/main'),
   },
   output: {
     path: config.build.assetsRoot,
@@ -82,5 +82,8 @@ module.exports = {
       allChunks: true,
       disable: NODE_ENV !== 'production'
     })
-  ]
+  ],
+  externals: {
+    "yao-m-ui": 'YAO_M_UI'
+  }
 }

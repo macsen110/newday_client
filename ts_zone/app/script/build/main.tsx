@@ -1,8 +1,3 @@
-/**************
- react route
-
-return 
-* **********/
 'use strict';
 import 'react-hot-loader/patch';
 import { AppContainer } from 'react-hot-loader';

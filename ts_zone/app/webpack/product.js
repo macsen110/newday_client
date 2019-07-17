@@ -8,19 +8,36 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 //var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var htmlTplPath = path.join(__dirname, '../template/pro/')
 var env = process.env.NODE_ENV;
-
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
-    
+
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
+  entry: {
+    vendors: ["react", "react-dom", "react-router", "react-router-dom", "history"],
+    app: resolve('script/build/main'),
+  },
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   optimization: {
-    minimize: true
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: "vendors",
+          name: 'vendors',
+          chunks: 'initial',
+          priority: 2,
+          minChunks: 2,
+        },
+      }
+    },
+    runtimeChunk: true
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -32,7 +49,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       template: htmlTplPath + 'index.html',
       inject: true,
     }),
-    
+
   ]
 })
 
@@ -58,5 +75,4 @@ if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
-
 module.exports = webpackConfig

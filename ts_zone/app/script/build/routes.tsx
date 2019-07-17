@@ -3,7 +3,6 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
-//import lazy from '@loadable/component'
 const {
     Suspense,
     lazy
