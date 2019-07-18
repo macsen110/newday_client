@@ -45,11 +45,10 @@ function Register(props:any) {
         }).then(
             (obj:any) => {
                 if (obj.code === 0) {
-                    dispatch({ type: LOGIN })
                     showPrompt({
                         msg: obj.msg,
                         cb: () => {
-                            dispatch({ type: LOGIN })
+                            dispatch({ type: LOGIN, value: obj.user })
                             props.history.push({ pathname: '/goods/upload' })
                         }
                     });

@@ -4,6 +4,7 @@ import { SHOWGOOD, POSTCOMMET, DELETECOMMET, LISTCOMMETS } from '../actions';
 import { showPrompt } from 'yao-m-ui';
 import reducer from "../reducers/showGoodTs"
 import reduceCommets from '../reducers/commetsTs'
+import { getUser } from '../common';
 const {
     useReducer,
     useEffect,
@@ -43,7 +44,7 @@ function _delCommet(C_id, goodsid) {
 function _submitCommet(goodsid, content) {
     let commentData = JSON.stringify({
         goodsid,
-        content
+        comment: content
     });
     // @ts-ignore
     return fetch(perfixerURL + '/api/comments/', {
@@ -60,6 +61,7 @@ function _submitCommet(goodsid, content) {
     }).then((obj) => {
         if (obj.code === unLoginCode) return showPrompt({ msg: obj.msg })
         if (obj.code !== 0) return showPrompt({ msg: obj.msg })
+        return obj;
     })
 }
 
@@ -91,7 +93,7 @@ function GoodsDetail(props: any) {
         })
     }, [])
     const deleteGoods = () => {
-        _delGoods(props.match.params.id)
+        _delGoods(props.match.params.id).then(() => history.back())
 
     }
     if (state.id) {
@@ -106,8 +108,10 @@ function GoodsDetail(props: any) {
                 {
                     state.content != '' && (<p className="content">{state.content}</p>)
                 }
-                <Commets commets={commets} goodsid={state.id}/>
+                <Commets commets={commets} goodsid={state.id} dispatchCommets={dispatchCommets} />
+                {state.user === getUser() && (<button onClick={deleteGoods} className="icon-delete-page">x</button>)}
             </div>
+            
         )
     }
     return (<div>{props.match.params.id}</div>)
@@ -148,34 +152,35 @@ function Commets(props: any) {
         return (
             <div className="commets-container">
                 <ul className="commets-list">
-                {commets.map((item, index) => <CommetItem goodsid={goodsid} C_content={item.C_content}  key={index} C_id={item._id} />)}
+                    {commets.map((item, index) => <CommetItem dispatchCommets={props.dispatchCommets} goodsid={goodsid} C_user={item.C_user} C_content={item.C_content} key={index} C_id={item._id} />)}
                 </ul>
-                <InputContainer goodsid={goodsid} />
+                <InputContainer goodsid={goodsid} dispatchCommets={props.dispatchCommets} />
             </div>
         )
     }
     return (
         <div className="commets-contain">
-            <InputContainer goodsid={goodsid} />
+            <InputContainer goodsid={goodsid} dispatchCommets={props.dispatchCommets} />
         </div>
     )
 
 }
 function CommetItem(props) {
     const {
-        C_content, 
+        C_content,
         C_id,
-        goodsid
+        goodsid,
+        C_user
     } = props
     const delCommet = (e) => {
         var item = e.target.parentNode;
         var C_id = item.dataset.id;
-        _delCommet(C_id, goodsid)
+        _delCommet(C_id, goodsid).then(_id => props.dispatchCommets({ type: DELETECOMMET, value: _id }))
     }
     return (
         <li className="item" data-id={C_id}>
-            <span className="con">{'游客评论: ' + C_content}</span>
-            <span className="del" onClick={(e) => delCommet(e)}>删除</span>
+            <span className="con">{C_user + ' : ' + C_content}</span>
+            {C_user === getUser() && (<span className="del" onClick={(e) => delCommet(e)}>删除</span>)}
         </li>
     )
 }
@@ -183,10 +188,12 @@ function InputContainer(props) {
     let wrap_comment = useRef<HTMLTextAreaElement>(null);
     const submitCommet = () => {
         let commentEle = wrap_comment.current;
-        _submitCommet(props.goodsid, commentEle ? commentEle.value : '')
+        let _val = commentEle ? commentEle.value : ''
+        _submitCommet(props.goodsid, _val)
+            .then(obj => props.dispatchCommets({ type: POSTCOMMET, value: { C_content: obj.commet, C_user: obj.C_user, _id: obj._id } }))
     }
     return (
-        <div  className="input-container">
+        <div className="input-container">
             <textarea className="ipt" ref={wrap_comment} />
             <p><button onClick={submitCommet} className="btn">提交评论</button></p>
         </div>

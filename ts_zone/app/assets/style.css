@@ -835,3 +835,7 @@ reader from server
 		max-width: 100%
 	}
  }
+ .app-detail-page .commets-list .del {
+	 color: #999;
+	 float: right
+ }

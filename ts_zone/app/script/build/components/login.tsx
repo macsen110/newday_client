@@ -53,7 +53,7 @@ function Login(props) {
                         showPrompt({
                             msg: "登陆成功",
                             cb: () => {
-                                dispatch({ type: LOGIN })
+                                dispatch({ type: LOGIN, value: obj.user })
                                 props.history.push({ pathname: '/goods/upload' })
                             }
                         });

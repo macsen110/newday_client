@@ -1,14 +1,14 @@
+import { setUser } from '../common'
 type StateType = {
   isLogin: boolean
 }
 interface ActionType {
-  type: 'LOGOUT' | 'LOGIN'
+  type: 'LOGOUT' | 'LOGIN',
+  value: string
 }
 let initialState = { isLogin: false };
-export function getInitState() {
-  return initialState
-}
 export default function reducer(state: StateType, action: ActionType) {
+  setUser(action.value)
   switch (action.type) {
     case 'LOGIN':
       initialState = { isLogin: true}
