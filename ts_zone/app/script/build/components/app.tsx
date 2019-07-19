@@ -8,8 +8,6 @@ const {
     useEffect,
     useContext
 } = React
-//const Context = createContext();
-// such as https://blog.csdn.net/weixin_42461410/article/details/88650304
 function LogoutHeader() {
     return (
         <div className="wrap-header-container">
@@ -49,12 +47,10 @@ function Tab(props: any) {
 function App() {
     const {state, dispatch} = useContext(FetchesContext)
     useEffect(() => {
-        // @ts-ignore
         fetch(perfixerURL+"/api/home", {
             credentials: 'include'
         })
-        // @ts-ignore
-        .then((res) => {
+        .then((res:any) => {
             if (res.ok) return res.json()
         })
         .then((obj:any) => dispatch({ type: obj.isLogin ? LOGIN : LOGOUT, value: obj.user }))

@@ -11,7 +11,7 @@ const {
     useRef
 } = React
 const unLoginCode = '00002';
-function _fetchGoods(id) {
+function _fetchGoods(id:number) {
     return new Promise(function (resolve, reject) {
         new xhr({
             url: '/api/goods/detail/' + id,
@@ -27,13 +27,13 @@ function _fetchGoods(id) {
 
     })
 }
-function _delCommet(C_id, goodsid) {
-    return new Promise((res, rej) => {
+function _delCommet({ C_id, goodsid }: { C_id: number; goodsid: number; }):Promise<number> {
+    return new Promise((res) => {
         new xhr({
             url: '/api/comments/' + goodsid + '/' + C_id,
             method: 'DELETE',
             done: (obj) => {
-                if (obj.code === 0) res(+C_id)
+                if (obj.code === 0) res(C_id)
                 if (obj.code === unLoginCode) return showPrompt({ msg: obj.msg })
                 if (obj.code !== 0) return showPrompt({ msg: obj.msg })
             }
@@ -41,7 +41,7 @@ function _delCommet(C_id, goodsid) {
     })
 
 }
-function _submitCommet(goodsid, content) {
+function _submitCommet({ goodsid, content }: { goodsid: number; content: number; }):void {
     let commentData = JSON.stringify({
         goodsid,
         comment: content
@@ -65,7 +65,7 @@ function _submitCommet(goodsid, content) {
     })
 }
 
-function _delGoods(id) {
+function _delGoods(id:number):void {
     // @ts-ignore
     return fetch(perfixerURL + '/api/goods/delete/' + id, {
         method: 'DELETE',
@@ -119,7 +119,7 @@ function GoodsDetail(props: any) {
 function Blog_item(props) {
     var item = props.item;
     var category = props.category;
-    var itemEle;
+    var itemEle:Element;
     switch (category) {
         case 'image':
             itemEle = <img src={'//res.macsen318.com' + item.path} width={item.width} />;
@@ -172,10 +172,10 @@ function CommetItem(props) {
         goodsid,
         C_user
     } = props
-    const delCommet = (e) => {
+    const delCommet = (e:React.MouseEvent) => {
         var item = e.target.parentNode;
         var C_id = item.dataset.id;
-        _delCommet(C_id, goodsid).then(_id => props.dispatchCommets({ type: DELETECOMMET, value: _id }))
+        _delCommet({ C_id, goodsid }).then(_id => props.dispatchCommets({ type: DELETECOMMET, value: _id }))
     }
     return (
         <li className="item" data-id={C_id}>
@@ -189,7 +189,7 @@ function InputContainer(props) {
     const submitCommet = () => {
         let commentEle = wrap_comment.current;
         let _val = commentEle ? commentEle.value : ''
-        _submitCommet(props.goodsid, _val)
+        _submitCommet({ goodsid: props.goodsid, content: _val })
             .then(obj => props.dispatchCommets({ type: POSTCOMMET, value: { C_content: obj.commet, C_user: obj.C_user, _id: obj._id } }))
     }
     return (
