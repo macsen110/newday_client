@@ -13,7 +13,7 @@ const {
 	useReducer
 } = React
 const history = createBrowserHistory();
-function Roots(props:any) {
+function Roots(props: any) {
 	const [state, dispatch] = useReducer(reducer, { isLogin: false })
 	return <FetchesContext.Provider value={{ state, dispatch }}>{props.children}</FetchesContext.Provider>
 }

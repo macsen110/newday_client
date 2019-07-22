@@ -8,10 +8,11 @@ import { getUser } from '../common';
 const {
     useReducer,
     useEffect,
-    useRef
+    useRef,
 } = React
+
 const unLoginCode = '00002';
-function _fetchGoods(id:number) {
+function _fetchGoods(id: number) {
     return new Promise(function (resolve, reject) {
         new xhr({
             url: '/api/goods/detail/' + id,
@@ -27,7 +28,7 @@ function _fetchGoods(id:number) {
 
     })
 }
-function _delCommet({ C_id, goodsid }: { C_id: number; goodsid: number; }):Promise<number> {
+function _delCommet({ C_id, goodsid }: { C_id: number; goodsid: number; }): Promise<number> {
     return new Promise((res) => {
         new xhr({
             url: '/api/comments/' + goodsid + '/' + C_id,
@@ -41,7 +42,7 @@ function _delCommet({ C_id, goodsid }: { C_id: number; goodsid: number; }):Promi
     })
 
 }
-function _submitCommet({ goodsid, content }: { goodsid: number; content: number; }):void {
+function _submitCommet({ goodsid, content }: { goodsid: number; content: string; }): Promise<object> {
     let commentData = JSON.stringify({
         goodsid,
         comment: content
@@ -65,7 +66,7 @@ function _submitCommet({ goodsid, content }: { goodsid: number; content: number;
     })
 }
 
-function _delGoods(id:number):void {
+function _delGoods(id: number): Promise<object> {
     // @ts-ignore
     return fetch(perfixerURL + '/api/goods/delete/' + id, {
         method: 'DELETE',
@@ -111,7 +112,7 @@ function GoodsDetail(props: any) {
                 <Commets commets={commets} goodsid={state.id} dispatchCommets={dispatchCommets} />
                 {state.user === getUser() && (<button onClick={deleteGoods} className="icon-delete-page">x</button>)}
             </div>
-            
+
         )
     }
     return (<div>{props.match.params.id}</div>)
@@ -119,7 +120,7 @@ function GoodsDetail(props: any) {
 function Blog_item(props) {
     var item = props.item;
     var category = props.category;
-    var itemEle:Element;
+    var itemEle: React.ReactNode;
     switch (category) {
         case 'image':
             itemEle = <img src={'//res.macsen318.com' + item.path} width={item.width} />;
@@ -172,8 +173,8 @@ function CommetItem(props) {
         goodsid,
         C_user
     } = props
-    const delCommet = (e:React.MouseEvent) => {
-        var item = e.target.parentNode;
+    const delCommet = (e: React.MouseEvent) => {
+        var item:any = (e.currentTarget).parentNode;
         var C_id = item.dataset.id;
         _delCommet({ C_id, goodsid }).then(_id => props.dispatchCommets({ type: DELETECOMMET, value: _id }))
     }
@@ -190,7 +191,7 @@ function InputContainer(props) {
         let commentEle = wrap_comment.current;
         let _val = commentEle ? commentEle.value : ''
         _submitCommet({ goodsid: props.goodsid, content: _val })
-            .then(obj => props.dispatchCommets({ type: POSTCOMMET, value: { C_content: obj.commet, C_user: obj.C_user, _id: obj._id } }))
+            .then((obj: any) => props.dispatchCommets({ type: POSTCOMMET, value: { C_content: obj.commet, C_user: obj.C_user, _id: obj._id } }))
     }
     return (
         <div className="input-container">
