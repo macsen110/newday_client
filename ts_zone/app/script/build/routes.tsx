@@ -3,10 +3,12 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
+import APPTOP from './components/app'
 const {
     Suspense,
     lazy
 } = React
+
 const App = lazy(() => import('./components/app'))
 const asyncIndex = lazy(() => import('./components/index'))
 const goodsList = lazy(() => import('./components/goodslist'))
@@ -20,9 +22,9 @@ const tsHook = lazy(() => import('./components/ts_hook'))
 
 var Routes = (
     <div>
-        <Suspense fallback={<div>Loading...</div>}>
-            <Route component={App} />
-            <div className="route-content-box">
+        <APPTOP />
+        <div className="route-content-box">
+            <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
                     <Route path="/" exact component={asyncIndex} />
                     <Route path="/user/login" component={asyncLogin} />
@@ -34,8 +36,9 @@ var Routes = (
                     <Route path="/ts_hook" component={tsHook} />
                     <Route component={notFound} />
                 </Switch>
-            </div>
-        </Suspense>
+            </Suspense>
+        </div>
+
     </div>
 );
 
