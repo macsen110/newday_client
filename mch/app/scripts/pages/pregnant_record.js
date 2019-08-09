@@ -30,6 +30,7 @@ define(['zepto','template'], function($, template) {
 		},
 		bindUI: function (tplScript, data) {
 			var self = this;
+			$('body').addClass('fixed')
 			self.setPageInfo();
 			self.$rootDom.addClass('page-pregnant-record visibile');
 			APP.selectBottomNav(-2);
@@ -374,6 +375,7 @@ define(['zepto','template'], function($, template) {
 		},
 		destroy: function () {
 			//如果有事件绑定的话, 解除事件绑定
+			$('body').removeClass('fixed')
 			var self = this;
 			if (this.audio && this.audio.paused) this.audio.pause()
 			this.$rootDom.removeClass('visibile page-pregnant-record');

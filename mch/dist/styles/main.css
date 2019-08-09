@@ -47,6 +47,14 @@ body {
   -webkit-box-pack: justify;
   -webkit-overflow-scrolling: touch;
 }
+body.fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+}
 select {
   border: 0;
   background: none;
