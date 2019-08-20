@@ -12,18 +12,20 @@
   <script src="https://yzs.111.com.cn/web/commonLib/dep/vconsole.min.js"></script>
   <script src="//imgcache.qq.com/qcloud/tcbjs/1.0.0/tcb.js"></script>
   <script>
+    alert(666)
     window.vConsole
     try {
       var app = tcb.init({
         env: 'newday318-6e42j'
       })
-      app
-        .auth({ persistence: 'local' })
-        .weixinAuthProvider({
-          appid: 'wxb46ca3911441b655',  //微信应用appid
-          scope: 'snsapi_base'     //网页授权类型
-        })
+      var auth = app.auth({ persistence: 'local' })
+
+      auth.weixinAuthProvider({
+        appid: 'wxb46ca3911441b655',  //微信应用appid
+        scope: 'snsapi_userinfo'     //网页授权类型
+      })
         .signIn(function (err, res) {
+          auth.getUserInfo().then(__res => console.log(__res))
           console.log(err)
           console.log('res')
           console.log(res)
@@ -54,6 +56,7 @@
               console.log(err)
             })
         })
+        
 
     } catch (e) {
       console.log(111)

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="//imgcache.qq.com/qcloud/tcbjs/1.0.0/tcb.js"></script>
+  <script>
+    (function () {
+      alert(112)
+      var scope = "snsapi_login"; //开放平台和公众平台获取权限不一样
+      var _returnUrl = encodeURIComponent(location.href);
+      var _href = "https://open.weixin.qq.com/connect/qrconnect?appid=wxad9100eef28e2e62&redirect_uri="+_returnUrl+"&response_type=code&scope="+scope+"&state=weixin#wechat_redirect"
+      if (location.href.indexOf('code') === -1) return location.href = _href;
+      return false;
+      try {
+        var app = tcb.init({
+          env: 'newday318-6e42j'
+        })
+        app
+          .auth({ persistence: 'local' })
+          .weixinAuthProvider({
+            appid: 'wxad9100eef28e2e62',  //微信应用appid
+            scope,     //网页授权类型
+          })
+          .signIn(function (err, res) {
+            console.log(err)
+            console.log(res)
+            console.log(app)
+            const db = app.database();
+            const collection = db.collection('users');
+            collection.get()
+              .then(_res => {
+                console.log('users')
+                console.log(_res)
+              })
+              .catch(_err => {
+                console.log('user catch')
+                console.log(_err)
+              })
+            app.callFunction({
+              name: 'HPImageArchive',
+              data: {
+                idx: Math.floor(Math.random() * 10)
+              }
+            })
+              .then((res) => {
+                console.log('then')
+                console.log(res)
+              })
+              .catch(err => {
+                console.log('err')
+                console.log(err)
+              })
+          })
+
+      } catch (e) {
+        console.log(111)
+        console.log(e)
+      }
+    }())
+
+
+
+  </script>
+</body>
+
+</html>
