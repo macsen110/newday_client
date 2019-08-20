@@ -12,23 +12,23 @@
   <script src="//imgcache.qq.com/qcloud/tcbjs/1.0.0/tcb.js"></script>
   <script>
     (function () {
-      alert(112)
+      alert(999)
       var scope = "snsapi_login"; //开放平台和公众平台获取权限不一样
       var _returnUrl = encodeURIComponent(location.href);
       var _href = "https://open.weixin.qq.com/connect/qrconnect?appid=wxad9100eef28e2e62&redirect_uri="+_returnUrl+"&response_type=code&scope="+scope+"&state=weixin#wechat_redirect"
       if (location.href.indexOf('code') === -1) return location.href = _href;
-      return false;
+      //return false;
       try {
         var app = tcb.init({
           env: 'newday318-6e42j'
         })
-        app
-          .auth({ persistence: 'local' })
-          .weixinAuthProvider({
+        var auth = app.auth({ persistence: 'local' })
+          auth.weixinAuthProvider({
             appid: 'wxad9100eef28e2e62',  //微信应用appid
             scope,     //网页授权类型
           })
           .signIn(function (err, res) {
+            auth.getUserInfo().then(__res => console.log(__res))
             console.log(err)
             console.log(res)
             console.log(app)
