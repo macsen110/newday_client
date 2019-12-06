@@ -1,0 +1,25 @@
+{
+  "name": "macsen",
+  "version": "1.0.0",
+  "description": "hello, macsen",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm start"
+  },
+  "keywords": [
+    "macsen"
+  ],
+  "author": "macsen",
+  "license": "ISC",
+  "dependencies": {
+    "bundle-loader": "^0.5.5",
+    "html": "^1.0.0",
+    "html-loader": "^0.4.4",
+    "mescroll.js": "^1.3.2",
+    "yao-easy-router": "^0.0.9",
+    "yao-m-ui": "^0.3.6"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}

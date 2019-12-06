@@ -1,0 +1,223 @@
+@import './common';
+//个人中心
+.page-personal{
+     .padding(10,0,0,0);
+}
+//邀请码
+.page-invite{
+    height: 100vh;
+    text-align: center;
+    .font-size(14);
+    color: #888;
+    .padding(50,0,0,0);
+    background: white;
+    h3{
+        .padding(35,0,15,0);
+        .font-size(20);
+        color: black;
+    }
+    .img-code{
+        .width(250);
+    }
+}
+//基本信息
+.page-userinfo{
+    .tab-con-list{
+        li{
+            margin: 0;
+            .font-size(18);
+            color: black;
+        }
+    }
+    .userinfo-list{
+        li{
+            height: auto;
+            h4{
+                margin-top: -5/@screenWidth;
+                .padding(0,0,10,0);
+                color: #888;
+            }
+            .title{
+                float: none;
+            }
+        }
+    }
+    h2{
+        .font-size(14);
+        color: #888;
+        .padding(18,0,10,12);
+        span{
+            color:red;
+        }
+    }
+    input{
+        float: left;
+        color: black;
+        .width(350);
+        //.height(43);
+        //.line-height(43);
+        .height(23);
+        margin-top:10/@screenWidth;
+        //.padding(10,0,10,0);
+        border: 0;
+        .font-size(17);
+    }
+}
+//手机号
+.page-phone{
+    .padding(10,0,0,0); 
+    li{
+        .more-change{
+            .margin(0,12,0,0);
+        }
+    }
+}
+//更改手机号 
+.page-change-phone{
+    .common-list{
+        li{
+            .title{
+                .width(100);
+            }
+            input{
+                float: left;
+                color: black;
+                .width(155);
+                .height(43);
+                .line-height(43);
+                border: 0;
+                .font-size(17);
+            }
+            input.phone{
+                .width(250);
+            }
+            .get-code{
+                float: right;
+                border-left:1px solid #E5E5E5;
+                display: inline-block;
+                text-align: center;
+                .font-size(17);
+                color: #FF3941;
+                .width(102);
+                height: 100%;
+                background: white;
+            }
+        }
+    }
+    .common-btn-gray{
+        margin-top: 30/@screenWidth;
+    }
+}
+//弹窗
+.popup-mask{
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: none;
+}
+.popup-content{
+    position: fixed;
+    z-index: 2;
+    //bottom: 0;
+    bottom:-102/@screenWidth;
+    left: 0;
+    width: 100%;
+    background: white;
+    //display: none;
+    text-align: center;
+    -webkit-transition:bottom 0.3s;
+    transition:bottom 0.3s;
+    .font-size(18);
+    li{
+        margin: 0;
+        .height(50);
+        .line-height(50);
+        .font-size(18);
+        color: black;
+    }
+}
+.popup-content-show{
+    bottom: 0;
+}
+
+//省市区
+@navHeight: 400 / @screenWidth;
+.address-dialog-container .tab-nav-list {
+    // display: -webkit-box;
+    // border-bottom: 1px solid #c9c9c9;
+    // height: @navHeight;
+    background-color: #fff;
+}
+
+.address-dialog-container .tab-con-list .item .place-item {
+    .padding(10,18,10,20);
+    // border-bottom: 1px solid #e8e8e8;
+    .font-size(18);
+    color: black;
+    &:first-child {
+        border-bottom: 1px solid #e8e8e8;
+    }
+}
+
+.address-dialog-container .tab-con-list .item .select {
+    &:after {
+        content: '';
+        float: right;
+        .width(20);
+        .height(20);
+        .bgCover;
+        background-image: url(./imgs/icon_city_select.png)
+    }
+    color: #FF394E;
+}
+
+.address-dialog-container .tab-nav-list>.item {
+    // -webkit-box-flex: 1;
+    // width: 1%;
+    height: 100%;
+    line-height: 42px;
+    // text-align: center;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .font-size(17);
+    color: black;
+    .select-icon();
+}
+
+.address-dialog-container .tab-nav-list>.item.on {
+    color: #FF394E; 
+    border-bottom: 2px solid #FF394E;
+    margin-bottom: -1px;
+}
+.address-dialog-container .tab-con-list {
+    position: absolute;
+}
+.address-dialog-container .tab-con-list>.item {
+    //display: none;
+    z-index: 4;
+    position: fixed;
+    //top: @navHeight;
+    //bottom: 0;
+    bottom: -@navHeight;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    background-color: #fff;
+    -webkit-transition:bottom 0.3s;
+    transition:bottom 0.3s;
+    height: @navHeight;
+}
+
+
+.address-dialog-container .tab-con-list>.item.on {
+    //display: block;
+    bottom: 0;
+}

@@ -1,0 +1,27 @@
+<div class="page-my-customer">
+  <form action="" class="header search-form-container">
+    <div class="search-box">
+      <i class="icon"></i>
+      <input name="search_ipt" class="ipt" type="text" placeholder="请输入客户名称搜索">
+    </div>
+    <button class="btn" type="submit">查询</button>
+  </form>
+  <div class="body mescroll" id="my_customer_body">
+    <ul class="list common-list"></ul>
+  </div>
+
+</div>
+<script id="render_item_html" type="html/javascript">
+  {{each list}}
+    <li class="item{{$value.isOver == 1 ? ' over' : ''}}" data-type="{{$value.userType}}" data-createtime="{{$value.createTime}}" data-id="{{$value.enterpriseId}}" data-enterprise_name="{{$value.enterpriseName}}">
+      <div class="info">
+        <p class="name">{{$value.enterpriseName}}</p>
+        <p>
+          <span class="status status-{{$value.isCheck}}">{{$value.statusDesc}}</span>
+          <span class="type">客户类型: {{$value.userType}}</span>
+        </p>
+      </div>
+      <em class="arrow"></em>
+  </li>
+  {{/each}}
+</script>

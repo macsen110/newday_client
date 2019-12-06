@@ -1,0 +1,24 @@
+<div class="page-customer-order">   
+    <div class="body mescroll" id="my_customer_body">
+        <ul class="list common-list"></ul>
+    </div>
+  
+  </div>
+  <script id="head_tpl" type="html/javascript">
+    <div class="header">
+        <p class="name">{{name}}</p>
+        <p class="type">客户类型: {{type}}</p>
+      </div>
+  </script>
+  <script id="render_order_tpl" type="html/javascript">
+    {{each list}}
+    <li class="item">
+        <p class="wrap-status">
+          <span class="time">{{$value.createTime}}</span>
+          <span class="status">{{$value.orderStatusName}}</span>
+          <strong class="price">{{$value.orgTotal ? "￥" + $value.orgTotal : ''}}</strong>
+        </p>
+        <p class="wrap-inner">订单号: {{$value.flowId}}</p>
+    </li>
+    {{/each}}
+  </script>

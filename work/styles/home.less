@@ -1,0 +1,132 @@
+@import './common';
+.page-index {
+    color: #000;
+    height: 100px;
+    .title {
+        text-align: center;
+        .font-size(24);
+        .padding(20, 0, 20);
+    }
+    .action-box {
+        .padding(30, 20, 20, 20);
+        >* {
+            display: block;
+            width: 100%;
+            text-align: center;
+            &.btn {
+                .font-size(18);
+                border-radius: 5px;
+                .line-height(47);
+                .margin(0, 0, 10)
+            }
+            &.submit-join-btn {
+                color: #fff;
+                background-color: #ff3941;
+                &:disabled {
+                    background-color: #ccc;
+                }
+            }
+            &.go-register-btn {
+                color: #000;
+                background: #F8F8F8;
+                border: 1px solid rgba(5, 5, 5, 0.10);
+            }
+        }
+        .tip {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+    }
+    .list {
+        li {
+            line-height: inherit;
+            height: auto;
+            .padding(0);
+            .ipt {
+                border: 0 none
+            }
+            .sms-ipt{
+                .width(180);
+            }
+            >* {
+                float: left;
+                .height(44);
+                .padding(10, 0, 10, 0);
+                .font-size(16);
+                &.key {
+                    .width(78);
+                }
+                &.get-sms-btn {
+                    .width(93);
+                    float: left;
+                    color: #FF3941;
+                    background: none;
+                    border-left: 1px solid #E5E5E5;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+
+/***
+widget
+*/
+
+.get-numcode-dialog {
+    .main {
+        padding: 1rem 1rem 1rem;
+        .content {
+            padding: 0;
+            overflow: hidden;
+        }
+        .ipt {
+            width: 60%;
+            background-color: #eee;
+            height: .8rem;
+            line-height: .8rem;
+            ;
+            float: left;
+            padding: 0 .1rem;
+            border: 0;
+        }
+        .pic {
+            max-width: 36%;
+            max-height: 1.5rem;
+            vertical-align: middle;
+            float: right;
+            color: #f08477;
+        }
+        .tip {
+            width: 100%;
+            overflow: hidden;
+            padding: .15rem 0;
+            text-align: center;
+            visibility: hidden;
+            color: #f08477;
+            &.show {
+                visibility: visible
+            }
+            &:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: '';
+                width: .4rem;
+                height: .4rem;
+                background: url(./imgs/icon_tip.png) no-repeat;
+                background-size: 100%;
+                margin-right: .2rem;
+            }
+        }
+    }
+    .foot {
+        border-top: 0;
+        .btn-dialog-ok {
+            background-color: #f08477;
+            color: #fff;
+            border-radius: .2rem
+        }
+    }
+}

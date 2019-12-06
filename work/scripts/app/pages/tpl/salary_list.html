@@ -1,0 +1,32 @@
+<div class="page-salary-list">
+  <header class="header">
+    <i class="icon-help"></i>
+    <h2>2018年5月</h2>
+    <h3>2018/05/01-2018/05/30</h3>
+    <h4 class="info">
+        佣金金额<strong class="price">13,800</strong>
+    </h4>
+    <div class="review-detail-box">
+      <span>查看详情</span>
+      <i class="icon-arrow-right"></i>
+    </div>
+  </header>
+  <div class="body mescroll" id="my_customer_body">
+    <ul class="list common-list"></ul>
+  </div>
+
+</div>
+<script id="render_item_html" type="html/javascript">
+  {{each list}}
+    <li class="item{{$value.isOver == 1 ? ' over' : ''}}" data-type="{{$value.userType}}" data-createtime="{{$value.createTime}}" data-id="{{$value.enterpriseId}}" data-enterprise_name="{{$value.enterpriseName}}">
+      <div class="info">
+        <p class="name">{{$value.enterpriseName}}</p>
+        <p>
+          <span class="status status-{{$value.isCheck}}">{{$value.statusDesc}}</span>
+          <span class="type">客户类型: {{$value.userType}}</span>
+        </p>
+      </div>
+      <em class="arrow"></em>
+  </li>
+  {{/each}}
+</script>

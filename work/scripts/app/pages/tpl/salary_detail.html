@@ -1,0 +1,18 @@
+<div class="page-salary-detail">
+
+
+</div>
+<script id="render_item_html" type="html/javascript">
+  {{each list}}
+    <li class="item{{$value.isOver == 1 ? ' over' : ''}}" data-type="{{$value.userType}}" data-createtime="{{$value.createTime}}" data-id="{{$value.enterpriseId}}" data-enterprise_name="{{$value.enterpriseName}}">
+      <div class="info">
+        <p class="name">{{$value.enterpriseName}}</p>
+        <p>
+          <span class="status status-{{$value.isCheck}}">{{$value.statusDesc}}</span>
+          <span class="type">客户类型: {{$value.userType}}</span>
+        </p>
+      </div>
+      <em class="arrow"></em>
+  </li>
+  {{/each}}
+</script>
